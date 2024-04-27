@@ -31,7 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#define SD_SPI_HANDLE  hspi1
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -57,10 +57,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ST7735_AD_Pin GPIO_PIN_13
+#define ST7735_AD_GPIO_Port GPIOC
+#define ST7735_CS_Pin GPIO_PIN_14
+#define ST7735_CS_GPIO_Port GPIOC
+#define ST7735_RESET_Pin GPIO_PIN_15
+#define ST7735_RESET_GPIO_Port GPIOC
 #define SD_CS_Pin GPIO_PIN_1
 #define SD_CS_GPIO_Port GPIOB
-
-#define SD_SPI_HANDLE hspi1
 
 /* USER CODE BEGIN Private defines */
 
