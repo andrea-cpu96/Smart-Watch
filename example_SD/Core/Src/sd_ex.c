@@ -13,6 +13,15 @@
 #include "fatfs.h"
 
 
+static showVideo(char *name, int x, int y, int wd, int ht, int nl, int skipFr);
+
+
+//some variables for FatFs
+FATFS FatFs; 	//Fatfs handle
+FIL fil; 		//File handle
+FRESULT fres; //Result after operations
+
+
 void sd_process(void)
 {
 
@@ -21,40 +30,20 @@ void sd_process(void)
   HAL_Delay(1000);
   fillScreen(BLACK);
 
-  //some variables for FatFs
-  FATFS FatFs; 	//Fatfs handle
-  FIL fil; 		//File handle
-  FRESULT fres; //Result after operations
-
   //Open the file system
   fres = f_mount(&FatFs, "", 1); //1=mount now
   if(fres != FR_OK)
   {
 
-	  //myprintf("f_mount error (%i)\r\n", fres);
 	  while(1);
 
   }
 
-  //Let's get some statistics from the SD card
-  DWORD free_clusters, free_sectors, total_sectors;
+  showVideo(char *name, int x, int y, int wd, int ht, int nl, int skipFr);
 
-  FATFS* getFreeFs;
+  /////////////////////
 
-  fres = f_getfree("", &free_clusters, &getFreeFs);
-  if(fres != FR_OK)
-  {
-
-	  //myprintf("f_getfree error (%i)\r\n", fres);
-	  while(1);
-
-  }
-
-  //Formula comes from ChaN's documentation
-  total_sectors = (getFreeFs->n_fatent - 2) * getFreeFs->csize;
-  free_sectors = free_clusters * getFreeFs->csize;
-
-  //myprintf("SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
+  /*
 
   //Now let's try to open file "test.txt"
   fres = f_open(&fil, "ex.txt", FA_READ);
@@ -95,46 +84,50 @@ void sd_process(void)
   //Be a tidy kiwi - don't forget to close your file!
   f_close(&fil);
 
-/*
-
-  //Now let's try and write a file "write.txt"
-  fres = f_open(&fil, "write.txt", FA_WRITE | FA_OPEN_ALWAYS | FA_CREATE_ALWAYS);
-  if(fres == FR_OK)
-  {
-
-	  //myprintf("I was able to open 'write.txt' for writing\r\n");
-
-  }
-  else
-  {
-
-	  //myprintf("f_open error (%i)\r\n", fres);
-
-  }
-
-  //Copy in a string
-  strncpy((char*)readBuf, "a new file is made!", 19);
-  UINT bytesWrote;
-  fres = f_write(&fil, readBuf, 19, &bytesWrote);
-  if(fres == FR_OK)
-  {
-
-	  //myprintf("Wrote %i bytes to 'write.txt'!\r\n", bytesWrote);
-
-  }
-  else
-  {
-
-	  myprintf("f_write error (%i)\r\n");
-
-  }
-
-  //Be a tidy kiwi - don't forget to close your file!
-  f_close(&fil);
-
-  //We're done, so de-mount the drive
-  f_mount(NULL, "", 0);
-
-*/
 
 }
+*/
+
+// Params:
+// name - file name
+// x,y - start x,y on the screen
+// wd,ht - width, height of the video (raw data has no header with such info)
+// nl - num lines read in one operation (nl*wd*2 bytes are loaded)
+// skipFr - num frames to skip
+void showVideo(char *name, int x, int y, int wd, int ht, int nl, int skipFr)
+{
+
+	uint16_t buf[200*NLINES];
+
+
+	fres = f_open(&fil, name, FA_READ);
+	if(fres != FR_OK)
+	{
+
+		while(1);
+
+	}
+
+	// Start from the intial
+	f_rewind(&fil);
+
+  //handleButton();
+
+  while(!f_eof(&fil)) {
+
+    for(int i = 0 ; i < ( ht / nl ) ; i++)
+    {
+
+      fres = f_read(&fil, buf, ( wd * 2 * nl ), NULL);
+      for(int j = 0 ; j < nl ;j++)
+    	  ST7735_DrawImage(0, ( ( i * nl ) + j ), lcd.width(), 1, ( buf + 20 + ( j * wd ) ));
+
+    }
+
+  }
+
+  f_close(&fil);
+
+}
+
+

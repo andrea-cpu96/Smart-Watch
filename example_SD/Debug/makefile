@@ -64,8 +64,8 @@ all: main-build
 main-build: example_SD.elf secondary-outputs
 
 # Tool invocations
-example_SD.elf example_SD.map: $(OBJS) $(USER_OBJS) D:\Andrea\Embedded\Repositories\Smart-Watch\example_SD\STM32F030CCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "example_SD.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"D:\Andrea\Embedded\Repositories\Smart-Watch\example_SD\STM32F030CCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="example_SD.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+example_SD.elf example_SD.map: $(OBJS) $(USER_OBJS) C:\Users\Fato\Desktop\Nuova\ cartella\Smart-Watch\example_SD\STM32F030CCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "example_SD.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\Fato\Desktop\Nuova cartella\Smart-Watch\example_SD\STM32F030CCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="example_SD.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
