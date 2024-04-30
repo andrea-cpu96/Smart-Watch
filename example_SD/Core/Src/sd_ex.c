@@ -2,7 +2,7 @@
  * sd_ex.c
  *
  *  Created on: Apr 27, 2024
- *      Author: andre
+ *      Author: Fato
  */
 
 #include "main.h"
@@ -13,7 +13,7 @@
 #include "fatfs.h"
 
 
-static showVideo(char *name, int x, int y, int wd, int ht, int nl, int skipFr);
+static void showVideo(char *name, int wd, int ht, int nl, int skipFr);
 
 
 //some variables for FatFs
@@ -25,8 +25,7 @@ FRESULT fres; //Result after operations
 void sd_process(void)
 {
 
-  ST7735_SetRotation(3);
-  //ST7735_WriteString(0, 0, "UnNatural presents", Font_7x10, WHITE,BLACK);
+  ST7735_SetRotation(3); // (wd = 160 ; x_start = 0)  and (ht = 128 ; y_start = 0)
   HAL_Delay(1000);
   fillScreen(BLACK);
 
@@ -39,7 +38,7 @@ void sd_process(void)
 
   }
 
-  showVideo(char *name, int x, int y, int wd, int ht, int nl, int skipFr);
+  showVideo("ex.txt", WIDTH, HEIGHT, 32, 2);
 
   /////////////////////
 
@@ -84,9 +83,10 @@ void sd_process(void)
   //Be a tidy kiwi - don't forget to close your file!
   f_close(&fil);
 
+*/
 
 }
-*/
+
 
 // Params:
 // name - file name
@@ -94,7 +94,7 @@ void sd_process(void)
 // wd,ht - width, height of the video (raw data has no header with such info)
 // nl - num lines read in one operation (nl*wd*2 bytes are loaded)
 // skipFr - num frames to skip
-void showVideo(char *name, int x, int y, int wd, int ht, int nl, int skipFr)
+static void showVideo(char *name, int wd, int ht, int nl, int skipFr)
 {
 
 	uint16_t buf[200*NLINES];
@@ -120,9 +120,13 @@ void showVideo(char *name, int x, int y, int wd, int ht, int nl, int skipFr)
 
       fres = f_read(&fil, buf, ( wd * 2 * nl ), NULL);
       for(int j = 0 ; j < nl ;j++)
-    	  ST7735_DrawImage(0, ( ( i * nl ) + j ), lcd.width(), 1, ( buf + 20 + ( j * wd ) ));
+    	  ST7735_DrawImage(0, ( ( i * nl ) + j ), wd, 1, ( buf + 20 + ( j * wd ) ));
 
     }
+
+    // Skip a number of frames
+    if(skipFr > 0)
+    	f_lseek(&fil, fil.fptr + ( wd * ht * 2 * skipFr ));
 
   }
 

@@ -6,10 +6,10 @@ Introduction
 
 Requirements
 
-- Round display
-- Battery
-- SD-car reader 
-- SD driver for video
+- space compatible with smart-watches 
+- SD capability
+- 24h video-play
+- battery rechargeble 
 
 Battery
 
@@ -39,22 +39,44 @@ Video
 
 -> MJPEG is a standard which uses various complete frames in sequence. Lower quality then H264 and highr memory required, but less processing needed. 
 -> I need a method to create this kind of file starting from an MP4.
+   -> .RAW files are a format of non-compressed fiels 
 
+Firmware
+
+- The microcontroller handles the data stream between the SD-card and the ST7735 display. 
+- This is done using a specific middleware packet, FATFS, which allows the microcontroller to read fles from the SD-card file system.
+- A specific library, GFX_ST7735, allows the microcontroller to read show images into the dispaly.
+
+-> in order to implement the videoplayer function, the microcontroller should reach the max speed for the communication with the SD-car via SPI
+-> the DMA migth help the communication 
+-> skip some frame also help to elaborate the video with less delay (lag), this becasue we can compensate the processing time skipping frames
+
+-> synchronizzation between video time and actual clock time must be established in order to always show the correct time.
+   Internal timer should be enabled and it must be synchronized with frames corresponding to specific times. 
+
+-> maybe also low power mode should be implemented 
+
+Hardware
+
+- microcontroller with enougth performances in terms of speed and power consumptions
+- micro-usb
+- design of circuit for battery charging 
+- maybe PCB space for battery
+- round display 
+- small space for debuger connector (touch debug)
 
 Consumptions 
 
 - SD-Card requires up to 100mA for write operations (I don't know how much requires for read operation)
 
-
 NOTES
 
 - A pull-up on the DO cannot be omited, or some cards will fail initialization process.
 - SD card from 4GB to 32GB are of different types and are considered SDHC (High  Capacity), they work different.
-- FAT is the File System used by SD-Cards 
+- FAT is the File System used by SD-Cards. FATFS is a middleware packet for file system management.  
 - MMC/SDC employs NAND Flash Memory.  Generally the flash memory requires to erase existing data prior to re-write a new data, and minimum unit of erase operation, called erase block, is larger than write block size.
-- Larger memory cards happen to be slower than smaler ones. 
+- Larger memory cards happen to be slower than smaller ones. 
 - Not all the SD-cards support the SPI mode. SD-Cards have their own native mode, SPI is an option. 
-
 
 Useful links
 
