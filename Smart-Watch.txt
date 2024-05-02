@@ -69,6 +69,20 @@ Consumptions
 
 - SD-Card requires up to 100mA for write operations (I don't know how much requires for read operation)
 
+How to convert video from mp4 to uncompressed avi
+
+1) use ffmpeg tools 
+	installation tutorial; https://www.youtube.com/watch?v=r1AtmY-RMyQ
+	create a folder (for exampple in program) for the files inside the bin folder
+	add the path to the envirorement variables   
+
+2) prompt command; ffmpeg -i input.mp4 -c:v rawvideo output.avi 
+
+3) make sure you video format has 16B per pixel (only if step 2 doesn't work) 
+	convert mp4-12 into mp4-16; ffmpeg -i input.mp4 -pix_fmt yuv420p16 output.mp4
+	convert mp4 into uncompressed avi; ffmpeg -i output.mp4 -c:v rawvideo output16.avi  
+
+
 NOTES
 
 - A pull-up on the DO cannot be omited, or some cards will fail initialization process.

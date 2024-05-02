@@ -1,2 +1,3 @@
 ../Core/Src/sd_ex.c:25:6:sd_process	16	static
-../Core/Src/sd_ex.c:97:13:showVideo	12048	static
+../Core/Src/sd_ex.c:48:13:showVideo	2656	static
+../Core/Src/sd_ex.c:92:13:ferror_handler	16	static
