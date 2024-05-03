@@ -25,6 +25,12 @@
 // File name
 #define FILE_NAME				"sample.mov"
 
+// File header number of bytes (to be skipped)
+#define FILE_HEADER				54					// .bmp = 54B
+
+// Number of bit of depth
+#define COLOUR_DEPTH 			16
+
 /*****************************************/
 
 /*************** FIXED PARAMETERS *****************/
@@ -34,7 +40,7 @@
 #define HEIGHT					ST7735_WIDTH
 
 // Number of bytes per pixel
-#define BYTE_PER_PXL			2
+#define BYTE_PER_PXL			( COLOUR_DEPTH / 8 )
 
 // Frame sizes
 #define FRAME_TOTAL_SIZE		( FRAME_DIM_WD * FRAME_DIM_HT * BYTE_PER_PXL)

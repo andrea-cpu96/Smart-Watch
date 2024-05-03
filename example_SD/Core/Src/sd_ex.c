@@ -63,10 +63,13 @@ static void showVideo(char *name, int wd, int ht, int nl, int skipFr)
 	while(!f_eof(&fil))
 	{
 
+		// Skip header file
+		f_lseek(&fil, fil.fptr + FILE_HEADER);
+
 		for(int i = 0 ; i < ( ht / nl ) ; i++)
 		{
 
-			fres = f_read(&fil, buf, ( wd * 2 * nl ), &byteRead);
+			fres = f_read(&fil, buf, ( wd * BYTE_PER_PXL * nl ), &byteRead);
 
 			if(fres != FR_OK)
 				ferror_handler(ERROR_2_READ);
@@ -75,13 +78,13 @@ static void showVideo(char *name, int wd, int ht, int nl, int skipFr)
 				ferror_handler(ERROR_3_READ);
 
 			for(int j = 0 ; j < nl ;j++)
-				ST7735_DrawImage(0, ( ( i * nl ) + j ), wd, 1, ( &buf[20 + ( j * wd )] ));
+				ST7735_DrawImage(0, ( ( i * nl ) + j ), wd, 1, ( &buf[( j * wd )] ));
 
 		}
 
 		// Skip a number of frames
 		if(skipFr > 0)
-			f_lseek(&fil, fil.fptr + ( wd * ht * 2 * skipFr ));
+			f_lseek(&fil, fil.fptr + ( wd * ht * BYTE_PER_PXL * skipFr ));
 
 	}
 
