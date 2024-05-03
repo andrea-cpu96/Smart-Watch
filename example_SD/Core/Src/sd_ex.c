@@ -34,7 +34,7 @@ void sd_process(void)
 	if(fres != FR_OK)
 		ferror_handler(ERROR_0_MOUNT);
 
-	showVideo(FILE_NAME, WIDTH, HEIGHT, FRAME_DIV_FACTOR, FRAME_SKIP_FACTOR);
+	showVideo(FILE_NAME, FRAME_DIM_WD, FRAME_DIM_HT, FRAME_DIV_FACTOR, FRAME_SKIP_FACTOR);
 
 }
 

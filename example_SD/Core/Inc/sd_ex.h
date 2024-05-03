@@ -10,13 +10,17 @@
 
 /*************** SETTINGS *****************/
 
+// Frame sizes
+#define FRAME_DIM_WD			100
+#define FRAME_DIM_HT			100
+
 // Frame division factor (in order to save RAM during run time I chose
 // to subdivide each frame in multiple sub-frames)
 // It must be a multiple of 2
-#define FRAME_DIV_FACTOR		32
+#define FRAME_DIV_FACTOR		2
 
 // Number of frames to be skipped ( in order to save processing time )
-#define FRAME_SKIP_FACTOR		2
+#define FRAME_SKIP_FACTOR		0
 
 // File name
 #define FILE_NAME				"sample.mov"
@@ -33,11 +37,11 @@
 #define BYTE_PER_PXL			2
 
 // Frame sizes
-#define FRAME_TOTAL_SIZE		( WIDTH * HEIGHT * BYTE_PER_PXL)
+#define FRAME_TOTAL_SIZE		( FRAME_DIM_WD * FRAME_DIM_HT * BYTE_PER_PXL)
 #define FRAME_SECTION_SIZE		( FRAME_TOTAL_SIZE / FRAME_DIV_FACTOR )
 
 // Max buffer size
-#define MAX_BUFF_RAM 			( FRAME_SECTION_SIZE + 20 )
+#define MAX_BUFF_RAM 			( FRAME_SECTION_SIZE + 200 )
 
 /*****************************************/
 
