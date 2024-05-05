@@ -11,25 +11,25 @@
 /*************** SETTINGS *****************/
 
 // Frame sizes
-#define FRAME_DIM_WD					100
-#define FRAME_DIM_HT					100
+#define FRAME_DIM_HT					50
+#define FRAME_DIM_WD					50
 
 // Frame division factor (in order to save RAM during run time I chose
 // to subdivide each frame in multiple sub-frames)
 // It must be a multiple of 2
-#define FRAME_DIV_FACTOR				20
+#define FRAME_DIV_FACTOR				50
 
 // Number of frames to be skipped ( in order to save processing time )
 #define FRAME_SKIP_FACTOR				0
 
 // File name
-#define FILE_NAME						"sample9.bmp"
+#define FILE_NAME						"sample11.bmp"
 
 // File header number of bytes (to be skipped)
 #define FILE_HEADER						54					// .bmp = 54B
 
 // Number of bit of depth
-#define COLOUR_DEPTH 					24
+#define COLOUR_DEPTH 					32
 
 /*****************************************/
 

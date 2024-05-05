@@ -5,6 +5,7 @@
  *      Author: Fato
  */
 
+#include <stdlib.h>
 #include <string.h>
 
 #include "main.h"
@@ -17,6 +18,7 @@
 
 static void ferror_handler(uint8_t error);
 static void depth24To16(doubleFormat *pxArr, uint16_t length);
+static void videoPlayer(void);
 
 
 FATFS FatFs; 		//Fatfs handle
@@ -36,9 +38,62 @@ void sd_process(void)
 	if(fres != FR_OK)
 		ferror_handler(ERROR_0_MOUNT);
 
-	showImageBmp(FILE_NAME);
+
+	videoPlayer();
+
+	//showImageBmp(FILE_NAME);
 
 }
+
+static void videoPlayer(void)
+{
+
+	char name[30] = "sample";
+	int r = 1;
+
+	for(int i = 1 ; ; )
+	{
+
+		if(i > 9)
+		{
+
+			name[6] = ( i / 10 ) + 48;
+			name[7] = ( i % 10 ) + 48;
+
+			name[8] = '.';
+			name[9] = 'b';
+			name[10] = 'm';
+			name[11] = 'p';
+
+		}
+		else
+		{
+
+			name[6] = ( i % 10 ) + 48;
+
+			name[7] = '.';
+			name[8] = 'b';
+			name[9] = 'm';
+			name[10] = 'p';
+
+		}
+
+
+		showImageBmp(name);
+
+		if(i >= 4)
+			r = -1;
+		if(i == 1)
+			r = 1;
+
+		i += r;
+
+	}
+
+	//showImageBmp(name);
+
+}
+
 
 
 // Params:
@@ -73,7 +128,7 @@ void showImageBmp(char *name)
 		for(int i = 0 ; i < ( FRAME_DIM_HT / FRAME_DIV_FACTOR ) ; i++)
 		{
 
-			//HAL_Delay(10);
+			//HAL_Delay(100);
 
 			memset(buf, 0, MAX_BUFF_RAM);
 			fres = f_read(&fil, buf, FRAME_SECTION_BYTE_SIZE, &byteRead);
@@ -84,7 +139,7 @@ void showImageBmp(char *name)
 			if(byteRead != FRAME_SECTION_BYTE_SIZE)
 				ferror_handler(ERROR_3_READ);
 
-			if(COLOUR_DEPTH == 24)
+			if(COLOUR_DEPTH >= 24)
 				depth24To16(&pBuf, FRAME_SECTION_PXL_SIZE);
 
 			for(int j = 0 ; j < FRAME_DIV_FACTOR ;j++)
@@ -98,7 +153,7 @@ void showImageBmp(char *name)
 
 	}
 
-	HAL_Delay(10);
+	//HAL_Delay(10);
 
 	f_close(&fil);
 

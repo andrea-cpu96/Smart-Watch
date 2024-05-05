@@ -1,4 +1,5 @@
-../Core/Src/sd_ex.c:27:6:sd_process	8	static
-../Core/Src/sd_ex.c:50:6:showImageBmp	6248	static
-../Core/Src/sd_ex.c:108:13:depth24To16	32	static
-../Core/Src/sd_ex.c:131:13:ferror_handler	16	static
+../Core/Src/sd_ex.c:29:6:sd_process	8	static
+../Core/Src/sd_ex.c:48:13:videoPlayer	48	static
+../Core/Src/sd_ex.c:105:6:showImageBmp	10248	static
+../Core/Src/sd_ex.c:163:13:depth24To16	32	static
+../Core/Src/sd_ex.c:186:13:ferror_handler	16	static
