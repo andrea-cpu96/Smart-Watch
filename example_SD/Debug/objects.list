@@ -1,6 +1,7 @@
 "./Core/Src/GFX_FUNCTIONS.o"
 "./Core/Src/ST7735.o"
 "./Core/Src/fonts.o"
+"./Core/Src/gif.o"
 "./Core/Src/main.o"
 "./Core/Src/sd_ex.o"
 "./Core/Src/stm32f0xx_hal_msp.o"

@@ -8,6 +8,10 @@
 #ifndef INC_SD_EX_H_
 #define INC_SD_EX_H_
 
+
+#include "fatfs.h"
+
+
 /*************** SETTINGS BMP *****************/
 
 // Frame sizes
@@ -34,24 +38,9 @@
 /*****************************************/
 
 
-/*************** FIXED PARAMETERS BMP *****************/
+/*************** SETTINGS GIF *****************/
 
-// Display sizes (considering the rotation of the display)
-#define WIDTH							ST7735_HEIGHT
-#define HEIGHT							ST7735_WIDTH
-
-// Number of bytes per pixel
-#define BYTE_PER_PXL					( COLOUR_DEPTH / 8 )
-
-// Frame sizes
-#define FRAME_TOTAL_BYTE_SIZE			( FRAME_DIM_WD * FRAME_DIM_HT * BYTE_PER_PXL)
-#define FRAM_TOTAL_BYTE_16_SIZE			( FRAME_DIM_WD * FRAME_DIM_HT * 2 )
-#define FRAME_SECTION_BYTE_SIZE			( FRAME_DIM_WD * FRAME_DIV_FACTOR * BYTE_PER_PXL )
-#define FRAME_SECTION_BYTE_16_SIZE 		( FRAME_DIM_WD * FRAME_DIV_FACTOR * 2 )
-#define FRAME_SECTION_PXL_SIZE			( FRAME_DIM_WD * FRAME_DIV_FACTOR )
-
-// Max buffer size
-#define MAX_BUFF_RAM 					( FRAME_SECTION_BYTE_SIZE + 200 )
+#define GIF_FILE_NAME					"sample11.gif"
 
 /*****************************************/
 
@@ -78,12 +67,47 @@
 /*****************************************/
 
 
+/*************** FIXED PARAMETERS BMP *****************/
+
+// Display sizes (considering the rotation of the display)
+#define WIDTH							ST7735_HEIGHT
+#define HEIGHT							ST7735_WIDTH
+
+// Number of bytes per pixel
+#define BYTE_PER_PXL					( COLOUR_DEPTH / 8 )
+
+// Frame sizes
+#define FRAME_TOTAL_BYTE_SIZE			( FRAME_DIM_WD * FRAME_DIM_HT * BYTE_PER_PXL)
+#define FRAM_TOTAL_BYTE_16_SIZE			( FRAME_DIM_WD * FRAME_DIM_HT * 2 )
+#define FRAME_SECTION_BYTE_SIZE			( FRAME_DIM_WD * FRAME_DIV_FACTOR * BYTE_PER_PXL )
+#define FRAME_SECTION_BYTE_16_SIZE 		( FRAME_DIM_WD * FRAME_DIV_FACTOR * 2 )
+#define FRAME_SECTION_PXL_SIZE			( FRAME_DIM_WD * FRAME_DIV_FACTOR )
+
+// Max buffer size
+#define MAX_BUFF_RAM 					( FRAME_SECTION_BYTE_SIZE + 200 )
+
+/*****************************************/
+
+
 /******************* ERRORS	******************/
 
-#define ERROR_0_MOUNT			0
-#define ERROR_1_OPEN			1
-#define ERROR_2_READ			2
-#define ERROR_3_READ			3
+
+enum
+{
+
+	ERROR_GENERIC				=  1,
+	ERROR_MOUNT,
+	ERROR_OPEN,
+	ERROR_READ_FILE,
+	ERROR_READ_FEW_DATA,
+
+	ERROR_GIF_HEADER,
+	ERROR_GIF_VERSION,
+	ERROR_GIF_GCT,
+	ERROR_GIF_TABLE,
+
+};
+
 
 /*****************************************/
 
@@ -95,9 +119,17 @@ typedef union
 
 }doubleFormat;
 
+
+extern FATFS FatFs; 						//Fatfs handle
+extern FIL fil; 							//File handle
+extern FRESULT fres; 						//Result after operations
+extern uint8_t buf[MAX_BUFF_RAM];			// RAM buffer
+
+
 void sd_process(void);
 
 void videoPlayer(void);
 void showImageBmp(char *name);
+void ferror_handler(uint8_t error);
 
 #endif /* INC_SD_EX_H_ */

@@ -13,17 +13,19 @@
 #include "sd_ex.h"
 #include "ST7735.h"
 #include "GFX_FUNCTIONS.h"
-#include "fatfs.h"
+#include "gif.h"
 
 
-static void ferror_handler(uint8_t error);
 static void depth24To16(doubleFormat *pxArr, uint16_t length);
 static void playBmp(void);
+static void playGif(void);
 
 
 FATFS FatFs; 		//Fatfs handle
 FIL fil; 			//File handle
 FRESULT fres; 		//Result after operations
+
+uint8_t buf[MAX_BUFF_RAM];			// RAM buffer
 
 
 void sd_process(void)
@@ -36,7 +38,7 @@ void sd_process(void)
 	//Open the file system
 	fres = f_mount(&FatFs, "", 1); // 1 = mount now
 	if(fres != FR_OK)
-		ferror_handler(ERROR_0_MOUNT);
+		ferror_handler(ERROR_MOUNT);
 
 
 	videoPlayer();
@@ -65,7 +67,6 @@ void videoPlayer(void)
 void showImageBmp(char *name)
 {
 
-	uint8_t buf[MAX_BUFF_RAM];			// RAM buffer
 	doubleFormat pBuf;
 	UINT byteRead;						// Number of bytes elaborated at time
 
@@ -74,7 +75,7 @@ void showImageBmp(char *name)
 
 	fres = f_open(&fil, name, FA_READ);
 	if(fres != FR_OK)
-		ferror_handler(ERROR_1_OPEN);
+		ferror_handler(ERROR_OPEN);
 
 	// Point to the initial position
 	f_rewind(&fil);
@@ -94,10 +95,10 @@ void showImageBmp(char *name)
 			fres = f_read(&fil, buf, FRAME_SECTION_BYTE_SIZE, &byteRead);
 
 			if(fres != FR_OK)
-				ferror_handler(ERROR_2_READ);
+				ferror_handler(ERROR_READ_FILE);
 
 			if(byteRead != FRAME_SECTION_BYTE_SIZE)
-				ferror_handler(ERROR_3_READ);
+				ferror_handler(ERROR_READ_FILE);
 
 			if(COLOUR_DEPTH >= 24)
 				depth24To16(&pBuf, FRAME_SECTION_PXL_SIZE);
@@ -203,42 +204,29 @@ void playBmp(void)
 }
 
 
-static void ferror_handler(uint8_t error)
+static void playGif(void)
 {
 
-	switch(error)
-	{
+	gd_GIF	gif;
+	gd_GIF *pgif;
 
 
-		case ERROR_0_MOUNT:
+	pgif = &gif;
 
-			//Error during mount
-			while(1);
-
-			break;
-
-		case ERROR_1_OPEN:
-
-			// Error during file opening
-			while(1);
-
-			break;
-
-		case ERROR_2_READ:
-
-			// Error during file reading
-			while(1);
-
-			break;
-
-		case ERROR_3_READ:
-
-			// Data read are less than expected
-			while(1);
-
-			break;
+	open_gif(pgif);
 
 
-	}
+
+	close_gif(pgif);
+
+
+}
+
+
+void ferror_handler(uint8_t error)
+{
+
+	if(error)
+		while(1);
 
 }

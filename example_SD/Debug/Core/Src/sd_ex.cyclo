@@ -1,6 +1,7 @@
-../Core/Src/sd_ex.c:29:6:sd_process	2
-../Core/Src/sd_ex.c:49:6:videoPlayer	1
-../Core/Src/sd_ex.c:65:6:showImageBmp	7
-../Core/Src/sd_ex.c:123:13:depth24To16	2
-../Core/Src/sd_ex.c:146:6:playBmp	5
-../Core/Src/sd_ex.c:206:13:ferror_handler	7
+../Core/Src/sd_ex.c:31:6:sd_process	2
+../Core/Src/sd_ex.c:51:6:videoPlayer	1
+../Core/Src/sd_ex.c:67:6:showImageBmp	7
+../Core/Src/sd_ex.c:124:13:depth24To16	2
+../Core/Src/sd_ex.c:147:6:playBmp	5
+../Core/Src/sd_ex.c:207:13:playGif	1
+../Core/Src/sd_ex.c:226:6:ferror_handler	2
