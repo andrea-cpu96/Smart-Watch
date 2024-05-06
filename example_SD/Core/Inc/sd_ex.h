@@ -8,7 +8,7 @@
 #ifndef INC_SD_EX_H_
 #define INC_SD_EX_H_
 
-/*************** SETTINGS *****************/
+/*************** SETTINGS BMP *****************/
 
 // Frame sizes
 #define FRAME_DIM_HT					50
@@ -33,7 +33,8 @@
 
 /*****************************************/
 
-/*************** FIXED PARAMETERS *****************/
+
+/*************** FIXED PARAMETERS BMP *****************/
 
 // Display sizes (considering the rotation of the display)
 #define WIDTH							ST7735_HEIGHT
@@ -54,6 +55,29 @@
 
 /*****************************************/
 
+
+/*************** SETTINGS VIDEOPLAYER *****************/
+
+#define TRUE_GIF 						0
+#define BMP_GIF							1
+#define BMP_VIDEO						2
+
+#define FORMAT_TYPE						BMP_GIF
+
+#define RELOAD							0
+#define BACK_AND_FORTH					1
+
+#define GIF_LOOP_TYPE					BACK_AND_FORTH
+
+#define NUM_OF_FRAMES					4
+
+#define ROOT_NAME						"sample"
+
+#define FIRST_FRAME_NUM					1
+
+/*****************************************/
+
+
 /******************* ERRORS	******************/
 
 #define ERROR_0_MOUNT			0
@@ -72,6 +96,8 @@ typedef union
 }doubleFormat;
 
 void sd_process(void);
+
+void videoPlayer(void);
 void showImageBmp(char *name);
 
 #endif /* INC_SD_EX_H_ */

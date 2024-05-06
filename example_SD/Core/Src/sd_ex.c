@@ -18,7 +18,7 @@
 
 static void ferror_handler(uint8_t error);
 static void depth24To16(doubleFormat *pxArr, uint16_t length);
-static void videoPlayer(void);
+static void playBmp(void);
 
 
 FATFS FatFs; 		//Fatfs handle
@@ -41,56 +41,16 @@ void sd_process(void)
 
 	videoPlayer();
 
-	//showImageBmp(FILE_NAME);
+	// showImageBmp(FILE_NAME);
 
 }
 
-static void videoPlayer(void)
+
+void videoPlayer(void)
 {
 
-	char name[30] = "sample";
-	int r = 1;
-
-	for(int i = 1 ; ; )
-	{
-
-		if(i > 9)
-		{
-
-			name[6] = ( i / 10 ) + 48;
-			name[7] = ( i % 10 ) + 48;
-
-			name[8] = '.';
-			name[9] = 'b';
-			name[10] = 'm';
-			name[11] = 'p';
-
-		}
-		else
-		{
-
-			name[6] = ( i % 10 ) + 48;
-
-			name[7] = '.';
-			name[8] = 'b';
-			name[9] = 'm';
-			name[10] = 'p';
-
-		}
-
-
-		showImageBmp(name);
-
-		if(i >= 4)
-			r = -1;
-		if(i == 1)
-			r = 1;
-
-		i += r;
-
-	}
-
-	//showImageBmp(name);
+	if(( FORMAT_TYPE == BMP_GIF ) || ( FORMAT_TYPE == BMP_VIDEO ) )
+		playBmp();
 
 }
 
@@ -177,6 +137,66 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length)
 
 		pxArr->u16Arr[i] = color565(r, g, b);
 		pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
+
+	}
+
+}
+
+
+void playBmp(void)
+{
+
+	char name[30] = ROOT_NAME;
+	int inc = 1;
+
+
+	uint8_t frameNum = strlen(ROOT_NAME);
+	for(int i = 1 ; i < NUM_OF_FRAMES ; )
+	{
+
+		if(i > 9)
+		{
+
+			name[frameNum] = ( i / 10 ) + 48;
+			name[frameNum+1] = ( i % 10 ) + 48;
+
+			name[frameNum+2] = '.';
+			name[frameNum+3] = 'b';
+			name[frameNum+4] = 'm';
+			name[frameNum+5] = 'p';
+
+		}
+		else
+		{
+
+			name[frameNum] = ( i % 10 ) + 48;
+
+			name[frameNum+1] = '.';
+			name[frameNum+2] = 'b';
+			name[frameNum+3] = 'm';
+			name[frameNum+4] = 'p';
+
+		}
+
+
+		showImageBmp(name);
+
+
+		if(FORMAT_TYPE == BMP_GIF)
+		{
+
+			if(GIF_LOOP_TYPE == BACK_AND_FORTH)
+			{
+
+				if(i >= NUM_OF_FRAMES)
+					inc = -1;
+				if(i == FIRST_FRAME_NUM)
+					inc = 1;
+			}
+
+		}
+
+			i += inc;
 
 	}
 
