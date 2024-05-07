@@ -1,5 +1,6 @@
 "./Core/Src/GFX_FUNCTIONS.o"
 "./Core/Src/ST7735.o"
+"./Core/Src/bmp.o"
 "./Core/Src/fonts.o"
 "./Core/Src/gif.o"
 "./Core/Src/main.o"

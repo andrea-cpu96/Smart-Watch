@@ -18,6 +18,8 @@
 #define MAX(A, B) ((A) > (B) ? (A) : (B))
 
 
+#define MX_BUF_GIF_RAM						( 128 * 160 )
+
 typedef struct Entry
 {
 
@@ -62,6 +64,7 @@ typedef struct gd_GIF
 {
 
 	FIL *fp;
+	char *name;
     off_t anim_start;
     uint16_t width, height;
     uint16_t depth;
@@ -76,9 +79,12 @@ typedef struct gd_GIF
     uint8_t bgcolor;
     uint8_t *frame;
 
+    const void (*draw)(uint16_t x, uint16_t y, uint16_t wd, uint16_t ht, const uint16_t *data);
+
 }gd_GIF;
 
 
+void gif_init(gd_GIF *gif, FIL *fil, char *fName, const void (*drawFunc));
 void open_gif(gd_GIF *gif);
 int getGifFrame(gd_GIF *gif);
 void renderGifFrame(gd_GIF *gif, uint8_t *buffer);

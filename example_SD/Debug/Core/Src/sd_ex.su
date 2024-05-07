@@ -1,7 +1,5 @@
 ../Core/Src/sd_ex.c:31:6:sd_process	8	static
 ../Core/Src/sd_ex.c:51:6:videoPlayer	8	static
-../Core/Src/sd_ex.c:67:6:showImageBmp	40	static
-../Core/Src/sd_ex.c:124:13:depth24To16	32	static
-../Core/Src/sd_ex.c:147:6:playBmp	56	static
-../Core/Src/sd_ex.c:207:13:playGif	1608	static
-../Core/Src/sd_ex.c:226:6:ferror_handler	16	static
+../Core/Src/sd_ex.c:60:6:playBmp	64	static
+../Core/Src/sd_ex.c:132:13:playGif	1616	static
+../Core/Src/sd_ex.c:151:6:ferror_handler	16	static

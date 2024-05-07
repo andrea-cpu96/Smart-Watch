@@ -27,6 +27,9 @@ void read_Gif_Blocks(gd_GIF *imageGif, void *buf, size_t nbytes)
 {
 
 	UINT cnt;
+	FRESULT fres;
+
+
     fres = f_read(imageGif->fp, buf, nbytes, &cnt);
 
     if(fres!=FR_OK)
@@ -61,22 +64,36 @@ static uint16_t read_num(gd_GIF *imageGif)
 }
 
 
+void gif_init(gd_GIF *gif, FIL *fil, char *fName, const void (*drawFunc))
+{
+
+	gif->fp = fil;
+	gif->name = fName;
+	gif->draw = drawFunc;
+
+	open_gif(gif);
+
+}
+
+
 void open_gif(gd_GIF *gif)
 {
 
+	FRESULT fres;
     uint8_t sigver[3];
     uint16_t width, height, depth;
     uint8_t fdsz, bgidx, aspect;
     int gct_sz;
 
+	uint8_t bufRam[MX_BUF_GIF_RAM];
 
-    fres = f_open(&fil, GIF_FILE_NAME, FA_READ);
+
+    fres = f_open(gif->fp, gif->name, FA_READ);
 
     if(fres!=FR_OK)
     	ferror_handler(ERROR_OPEN);
 
     /* Header */
-    gif->fp = &fil;
     read_Gif_Blocks(gif, sigver, 3);
 
     if(memcmp(sigver, "GIF", 3) != 0)
@@ -124,7 +141,7 @@ void open_gif(gd_GIF *gif)
     gif->palette = &gif->gct;
     gif->bgcolor = gif->palette->colors[gif->bgindex*3];
 
-    gif->frame = buf;
+    gif->frame = bufRam;
 
     if (gif->bgindex)
         memset(gif->frame, gif->bgcolor, gif->width * gif->height); // render background
@@ -334,7 +351,6 @@ static int add_entry(Table **tablep, uint16_t length, uint16_t prefix, uint8_t s
         if (!table)
         {
 
-        	putErrorString("error: cannot reallocate table!!!");
         	return -1;
 
         }
