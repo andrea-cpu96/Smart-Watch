@@ -10,7 +10,6 @@
 #include "bmp.h"
 
 
-static uint32_t linesPerSection(BMP *bmp);
 static error_bmp read_sign_bmp(BMP *bmp, uint8_t *slotsBuf);
 static error_bmp read_fSize_bmp(BMP *bmp, uint8_t *slotsBuf);
 static error_bmp read_off_bmp(BMP *bmp, uint8_t *slotsBuf);
@@ -66,7 +65,6 @@ error_bmp showImageBmp(BMP *bmp)
 
 	FRESULT fres; 		//Result after operations
 
-	uint8_t bufRam[MAX_BUFF_RAM];
 	doubleFormat pBuf;
 
 	uint32_t sectionSizeByte;
@@ -76,8 +74,10 @@ error_bmp showImageBmp(BMP *bmp)
 
 	UINT byteRead;
 
-
-	pBuf.u8Arr = bufRam;					// Pointer to buf in order to convert format from uint8_t to uint16_t
+	if(bmp->pipeFlag)
+		pBuf.u8Arr = bmp->dataBuf[bmp->pipeIndex];					// Pointer to buf in order to convert format from uint8_t to uint16_t
+	else
+		pBuf.u8Arr = bmp->dataBuf[0];
 
 	linesPerSec = linesPerSection(bmp);
 	sectionSizeByte = ( ( linesPerSec * bmp->width ) * ( bmp->depth / 8 ) );
@@ -99,8 +99,8 @@ error_bmp showImageBmp(BMP *bmp)
 
 			//HAL_Delay(100);
 
-			memset(bufRam, 0, MAX_BUFF_RAM);
-			fres = f_read(bmp->fp, bufRam, sectionSizeByte, &byteRead);
+			memset(pBuf.u8Arr, 0, MAX_BUFF_RAM);
+			fres = f_read(bmp->fp, pBuf.u8Arr, sectionSizeByte, &byteRead);
 
 			if(fres != FR_OK)
 				return ERROR_BMP_READ_FILE;
@@ -111,8 +111,12 @@ error_bmp showImageBmp(BMP *bmp)
 			if(bmp->depth >= 24)
 				depth24To16(&pBuf, sectionDim, bytePerPxl);
 
+			if(bmp->pipeFlag)
+				pBuf.u8Arr = bmp->dataBuf[( bmp->pipeIndex + 1 ) % 2];
+
 			for(int j = 0 ; j < linesPerSec ;j++)
 				bmp->draw(0, ( ( i * linesPerSec ) + j ), bmp->width, 1, ( &pBuf.u16Arr[( j * bmp->width )] ));
+
 
 		}
 
@@ -169,10 +173,7 @@ error_bmp read_header_bmp(BMP *bmp)
 }
 
 
-//////////////////////////////////////////////////////////////
-
-
-static uint32_t linesPerSection(BMP *bmp)
+uint32_t linesPerSection(BMP *bmp)
 {
 
 	uint32_t sizeMax;
@@ -196,6 +197,9 @@ static uint32_t linesPerSection(BMP *bmp)
 	return 1;
 
 }
+
+
+//////////////////////////////////////////////////////////////
 
 
 static error_bmp read_sign_bmp(BMP *bmp, uint8_t *slotsBuf)

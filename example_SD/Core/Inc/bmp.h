@@ -12,9 +12,9 @@
 #include "fatfs.h"
 
 // Max buffer size
-#define MAX_BUFF_RAM 					( 128 * 160 )
+#define MAX_BUFF_RAM 					( 50 * 50 )
 
-#define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
+#define color565(r, g, b) 				(((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
 
 #define FILE_HWORD(data) 				( (uint16_t)data[0] + ( ( (uint16_t)data[1] ) << 8 ) )
 #define FILE_WORD(data)					( (uint32_t)data[0] + ( ( (uint32_t)data[1] ) << 8 ) + ( ( (uint32_t)data[1] ) << 16 ) + ( ( (uint32_t)data[1] ) << 24 ) )
@@ -51,6 +51,10 @@ typedef struct BMP
 	uint32_t height;
     uint16_t depth;
 
+    uint8_t *dataBuf[2];
+    uint8_t	pipeIndex;
+    uint8_t pipeFlag;
+
     uint32_t frameNum;
 
     const void (*draw)(uint16_t x, uint16_t y, uint16_t wd, uint16_t ht, const uint16_t *data);
@@ -64,5 +68,6 @@ error_bmp open_bmp(BMP *bmp);
 error_bmp read_header_bmp(BMP *bmp);
 error_bmp showImageBmp(BMP *bmp);
 
+uint32_t linesPerSection(BMP *bmp);
 
 #endif /* INC_BMP_H_ */

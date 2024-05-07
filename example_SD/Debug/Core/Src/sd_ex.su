@@ -1,5 +1,6 @@
-../Core/Src/sd_ex.c:31:6:sd_process	8	static
-../Core/Src/sd_ex.c:51:6:videoPlayer	8	static
-../Core/Src/sd_ex.c:60:6:playBmp	64	static
-../Core/Src/sd_ex.c:132:13:playGif	1616	static
-../Core/Src/sd_ex.c:151:6:ferror_handler	16	static
+../Core/Src/sd_ex.c:33:6:sd_process	8	static
+../Core/Src/sd_ex.c:53:6:videoPlayer	8	static
+../Core/Src/sd_ex.c:62:6:playBmp	5072	static
+../Core/Src/sd_ex.c:152:13:playGif	1616	static
+../Core/Src/sd_ex.c:171:6:ferror_handler	16	static
+../Core/Src/sd_ex.c:181:18:ramPipeline	40	static

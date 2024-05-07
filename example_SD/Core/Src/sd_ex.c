@@ -20,6 +20,8 @@
 static void playBmp(void);
 static void playGif(void);
 
+static error_bmp ramPipeline(BMP *bmp);
+
 
 FATFS FatFs; 		//Fatfs handle
 FIL fil; 			//File handle
@@ -40,10 +42,10 @@ void sd_process(void)
 	if(fres != FR_OK)
 		ferror_handler(ERROR_MOUNT);
 
-	// videoPlayer();
+	videoPlayer();
 
-	bmp_init(&bmp, &fil, FILE_NAME, ST7735_DrawImage);
-	showImageBmp(&bmp);
+	//bmp_init(&bmp, &fil, FILE_NAME, ST7735_DrawImage);
+	//showImageBmp(&bmp);
 
 }
 
@@ -61,10 +63,16 @@ void playBmp(void)
 {
 
 	uint8_t first = 1;
+	uint8_t fillPipe = 0;
+
+	uint8_t bufRam1[MAX_BUFF_RAM];
+	uint8_t bufRam2[MAX_BUFF_RAM];
 
 	char name[30] = ROOT_NAME;
 	int inc = 1;
 
+	bmp.dataBuf[0] = bufRam1;
+	bmp.dataBuf[1] = bufRam2;
 
 	uint8_t frameNum = strlen(ROOT_NAME);
 	for(int i = 1 ; i <= NUM_OF_FRAMES ; )
@@ -101,12 +109,24 @@ void playBmp(void)
 
 			bmp_init(&bmp, &fil, name, ST7735_DrawImage);
 
+			bmp.pipeFlag = 1;
+
+		}
+		else
+		{
+
+			bmp.name = name;
+
+			f_open(bmp.fp, bmp.name, FA_READ);
+
 		}
 
-		bmp.name = name;
+		ramPipeline(&bmp);
 
-		showImageBmp(&bmp);
-
+		if(fillPipe >= 1)
+			showImageBmp(&bmp);
+		else
+			fillPipe++;
 
 		if(FORMAT_TYPE == BMP_GIF)
 		{
@@ -153,5 +173,37 @@ void ferror_handler(uint8_t error)
 
 	if(error)
 		while(1);
+
+}
+
+
+
+static error_bmp ramPipeline(BMP *bmp)
+{
+
+	FRESULT fres;
+
+	UINT byteRead;
+
+	uint32_t sectionSizeByte;
+	uint32_t linesPerSec;
+
+
+	linesPerSec = linesPerSection(bmp);
+	sectionSizeByte = ( ( linesPerSec * bmp->width ) * ( bmp->depth / 8 ) );
+
+	// Enter new data in pipe
+
+	memset(bmp->dataBuf[bmp->pipeIndex], 0, MAX_BUFF_RAM);
+	fres = f_read(bmp->fp, bmp->dataBuf[bmp->pipeIndex], sectionSizeByte, &byteRead);
+
+	if(fres != FR_OK)
+		return ERROR_BMP_READ_FILE;
+
+	// Elaborate data ready
+
+	bmp->pipeIndex = ( ( bmp->pipeIndex + 1 ) % 2 );
+
+	return BMP_OK;
 
 }
