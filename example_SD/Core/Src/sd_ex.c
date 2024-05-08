@@ -40,10 +40,10 @@ void sd_process(void)
 	if(fres != FR_OK)
 		ferror_handler(ERROR_MOUNT);
 
-	// videoPlayer();
+	videoPlayer();
 
-	bmp_init(&bmp, &fil, FILE_NAME, ST7735_DrawImage);
-	showImageBmp(&bmp);
+	//bmp_init(&bmp, &fil, FILE_NAME, ST7735_DrawImage);
+	//showImageBmp(&bmp);
 
 }
 
@@ -104,6 +104,8 @@ void playBmp(void)
 		}
 
 		bmp.name = name;
+
+	    f_open(bmp.fp, bmp.name, FA_READ);
 
 		showImageBmp(&bmp);
 
