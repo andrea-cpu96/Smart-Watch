@@ -26,6 +26,7 @@ FIL fil; 			//File handle
 FRESULT fres; 		//Result after operations
 
 BMP bmp;
+gd_GIF gif;
 
 
 void sd_process(void)
@@ -53,6 +54,9 @@ void videoPlayer(void)
 
 	if(( FORMAT_TYPE == BMP_GIF ) || ( FORMAT_TYPE == BMP_VIDEO ) )
 		playBmp();
+
+	if(FORMAT_TYPE == TRUE_GIF)
+		playGif();
 
 }
 
@@ -105,7 +109,13 @@ void playBmp(void)
 
 		bmp.name = name;
 
+		GPIOB->ODR |= ( 1 << 5 );
+
+		//GPIOB->ODR ^= ( 1 << 5 );
+
 	    f_open(bmp.fp, bmp.name, FA_READ);
+
+	    GPIOB->ODR &= ~( 1 << 5 );
 
 		showImageBmp(&bmp);
 
@@ -126,6 +136,8 @@ void playBmp(void)
 
 			i += inc;
 
+
+		//	GPIOB->ODR ^= ( 1 << 5 );
 	}
 
 }
@@ -134,18 +146,54 @@ void playBmp(void)
 static void playGif(void)
 {
 
-	gd_GIF	gif;
-	gd_GIF *pgif;
+	int ret;
 
 
-	pgif = &gif;
+	gif_init(&gif, &fil, FILE_NAME);
 
-	open_gif(pgif);
+	uint8_t frame[gif.width * gif.height * 3];
+	//uint8_t frame_old[gif.width * gif.height * 3];
+
+	uint8_t *color = frame;
+	//uint8_t *color_old = frame_old;
 
 
+	while(1)
+	{
 
-	close_gif(pgif);
+		ret = getGifFrame(&gif);
 
+		if(ret == -1)
+			while(1);
+
+		renderGifFrame(&gif, frame);
+
+		color = frame;
+		//color_old = frame_old;
+
+		for(int i = 0; i < gif.height; i++)
+		{
+
+			for(int j = 0; j < gif.width; j++)
+			{
+
+				//								R		  G		    B
+				ST7735_DrawPixel(j, i, color565(color[0], color[1], color[2]));
+				color += 3;
+			//	color_old += 3;
+
+			}
+
+		}
+
+		//for(int h = 0 ; h < gif.width * gif.height * 3 ; h++)
+			//frame_old[h] = frame[h];
+
+		//HAL_Delay(50);
+        if(ret == 0)
+        	rewindGif(&gif);
+
+	}
 
 }
 

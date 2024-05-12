@@ -64,12 +64,11 @@ static uint16_t read_num(gd_GIF *imageGif)
 }
 
 
-void gif_init(gd_GIF *gif, FIL *fil, char *fName, const void (*drawFunc))
+void gif_init(gd_GIF *gif, FIL *fil, char *fName)
 {
 
 	gif->fp = fil;
 	gif->name = fName;
-	gif->draw = drawFunc;
 
 	open_gif(gif);
 
@@ -85,7 +84,7 @@ void open_gif(gd_GIF *gif)
     uint8_t fdsz, bgidx, aspect;
     int gct_sz;
 
-	uint8_t bufRam[MX_BUF_GIF_RAM];
+	uint8_t bufRam[2500] = {1};
 
 
     fres = f_open(gif->fp, gif->name, FA_READ);
@@ -155,7 +154,7 @@ void close_gif(gd_GIF *gif)
 {
 
     f_close(gif->fp);
-    free(gif->frame);
+    //free(gif->frame);
 
 }
 
@@ -558,11 +557,11 @@ int getGifFrame(gd_GIF *gif)
 
         if (sep == 0x3B)     // 0x3B – Gif completing
             return 0;
-
         if (sep == 0x21)     // 0x21 – Extension
             read_ext(gif);
+        else
+        	return -1;
 
-        else return -1;
         read_Gif_Blocks(gif, &sep, 1);
 
     }

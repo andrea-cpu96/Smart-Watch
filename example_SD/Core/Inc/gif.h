@@ -79,12 +79,10 @@ typedef struct gd_GIF
     uint8_t bgcolor;
     uint8_t *frame;
 
-    const void (*draw)(uint16_t x, uint16_t y, uint16_t wd, uint16_t ht, const uint16_t *data);
-
 }gd_GIF;
 
 
-void gif_init(gd_GIF *gif, FIL *fil, char *fName, const void (*drawFunc));
+void gif_init(gd_GIF *gif, FIL *fil, char *fName);
 void open_gif(gd_GIF *gif);
 int getGifFrame(gd_GIF *gif);
 void renderGifFrame(gd_GIF *gif, uint8_t *buffer);

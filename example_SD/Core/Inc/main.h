@@ -65,6 +65,8 @@ void Error_Handler(void);
 #define ST7735_RESET_GPIO_Port GPIOC
 #define SD_CS_Pin GPIO_PIN_1
 #define SD_CS_GPIO_Port GPIOB
+#define TP5_Pin GPIO_PIN_5
+#define TP5_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

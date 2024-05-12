@@ -9,7 +9,7 @@
 #define INC_SD_EX_H_
 
 
-#define FILE_NAME						"sample1.bmp"
+#define FILE_NAME						"sonic.gif"
 
 
 
@@ -19,7 +19,7 @@
 #define BMP_GIF							1
 #define BMP_VIDEO						2
 
-#define FORMAT_TYPE						BMP_GIF
+#define FORMAT_TYPE						TRUE_GIF
 
 #define RELOAD							0
 #define BACK_AND_FORTH					1
