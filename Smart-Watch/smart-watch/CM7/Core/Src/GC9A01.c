@@ -355,11 +355,15 @@ void GC9A01_set_frame(struct GC9A01_frame frame) {
 
 //////////////////////////////////////////////// PRIVATE FUNCTIONS
 
-
+HAL_StatusTypeDef ret;
 static void GC9A01_spi_tx(uint8_t *data, uint16_t size)
 {
 
-	HAL_SPI_Transmit(&hspi5, data, size, HAL_MAX_DELAY);
+
+	ret = HAL_SPI_Transmit(&hspi5, data, size, HAL_MAX_DELAY);
+
+	if(ret != HAL_OK)
+		return;
 
 }
 

@@ -265,3 +265,33 @@ java.lang.Exception: Resource '/JPEG_MJPEG_VideoDecoding' does not exist.
 
 !ENTRY org.eclipse.cdt.core 1 0 2024-06-03 15:46:31.710
 !MESSAGE Indexed 'JPEG_MJPEG_VideoDecoding_CM7' (54 sources, 136 headers) in 3.39 sec: 16,518 declarations; 120,042 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0015%)
+!SESSION 2024-06-04 18:46:18.941 -----------------------------------------------
+eclipse.buildId=Version 1.15.1
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-06-04 18:46:28.893
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-06-04 18:46:28.966
+!MESSAGE Log4j2 initialized with config file D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-06-04 18:46:38.406
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2024-06-04 19:46:31.467 -----------------------------------------------
+eclipse.buildId=Version 1.15.1
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-06-04 19:46:48.347
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-06-04 19:46:48.362
+!MESSAGE Log4j2 initialized with config file D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-06-04 19:46:58.549
+!MESSAGE Started RMI Server, listening on port 41337
