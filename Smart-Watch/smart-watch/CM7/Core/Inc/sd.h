@@ -8,6 +8,9 @@
 #ifndef INC_SD_H_
 #define INC_SD_H_
 
+#include "fatfs.h"
 
+void sd_init(void);
+void sd_open(FIL *file, char *fileName, char rw);
 
 #endif /* INC_SD_H_ */

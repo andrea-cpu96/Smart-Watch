@@ -295,3 +295,25 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-06-04 19:46:58.549
 !MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2024-06-06 21:27:50.706 -----------------------------------------------
+eclipse.buildId=Version 1.15.1
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-06-06 21:28:14.263
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-06-06 21:28:14.271
+!MESSAGE Log4j2 initialized with config file D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-06-06 21:28:38.228
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-06-06 21:28:43.020
+!MESSAGE Indexed 'smart-watch_CM4' (24 sources, 85 headers) in 4.47 sec: 7,835 declarations; 57,548 references; 0 unresolved inclusions; 2 syntax errors; 2 unresolved names (0.0031%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-06-06 21:28:46.209
+!MESSAGE Indexed 'smart-watch_CM7' (41 sources, 107 headers) in 3.17 sec: 9,821 declarations; 80,409 references; 0 unresolved inclusions; 117 syntax errors; 0 unresolved names (0%)

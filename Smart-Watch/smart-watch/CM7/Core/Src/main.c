@@ -138,7 +138,7 @@ Error_Handler();
   while (1)
   {
     /* USER CODE END WHILE */
-	  lcd_process();
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
