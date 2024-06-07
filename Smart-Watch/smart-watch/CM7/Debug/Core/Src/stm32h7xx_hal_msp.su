@@ -1,5 +1,5 @@
 ../Core/Src/stm32h7xx_hal_msp.c:63:6:HAL_MspInit	16	static
 ../Core/Src/stm32h7xx_hal_msp.c:85:6:HAL_SD_MspInit	256	static
-../Core/Src/stm32h7xx_hal_msp.c:145:6:HAL_SD_MspDeInit	16	static
-../Core/Src/stm32h7xx_hal_msp.c:181:6:HAL_SPI_MspInit	256	static
-../Core/Src/stm32h7xx_hal_msp.c:237:6:HAL_SPI_MspDeInit	16	static
+../Core/Src/stm32h7xx_hal_msp.c:148:6:HAL_SD_MspDeInit	16	static
+../Core/Src/stm32h7xx_hal_msp.c:186:6:HAL_SPI_MspInit	256	static
+../Core/Src/stm32h7xx_hal_msp.c:242:6:HAL_SPI_MspDeInit	16	static

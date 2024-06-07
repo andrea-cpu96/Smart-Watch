@@ -1,0 +1,3 @@
+../Core/Src/sd.c:22:6:sd_init	16	static
+../Core/Src/sd.c:34:6:sd_open	24	static
+../Core/Src/sd.c:46:13:sd_error_handler	4	static

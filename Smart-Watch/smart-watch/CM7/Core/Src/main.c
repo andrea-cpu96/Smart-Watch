@@ -18,10 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "fatfs.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "sd.h"
 #include "lcd.h"
 /* USER CODE END Includes */
 
@@ -130,6 +130,7 @@ Error_Handler();
   MX_SDMMC1_SD_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
+  sd_init();
   lcd_init();
   /* USER CODE END 2 */
 
@@ -138,7 +139,7 @@ Error_Handler();
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  lcd_process();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -11,14 +11,21 @@
 #include "GC9A01.h"
 
 
+extern FATFS SDFatFs;  				// File system object for SD card logical drive
+extern FIL file;    	      		// MJPEG File object
+extern char fileName[];
+extern uint8_t rtext[_MAX_SS];		// File read buffer
+
+
 // Process function
 void lcd_process(void);
 
 // LCD functions
 void lcd_init(void);
 
-// Demonstration function
+// Demonstration functions
 void lcd_demo(void);
+void sd_image_demo(void);
 
 
 

@@ -1,9 +1,9 @@
 Middlewares/Third_Party/FatFs/diskio.o: \
- D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/diskio.c \
- D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/diskio.h \
- D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/integer.h \
- D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
- D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/ff.h \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/diskio.c \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/diskio.h \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/integer.h \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/ff.h \
  ../FATFS/Target/ffconf.h ../Core/Inc/main.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
@@ -40,10 +40,10 @@ Middlewares/Third_Party/FatFs/diskio.o: \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h
-D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/diskio.h:
-D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/integer.h:
-D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
-D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/ff.h:
+C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/diskio.h:
+C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/integer.h:
+C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
+C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch/smart-watch/Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/ffconf.h:
 ../Core/Inc/main.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:

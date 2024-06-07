@@ -12,12 +12,13 @@
 #include "fatfs.h"
 
 // Max buffer size
-#define MAX_BUFF_RAM 					( 128 * 160 )
+#define MAX_BUFF_RAM 					( 240 * 240 )
 
 #define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
 
 #define FILE_HWORD(data) 				( (uint16_t)data[0] + ( ( (uint16_t)data[1] ) << 8 ) )
 #define FILE_WORD(data)					( (uint32_t)data[0] + ( ( (uint32_t)data[1] ) << 8 ) + ( ( (uint32_t)data[1] ) << 16 ) + ( ( (uint32_t)data[1] ) << 24 ) )
+
 
 typedef union
 {

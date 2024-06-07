@@ -6,12 +6,14 @@
  */
 
 #include "main.h"
+
 #include "sd.h"
 
 
-FATFS SDFatFs;  			// File system object for SD card logical drive
-FIL MJPEG_File;          	// MJPEG File object
-char fileName[] = "image.avi";
+FATFS SDFatFs;  				// File system object for SD card logical drive
+FIL file;          				// MJPEG File object
+char fileName[] = "image.bmp";
+uint8_t rtext[_MAX_SS];			// File read buffer
 
 
 static void sd_error_handler(void);
@@ -20,17 +22,11 @@ static void sd_error_handler(void);
 void sd_init(void)
 {
 
-	if(FATFS_LinkDriver(&SD_Driver, SDPath) == 0)
-	{
+    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
+    	sd_error_handler();
 
-		// Init the SD Card
-		BSP_SD_Init(0);
-
-	    // Register the file system object to the FatFs module
-	    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
-	    	sd_error_handler();
-
-	}
+    if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, rtext, sizeof(rtext)) != FR_OK)
+		sd_error_handler();
 
 }
 
@@ -44,6 +40,7 @@ void sd_open(FIL *file, char *fileName, char rw)
 }
 
 
+/****************************************** PRIVATE FUNCTIONS */
 
 
 static void sd_error_handler(void)

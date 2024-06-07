@@ -1,7 +1,0 @@
-../Core/Src/lcd.c:21:6:lcd_init	8	static
-../Core/Src/lcd.c:29:6:lcd_process	8	static
-../Core/Src/lcd.c:37:6:lcd_demo	8	static
-../Core/Src/lcd.c:90:13:triangle_ex	16	static
-../Core/Src/lcd.c:135:13:rainbow_ex	32	static
-../Core/Src/lcd.c:169:13:checkboard_ex	16	static
-../Core/Src/lcd.c:214:13:swissFlag_ex	16	static

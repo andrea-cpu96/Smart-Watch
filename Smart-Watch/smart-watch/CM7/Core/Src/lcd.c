@@ -8,13 +8,25 @@
 #include "main.h"
 #include "lcd.h"
 
+#include "bmp.h"
+
 
 static void triangle_ex(void);
 static void rainbow_ex(void);
 static void checkboard_ex(void);
 static void swissFlag_ex(void);
+static void sd_error_handler(void);
 
+// sd
+FATFS SDFatFs;  				// File system object for SD card logical drive
+FIL file;          				// MJPEG File object
+char fName[] = "image.bmp";
+uint8_t rtext[_MAX_SS];			// File read buffer
 
+// bmp
+BMP *bmp;
+
+// lcd
 uint8_t color[3];
 
 
@@ -22,6 +34,9 @@ void lcd_init(void)
 {
 
 	GC9A01_init();
+	sd_init();
+
+	bmp_init(&bmp, &fil, fName, const void (*drawFunc));
 
 }
 
@@ -29,7 +44,17 @@ void lcd_init(void)
 void lcd_process(void)
 {
 
-	lcd_demo();
+	sd_image();
+	// lcd_demo();
+
+}
+
+
+void lcd_draw(uint16_t x, uint16_t y, uint16_t wd, uint16_t ht, const uint16_t *data)
+{
+
+
+
 
 }
 
@@ -41,50 +66,42 @@ void lcd_demo(void)
 
 	triangle_ex();
 
-    //setPWM(1);
-
     HAL_Delay(1000);
-
-    // setPWM(0);
 
     // Rainbow //
 
     rainbow_ex();
 
-    // setPWM(1);
-
     HAL_Delay(1000);
-
-    // setPWM(0);
 
     // Checkerboard //
 
     checkboard_ex();
 
-    // setPWM(1);
-
     HAL_Delay(1000);
-
-    // setPWM(0);
 
     // Swiss flag //
 
     swissFlag_ex();
 
-    // setPWM(1);
-
-    GC9A01_write_command(0x20);
+    GC9A01_write_command(0x20); // Change colours
 
     HAL_Delay(1000);
-
-    // setPWM(0);
 
 }
 
 
-/****************************************** PRIVATE FUNCTIONS */
+void sd_image_demo(void)
+{
+
+	showImageBmp(bmp);
+
+	HAL_Delay(2000);
+
+}
 
 
+///////////////////////////////////////////////////////// PRIVATE FUNCTIONS
 
 
 static void triangle_ex(void)
@@ -253,5 +270,27 @@ static void swissFlag_ex(void)
 		}
 
 	}
+
+}
+
+
+// SD
+
+static void sd_init(void)
+{
+
+    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
+    	sd_error_handler();
+
+    if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, rtext, sizeof(rtext)) != FR_OK)
+		sd_error_handler();
+
+}
+
+
+static void sd_error_handler(void)
+{
+
+	while(1);
 
 }

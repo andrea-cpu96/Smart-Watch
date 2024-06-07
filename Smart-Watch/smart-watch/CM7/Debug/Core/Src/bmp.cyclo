@@ -1,0 +1,14 @@
+../Core/Src/bmp.c:24:11:bmp_init	1
+../Core/Src/bmp.c:36:11:open_bmp	2
+../Core/Src/bmp.c:63:11:showImageBmp	7
+../Core/Src/bmp.c:135:11:read_header_bmp	2
+../Core/Src/bmp.c:174:17:linesPerSection	4
+../Core/Src/bmp.c:200:18:read_sign_bmp	2
+../Core/Src/bmp.c:213:18:read_fSize_bmp	1
+../Core/Src/bmp.c:223:18:read_off_bmp	1
+../Core/Src/bmp.c:235:18:read_width_bmp	1
+../Core/Src/bmp.c:247:18:read_height_bmp	1
+../Core/Src/bmp.c:259:18:read_depth_bmp	1
+../Core/Src/bmp.c:271:18:skip_slots_bmp	1
+../Core/Src/bmp.c:284:18:read_bmp_blocks	3
+../Core/Src/bmp.c:303:13:depth24To16	2

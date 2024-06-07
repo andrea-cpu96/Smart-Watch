@@ -1,5 +1,6 @@
 "./Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.o"
 "./Core/Src/GC9A01.o"
+"./Core/Src/bmp.o"
 "./Core/Src/lcd.o"
 "./Core/Src/main.o"
 "./Core/Src/sd.o"

@@ -10,6 +10,13 @@
 
 #include "fatfs.h"
 
+
+extern FATFS SDFatFs;  				// File system object for SD card logical drive
+extern FIL file;    	      		// MJPEG File object
+extern char fileName[];
+extern uint8_t rtext[_MAX_SS];		// File read buffer
+
+
 void sd_init(void);
 void sd_open(FIL *file, char *fileName, char rw);
 
