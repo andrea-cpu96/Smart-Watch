@@ -12,7 +12,7 @@
 #include "fatfs.h"
 
 // Max buffer size
-#define MAX_BUFF_RAM 					( 128 * 160 )
+#define MAX_BUFF_RAM 					( 240 * 240 * 3 )
 
 #define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
 
@@ -53,7 +53,7 @@ typedef struct BMP
 
     uint32_t frameNum;
 
-    const void (*draw)(uint16_t x, uint16_t y, uint16_t wd, uint16_t ht, const uint16_t *data);
+    const void (*draw)(uint16_t x, uint16_t y, uint16_t wd, uint16_t ht, const uint8_t *data);
 
 }BMP;
 

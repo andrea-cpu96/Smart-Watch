@@ -15,12 +15,13 @@ static void triangle_ex(void);
 static void rainbow_ex(void);
 static void checkboard_ex(void);
 static void swissFlag_ex(void);
+static void sd_init(void);
 static void sd_error_handler(void);
 
 // sd
 FATFS SDFatFs;  				// File system object for SD card logical drive
 FIL file;          				// MJPEG File object
-char fName[] = "image.bmp";
+char fName[] = "image2.bmp";
 uint8_t rtext[_MAX_SS];			// File read buffer
 
 // bmp
@@ -36,7 +37,7 @@ void lcd_init(void)
 	GC9A01_init();
 	sd_init();
 
-	bmp_init(&bmp, &fil, fName, const void (*drawFunc));
+	bmp_init(bmp, &file, fName, lcd_draw);
 
 }
 
@@ -44,15 +45,46 @@ void lcd_init(void)
 void lcd_process(void)
 {
 
-	sd_image();
+	// sd_image_demo();
 	// lcd_demo();
+	jpeg_demo();
 
 }
 
 
-void lcd_draw(uint16_t x, uint16_t y, uint16_t wd, uint16_t ht, const uint16_t *data)
+void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 {
 
+	for(int x = sx; x < ( wd + sx ) ; x++)
+	{
+
+		for(int y = sy; y < ( ht + sy ) ; y++)
+		{
+
+			if (x == sx && y == sy)
+			{
+
+				GC9A01_write(data, 2);
+
+			}
+			else
+			{
+
+				GC9A01_write_continue(data, 2);
+
+			}
+
+			data += 2;
+
+		}
+
+	}
+
+}
+
+
+void jpeg_demo(void)
+{
 
 
 
@@ -279,11 +311,11 @@ static void swissFlag_ex(void)
 static void sd_init(void)
 {
 
-    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
+    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 1) != FR_OK)
     	sd_error_handler();
 
-    if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, rtext, sizeof(rtext)) != FR_OK)
-		sd_error_handler();
+    //if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, rtext, sizeof(rtext)) != FR_OK)
+		//sd_error_handler();
 
 }
 

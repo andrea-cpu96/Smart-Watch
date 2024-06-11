@@ -9,7 +9,6 @@
 #include "bmp.h"
 
 
-static uint32_t linesPerSection(BMP *bmp);
 static error_bmp read_sign_bmp(BMP *bmp, uint8_t *slotsBuf);
 static error_bmp read_fSize_bmp(BMP *bmp, uint8_t *slotsBuf);
 static error_bmp read_off_bmp(BMP *bmp, uint8_t *slotsBuf);
@@ -19,6 +18,7 @@ static error_bmp read_depth_bmp(BMP *bmp, uint8_t *slotsBuf);
 static error_bmp skip_slots_bmp(BMP *bmp, uint16_t byteToSkip);
 static error_bmp read_bmp_blocks(BMP *bmp, uint8_t *buf, size_t nbytes);
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
+static void imageWindowed(doubleFormat *data);
 
 
 error_bmp bmp_init(BMP *bmp, FIL *fil, char *fName, const void (*drawFunc))
@@ -69,7 +69,6 @@ error_bmp showImageBmp(BMP *bmp)
 	doubleFormat pBuf;
 
 	uint32_t sectionSizeByte;
-	uint32_t linesPerSec;
 	uint32_t sectionDim;
 	uint8_t bytePerPxl;
 
@@ -78,9 +77,8 @@ error_bmp showImageBmp(BMP *bmp)
 
 	pBuf.u8Arr = bufRam;					// Pointer to buf in order to convert format from uint8_t to uint16_t
 
-	linesPerSec = linesPerSection(bmp);
-	sectionSizeByte = ( ( linesPerSec * bmp->width ) * ( bmp->depth / 8 ) );
-	sectionDim = ( linesPerSec * bmp->width );
+	sectionSizeByte = ( ( bmp->height * bmp->width ) * ( bmp->depth / 8 ) );
+	sectionDim = ( bmp->height * bmp->width );
 	bytePerPxl = ( bmp->depth / 8 );
 
 	// Point to the initial position
@@ -93,39 +91,21 @@ error_bmp showImageBmp(BMP *bmp)
 		// Skip header file
 		f_lseek(bmp->fp, bmp->fp->fptr + bmp->offset);
 
-		for(int i = 0 ; i < ( bmp->height / linesPerSec ) ; i++)
-		{
+		memset(bufRam, 0, MAX_BUFF_RAM);
+		fres = f_read(bmp->fp, bufRam, sectionSizeByte, &byteRead);
 
-			//HAL_Delay(100);
+		if(fres != FR_OK)
+			return ERROR_BMP_READ_FILE;
 
-			memset(bufRam, 0, MAX_BUFF_RAM);
-			fres = f_read(bmp->fp, bufRam, sectionSizeByte, &byteRead);
+		if(byteRead != sectionSizeByte)
+			return ERROR_BMP_READ_FEW_DATA;
 
-			if(fres != FR_OK)
-				return ERROR_BMP_READ_FILE;
+		depth24To16(&pBuf, sectionDim, bytePerPxl);
+		imageWindowed(&pBuf);
 
-			if(byteRead != sectionSizeByte)
-				return ERROR_BMP_READ_FEW_DATA;
-
-			if(bmp->depth >= 24)
-				depth24To16(&pBuf, sectionDim, bytePerPxl);
-
-			for(int j = 0 ; j < linesPerSec ;j++)
-				bmp->draw(0, ( ( i * linesPerSec ) + j ), bmp->width, 1, ( &pBuf.u16Arr[( j * bmp->width )] ));
-
-		}
-
-		/*
-		// Skip a number of frames
-		if(FRAME_SKIP_FACTOR > 0)
-			f_lseek(&fil, fil.fptr + ( FRAME_TOTAL_BYTE_SIZE * FRAME_SKIP_FACTOR ));
-		*/
+		bmp->draw(0, 0, bmp->width, bmp->height, pBuf.u8Arr);
 
 	}
-
-	//HAL_Delay(10);
-
-	f_close(bmp->fp);
 
 	return BMP_OK;
 
@@ -169,32 +149,6 @@ error_bmp read_header_bmp(BMP *bmp)
 
 
 //////////////////////////////////////////////////////////////
-
-
-static uint32_t linesPerSection(BMP *bmp)
-{
-
-	uint32_t sizeMax;
-
-	sizeMax = ( ( bmp->height * bmp->width ) * ( bmp->depth / 8 ) );
-
-
-	for(int i = 1 ; i < bmp->height; i++)
-	{
-
-		if(( bmp->height % i ) != 0)
-			continue;
-
-		uint32_t numOflines = ( bmp->height / i );
-
-		if(( sizeMax / i ) <= MAX_BUFF_RAM)
-			return numOflines;
-
-	}
-
-	return 1;
-
-}
 
 
 static error_bmp read_sign_bmp(BMP *bmp, uint8_t *slotsBuf)
@@ -315,8 +269,31 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 		g = pxArr->u8Arr[i*bpx+1];
 		r = pxArr->u8Arr[i*bpx+2];
 
-		pxArr->u16Arr[i] = color565(r, g, b);
+		pxArr->u16Arr[i] = color565(b, r, g);
 		pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
+
+	}
+
+}
+
+
+static void imageWindowed(doubleFormat *data)
+{
+
+	uint16_t tmp;
+
+
+	for(int i = 0 ; i < 240 ; i++)
+	{
+
+		for(int j = 0 ; j < 120 ; j++)
+		{
+
+			tmp = data->u16Arr[j+(i*240)];
+			data->u16Arr[j+(i*240)] = data->u16Arr[(240-1-j)+(i*240)];
+			data->u16Arr[(240-1-j)+(i*240)] = tmp;
+
+		}
 
 	}
 

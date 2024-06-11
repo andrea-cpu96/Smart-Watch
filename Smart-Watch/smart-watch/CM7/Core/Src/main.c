@@ -18,10 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "fatfs.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "sd.h"
 #include "lcd.h"
 /* USER CODE END Includes */
 
@@ -46,6 +46,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 
+JPEG_HandleTypeDef hjpeg;
+
 SD_HandleTypeDef hsd1;
 
 SPI_HandleTypeDef hspi5;
@@ -59,6 +61,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_SPI5_Init(void);
 static void MX_SDMMC1_SD_Init(void);
+static void MX_JPEG_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -129,8 +132,8 @@ Error_Handler();
   MX_SPI5_Init();
   MX_SDMMC1_SD_Init();
   MX_FATFS_Init();
+  MX_JPEG_Init();
   /* USER CODE BEGIN 2 */
-  sd_init();
   lcd_init();
   /* USER CODE END 2 */
 
@@ -202,6 +205,32 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief JPEG Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_JPEG_Init(void)
+{
+
+  /* USER CODE BEGIN JPEG_Init 0 */
+
+  /* USER CODE END JPEG_Init 0 */
+
+  /* USER CODE BEGIN JPEG_Init 1 */
+
+  /* USER CODE END JPEG_Init 1 */
+  hjpeg.Instance = JPEG;
+  if (HAL_JPEG_Init(&hjpeg) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN JPEG_Init 2 */
+
+  /* USER CODE END JPEG_Init 2 */
+
 }
 
 /**
