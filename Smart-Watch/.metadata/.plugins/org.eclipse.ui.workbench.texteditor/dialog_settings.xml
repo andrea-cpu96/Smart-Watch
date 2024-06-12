@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="depth24To16"/>
+		<item key="selection" value="fName"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="fName"/>
+			<item value="SDPath"/>
+			<item value="fileName"/>
+			<item value="file"/>
+			<item value="UINT"/>
+			<item value="AVI_Handel"/>
+			<item value="FrameType"/>
+			<item value="MJPEG_VID_BUFFER_SIZE"/>
+			<item value="MJPEG_VideoBuffer"/>
+			<item value="HAL_JPEG_Decode"/>
+			<item value="jpeg_demo"/>
 			<item value="depth24To16"/>
 			<item value="temp"/>
 			<item value="COLOR_MODE__16_BIT"/>
 			<item value="bmp_init"/>
-			<item value="static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);"/>
-			<item value="COLOR_MODE__18_BIT"/>
-			<item value="COLOR_MODE__24_BIT"/>
-			<item value="linesPerSec"/>
-			<item value="bytePerPxl"/>
-			<item value="COLOR_MODE"/>
-			<item value="ORIENTATION"/>
-			<item value="lcd_demo"/>
-			<item value="sd_open"/>
-			<item value="sd_image"/>
-			<item value="color"/>
 		</list>
 		<list key="replacehistory">
 		</list>

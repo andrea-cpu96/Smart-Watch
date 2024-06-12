@@ -19,6 +19,7 @@
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_hsem.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_i2c.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_i2c_ex.o"
+"./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_jpeg.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_mdma.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_pwr.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_pwr_ex.o"
@@ -40,3 +41,4 @@
 "./Middlewares/Third_Party/FatFs/ff.o"
 "./Middlewares/Third_Party/FatFs/ff_gen_drv.o"
 "./Middlewares/Third_Party/FatFs/syscall.o"
+"./Utilities/jpeg_utils.o"

@@ -21,7 +21,7 @@ static void sd_error_handler(void);
 // sd
 FATFS SDFatFs;  				// File system object for SD card logical drive
 FIL file;          				// MJPEG File object
-char fName[] = "image2.bmp";
+char fName[] = "image.jpeg";
 uint8_t rtext[_MAX_SS];			// File read buffer
 
 // bmp
@@ -37,7 +37,7 @@ void lcd_init(void)
 	GC9A01_init();
 	sd_init();
 
-	bmp_init(bmp, &file, fName, lcd_draw);
+	//bmp_init(bmp, &file, fName, lcd_draw);
 
 }
 
@@ -82,11 +82,31 @@ void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 
 }
 
+#define JPEG_BUFFER_SIZE ((uint32_t)(1024 *96))
+#define JPEG_AUD_BUFFER_SIZE ((uint32_t)(1024 *16))
 
 void jpeg_demo(void)
 {
 
+	UINT byteRead;
+	uint8_t JPEG_InputBuffer[11527]; // Example size, adjust as needed
+	uint8_t JPEG_OutputBuffer[11527]; // Example size, adjust as needed
 
+
+	hjpeg.Instance = JPEG;
+	HAL_JPEG_Init(&hjpeg);
+
+	if(f_open(&file, "image1.bmp", FA_READ) != FR_OK)
+		while(1);
+
+	if(f_read(&file, JPEG_InputBuffer, 11527, &byteRead) != FR_OK)
+		while(1);
+
+
+	if(HAL_JPEG_Decode(&hjpeg, JPEG_InputBuffer, 11527, JPEG_OutputBuffer, 11527, HAL_MAX_DELAY) != HAL_OK)
+		while(1);
+
+	lcd_draw(0, 0, 240, 240, JPEG_OutputBuffer);
 
 }
 
@@ -311,7 +331,7 @@ static void swissFlag_ex(void)
 static void sd_init(void)
 {
 
-    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 1) != FR_OK)
+    if(f_mount(&SDFatFs, "", 1) != FR_OK)
     	sd_error_handler();
 
     //if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, rtext, sizeof(rtext)) != FR_OK)

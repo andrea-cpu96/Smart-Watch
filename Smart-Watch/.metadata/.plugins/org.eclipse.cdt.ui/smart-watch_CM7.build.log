@@ -1,17 +1,17 @@
-13:43:11 **** Incremental Build of configuration Debug for project smart-watch_CM7 ****
+22:04:43 **** Incremental Build of configuration Debug for project smart-watch_CM7 ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/bmp.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H747xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../../Middlewares/Third_Party/FatFs/src -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bmp.d" -MT"Core/Src/bmp.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bmp.o"
+arm-none-eabi-gcc "../Core/Src/lcd.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H747xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../../Middlewares/Third_Party/FatFs/src -I../../Utilities/JPEG -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd.d" -MT"Core/Src/lcd.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd.o"
 arm-none-eabi-gcc -o "smart-watch_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\STM32H747XIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="smart-watch_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: smart-watch_CM7.elf
  
 arm-none-eabi-size  smart-watch_CM7.elf 
 arm-none-eabi-objdump -h -S smart-watch_CM7.elf  > "smart-watch_CM7.list"
    text	   data	    bss	    dec	    hex	filename
-  45604	     28	   3028	  48660	   be14	smart-watch_CM7.elf
+  49444	     16	   3112	  52572	   cd5c	smart-watch_CM7.elf
 Finished building: default.size.stdout
  
 Finished building: smart-watch_CM7.list
  
 
-13:43:12 Build Finished. 0 errors, 0 warnings. (took 1s.320ms)
+22:04:45 Build Finished. 0 errors, 0 warnings. (took 1s.270ms)
 
