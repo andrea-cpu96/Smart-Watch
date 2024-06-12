@@ -39,6 +39,7 @@ extern "C" {
 
 extern SPI_HandleTypeDef hspi5;
 extern JPEG_HandleTypeDef hjpeg;
+extern JPEG_ConfTypeDef JPEG_Info;
 
 /* USER CODE END ET */
 

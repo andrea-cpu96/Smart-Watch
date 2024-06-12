@@ -10,6 +10,8 @@
 
 #include "bmp.h"
 
+//#include "decode_polling.h"
+
 
 static void triangle_ex(void);
 static void rainbow_ex(void);
@@ -17,6 +19,9 @@ static void checkboard_ex(void);
 static void swissFlag_ex(void);
 static void sd_init(void);
 static void sd_error_handler(void);
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
+static void imageWindowed(doubleFormat *data);
+
 
 // sd
 FATFS SDFatFs;  				// File system object for SD card logical drive
@@ -82,32 +87,75 @@ void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 
 }
 
-#define JPEG_BUFFER_SIZE ((uint32_t)(1024 *96))
-#define JPEG_AUD_BUFFER_SIZE ((uint32_t)(1024 *16))
+#include "string.h"
+uint16_t sample_image[240*240*2] = {0};
 
 void jpeg_demo(void)
 {
+    UINT byteRead;
+    JPEG_ConfTypeDef JPEG_Info;
 
-	UINT byteRead;
-	uint8_t JPEG_InputBuffer[11527]; // Example size, adjust as needed
-	uint8_t JPEG_OutputBuffer[11527]; // Example size, adjust as needed
+    hjpeg.Instance = JPEG;
+    HAL_JPEG_Init(&hjpeg);
+
+    if(f_open(&file, "image.jpg", FA_READ) != FR_OK)
+    {
+        Error_Handler(); // Gestisci l'errore di apertura del file
+        return;
+    }
+
+    uint32_t size = f_size(&file);
+
+    uint8_t *JPEG_InputBuffer = (uint8_t *)malloc(size); // Allocazione dinamica del buffer di input
+    if (JPEG_InputBuffer == NULL)
+    {
+        Error_Handler(); // Gestisci l'errore di allocazione di memoria
+        return;
+    }
+
+    uint8_t JPEG_OutputBuffer[240 * 240 * 3]; // Buffer di output
+
+    if(f_read(&file, JPEG_InputBuffer, size, &byteRead) != FR_OK)
+    {
+        free(JPEG_InputBuffer); // Libera la memoria allocata
+        Error_Handler(); // Gestisci l'errore di lettura dal file
+        return;
+    }
+
+    // Decodifica JPEG
+    HAL_JPEG_Decode(&hjpeg, JPEG_InputBuffer, size, JPEG_OutputBuffer, sizeof(JPEG_OutputBuffer), HAL_MAX_DELAY);
+
+    // Ottieni informazioni sull'immagine JPEG
+    HAL_JPEG_GetInfo(&hjpeg, &JPEG_Info);
+
+    uint32_t width = JPEG_Info.ImageWidth;
+    uint32_t height = JPEG_Info.ImageHeight;
+
+    doubleFormat p;
+    p.u8Arr = JPEG_OutputBuffer;
+
+    depth24To16(&p, width*height, 3);
+    imageWindowed(&p);
+
+    lcd_draw(0, 0, width, height, p.u8Arr);
 
 
-	hjpeg.Instance = JPEG;
-	HAL_JPEG_Init(&hjpeg);
-
-	if(f_open(&file, "image1.bmp", FA_READ) != FR_OK)
-		while(1);
-
-	if(f_read(&file, JPEG_InputBuffer, 11527, &byteRead) != FR_OK)
-		while(1);
+        // Apri il file per la scrittura
+        f_open(&file, "o.txt", FA_WRITE);
 
 
-	if(HAL_JPEG_Decode(&hjpeg, JPEG_InputBuffer, 11527, JPEG_OutputBuffer, 11527, HAL_MAX_DELAY) != HAL_OK)
-		while(1);
+        // Scrivi i dati dell'array nel file
+        for (size_t i = 0; i < (width*height); i++)
+        {
+            // Scrive ogni elemento dell'array in una nuova riga
+            f_printf(&file, ""+JPEG_OutputBuffer[i]);
+        }
 
-	lcd_draw(0, 0, 240, 240, JPEG_OutputBuffer);
+        // Chiudi il file
+        f_close(&file);
 
+
+    free(JPEG_InputBuffer); // Libera la memoria allocata
 }
 
 
@@ -344,5 +392,51 @@ static void sd_error_handler(void)
 {
 
 	while(1);
+
+}
+
+
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
+{
+
+	uint8_t b;
+	uint8_t g;
+	uint8_t r;
+
+
+	for(int i = 0 ; i < length ; i++)
+	{
+
+		b = pxArr->u8Arr[i*bpx];
+		g = pxArr->u8Arr[i*bpx+1];
+		r = pxArr->u8Arr[i*bpx+2];
+
+		pxArr->u16Arr[i] = color565(b, r, g);
+		//pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
+
+	}
+
+}
+
+
+static void imageWindowed(doubleFormat *data)
+{
+
+	uint16_t tmp;
+
+
+	for(int i = 0 ; i < 240 ; i++)
+	{
+
+		for(int j = 0 ; j < 120 ; j++)
+		{
+
+			tmp = data->u16Arr[j+(i*240)];
+			data->u16Arr[j+(i*240)] = data->u16Arr[(240-1-j)+(i*240)];
+			data->u16Arr[(240-1-j)+(i*240)] = tmp;
+
+		}
+
+	}
 
 }

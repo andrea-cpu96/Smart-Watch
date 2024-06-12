@@ -17,6 +17,10 @@ extern char fileName[];
 extern uint8_t rtext[_MAX_SS];		// File read buffer
 
 
+#define LCD_FRAME_BUFFER 0xD0000000
+#define JPEG_OUTPUT_DATA_BUFFER  0xD0200000
+
+
 // Process function
 void lcd_process(void);
 
