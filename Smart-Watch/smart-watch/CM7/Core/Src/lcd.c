@@ -7,8 +7,9 @@
 
 #include "main.h"
 #include "lcd.h"
-
 #include "bmp.h"
+
+#include "decode_polling.h"
 
 //#include "decode_polling.h"
 
@@ -21,6 +22,7 @@ static void sd_init(void);
 static void sd_error_handler(void);
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
 static void imageWindowed(doubleFormat *data);
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset);
 
 
 // sd
@@ -87,43 +89,25 @@ void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 
 }
 
-#include "string.h"
-uint16_t sample_image[240*240*2] = {0};
 
 void jpeg_demo(void)
 {
-    UINT byteRead;
+
     JPEG_ConfTypeDef JPEG_Info;
 
     hjpeg.Instance = JPEG;
     HAL_JPEG_Init(&hjpeg);
 
     if(f_open(&file, "image.jpg", FA_READ) != FR_OK)
-    {
-        Error_Handler(); // Gestisci l'errore di apertura del file
-        return;
-    }
+    	while(1);
 
-    uint32_t size = f_size(&file);
-
-    uint8_t *JPEG_InputBuffer = (uint8_t *)malloc(size); // Allocazione dinamica del buffer di input
-    if (JPEG_InputBuffer == NULL)
-    {
-        Error_Handler(); // Gestisci l'errore di allocazione di memoria
-        return;
-    }
-
-    uint8_t JPEG_OutputBuffer[240 * 240 * 3]; // Buffer di output
-
-    if(f_read(&file, JPEG_InputBuffer, size, &byteRead) != FR_OK)
-    {
-        free(JPEG_InputBuffer); // Libera la memoria allocata
-        Error_Handler(); // Gestisci l'errore di lettura dal file
-        return;
-    }
+    uint8_t JPEG_OutputBuffer[240*240*2]; 		// RAW buffer
+    uint8_t DECODED_OutputBuffer[240*240*2];	// Decoded buffer
 
     // Decodifica JPEG
-    HAL_JPEG_Decode(&hjpeg, JPEG_InputBuffer, size, JPEG_OutputBuffer, sizeof(JPEG_OutputBuffer), HAL_MAX_DELAY);
+    JPEG_DecodePolling(&hjpeg, &file, (uint32_t)JPEG_OutputBuffer);
+
+    while(!Jpeg_Decoding_End);
 
     // Ottieni informazioni sull'immagine JPEG
     HAL_JPEG_GetInfo(&hjpeg, &JPEG_Info);
@@ -131,31 +115,10 @@ void jpeg_demo(void)
     uint32_t width = JPEG_Info.ImageWidth;
     uint32_t height = JPEG_Info.ImageHeight;
 
-    doubleFormat p;
-    p.u8Arr = JPEG_OutputBuffer;
+    DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, 0, 0, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, 0);
 
-    depth24To16(&p, width*height, 3);
-    imageWindowed(&p);
+    lcd_draw(0, 0, width, height, DECODED_OutputBuffer);
 
-    lcd_draw(0, 0, width, height, p.u8Arr);
-
-
-        // Apri il file per la scrittura
-        f_open(&file, "o.txt", FA_WRITE);
-
-
-        // Scrivi i dati dell'array nel file
-        for (size_t i = 0; i < (width*height); i++)
-        {
-            // Scrive ogni elemento dell'array in una nuova riga
-            f_printf(&file, ""+JPEG_OutputBuffer[i]);
-        }
-
-        // Chiudi il file
-        f_close(&file);
-
-
-    free(JPEG_InputBuffer); // Libera la memoria allocata
 }
 
 
@@ -439,4 +402,68 @@ static void imageWindowed(doubleFormat *data)
 
 	}
 
+}
+
+
+/**
+  * @brief  Copy the Decoded image to the display Frame buffer.
+  * @param  pSrc: Pointer to source buffer
+  * @param  pDst: Pointer to destination buffer
+  * @param  x: destination horizenatl offset.
+  * @param  y: destination Vertical offset.
+  * @param  xSize: image width
+  * @param  ysize: image Height
+  * @retval None
+  */
+static DMA2D_HandleTypeDef    DMA2D_Handle;
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset)
+{
+
+  uint32_t destination = (uint32_t)pDst;
+  uint32_t source      = (uint32_t)pSrc;
+
+  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/
+  DMA2D_Handle.Init.Mode          = DMA2D_M2M_PFC;
+  DMA2D_Handle.Init.ColorMode     = DMA2D_OUTPUT_RGB565;
+  DMA2D_Handle.Init.OutputOffset  = 240 - xsize;
+  DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/
+  DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */
+
+  /*##-2- DMA2D Callbacks Configuration ######################################*/
+  DMA2D_Handle.XferCpltCallback  = NULL;
+
+  /*##-3- Foreground Configuration ###########################################*/
+  DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
+  DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
+
+#if (JPEG_RGB_FORMAT == JPEG_ARGB8888)
+  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
+
+#elif (JPEG_RGB_FORMAT == JPEG_RGB888)
+  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB888;
+
+#elif (JPEG_RGB_FORMAT == JPEG_RGB565)
+  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
+
+#endif /* JPEG_RGB_FORMAT * */
+
+
+  DMA2D_Handle.LayerCfg[1].InputOffset = width_offset;
+  DMA2D_Handle.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
+  DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */
+
+  DMA2D_Handle.Instance          = DMA2D;
+
+  /* DMA2D Initialization */
+  if(HAL_DMA2D_Init(&DMA2D_Handle) == HAL_OK)
+  {
+    if(HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1) == HAL_OK)
+    {
+      if (HAL_DMA2D_Start(&DMA2D_Handle, source, destination, xsize, ysize) == HAL_OK)
+      {
+        /* Polling For DMA transfer */
+        HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 100);
+      }
+    }
+  }
 }

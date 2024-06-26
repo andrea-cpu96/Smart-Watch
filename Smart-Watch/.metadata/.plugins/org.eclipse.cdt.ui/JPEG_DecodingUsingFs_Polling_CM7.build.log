@@ -1,0 +1,10 @@
+19:47:36 **** Incremental Build of configuration Debug for project JPEG_DecodingUsingFs_Polling_CM7 ****
+make -j12 all 
+arm-none-eabi-size  JPEG_DecodingUsingFs_Polling_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+  79024	    284	  15964	  95272	  17428	JPEG_DecodingUsingFs_Polling_CM7.elf
+Finished building: default.size.stdout
+ 
+
+19:47:36 Build Finished. 0 errors, 0 warnings. (took 353ms)
+

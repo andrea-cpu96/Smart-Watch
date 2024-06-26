@@ -40,6 +40,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Utilities/JPEG/jpeg_utils.c</locationURI>
 		</link>
 		<link>
+			<name>Utilities/jpeg_utils.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Utilities/JPEG/jpeg_utils.h</locationURI>
+		</link>
+		<link>
+			<name>Utilities/jpeg_utils_conf_template.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Utilities/JPEG/jpeg_utils_conf_template.h</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c</locationURI>
@@ -53,6 +63,11 @@
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dma.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dma2d.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma2d.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dma_ex.c</name>

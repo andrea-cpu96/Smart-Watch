@@ -1,0 +1,410 @@
+/*
+ * lcd.c
+ *
+ *  Created on: Jun 1, 2024
+ *      Author: Fato
+ */
+
+#include "main.h"
+#include "lcd.h"
+
+#include "jpeg_utils.h"
+#include "bmp.h"
+
+//#include "decode_polling.h"
+
+
+static void triangle_ex(void);
+static void rainbow_ex(void);
+static void checkboard_ex(void);
+static void swissFlag_ex(void);
+static void sd_init(void);
+static void sd_error_handler(void);
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
+static void imageWindowed(doubleFormat *data);
+
+
+// sd
+char fName[] = "image.jpeg";
+uint8_t rtext[_MAX_SS];			// File read buffer
+
+// bmp
+BMP *bmp;
+
+// lcd
+uint8_t color[3];
+
+
+void lcd_init(void)
+{
+
+	GC9A01_init();
+	sd_init();
+
+	//bmp_init(bmp, &file, fName, lcd_draw);
+
+}
+
+
+void lcd_process(void)
+{
+
+	// sd_image_demo();
+	// lcd_demo();
+	jpeg_demo();
+
+}
+
+
+void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
+{
+
+	for(int x = sx; x < ( wd + sx ) ; x++)
+	{
+
+		for(int y = sy; y < ( ht + sy ) ; y++)
+		{
+
+			if (x == sx && y == sy)
+			{
+
+				GC9A01_write(data, 2);
+
+			}
+			else
+			{
+
+				GC9A01_write_continue(data, 2);
+
+			}
+
+			data += 2;
+
+		}
+
+	}
+
+}
+
+#define OUT_DIM								240*240*2
+void jpeg_demo(void)
+{
+
+    UINT byteRead;
+    JPEG_ConfTypeDef JPEG_Info;
+
+    hjpeg.Instance = JPEG;
+    HAL_JPEG_Init(&hjpeg);
+
+    if(f_open(&file, "image.jpg", FA_READ) != FR_OK)
+    	while(1);
+
+    //uint32_t size = f_size(&file);
+    uint8_t JPEG_InputBuffer[CHUNK_SIZE_IN]; 		// Buffer di input
+    uint8_t JPEG_OutputBuffer[CHUNK_SIZE_OUT]; 	// Buffer di output
+    uint8_t FRAME_OutputBuffer[CHUNK_SIZE_OUT]; 	// Buffer di output
+
+    if(f_read(&file, JPEG_InputBuffer, CHUNK_SIZE_IN, &byteRead) != FR_OK)
+    	while(1);
+
+    // Decodifica JPEG
+
+    // Ottieni informazioni sull'immagine JPEG
+    HAL_JPEG_GetInfo(&hjpeg, &JPEG_Info);
+
+    uint32_t width = JPEG_Info.ImageWidth;
+    uint32_t height = JPEG_Info.ImageHeight;
+
+    JPEG_YCbCrToRGB_Convert_Function pConvFunc;
+    uint32_t MCUsNum = 0;
+    JPEG_GetDecodeColorConvertFunc(&JPEG_Info, &pConvFunc, &MCUsNum);
+
+    uint32_t ConvertedDataCount = 0;
+    pConvFunc(JPEG_OutputBuffer, FRAME_OutputBuffer, 0, MCUsNum*64, &ConvertedDataCount);
+
+    lcd_draw(0, 0, width, height, FRAME_OutputBuffer);
+
+}
+
+
+void lcd_demo(void)
+{
+
+    // Triangle //
+
+	triangle_ex();
+
+    HAL_Delay(1000);
+
+    // Rainbow //
+
+    rainbow_ex();
+
+    HAL_Delay(1000);
+
+    // Checkerboard //
+
+    checkboard_ex();
+
+    HAL_Delay(1000);
+
+    // Swiss flag //
+
+    swissFlag_ex();
+
+    GC9A01_write_command(0x20); // Change colours
+
+    HAL_Delay(1000);
+
+}
+
+
+void sd_image_demo(void)
+{
+
+	showImageBmp(bmp);
+
+	HAL_Delay(2000);
+
+}
+
+
+///////////////////////////////////////////////////////// PRIVATE FUNCTIONS
+
+
+static void triangle_ex(void)
+{
+
+	color[0] = 0xFF;
+	color[1] = 0xFF;
+
+	for(int x = 0; x < 240; x++)
+	{
+
+		for(int y = 0; y < 240; y++)
+		{
+
+			if(x < y)
+			{
+
+				color[2] = 0xFF;
+
+			}
+			else
+			{
+
+				color[2] = 0x00;
+
+			}
+
+			if(x == 0 && y == 0)
+			{
+
+				GC9A01_write(color, sizeof(color));
+
+			}
+			else
+			{
+
+				GC9A01_write_continue(color, sizeof(color));
+
+			}
+
+		}
+
+	}
+
+}
+
+
+static void rainbow_ex(void)
+{
+
+	float frequency = 0.026;
+
+	for(int x = 0; x < 240; x++)
+	{
+
+		color[0] = sin(frequency*x + 0) * 127 + 128;
+		color[1] = sin(frequency*x + 2) * 127 + 128;
+		color[2] = sin(frequency*x + 4) * 127 + 128;
+		for(int y = 0; y < 240; y++)
+		{
+
+			if (x == 0 && y == 0)
+			{
+
+				GC9A01_write(color, sizeof(color));
+
+			}
+			else
+			{
+
+				GC9A01_write_continue(color, sizeof(color));
+
+			}
+
+		}
+
+	}
+
+}
+
+
+static void checkboard_ex(void)
+{
+
+	for(int x = 0; x < 240; x++)
+	{
+
+		for(int y = 0; y < 240; y++)
+		{
+
+			if((x / 10) % 2 ==  (y / 10) % 2)
+			{
+
+				color[0] = 0xFF;
+				color[1] = 0xFF;
+				color[2] = 0xFF;
+
+			}
+			else
+			{
+
+				color[0] = 0x00;
+				color[1] = 0x00;
+				color[2] = 0x00;
+
+			}
+			if(x == 0 && y == 0)
+			{
+
+				GC9A01_write(color, sizeof(color));
+
+			}
+			else
+			{
+
+				GC9A01_write_continue(color, sizeof(color));
+
+			}
+
+		}
+
+	}
+
+}
+
+
+static void swissFlag_ex(void)
+{
+
+	color[0] = 0xFF;
+
+	for(int x = 0; x < 240; x++)
+	{
+
+		for(int y = 0; y < 240; y++)
+		{
+
+			if((x >= 1*48 && x < 4*48 && y >= 2*48 && y < 3*48) ||
+				(x >= 2*48 && x < 3*48 && y >= 1*48 && y < 4*48))
+			{
+
+				color[1] = 0xFF;
+				color[2] = 0xFF;
+
+			}
+			else
+			{
+
+				color[1] = 0x00;
+				color[2] = 0x00;
+
+			}
+			if(x == 0 && y == 0)
+			{
+
+				GC9A01_write(color, sizeof(color));
+
+			}
+			else
+			{
+
+				GC9A01_write_continue(color, sizeof(color));
+
+			}
+
+		}
+
+	}
+
+}
+
+
+// SD
+
+static void sd_init(void)
+{
+
+    if(f_mount(&SDFatFs, "", 1) != FR_OK)
+    	sd_error_handler();
+
+    //if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, rtext, sizeof(rtext)) != FR_OK)
+		//sd_error_handler();
+
+}
+
+
+static void sd_error_handler(void)
+{
+
+	while(1);
+
+}
+
+
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
+{
+
+	uint8_t b;
+	uint8_t g;
+	uint8_t r;
+
+
+	for(int i = 0 ; i < length ; i++)
+	{
+
+		b = pxArr->u8Arr[i*bpx];
+		g = pxArr->u8Arr[i*bpx+1];
+		r = pxArr->u8Arr[i*bpx+2];
+
+		pxArr->u16Arr[i] = color565(b, r, g);
+		//pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
+
+	}
+
+}
+
+
+static void imageWindowed(doubleFormat *data)
+{
+
+	uint16_t tmp;
+
+
+	for(int i = 0 ; i < 240 ; i++)
+	{
+
+		for(int j = 0 ; j < 120 ; j++)
+		{
+
+			tmp = data->u16Arr[j+(i*240)];
+			data->u16Arr[j+(i*240)] = data->u16Arr[(240-1-j)+(i*240)];
+			data->u16Arr[(240-1-j)+(i*240)] = tmp;
+
+		}
+
+	}
+
+}

@@ -38,17 +38,17 @@
  * Define USE_JPEG_ENCODER
  */
 
-#define USE_JPEG_ENCODER 1 /* 1 or 0 ********* Value different from default value : 1 ********** */
+#define USE_JPEG_ENCODER 0 /* 1 or 0 */
 
 /*
  * Define JPEG_RGB_FORMAT
  */
-#define JPEG_RGB_FORMAT JPEG_RGB888 /* JPEG_ARGB8888, JPEG_RGB888, JPEG_RGB565 ********* Value different from default value : 0 ********** */
+#define JPEG_RGB_FORMAT JPEG_RGB565 /* JPEG_ARGB8888, JPEG_RGB888, JPEG_RGB565 ********* Value different from default value : 0 ********** */
 
 /*
  * Define JPEG_SWAP_RG
  */
-#define JPEG_SWAP_RG 0 /* 0 or 1 ********* Value different from default value : 0 ********** */
+#define JPEG_SWAP_RG 1 /* 0 or 1 */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

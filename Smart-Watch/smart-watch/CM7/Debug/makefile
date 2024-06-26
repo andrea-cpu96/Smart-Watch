@@ -16,6 +16,7 @@ RM := rm -rf
 -include Drivers/STM32H7xx_HAL_Driver/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
+-include Core/Inc/subdir.mk
 -include Common/Src/subdir.mk
 -include objects.mk
 
@@ -65,8 +66,8 @@ all: main-build
 main-build: smart-watch_CM7.elf secondary-outputs
 
 # Tool invocations
-smart-watch_CM7.elf smart-watch_CM7.map: $(OBJS) $(USER_OBJS) C:\Users\Fato\Desktop\Nuova\ cartella\Smart-Watch\Smart-Watch\smart-watch\CM7\STM32H747XIHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "smart-watch_CM7.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\Fato\Desktop\Nuova cartella\Smart-Watch\Smart-Watch\smart-watch\CM7\STM32H747XIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="smart-watch_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+smart-watch_CM7.elf smart-watch_CM7.map: $(OBJS) $(USER_OBJS) D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\STM32H747XIHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "smart-watch_CM7.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\STM32H747XIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="smart-watch_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

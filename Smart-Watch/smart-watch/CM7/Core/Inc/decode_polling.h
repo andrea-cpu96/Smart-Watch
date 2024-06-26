@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    JPEG/JPEG_DecodingUsingFs_Polling/CM7/Inc/decode_polling.h
+  * @file    JPEG/JPEG_DecodingUsingFs_Polling/Inc/decode_polling.h
   * @author  MCD Application Team
   * @brief   Header for decode_polling.c module
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics.
+  * Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -24,6 +24,10 @@
 #include "main.h"
 #include "lcd.h"
 
+extern uint32_t Jpeg_Decoding_End;
+extern uint32_t len;
+
+
 /* Exported variables --------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -31,4 +35,3 @@
 uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestAddress);
 
 #endif /* __DECODE_POLLING_H */
-

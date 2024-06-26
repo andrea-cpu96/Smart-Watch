@@ -1,0 +1,17 @@
+16:00:49 **** Incremental Build of configuration Debug for project smart-watch_CM4 ****
+make -j12 all 
+arm-none-eabi-gcc "D:/Andrea/Embedded/Repositories/Smart-Watch/Smart-Watch/smart-watch/Utilities/JPEG/jpeg_utils.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32H747xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Utilities/JPEG/jpeg_utils.d" -MT"Utilities/JPEG/jpeg_utils.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Utilities/JPEG/jpeg_utils.o"
+arm-none-eabi-gcc -o "smart-watch_CM4.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\STM32H747XIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="smart-watch_CM4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: smart-watch_CM4.elf
+ 
+arm-none-eabi-size  smart-watch_CM4.elf 
+arm-none-eabi-objdump -h -S smart-watch_CM4.elf  > "smart-watch_CM4.list"
+   text	   data	    bss	    dec	    hex	filename
+   3148	     16	   1568	   4732	   127c	smart-watch_CM4.elf
+Finished building: default.size.stdout
+ 
+Finished building: smart-watch_CM4.list
+ 
+
+16:00:50 Build Finished. 0 errors, 0 warnings. (took 1s.226ms)
+
