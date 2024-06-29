@@ -1,0 +1,454 @@
+2024-06-24 19:54:03,822 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2024-06-24 19:54:11,091 [INFO] ProjectBuilder:5002 - Time for Generating toolchain IDE Files: 8743mS.
+2024-06-24 19:54:11,092 [INFO] ProjectBuilder:3034 - Time for Copy CMSIS : 1mS.
+2024-06-24 19:54:11,093 [INFO] ProjectBuilder:3034 - Time for Copy CMSIS : 0mS.
+2024-06-24 20:01:01,226 [INFO] MainUpdater:2873 - connection check result : 10
+2024-06-24 20:01:01,226 [INFO] MainUpdater:2873 - connection check result : 10
+2024-06-24 20:01:01,287 [INFO] MicroXplorer:468 - Change Database Path : 
+2024-06-24 20:01:01,287 [INFO] MicroXplorer:498 - Change Database Version : DB.6.0.111
+2024-06-24 20:01:01,294 [ERROR] ProjectManagerView:394 - 
+java.lang.NullPointerException: Cannot invoke "javax.swing.JTextField.getText()" because the return value of "java.util.List.get(int)" is null
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab$10.caretUpdate(ProjectChoiceTab.java:2504) ~[filemanager.jar:?]
+	at javax.swing.text.JTextComponent.fireCaretUpdate(JTextComponent.java:412) ~[?:?]
+	at javax.swing.text.JTextComponent$MutableCaretEvent.fire(JTextComponent.java:4491) ~[?:?]
+	at javax.swing.text.JTextComponent$MutableCaretEvent.stateChanged(JTextComponent.java:4513) ~[?:?]
+	at javax.swing.text.DefaultCaret.fireStateChanged(DefaultCaret.java:842) ~[?:?]
+	at javax.swing.text.DefaultCaret.changeCaretPosition(DefaultCaret.java:1313) ~[?:?]
+	at javax.swing.text.DefaultCaret.handleSetDot(DefaultCaret.java:1212) ~[?:?]
+	at javax.swing.text.DefaultCaret.setDot(DefaultCaret.java:1193) ~[?:?]
+	at javax.swing.text.DefaultCaret$Handler.insertUpdate(DefaultCaret.java:1789) ~[?:?]
+	at javax.swing.text.AbstractDocument.fireInsertUpdate(AbstractDocument.java:226) ~[?:?]
+	at javax.swing.text.AbstractDocument.handleInsertString(AbstractDocument.java:780) ~[?:?]
+	at javax.swing.text.AbstractDocument.insertString(AbstractDocument.java:739) ~[?:?]
+	at javax.swing.text.PlainDocument.insertString(PlainDocument.java:131) ~[?:?]
+	at javax.swing.text.AbstractDocument.replace(AbstractDocument.java:698) ~[?:?]
+	at javax.swing.text.JTextComponent.setText(JTextComponent.java:1729) ~[?:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab.createHeapStackFields(ProjectChoiceTab.java:944) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab.buildLinkSettingsPanel(ProjectChoiceTab.java:3475) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab.defineWindowsFields(ProjectChoiceTab.java:1816) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab.updateSettings(ProjectChoiceTab.java:544) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectSettingsPanel.UpdateDialog(ProjectSettingsPanel.java:245) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.ProjectManagerView.propertyChange(ProjectManagerView.java:391) ~[filemanager.jar:?]
+	at java.beans.PropertyChangeSupport.fire(PropertyChangeSupport.java:343) ~[?:?]
+	at java.beans.PropertyChangeSupport.firePropertyChange(PropertyChangeSupport.java:335) ~[?:?]
+	at java.beans.PropertyChangeSupport.firePropertyChange(PropertyChangeSupport.java:268) ~[?:?]
+	at com.st.microxplorer.util.MXPropertyChangeSupport.firePropertyChange(MXPropertyChangeSupport.java:54) ~[STM32CubeMX.jar:?]
+	at com.st.microxplorer.mxsystem.MxSystem.closeConfig(MxSystem.java:900) ~[STM32CubeMX.jar:?]
+	at com.st.microxplorer.maingui.MainPanel.closeConfig(MainPanel.java:776) ~[STM32CubeMX.jar:?]
+	at com.st.microxplorer.plugins.filemanager.engine.OpenFileManager.loadConfigurationFile(OpenFileManager.java:245) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.filemanager.engine.MainFileManager.userLoadConfig(MainFileManager.java:315) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.filemanager.engine.MainFileManager.userLoadConfig(MainFileManager.java:293) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.filemanager.FileManagerView.getSpecificTask(FileManagerView.java:247) ~[filemanager.jar:?]
+	at com.st.stm32cube.common.mx.editor.CubeMxEditor.getMxTabbedPaneInstance(CubeMxEditor.java:1198) ~[com.st.stm32cube.common.mx_6.11.1.202404110753/:?]
+	at com.st.stm32cube.common.mx.editor.CubeMxEditor$12$1.createSwingComponent(CubeMxEditor.java:1068) ~[com.st.stm32cube.common.mx_6.11.1.202404110753/:?]
+	at com.st.stm32cube.common.mx.oss.core.awtswtbridge.EmbeddedSwingComposite.doComponentCreation(EmbeddedSwingComposite.java:492) ~[com.st.stm32cube.common.mx.oss_6.11.1.202404110753/:?]
+	at com.st.stm32cube.common.mx.oss.core.awtswtbridge.EmbeddedSwingComposite$4.run(EmbeddedSwingComposite.java:291) ~[com.st.stm32cube.common.mx.oss_6.11.1.202404110753/:?]
+	at com.st.stm32cube.common.mx.oss.core.awtswtbridge.AwtEnvironment$2.run(AwtEnvironment.java:166) ~[com.st.stm32cube.common.mx.oss_6.11.1.202404110753/:?]
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:318) ~[?:?]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:773) ~[?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:720) ~[?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:714) ~[?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:399) ~[?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86) ~[?:?]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:742) ~[?:?]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) ~[?:?]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) ~[?:?]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) ~[?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) ~[?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) ~[?:?]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) ~[?:?]
+2024-06-24 20:01:02,884 [WARN] ThirdParty:871 - waiting for thirdparty lock release [close project]
+2024-06-24 20:01:02,884 [INFO] ThirdParty:873 - entering critical section [close project]
+2024-06-24 20:01:02,884 [INFO] ThirdParty:883 - exiting critical section [close project]
+2024-06-24 20:01:02,890 [INFO] PinOutPanel:1561 - setPackage(No Configuration,No Configuration)
+2024-06-24 20:01:02,900 [WARN] IpParametersView:151 - Warning: This peripheral hasn't parameters
+2024-06-24 20:01:02,910 [WARN] MainPanel:272 - <html><b><center>Warning: This peripheral has no parameters to be configured<br></b></html>
+2024-06-24 20:01:02,915 [WARN] IpParametersView:151 - Warning: This peripheral hasn't parameters
+2024-06-24 20:01:02,920 [WARN] MainPanel:272 - <html><b><center>Warning: This peripheral has no parameters to be configured<br></b></html>
+2024-06-24 20:01:02,930 [INFO] UtilMem:75 - Begin LoadConfig() Used Memory: 662011176 Bytes (1073741824)
+2024-06-24 20:01:02,931 [INFO] MicroXplorer:468 - Change Database Path : 
+2024-06-24 20:01:02,931 [INFO] MicroXplorer:498 - Change Database Version : DB.6.0.111
+2024-06-24 20:01:02,931 [INFO] OpenFileManager:312 - Change cursor
+2024-06-24 20:01:02,961 [INFO] RulesReader:64 - Compatibility file has been processed (297 Rules)
+2024-06-24 20:01:02,965 [INFO] Mcu:2021 - Initializing MCU STM32H747XIHx STM32H747XIHx STM32H747XIH6
+2024-06-24 20:01:06,355 [INFO] Context:663 - Trying to add GPIOservice into a context  which must be forbidden
+2024-06-24 20:01:06,355 [INFO] Context:663 - Trying to add GPIOservice into a context  which must be forbidden
+2024-06-24 20:01:07,535 [INFO] Context:663 - Trying to add GPIOservice into a context  which must be forbidden
+2024-06-24 20:01:07,536 [INFO] Context:663 - Trying to add GPIOservice into a context  which must be forbidden
+2024-06-24 20:01:07,606 [INFO] RtosManager:555 - Registered RTOS mode: class=CMSIS, group=RTOS, mode=CMSIS_V1, owner=FREERTOS_M7
+2024-06-24 20:01:07,606 [INFO] RtosManager:555 - Registered RTOS mode: class=CMSIS, group=RTOS2, mode=CMSIS_V2, owner=FREERTOS_M7
+2024-06-24 20:01:07,606 [INFO] RtosManager:555 - Registered RTOS mode: class=RTOS, group=Core, mode=CMSIS_V1, owner=FREERTOS_M7
+2024-06-24 20:01:07,606 [INFO] RtosManager:555 - Registered RTOS mode: class=RTOS, group=Core, mode=CMSIS_V2, owner=FREERTOS_M7
+2024-06-24 20:01:07,606 [WARN] ModelIntegratedComponent:184 - Missing modes for component STMicroelectronics:FreeRTOS:0.0.1:STMicroelectronics:RTOS:FreeRTOS:Core:::10.2.0:
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,611 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,612 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,625 [INFO] RtosManager:555 - Registered RTOS mode: class=CMSIS, group=RTOS, mode=CMSIS_V1, owner=FREERTOS_M4
+2024-06-24 20:01:07,625 [INFO] RtosManager:555 - Registered RTOS mode: class=CMSIS, group=RTOS2, mode=CMSIS_V2, owner=FREERTOS_M4
+2024-06-24 20:01:07,625 [INFO] RtosManager:555 - Registered RTOS mode: class=RTOS, group=Core, mode=CMSIS_V1, owner=FREERTOS_M4
+2024-06-24 20:01:07,625 [INFO] RtosManager:555 - Registered RTOS mode: class=RTOS, group=Core, mode=CMSIS_V2, owner=FREERTOS_M4
+2024-06-24 20:01:07,626 [WARN] ModelIntegratedComponent:184 - Missing modes for component STMicroelectronics:FreeRTOS:0.0.1:STMicroelectronics:RTOS:FreeRTOS:Core:::10.2.0:
+2024-06-24 20:01:07,630 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,630 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,631 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,632 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2024-06-24 20:01:07,650 [INFO] ThirdPartyModel:298 - Start build external matchings
+2024-06-24 20:01:07,776 [INFO] ThirdPartyModel:316 - End build external matchings
+2024-06-24 20:01:07,780 [INFO] ThirdPartyModel:298 - Start build external matchings
+2024-06-24 20:01:07,902 [INFO] ThirdPartyModel:316 - End build external matchings
+2024-06-24 20:01:08,244 [INFO] UtilMem:75 - End LoadConfig() Used Memory: 446865064 Bytes (1073741824)
+2024-06-24 20:01:08,276 [WARN] ThirdParty:833 - waiting for thirdparty lock release [change project]
+2024-06-24 20:01:08,276 [INFO] ThirdParty:835 - entering critical section [change project]
+2024-06-24 20:01:08,276 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USBPD 4.1
+2024-06-24 20:01:08,276 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-GNSS1 6.0.0
+2024-06-24 20:01:08,276 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_HOST 2.0.0
+2024-06-24 20:01:08,276 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-MOTENVWB1 1.4.0
+2024-06-24 20:01:08,276 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-F4 1.1.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics LIBJPEG 8.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SMBUS 2.1.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 3.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TCPP 4.1.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-FREERTOS 1.2.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-WB 2.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :wolfSSL I-CUBE-wolfSSL 5.6.6
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.23.1
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.23.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.23.2
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-F7 1.1.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-L5 2.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 2.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-EEPRMA1 4.2.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC6 3.1.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :ITTIA_DB I-CUBE-ITTIADB 8.8.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-MOTENV1 4.3.2
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ALGOBUILD 1.3.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FreeRTOS 0.0.1
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-G0 1.1.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SAFEA1 1.2.2
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC4 3.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SUBG2 5.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics STM32_WPAN 1.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :wolfSSL I-CUBE-wolfMQTT 1.18.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics lwIP 2.0.3
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-FLIGHT1 5.0.2
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_HOST 1.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AI 9.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-G4 2.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.1.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :Infineon AIROC-Wi-Fi-Bluetooth-STM32 1.5.1
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLEMGR 3.0.0
+2024-06-24 20:01:08,277 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.3.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-DISPLAY 3.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-MOTENVWB1 1.3.1
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE1 7.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-ATR-SIGFOX1 3.2.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ISPU 2.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-EEPRMA1 5.1.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics HAL Drivers 0.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics MBEDTLS 2.16.2
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ALS 1.0.2
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :emotas I-CUBE-CANOPEN 1.3.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-FREERTOS 1.1.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC7 1.0.1
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics MBEDTLS 2.14.1
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC6 3.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :portGmbH I-Cube-SoM-uGOAL 1.1.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ALS 1.0.1
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLEMGR 3.1.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics ThreadX 1.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-SMARTAG2 1.2.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-WL 2.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :SEGGER I-CUBE-embOS 1.3.1
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ALGOBUILD 1.4.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-MOTENV1 5.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 1.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AI 8.1.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-L4 2.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics ThreadX 0.0.2
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :WES I-CUBE-Cesium 1.3.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-ATR-ASTRA1 2.0.0
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics lwIP 2.1.2
+2024-06-24 20:01:08,278 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SFXS2LP1 4.0.0
+2024-06-24 20:01:08,279 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE2 3.3.0
+2024-06-24 20:01:08,279 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOF1 3.4.0
+2024-06-24 20:01:08,279 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOF1 3.4.1
+2024-06-24 20:01:08,279 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.2.0
+2024-06-24 20:01:08,279 [INFO] ThirdParty:841 - exiting critical section [change project]
+2024-06-24 20:01:08,687 [INFO] PinOutPanel:1561 - setPackage(No Configuration,No Configuration)
+2024-06-24 20:01:08,687 [INFO] PinOutPanel:1561 - setPackage(STM32H747XIHx,TFBGA240)
+2024-06-24 20:01:09,270 [INFO] UtilMem:75 - Before build in PCC Used Memory: 571988640 Bytes (1073741824)
+2024-06-24 20:01:09,511 [INFO] UtilMem:75 - After build in PCC Used Memory: 692574880 Bytes (1073741824)
+2024-06-24 20:01:09,523 [INFO] ApiDbMcu:508 - Load IP Config File for FATFS
+2024-06-24 20:01:09,547 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,547 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,547 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,547 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,547 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,547 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,548 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,549 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,550 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,551 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,551 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,551 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,551 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,551 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,552 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,552 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,552 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,552 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,553 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,553 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,553 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,553 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,554 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,554 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,554 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,555 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,555 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,555 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,555 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,556 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,556 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,556 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,556 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,557 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,557 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,557 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,558 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,558 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,558 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,558 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,559 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,559 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,559 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,560 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,560 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,560 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,561 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,561 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,562 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,562 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,562 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,563 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,563 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,563 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,564 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,564 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,565 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,565 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,565 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,566 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,566 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,566 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,567 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,567 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,568 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,568 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,568 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,569 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,569 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,570 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,570 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,570 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,571 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,571 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,572 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,572 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,573 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,573 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,574 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,575 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,575 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,576 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,577 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,577 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,578 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,578 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2024-06-24 20:01:09,580 [INFO] ApiDbMcu:508 - Load IP Config File for PDM2PCM
+2024-06-24 20:01:09,581 [INFO] ApiDbMcu:508 - Load IP Config File for PDM2PCM
+2024-06-24 20:01:09,648 [INFO] CADModel:165 - CPN selected for project levelSTM32H747XIH6
+2024-06-24 20:01:09,648 [INFO] CADModel:114 - Register for checkConnection events
+2024-06-24 20:01:09,703 [INFO] OpenFileManager:343 - Restore cursor
+2024-06-24 20:01:16,873 [INFO] DmaTabbedPanel:205 - Cannot restore the selected Tab for DMA
+2024-06-24 20:02:20,763 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 557943448 Bytes (1073741824)
+2024-06-24 20:02:23,691 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 595080424 Bytes (1073741824)
+2024-06-24 20:02:26,229 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 727286424 Bytes (1073741824)
+2024-06-24 20:02:26,405 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2024-06-24 20:02:26,405 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2024-06-24 20:02:26,405 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SDMMC
+2024-06-24 20:02:26,405 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: JPEG
+2024-06-24 20:02:26,405 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2024-06-24 20:02:26,405 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: FATFS
+2024-06-24 20:02:26,405 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: DMA2D
+2024-06-24 20:02:26,405 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC2
+2024-06-24 20:02:26,406 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2024-06-24 20:02:26,406 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS_M4
+2024-06-24 20:02:26,406 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC1
+2024-06-24 20:02:26,406 [INFO] CodeGenerator:807 - code generatio: config db path: D:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.11.1.202404110753\\db\
+2024-06-24 20:02:26,500 [INFO] CodeGenerator:1511 - *******************Project context M7 selected
+2024-06-24 20:02:26,624 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\MXTmpFiles\license.tmp_save
+2024-06-24 20:02:26,701 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\MXTmpFiles\license.tmp
+2024-06-24 20:02:26,761 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\gpio.tmp_save
+2024-06-24 20:02:26,836 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\gpio.tmp
+2024-06-24 20:02:27,102 [WARN] IPConfigManager:98 - WARNING: Missing Config File for NVIC1 ip!!
+2024-06-24 20:02:27,327 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\cortex.tmp_save
+2024-06-24 20:02:27,400 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\cortex.tmp
+2024-06-24 20:02:27,411 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\fatfs_HalInit.tmp_save
+2024-06-24 20:02:27,478 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\fatfs_HalInit.tmp
+2024-06-24 20:02:27,481 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\fatfs_vars.tmp_save
+2024-06-24 20:02:27,530 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\fatfs_vars.tmp
+2024-06-24 20:02:27,533 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\fatfs_ext_vars.tmp_save
+2024-06-24 20:02:27,586 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\fatfs_ext_vars.tmp
+2024-06-24 20:02:27,589 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\fatfs_inc.tmp_save
+2024-06-24 20:02:27,653 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\fatfs_inc.tmp
+2024-06-24 20:02:27,663 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\ffconf.h_save
+2024-06-24 20:02:27,742 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\ffconf.h
+2024-06-24 20:02:27,752 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\bsp_driver_sd.c_save
+2024-06-24 20:02:27,819 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\bsp_driver_sd.c
+2024-06-24 20:02:27,823 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\bsp_driver_sd.h_save
+2024-06-24 20:02:27,877 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\bsp_driver_sd.h
+2024-06-24 20:02:27,880 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\sd_diskio.h_save
+2024-06-24 20:02:27,930 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\sd_diskio.h
+2024-06-24 20:02:27,940 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\sd_diskio.c_save
+2024-06-24 20:02:28,009 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\sd_diskio.c
+2024-06-24 20:02:28,019 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\App\fatfs.c_save
+2024-06-24 20:02:28,071 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\App\fatfs.c
+2024-06-24 20:02:28,079 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\App\fatfs.h_save
+2024-06-24 20:02:28,129 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\App\fatfs.h
+2024-06-24 20:02:28,133 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\fatfs_platform.c_save
+2024-06-24 20:02:28,176 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\fatfs_platform.c
+2024-06-24 20:02:28,185 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\fatfs_platform.h_save
+2024-06-24 20:02:28,234 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\FATFS\Target\fatfs_platform.h
+2024-06-24 20:02:28,262 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Src\stm32h7xx_it.c_save
+2024-06-24 20:02:28,339 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Src\stm32h7xx_it.c
+2024-06-24 20:02:28,348 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Inc\stm32h7xx_it.h_save
+2024-06-24 20:02:28,404 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Inc\stm32h7xx_it.h
+2024-06-24 20:02:28,521 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Src\stm32h7xx_hal_msp.c_save
+2024-06-24 20:02:28,623 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Src\stm32h7xx_hal_msp.c
+2024-06-24 20:02:28,631 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\system.tmp_save
+2024-06-24 20:02:28,681 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\MXTmpFiles\system.tmp
+2024-06-24 20:02:28,694 [INFO] CodeEngine:311 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Inc\stm32h7xx_hal_conf.h_save
+2024-06-24 20:02:28,773 [INFO] CodeEngine:335 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Inc\stm32h7xx_hal_conf.h
+2024-06-24 20:02:28,818 [WARN] IPConfigManager:3513 - IP not found : NVIC
+2024-06-24 20:02:28,818 [WARN] CodeGenerator:3951 - IP not found : null
+2024-06-24 20:02:28,831 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Inc\main.h_save
+2024-06-24 20:02:28,910 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Inc\main.h
+2024-06-24 20:02:28,920 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Src\main.c_save
+2024-06-24 20:02:29,019 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Src\main.c
+2024-06-24 20:02:29,028 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Inc\jpeg_utils_conf.h_save
+2024-06-24 20:02:29,080 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM7\Core\Inc\jpeg_utils_conf.h
+2024-06-24 20:02:29,132 [INFO] CodeGenerator:1511 - *******************Project context M4 selected
+2024-06-24 20:02:29,185 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\MXTmpFiles\license.tmp_save
+2024-06-24 20:02:29,299 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\MXTmpFiles\license.tmp
+2024-06-24 20:02:29,307 [WARN] IPConfigManager:98 - WARNING: Missing Config File for NVIC2 ip!!
+2024-06-24 20:02:29,320 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\MXTmpFiles\cortex.tmp_save
+2024-06-24 20:02:29,395 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\MXTmpFiles\cortex.tmp
+2024-06-24 20:02:29,418 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Src\stm32h7xx_it.c_save
+2024-06-24 20:02:29,490 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Src\stm32h7xx_it.c
+2024-06-24 20:02:29,494 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Inc\stm32h7xx_it.h_save
+2024-06-24 20:02:29,545 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Inc\stm32h7xx_it.h
+2024-06-24 20:02:29,579 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Src\stm32h7xx_hal_msp.c_save
+2024-06-24 20:02:29,647 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Src\stm32h7xx_hal_msp.c
+2024-06-24 20:02:29,649 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\MXTmpFiles\system.tmp_save
+2024-06-24 20:02:29,696 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\MXTmpFiles\system.tmp
+2024-06-24 20:02:29,710 [INFO] CodeEngine:311 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Inc\stm32h7xx_hal_conf.h_save
+2024-06-24 20:02:29,787 [INFO] CodeEngine:335 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Inc\stm32h7xx_hal_conf.h
+2024-06-24 20:02:29,804 [WARN] IPConfigManager:3513 - IP not found : NVIC
+2024-06-24 20:02:29,805 [WARN] CodeGenerator:3951 - IP not found : null
+2024-06-24 20:02:29,817 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Inc\main.h_save
+2024-06-24 20:02:29,883 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Inc\main.h
+2024-06-24 20:02:29,892 [INFO] CodeEngine:255 - oldGeneratedFile, D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Src\main.c_save
+2024-06-24 20:02:29,957 [INFO] CodeEngine:279 - Generated code: D:\Andrea\Embedded\Repositories\Smart-Watch\Smart-Watch\smart-watch\CM4\Core\Src\main.c
+2024-06-24 20:02:30,295 [INFO] ProjectBuilder:3163 - Time for Copy HAL[1] : 165mS.
+2024-06-24 20:02:30,306 [INFO] ProjectBuilder:4736 - Project Generator version: 4.3.0-B58
+2024-06-24 20:02:30,364 [INFO] ConfigFileManager:1503 - The Die is : DIE450
+2024-06-24 20:02:35,898 [INFO] ProjectBuilder:5002 - Time for Generating toolchain IDE Files: 5592mS.
+2024-06-24 20:02:35,899 [INFO] ProjectBuilder:3034 - Time for Copy CMSIS : 1mS.
+2024-06-24 20:02:35,900 [INFO] ProjectBuilder:3034 - Time for Copy CMSIS : 0mS.
