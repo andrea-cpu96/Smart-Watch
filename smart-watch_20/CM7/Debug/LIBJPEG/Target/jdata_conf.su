@@ -1,0 +1,2 @@
+../LIBJPEG/Target/jdata_conf.c:33:8:read_file	24	static
+../LIBJPEG/Target/jdata_conf.c:40:8:write_file	24	static
