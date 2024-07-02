@@ -48,7 +48,7 @@
 /*
  * Define JPEG_SWAP_RG
  */
-#define JPEG_SWAP_RG 1 /* 0 or 1 */
+#define JPEG_SWAP_RG 0 /* 0 or 1 ********* Value different from default value : 0 ********** */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

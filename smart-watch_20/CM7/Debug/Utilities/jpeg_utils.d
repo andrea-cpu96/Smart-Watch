@@ -1,6 +1,6 @@
 Utilities/jpeg_utils.o: \
- D:/Andrea/Embedded/workspace/smart-watch_20/Utilities/JPEG/jpeg_utils.c \
- D:/Andrea/Embedded/workspace/smart-watch_20/Utilities/JPEG/jpeg_utils.h \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/smart-watch_20/Utilities/JPEG/jpeg_utils.c \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/smart-watch_20/Utilities/JPEG/jpeg_utils.h \
  ../Core/Inc/jpeg_utils_conf.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
@@ -40,7 +40,7 @@ Utilities/jpeg_utils.o: \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
-D:/Andrea/Embedded/workspace/smart-watch_20/Utilities/JPEG/jpeg_utils.h:
+C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/smart-watch_20/Utilities/JPEG/jpeg_utils.h:
 ../Core/Inc/jpeg_utils_conf.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:

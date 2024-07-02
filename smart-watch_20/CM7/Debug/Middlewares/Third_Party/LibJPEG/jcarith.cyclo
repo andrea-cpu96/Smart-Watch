@@ -1,11 +1,11 @@
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:116:1:emit_byte	3
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:133:1:finish_pass	21
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:219:1:arith_encode	21
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:319:1:emit_restart	5
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:362:1:encode_mcu_DC_first	11
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:453:1:encode_mcu_AC_first	17
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:555:1:encode_mcu_DC_refine	4
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:590:1:encode_mcu_AC_refine	19
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:686:1:encode_mcu	23
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:834:1:start_pass	16
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:917:1:jinit_arith_encoder	2
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:116:1:emit_byte	3
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:133:1:finish_pass	21
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:219:1:arith_encode	21
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:319:1:emit_restart	5
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:362:1:encode_mcu_DC_first	11
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:453:1:encode_mcu_AC_first	17
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:555:1:encode_mcu_DC_refine	4
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:590:1:encode_mcu_AC_refine	19
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:686:1:encode_mcu	23
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:834:1:start_pass	16
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcarith.c:917:1:jinit_arith_encoder	2

@@ -17,9 +17,15 @@ extern FIL file;    	      		// MJPEG File object
 extern char fileName[];
 extern uint8_t rtext[_MAX_SS];		// File read buffer
 
+#define LCD_WIDTH				240
 
-#define CHUNK_SIZE_IN  ((uint32_t)(4096))
-#define CHUNK_SIZE_OUT ((uint32_t)(64 * 1024 * 3))
+#define IMAGE_MAX_WIDTH			240
+#define IMAGE_MAX_HEIGHT		240
+#define BYTE_PER_PIXEL			2	// 16 bit RGB565
+
+#define MAX_BUFFER_SIZE			( IMAGE_MAX_WIDTH * IMAGE_MAX_HEIGHT * BYTE_PER_PIXEL )
+#define CHUNK_SIZE_IN  			((uint32_t)(4096))
+#define CHUNK_SIZE_OUT 			((uint32_t)(64 * 1024 * 3))
 
 
 // Process function

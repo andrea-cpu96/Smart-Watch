@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    JPEG/JPEG_DecodingUsingFs_Polling/Src/decode_polling.c
+  * @file    JPEG/JPEG_DecodingUsingFs_Polling/CM7/Src/decode_polling.c
   * @author  MCD Application Team
   * @brief   This file provides routines for JPEG decoding with polling method.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics.
+  * Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -19,7 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "decode_polling.h"
 
-/** @addtogroup STM32F7xx_HAL_Examples
+/** @addtogroup STM32H7xx_HAL_Examples
   * @{
   */
 
@@ -37,9 +37,9 @@ typedef struct
 
 /* Private define ------------------------------------------------------------*/
 
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-JPEG_YCbCrToRGB_Convert_Function pConvert_Function;
 
 FIL *pFile;     /* pointer to File object */
 
@@ -68,26 +68,20 @@ uint32_t FrameBufferAddress;
   */
 uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestAddress)
 {
-
-  MCU_TotalNb = 0;
-  MCU_BlockIndex = 0;
-  Inputfile_Offset = 0;
-  Jpeg_Decoding_End = 0;
-
   pFile = file;
   FrameBufferAddress = DestAddress;
 
   /* Read from JPG file and fill the input buffer */
   if(f_read (pFile, JPEG_InBuffer.DataBuffer , CHUNK_SIZE_IN, (UINT*)(&JPEG_InBuffer.DataBufferSize)) != FR_OK)
   {
-    while(1);
+    Error_Handler();
   }
 
   /* Update the file Offset*/
   Inputfile_Offset = JPEG_InBuffer.DataBufferSize;
 
   /* Start JPEG decoding with polling (Blocking) method */
-  HAL_JPEG_Decode(hjpeg ,JPEG_InBuffer.DataBuffer ,JPEG_InBuffer.DataBufferSize ,MCU_Data_OutBuffer ,CHUNK_SIZE_OUT,HAL_MAX_DELAY);
+  HAL_JPEG_Decode(hjpeg ,JPEG_InBuffer.DataBuffer ,JPEG_InBuffer.DataBufferSize ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT,HAL_MAX_DELAY);
 
   return 0;
 }
@@ -100,37 +94,6 @@ uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestA
   */
 void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pInfo)
 {
-  if(pInfo->ChromaSubsampling == JPEG_420_SUBSAMPLING)
-  {
-    if((pInfo->ImageWidth % 16) != 0)
-    pInfo->ImageWidth += (16 - (pInfo->ImageWidth % 16));
-
-    if((pInfo->ImageHeight % 16) != 0)
-    pInfo->ImageHeight += (16 - (pInfo->ImageHeight % 16));
-  }
-
-  if(pInfo->ChromaSubsampling == JPEG_422_SUBSAMPLING)
-  {
-    if((pInfo->ImageWidth % 16) != 0)
-    pInfo->ImageWidth += (16 - (pInfo->ImageWidth % 16));
-
-    if((pInfo->ImageHeight % 8) != 0)
-    pInfo->ImageHeight += (8 - (pInfo->ImageHeight % 8));
-  }
-
-  if(pInfo->ChromaSubsampling == JPEG_444_SUBSAMPLING)
-  {
-    if((pInfo->ImageWidth % 8) != 0)
-    pInfo->ImageWidth += (8 - (pInfo->ImageWidth % 8));
-
-    if((pInfo->ImageHeight % 8) != 0)
-    pInfo->ImageHeight += (8 - (pInfo->ImageHeight % 8));
-  }
-
-  if(JPEG_GetDecodeColorConvertFunc(pInfo, &pConvert_Function, &MCU_TotalNb) != HAL_OK)
-  {
-    while(1);
-  }
 }
 
 /**
@@ -154,7 +117,7 @@ void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)
   }
   else
   {
-    while(1);
+    Error_Handler();
   }
 }
 
@@ -167,11 +130,10 @@ void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)
   */
 void HAL_JPEG_DataReadyCallback (JPEG_HandleTypeDef *hjpeg, uint8_t *pDataOut, uint32_t OutDataLength)
 {
-  uint32_t ConvertedDataCount;
+  /* Update JPEG encoder output buffer address*/
+  FrameBufferAddress += OutDataLength;
 
-  MCU_BlockIndex += pConvert_Function(pDataOut, (uint8_t *)FrameBufferAddress, MCU_BlockIndex, OutDataLength, &ConvertedDataCount);
-
-  HAL_JPEG_ConfigOutputBuffer(hjpeg, MCU_Data_OutBuffer, CHUNK_SIZE_OUT);
+  HAL_JPEG_ConfigOutputBuffer(hjpeg, (uint8_t *)FrameBufferAddress, CHUNK_SIZE_OUT);
 }
 
 /**
@@ -181,7 +143,7 @@ void HAL_JPEG_DataReadyCallback (JPEG_HandleTypeDef *hjpeg, uint8_t *pDataOut, u
   */
 void HAL_JPEG_ErrorCallback(JPEG_HandleTypeDef *hjpeg)
 {
-  while(1);
+  Error_Handler();
 }
 
 /**
@@ -201,3 +163,4 @@ void HAL_JPEG_DecodeCpltCallback(JPEG_HandleTypeDef *hjpeg)
 /**
   * @}
   */
+

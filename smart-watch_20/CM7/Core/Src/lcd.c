@@ -11,8 +11,6 @@
 
 #include "decode_polling.h"
 
-//#include "decode_polling.h"
-
 
 static void triangle_ex(void);
 static void rainbow_ex(void);
@@ -20,9 +18,12 @@ static void checkboard_ex(void);
 static void swissFlag_ex(void);
 static void sd_init(void);
 static void sd_error_handler(void);
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset);
+
+/*
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
 static void imageWindowed(doubleFormat *data);
-static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset);
+*/
 
 
 // sd
@@ -41,11 +42,14 @@ uint8_t color[3];
 void lcd_init(void)
 {
 
-	GC9A01_init();
+	// SD card initialization
 	sd_init();
 
-	//JPEG_InitColorTables();
-	//bmp_init(bmp, &file, fName, lcd_draw);
+	// Initialize the YCbCr to RGB color conversion tables.
+	JPEG_InitColorTables();
+
+	// Display driver initialization
+	GC9A01_init();
 
 }
 
@@ -55,6 +59,8 @@ void lcd_process(void)
 
 	// sd_image_demo();
 	// lcd_demo();
+
+	// Start the demonstrative execution of the JPEG decoding
 	jpeg_demo();
 
 }
@@ -94,28 +100,36 @@ void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 void jpeg_demo(void)
 {
 
-    JPEG_ConfTypeDef JPEG_Info;
+    JPEG_ConfTypeDef JPEG_Info;										// Contains the JPEG file information
 
+    uint8_t JPEG_OutputBuffer[MAX_BUFFER_SIZE]; 					// RAW buffer
+    uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
+
+
+    // File opening in reading
     if(f_open(&file, "image.jpg", FA_READ) != FR_OK)
     	while(1);
 
-    uint8_t JPEG_OutputBuffer[240*240*2]; 		// RAW buffer
-    uint8_t DECODED_OutputBuffer[240*240*2];	// Decoded buffer
-
-    // Decodifica JPEG
+    // JPEG decoding in polling mode
     JPEG_DecodePolling(&hjpeg, &file, (uint32_t)JPEG_OutputBuffer);
 
+    // Wait until the end of the conversion
     while(!Jpeg_Decoding_End);
 
-    // Ottieni informazioni sull'immagine JPEG
+    // Get info from the JPEG file
     HAL_JPEG_GetInfo(&hjpeg, &JPEG_Info);
 
-    uint32_t width = JPEG_Info.ImageWidth;
-    uint32_t height = JPEG_Info.ImageHeight;
+    uint16_t width = JPEG_Info.ImageWidth;
+	uint16_t height = JPEG_Info.ImageHeight;
 
-    //DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, 0, 0, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, 0);
+    uint16_t xPos = (LCD_WIDTH - width)/2;					// Center the image in x
+    uint16_t yPos = (LCD_WIDTH - height)/2;					// Center the image in y
 
-    lcd_draw(0, 0, width, height, JPEG_OutputBuffer);
+    // Convert the YCbCr format into the RGBB565 format
+    DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, 0, 0, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, 0);
+
+    // Display the image
+    lcd_draw(xPos, yPos, width, height, DECODED_OutputBuffer);
 
 }
 
@@ -171,10 +185,10 @@ static void triangle_ex(void)
 	color[0] = 0xFF;
 	color[1] = 0xFF;
 
-	for(int x = 0; x < 240; x++)
+	for(int x = 0 ; x < LCD_WIDTH ; x++)
 	{
 
-		for(int y = 0; y < 240; y++)
+		for(int y = 0 ; y < LCD_WIDTH ; y++)
 		{
 
 			if(x < y)
@@ -215,13 +229,13 @@ static void rainbow_ex(void)
 
 	float frequency = 0.026;
 
-	for(int x = 0; x < 240; x++)
+	for(int x = 0 ; x < LCD_WIDTH ; x++)
 	{
 
 		color[0] = sin(frequency*x + 0) * 127 + 128;
 		color[1] = sin(frequency*x + 2) * 127 + 128;
 		color[2] = sin(frequency*x + 4) * 127 + 128;
-		for(int y = 0; y < 240; y++)
+		for(int y = 0 ; y < LCD_WIDTH ; y++)
 		{
 
 			if (x == 0 && y == 0)
@@ -247,10 +261,10 @@ static void rainbow_ex(void)
 static void checkboard_ex(void)
 {
 
-	for(int x = 0; x < 240; x++)
+	for(int x = 0 ; x < LCD_WIDTH ; x++)
 	{
 
-		for(int y = 0; y < 240; y++)
+		for(int y = 0 ; y < LCD_WIDTH ; y++)
 		{
 
 			if((x / 10) % 2 ==  (y / 10) % 2)
@@ -294,10 +308,10 @@ static void swissFlag_ex(void)
 
 	color[0] = 0xFF;
 
-	for(int x = 0; x < 240; x++)
+	for(int x = 0 ; x < LCD_WIDTH ; x++)
 	{
 
-		for(int y = 0; y < 240; y++)
+		for(int y = 0 ; y < LCD_WIDTH ; y++)
 		{
 
 			if((x >= 1*48 && x < 4*48 && y >= 2*48 && y < 3*48) ||
@@ -356,7 +370,7 @@ static void sd_error_handler(void)
 
 }
 
-
+/*
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 {
 
@@ -386,22 +400,22 @@ static void imageWindowed(doubleFormat *data)
 	uint16_t tmp;
 
 
-	for(int i = 0 ; i < 240 ; i++)
+	for(int i = 0 ; i < LCD_WIDTH ; i++)
 	{
 
 		for(int j = 0 ; j < 120 ; j++)
 		{
 
-			tmp = data->u16Arr[j+(i*240)];
-			data->u16Arr[j+(i*240)] = data->u16Arr[(240-1-j)+(i*240)];
-			data->u16Arr[(240-1-j)+(i*240)] = tmp;
+			tmp = data->u16Arr[j+(i*LCD_WIDTH)];
+			data->u16Arr[j+(i*LCD_WIDTH)] = data->u16Arr[(LCD_WIDTH-1-j)+(i*LCD_WIDTH)];
+			data->u16Arr[(LCD_WIDTH-1-j)+(i*LCD_WIDTH)] = tmp;
 
 		}
 
 	}
 
 }
-
+*/
 
 /**
   * @brief  Copy the Decoded image to the display Frame buffer.
@@ -414,16 +428,47 @@ static void imageWindowed(doubleFormat *data)
   * @retval None
   */
 static DMA2D_HandleTypeDef    DMA2D_Handle;
-static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset)
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling)
 {
 
-  uint32_t destination = (uint32_t)pDst;
-  uint32_t source      = (uint32_t)pSrc;
+  uint32_t cssMode = DMA2D_CSS_420, inputLineOffset = 0;
+  uint32_t destination = 0;
+
+  if(ChromaSampling == JPEG_420_SUBSAMPLING)
+  {
+    cssMode = DMA2D_CSS_420;
+
+    inputLineOffset = xsize % 16;
+    if(inputLineOffset != 0)
+    {
+      inputLineOffset = 16 - inputLineOffset;
+    }
+  }
+  else if(ChromaSampling == JPEG_444_SUBSAMPLING)
+  {
+    cssMode = DMA2D_NO_CSS;
+
+    inputLineOffset = xsize % 8;
+    if(inputLineOffset != 0)
+    {
+      inputLineOffset = 8 - inputLineOffset;
+    }
+  }
+  else if(ChromaSampling == JPEG_422_SUBSAMPLING)
+  {
+    cssMode = DMA2D_CSS_422;
+
+    inputLineOffset = xsize % 16;
+    if(inputLineOffset != 0)
+    {
+      inputLineOffset = 16 - inputLineOffset;
+    }
+  }
 
   /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/
-  DMA2D_Handle.Init.Mode          = DMA2D_M2M_PFC;
-  DMA2D_Handle.Init.ColorMode     = DMA2D_OUTPUT_RGB565;
-  DMA2D_Handle.Init.OutputOffset  = 240 - xsize;
+  DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
+  DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_RGB565;
+  DMA2D_Handle.Init.OutputOffset = LCD_WIDTH - xsize;
   DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/
   DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */
 
@@ -433,35 +478,21 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   /*##-3- Foreground Configuration ###########################################*/
   DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
   DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
-
-#if (JPEG_RGB_FORMAT == JPEG_ARGB8888)
-  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
-
-#elif (JPEG_RGB_FORMAT == JPEG_RGB888)
-  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB888;
-
-#elif (JPEG_RGB_FORMAT == JPEG_RGB565)
-  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
-
-#endif /* JPEG_RGB_FORMAT * */
-
-
-  DMA2D_Handle.LayerCfg[1].InputOffset = width_offset;
+  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
+  DMA2D_Handle.LayerCfg[1].ChromaSubSampling = cssMode;
+  DMA2D_Handle.LayerCfg[1].InputOffset = inputLineOffset;
   DMA2D_Handle.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
   DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */
 
   DMA2D_Handle.Instance          = DMA2D;
 
-  /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&DMA2D_Handle) == HAL_OK)
-  {
-    if(HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1) == HAL_OK)
-    {
-      if (HAL_DMA2D_Start(&DMA2D_Handle, source, destination, xsize, ysize) == HAL_OK)
-      {
-        /* Polling For DMA transfer */
-        HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 100);
-      }
-    }
-  }
+  /*##-4- DMA2D Initialization     ###########################################*/
+  HAL_DMA2D_Init(&DMA2D_Handle);
+  HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
+
+  /*##-5-  copy the new decoded frame to the LCD Frame buffer ################*/
+  destination = (uint32_t)pDst + ((y * LCD_WIDTH) + x) * 4;
+
+  HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, xsize, ysize);
+  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 25);  /* wait for the previous DMA2D transfer to ends */
 }

@@ -1,5 +1,5 @@
 Middlewares/Third_Party/LibJPEG/jfdctfst.o: \
- D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jfdctfst.c \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jfdctfst.c \
  ../../Middlewares/Third_Party/LibJPEG/include/jinclude.h \
  ../LIBJPEG/Target/jconfig.h ../LIBJPEG/Target/jdata_conf.h \
  ../../Middlewares/Third_Party/FatFs/src/ff.h \

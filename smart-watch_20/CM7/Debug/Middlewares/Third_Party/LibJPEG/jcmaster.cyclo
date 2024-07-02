@@ -1,11 +1,11 @@
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:53:1:jpeg_calc_jpeg_dimensions	18
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:209:1:jpeg_calc_trans_dimensions	2
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:220:1:initial_setup	34
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:358:1:validate_script	46
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:493:1:reduce_script	5
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:528:1:select_scan_parameters	6
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:572:1:per_scan_setup	12
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:665:1:prepare_for_pass	13
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:753:1:pass_startup	1
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:767:1:finish_pass_master	7
-D:/Andrea/Embedded/workspace/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:807:1:jinit_c_master_control	9
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:53:1:jpeg_calc_jpeg_dimensions	18
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:209:1:jpeg_calc_trans_dimensions	2
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:220:1:initial_setup	34
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:358:1:validate_script	46
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:493:1:reduce_script	5
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:528:1:select_scan_parameters	6
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:572:1:per_scan_setup	12
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:665:1:prepare_for_pass	13
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:753:1:pass_startup	1
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:767:1:finish_pass_master	7
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcmaster.c:807:1:jinit_c_master_control	9
