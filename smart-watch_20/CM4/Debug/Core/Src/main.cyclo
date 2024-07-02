@@ -1,0 +1,9 @@
+../Core/Src/main.c:78:5:main	2
+../Core/Src/main.c:137:6:PeriphCommonClock_Config	2
+../Core/Src/main.c:164:13:MX_ADC1_Init	5
+../Core/Src/main.c:237:13:MX_ADC3_Init	4
+../Core/Src/main.c:301:13:MX_RTC_Init	3
+../Core/Src/main.c:355:13:MX_TIM13_Init	4
+../Core/Src/main.c:400:6:MX_USART1_UART_Init	5
+../Core/Src/main.c:448:6:MX_GPIO_Init	1
+../Core/Src/main.c:732:6:Error_Handler	1

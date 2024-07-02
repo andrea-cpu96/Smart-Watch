@@ -1,5 +1,5 @@
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:73:1:start_pass_dpost	9
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:126:1:post_process_1pass	2
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:158:1:post_process_prepass	4
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:202:1:post_process_2pass	5
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:250:1:jinit_d_post_controller	3
+D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:73:1:start_pass_dpost	9
+D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:126:1:post_process_1pass	2
+D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:158:1:post_process_prepass	4
+D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:202:1:post_process_2pass	5
+D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdpostct.c:250:1:jinit_d_post_controller	3

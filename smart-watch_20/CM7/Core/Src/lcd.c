@@ -20,16 +20,16 @@ static void sd_init(void);
 static void sd_error_handler(void);
 static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset);
 
-/*
+
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
 static void imageWindowed(doubleFormat *data);
-*/
+
 
 
 // sd
 FATFS SDFatFs;  				// File system object for SD card logical drive
 FIL file;          				// MJPEG File object
-char fName[] = "image.jpeg";
+char fName[] = "image.jpg";
 uint8_t rtext[_MAX_SS];			// File read buffer
 
 // bmp
@@ -107,7 +107,7 @@ void jpeg_demo(void)
 
 
     // File opening in reading
-    if(f_open(&file, "image.jpg", FA_READ) != FR_OK)
+    if(f_open(&file, fName, FA_READ) != FR_OK)
     	while(1);
 
     // JPEG decoding in polling mode
@@ -126,10 +126,15 @@ void jpeg_demo(void)
     uint16_t yPos = (LCD_WIDTH - height)/2;					// Center the image in y
 
     // Convert the YCbCr format into the RGBB565 format
-    DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, 0, 0, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, 0);
+    DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, 0, 0, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+    doubleFormat pOut;
+    pOut.u8Arr = DECODED_OutputBuffer;
+
+    depth24To16(&pOut, width*height, 3);
 
     // Display the image
-    lcd_draw(xPos, yPos, width, height, DECODED_OutputBuffer);
+    lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
 
 }
 
@@ -370,7 +375,7 @@ static void sd_error_handler(void)
 
 }
 
-/*
+
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 {
 
@@ -386,8 +391,8 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 		g = pxArr->u8Arr[i*bpx+1];
 		r = pxArr->u8Arr[i*bpx+2];
 
-		pxArr->u16Arr[i] = color565(b, r, g);
-		//pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
+		pxArr->u16Arr[i] = color565(r, g, b);
+		pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
 
 	}
 
@@ -415,7 +420,7 @@ static void imageWindowed(doubleFormat *data)
 	}
 
 }
-*/
+
 
 /**
   * @brief  Copy the Decoded image to the display Frame buffer.
@@ -467,7 +472,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
 
   /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/
   DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
-  DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_RGB565;
+  DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_RGB888;
   DMA2D_Handle.Init.OutputOffset = LCD_WIDTH - xsize;
   DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/
   DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */
@@ -476,7 +481,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   DMA2D_Handle.XferCpltCallback  = NULL;
 
   /*##-3- Foreground Configuration ###########################################*/
-  DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
+  DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
   DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
   DMA2D_Handle.LayerCfg[1].ChromaSubSampling = cssMode;
