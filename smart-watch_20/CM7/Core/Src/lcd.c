@@ -7,8 +7,10 @@
 
 #include "main.h"
 #include "lcd.h"
-#include "bmp.h"
 
+#include "bmp.h"
+#include "AVI_parser.h"
+#include "decode_DMA.h"
 #include "decode_polling.h"
 
 
@@ -18,22 +20,26 @@ static void checkboard_ex(void);
 static void swissFlag_ex(void);
 static void sd_init(void);
 static void sd_error_handler(void);
-static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset);
-
-
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
-static void imageWindowed(doubleFormat *data);
-
+//static void imageWindowed(doubleFormat *data);
+static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling);
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize);
 
 
 // sd
-FATFS SDFatFs;  				// File system object for SD card logical drive
-FIL file;          				// MJPEG File object
-char fName[] = "image.jpg";
-uint8_t rtext[_MAX_SS];			// File read buffer
+FATFS SDFatFs;  												// File system object for SD card logical drive
+FIL file;          												// File object
+uint8_t rtext[_MAX_SS];											// File read buffer
 
 // bmp
 BMP *bmp;
+
+//JPEG
+DMA2D_HandleTypeDef    DMA2D_Handle;
+JPEG_ConfTypeDef JPEG_Info;										// Contains the JPEG file information
+
+// AVI
+AVI_CONTEXT AVI_Handel;  										// AVI Parser Handle
 
 // lcd
 uint8_t color[3];
@@ -59,9 +65,9 @@ void lcd_process(void)
 
 	// sd_image_demo();
 	// lcd_demo();
+	//jpeg_demo();
 
-	// Start the demonstrative execution of the JPEG decoding
-	jpeg_demo();
+	//mjpeg_demo();
 
 }
 
@@ -100,14 +106,12 @@ void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 void jpeg_demo(void)
 {
 
-    JPEG_ConfTypeDef JPEG_Info;										// Contains the JPEG file information
-
-    uint8_t JPEG_OutputBuffer[MAX_BUFFER_SIZE]; 					// RAW buffer
-    uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
+	uint8_t JPEG_OutputBuffer[MAX_BUFFER_SIZE]; 					// RAW buffer
+	uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
 
 
     // File opening in reading
-    if(f_open(&file, fName, FA_READ) != FR_OK)
+    if(f_open(&file, FILE_NAME, FA_READ) != FR_OK)
     	while(1);
 
     // JPEG decoding in polling mode
@@ -126,7 +130,8 @@ void jpeg_demo(void)
     uint16_t yPos = (LCD_WIDTH - height)/2;					// Center the image in y
 
     // Convert the YCbCr format into the RGBB565 format
-    DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, 0, 0, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+    DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+    DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, 0, 0, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
     doubleFormat pOut;
     pOut.u8Arr = DECODED_OutputBuffer;
@@ -135,6 +140,106 @@ void jpeg_demo(void)
 
     // Display the image
     lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
+
+    // Close file
+    f_close(&file);
+
+}
+
+
+uint8_t isfirstFrame = 1;
+uint8_t FrameRate = 0;
+uint32_t startTime = 0;
+void mjpeg_demo(void)
+{
+
+	uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE] ;
+	uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE] ;
+
+	uint8_t JPEG_OutputBuffer_0[MAX_BUFFER_SIZE]; 					// RAW buffer 0
+	uint8_t JPEG_OutputBuffer_1[MAX_BUFFER_SIZE]; 					// RAW buffer 1
+	uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
+
+	uint32_t jpegOutDataAdreess = (uint32_t)JPEG_OutputBuffer_0;
+	uint32_t FrameType = 0;
+
+	// Open the MJPEG avi file with read access
+    if(f_open(&file, FILE_NAME, FA_READ) == FR_OK)
+    {
+
+    	isfirstFrame = 1; // First frame flag
+    	FrameRate = 0;
+
+    	// Parse the AVI file Header
+    	if(AVI_ParserInit(&AVI_Handel, &file, MJPEG_VideoBuffer, MJPEG_VID_BUFFER_SIZE, MJPEG_AudioBuffer, MJPEG_AUD_BUFFER_SIZE) != 0)
+    		while(1);
+
+    	startTime = HAL_GetTick();
+
+    	do
+    	{
+
+    		FrameType = AVI_GetFrame(&AVI_Handel, &file);
+
+    		if(FrameType == AVI_VIDEO_FRAME)
+    		{
+
+    			AVI_Handel.CurrentImage ++;
+
+    			// Start decoding the current JPEG frame with DMA (Not Blocking ) Method
+    			JPEG_Decode_DMA(&hjpeg,(uint32_t) MJPEG_VideoBuffer ,AVI_Handel.FrameSize, jpegOutDataAdreess );
+
+    			// Wait till end of JPEG decoding
+    			while(Jpeg_HWDecodingEnd == 0);
+
+    			if(isfirstFrame == 1)
+    			{
+
+    				// First time
+
+    				isfirstFrame = 0;
+
+    				// Get JPEG Info
+    				HAL_JPEG_GetInfo(&hjpeg, &JPEG_Info);
+
+    				// Initialize the DMA2D
+    				DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+    			}
+
+
+    			// Copy the Decoded frame to the display frame buffer using the DMA2D
+    			DMA2D_CopyBuffer((uint32_t *)jpegOutDataAdreess, (uint32_t *)DECODED_OutputBuffer, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+    			// Change frame buffer
+    			jpegOutDataAdreess = (jpegOutDataAdreess == JPEG_OutputBuffer_0) ? JPEG_OutputBuffer_1 : JPEG_OutputBuffer_0;
+
+    		}
+
+#ifdef USE_FRAMERATE_REGULATION
+
+              // Regulate the frame rate to the video native frame rate by inserting delays
+              FrameRate =  (HAL_GetTick() - startTime) + 1;
+
+              if(FrameRate < ((AVI_Handel.aviInfo.SecPerFrame/1000) * AVI_Handel.CurrentImage))
+                HAL_Delay(((AVI_Handel.aviInfo.SecPerFrame /1000) * AVI_Handel.CurrentImage) - FrameRate);
+
+#endif /* USE_FRAMERATE_REGULATION */
+
+    	}while(AVI_Handel.CurrentImage  <  AVI_Handel.aviInfo.TotalFrame);
+
+    	HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50);
+
+
+      f_close(&file);
+
+    }
+    else
+    {
+
+      while(1);
+
+    }
 
 }
 
@@ -398,7 +503,7 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 
 }
 
-
+/*
 static void imageWindowed(doubleFormat *data)
 {
 
@@ -420,6 +525,7 @@ static void imageWindowed(doubleFormat *data)
 	}
 
 }
+*/
 
 
 /**
@@ -432,12 +538,11 @@ static void imageWindowed(doubleFormat *data)
   * @param  ysize: image Height
   * @retval None
   */
-static DMA2D_HandleTypeDef    DMA2D_Handle;
-static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling)
+static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling)
 {
 
   uint32_t cssMode = DMA2D_CSS_420, inputLineOffset = 0;
-  uint32_t destination = 0;
+
 
   if(ChromaSampling == JPEG_420_SUBSAMPLING)
   {
@@ -495,9 +600,21 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
   HAL_DMA2D_Init(&DMA2D_Handle);
   HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
 
+}
+
+
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t xsize, uint16_t ysize)
+{
+
+  uint32_t destination = 0;
+
+  uint16_t x = (LCD_X_Size - JPEG_Info.ImageWidth)/2;
+  uint16_t y = (LCD_Y_Size - JPEG_Info.ImageHeight)/2;
+
   /*##-5-  copy the new decoded frame to the LCD Frame buffer ################*/
   destination = (uint32_t)pDst + ((y * LCD_WIDTH) + x) * 4;
 
   HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, xsize, ysize);
   HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 25);  /* wait for the previous DMA2D transfer to ends */
+
 }

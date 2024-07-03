@@ -1,12 +1,12 @@
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:323:1:jpeg_make_d_derived_tbl	22
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:465:1:jpeg_fill_bit_buffer	12
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:592:1:jpeg_huff_decode	7
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:636:1:process_restart	5
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:695:1:decode_mcu_DC_first	15
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:766:1:decode_mcu_AC_first	20
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:855:1:decode_mcu_DC_refine	8
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:904:1:decode_mcu_AC_refine	39
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:1059:1:decode_mcu_sub	40
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:1187:1:decode_mcu	40
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:1310:1:start_pass_huff_decoder	67
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:1509:1:jinit_huff_decoder	6
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:323:1:jpeg_make_d_derived_tbl	22
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:465:1:jpeg_fill_bit_buffer	12
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:592:1:jpeg_huff_decode	7
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:636:1:process_restart	5
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:695:1:decode_mcu_DC_first	15
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:766:1:decode_mcu_AC_first	20
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:855:1:decode_mcu_DC_refine	8
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:904:1:decode_mcu_AC_refine	39
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:1059:1:decode_mcu_sub	40
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:1187:1:decode_mcu	40
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:1310:1:start_pass_huff_decoder	67
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdhuff.c:1509:1:jinit_huff_decoder	6

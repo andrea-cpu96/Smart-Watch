@@ -1,10 +1,10 @@
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:80:1:start_iMCU_row	3
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:108:1:start_input_pass	1
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:120:1:start_output_pass	4
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:148:1:decompress_onepass	13
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:230:1:dummy_consume_data	1
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:246:1:consume_data	9
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:317:1:decompress_data	12
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:407:1:smoothing_ok	15
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:463:1:decompress_smooth_data	54
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:678:1:jinit_d_coef_controller	6
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:80:1:start_iMCU_row	3
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:108:1:start_input_pass	1
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:120:1:start_output_pass	4
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:148:1:decompress_onepass	13
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:230:1:dummy_consume_data	1
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:246:1:consume_data	9
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:317:1:decompress_data	12
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:407:1:smoothing_ok	15
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:463:1:decompress_smooth_data	54
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdcoefct.c:678:1:jinit_d_coef_controller	6

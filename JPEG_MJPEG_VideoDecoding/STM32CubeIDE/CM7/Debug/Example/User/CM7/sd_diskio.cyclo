@@ -1,0 +1,6 @@
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/sd_diskio.c:57:16:SD_CheckStatus	2
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/sd_diskio.c:74:9:SD_initialize	1
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/sd_diskio.c:84:9:SD_status	1
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/sd_diskio.c:97:9:SD_read	3
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/sd_diskio.c:124:9:SD_write	3
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/sd_diskio.c:151:9:SD_ioctl	6

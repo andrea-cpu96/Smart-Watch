@@ -9,13 +9,16 @@
 #define INC_LCD_H_
 
 #include "GC9A01.h"
-#include "fatfs.h"
 #include "jpeg_utils.h"
+#include "fatfs.h"
 
 extern FATFS SDFatFs;  				// File system object for SD card logical drive
 extern FIL file;    	      		// MJPEG File object
 extern char fileName[];
 extern uint8_t rtext[_MAX_SS];		// File read buffer
+
+
+#define FILE_NAME				"image.jpg"
 
 #define LCD_WIDTH				240
 
@@ -24,9 +27,11 @@ extern uint8_t rtext[_MAX_SS];		// File read buffer
 #define BYTE_PER_PIXEL			3	// 16 bit RGB565
 
 #define MAX_BUFFER_SIZE			( IMAGE_MAX_WIDTH * IMAGE_MAX_HEIGHT * BYTE_PER_PIXEL )
-#define CHUNK_SIZE_IN  			((uint32_t)(4096))
-#define CHUNK_SIZE_OUT 			((uint32_t)(64 * 1024))
 
+#define MJPEG_VID_BUFFER_SIZE 	((uint32_t)(1024 *96))
+#define MJPEG_AUD_BUFFER_SIZE 	((uint32_t)(1024 *16))
+
+#define USE_FRAMERATE_REGULATION	1
 
 // Process function
 void lcd_process(void);
@@ -39,6 +44,7 @@ void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 void lcd_demo(void);
 void sd_image_demo(void);
 void jpeg_demo(void);
+//void mjpeg_demo(void);
 
 
 #endif /* INC_LCD_H_ */

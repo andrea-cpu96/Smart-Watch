@@ -1,0 +1,11 @@
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:48:6:NMI_Handler	4	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:57:6:HardFault_Handler	4	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:70:6:MemManage_Handler	4	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:83:6:BusFault_Handler	4	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:96:6:UsageFault_Handler	4	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:109:6:SVC_Handler	4	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:118:6:DebugMon_Handler	4	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:127:6:PendSV_Handler	4	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:136:6:SysTick_Handler	8	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:154:6:JPEG_IRQHandler	8	static
+C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/stm32h7xx_it.c:165:6:MDMA_IRQHandler	8	static

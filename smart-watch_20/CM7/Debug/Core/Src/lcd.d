@@ -37,7 +37,8 @@ Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/main.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Core/Inc/lcd.h ../Core/Inc/GC9A01.h ../FATFS/App/fatfs.h \
+ ../Core/Inc/lcd.h ../Core/Inc/GC9A01.h ../../Utilities/JPEG/jpeg_utils.h \
+ ../Core/Inc/jpeg_utils_conf.h ../FATFS/App/fatfs.h \
  ../../Middlewares/Third_Party/FatFs/src/ff.h \
  ../../Middlewares/Third_Party/FatFs/src/integer.h \
  ../FATFS/Target/ffconf.h ../FATFS/Target/bsp_driver_sd.h \
@@ -45,9 +46,8 @@ Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/main.h \
  ../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../../Utilities/JPEG/jpeg_utils.h ../Core/Inc/jpeg_utils_conf.h \
- ../Core/Inc/bmp.h ../Core/Inc/decode_polling.h ../Core/Inc/main.h \
- ../Core/Inc/lcd.h
+ ../Core/Inc/bmp.h ../Core/Inc/AVI_parser.h ../Core/Inc/main.h \
+ ../Core/Inc/decode_DMA.h ../Core/Inc/decode_polling.h ../Core/Inc/lcd.h
 ../Core/Inc/main.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -89,6 +89,8 @@ Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/main.h \
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 ../Core/Inc/lcd.h:
 ../Core/Inc/GC9A01.h:
+../../Utilities/JPEG/jpeg_utils.h:
+../Core/Inc/jpeg_utils_conf.h:
 ../FATFS/App/fatfs.h:
 ../../Middlewares/Third_Party/FatFs/src/ff.h:
 ../../Middlewares/Third_Party/FatFs/src/integer.h:
@@ -99,9 +101,9 @@ Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/main.h \
 ../../Middlewares/Third_Party/FatFs/src/diskio.h:
 ../../Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/sd_diskio.h:
-../../Utilities/JPEG/jpeg_utils.h:
-../Core/Inc/jpeg_utils_conf.h:
 ../Core/Inc/bmp.h:
-../Core/Inc/decode_polling.h:
+../Core/Inc/AVI_parser.h:
 ../Core/Inc/main.h:
+../Core/Inc/decode_DMA.h:
+../Core/Inc/decode_polling.h:
 ../Core/Inc/lcd.h:

@@ -1,8 +1,8 @@
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:70:1:start_pass_upsample	1
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:90:1:sep_upsample	6
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:158:1:fullsize_upsample	1
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:171:1:noop_upsample	1
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:190:1:int_upsample	5
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:234:1:h2v1_upsample	3
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:262:1:h2v2_upsample	3
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:294:1:jinit_upsampler	13
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:70:1:start_pass_upsample	1
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:90:1:sep_upsample	6
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:158:1:fullsize_upsample	1
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:171:1:noop_upsample	1
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:190:1:int_upsample	5
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:234:1:h2v1_upsample	3
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:262:1:h2v2_upsample	3
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jdsample.c:294:1:jinit_upsampler	13

@@ -1,4 +1,4 @@
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcomapi.c:29:1:jpeg_abort	4
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcomapi.c:69:1:jpeg_destroy	2
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcomapi.c:86:1:jpeg_alloc_quant_table	1
-D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcomapi.c:98:1:jpeg_alloc_huff_table	1
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcomapi.c:29:1:jpeg_abort	4
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcomapi.c:69:1:jpeg_destroy	2
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcomapi.c:86:1:jpeg_alloc_quant_table	1
+C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jcomapi.c:98:1:jpeg_alloc_huff_table	1

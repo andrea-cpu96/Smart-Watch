@@ -19,13 +19,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "decode_polling.h"
 
-/** @addtogroup STM32H7xx_HAL_Examples
-  * @{
-  */
-
-/** @addtogroup JPEG_DecodingUsingFs_Polling
-  * @{
-  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef struct
