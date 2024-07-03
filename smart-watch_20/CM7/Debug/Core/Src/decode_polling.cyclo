@@ -1,6 +1,0 @@
-../Core/Src/decode_polling.c:62:10:JPEG_DecodePolling	2
-../Core/Src/decode_polling.c:88:6:HAL_JPEG_InfoReadyCallback	1
-../Core/Src/decode_polling.c:98:6:HAL_JPEG_GetDataCallback	3
-../Core/Src/decode_polling.c:124:6:HAL_JPEG_DataReadyCallback	1
-../Core/Src/decode_polling.c:137:6:HAL_JPEG_ErrorCallback	1
-../Core/Src/decode_polling.c:147:6:HAL_JPEG_DecodeCpltCallback	1

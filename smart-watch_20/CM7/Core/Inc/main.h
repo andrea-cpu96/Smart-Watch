@@ -101,7 +101,9 @@ void Error_Handler(void);
 #define GC9A01_RST_GPIO_Port GPIOJ
 
 /* USER CODE BEGIN Private defines */
-
+//#define JPEG_ON						1
+#define MJPEG_ON						1
+#define USE_FRAMERATE_REGULATION		1
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

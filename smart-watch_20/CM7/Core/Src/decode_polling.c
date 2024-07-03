@@ -16,11 +16,10 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
 #include "decode_polling.h"
 
+#ifdef JPEG_ON
 
-/* Private typedef -----------------------------------------------------------*/
 typedef struct
 {
   uint8_t *DataBuffer;
@@ -28,11 +27,6 @@ typedef struct
 
 }JPEG_Data_BufferTypeDef;
 
-/* Private define ------------------------------------------------------------*/
-
-
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
 
 FIL *pFile;     /* pointer to File object */
 
@@ -48,9 +42,6 @@ uint32_t Jpeg_Decoding_End = 0;
 
 uint32_t FrameBufferAddress;
 
-/* Private function prototypes -----------------------------------------------*/
-
-/* Private functions ---------------------------------------------------------*/
 
 /**
   * @brief  Decode_Polling
@@ -66,9 +57,7 @@ uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestA
 
   /* Read from JPG file and fill the input buffer */
   if(f_read (pFile, JPEG_InBuffer.DataBuffer , CHUNK_SIZE_IN, (UINT*)(&JPEG_InBuffer.DataBufferSize)) != FR_OK)
-  {
-    Error_Handler();
-  }
+	  while(1);
 
   /* Update the file Offset*/
   Inputfile_Offset = JPEG_InBuffer.DataBufferSize;
@@ -78,6 +67,7 @@ uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestA
 
   return 0;
 }
+
 
 /**
   * @brief  JPEG Info ready callback
@@ -110,7 +100,7 @@ void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)
   }
   else
   {
-    Error_Handler();
+	  while(1);
   }
 }
 
@@ -136,7 +126,7 @@ void HAL_JPEG_DataReadyCallback (JPEG_HandleTypeDef *hjpeg, uint8_t *pDataOut, u
   */
 void HAL_JPEG_ErrorCallback(JPEG_HandleTypeDef *hjpeg)
 {
-  Error_Handler();
+  while(1);
 }
 
 /**
@@ -149,11 +139,4 @@ void HAL_JPEG_DecodeCpltCallback(JPEG_HandleTypeDef *hjpeg)
   Jpeg_Decoding_End = 1;
 }
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
+#endif

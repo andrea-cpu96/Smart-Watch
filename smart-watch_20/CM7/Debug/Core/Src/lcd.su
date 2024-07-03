@@ -1,0 +1,15 @@
+../Core/Src/lcd.c:56:6:lcd_init	8	static
+../Core/Src/lcd.c:71:6:lcd_process	8	static
+../Core/Src/lcd.c:83:6:lcd_draw	32	static
+../Core/Src/lcd.c:166:6:mjpeg_demo	633136	static
+../Core/Src/lcd.c:277:6:lcd_demo	8	static
+../Core/Src/lcd.c:309:6:sd_image_demo	8	static
+../Core/Src/lcd.c:322:13:triangle_ex	16	static
+../Core/Src/lcd.c:367:13:rainbow_ex	32	static
+../Core/Src/lcd.c:401:13:checkboard_ex	16	static
+../Core/Src/lcd.c:446:13:swissFlag_ex	16	static
+../Core/Src/lcd.c:494:13:sd_init	8	static
+../Core/Src/lcd.c:506:13:sd_error_handler	4	static
+../Core/Src/lcd.c:514:13:depth24To16	24	static
+../Core/Src/lcd.c:571:13:DMA2D_Init	24	static
+../Core/Src/lcd.c:636:13:DMA2D_CopyBuffer	40	static

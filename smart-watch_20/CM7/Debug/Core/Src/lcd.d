@@ -47,7 +47,7 @@ Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/main.h \
  ../../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
  ../Core/Inc/bmp.h ../Core/Inc/AVI_parser.h ../Core/Inc/main.h \
- ../Core/Inc/decode_DMA.h ../Core/Inc/decode_polling.h ../Core/Inc/lcd.h
+ ../Core/Inc/decode_DMA.h
 ../Core/Inc/main.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -105,5 +105,3 @@ Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/main.h \
 ../Core/Inc/AVI_parser.h:
 ../Core/Inc/main.h:
 ../Core/Inc/decode_DMA.h:
-../Core/Inc/decode_polling.h:
-../Core/Inc/lcd.h:

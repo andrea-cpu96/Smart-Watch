@@ -1,5 +1,5 @@
 Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_rcc.o: \
- C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/smart-watch_20/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c \
+ D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \

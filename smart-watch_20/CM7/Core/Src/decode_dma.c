@@ -16,28 +16,15 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
 #include "decode_dma.h"
-/** @addtogroup STM32H7xx_HAL_Examples
-  * @{
-  */
 
-/** @addtogroup JPEG_MJPEG_VideoDecoding
-  * @{
-  */
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+#ifdef MJPEG_ON
 
 #define CHUNK_SIZE_IN  ((uint32_t)(64 * 1024)) 
 #define CHUNK_SIZE_OUT ((uint32_t)(64 * 1024))
 
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-
 
 __IO uint32_t Jpeg_HWDecodingEnd = 0;
-
 
 
 uint32_t FrameBufferAddress;
@@ -68,10 +55,10 @@ uint32_t JPEG_Decode_DMA(JPEG_HandleTypeDef *hjpeg, uint32_t FrameSourceAddress 
   /* Start JPEG decoding with DMA method */
   HAL_JPEG_Decode_DMA(hjpeg ,(uint8_t *)JPEGSourceAddress ,CHUNK_SIZE_IN ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT);
   
-  
   return 0;
   
 }
+
 
 /**
   * @brief  JPEG Info ready callback
@@ -149,11 +136,5 @@ void HAL_JPEG_DecodeCpltCallback(JPEG_HandleTypeDef *hjpeg)
   Jpeg_HWDecodingEnd = 1; 
 }
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
+#endif
 

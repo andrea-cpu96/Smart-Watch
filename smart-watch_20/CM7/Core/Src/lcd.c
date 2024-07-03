@@ -10,8 +10,16 @@
 
 #include "bmp.h"
 #include "AVI_parser.h"
+
+#ifdef MJPEG_ON
+
 #include "decode_DMA.h"
+
+#else
+
 #include "decode_polling.h"
+
+#endif
 
 
 static void triangle_ex(void);
@@ -23,7 +31,7 @@ static void sd_error_handler(void);
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
 //static void imageWindowed(doubleFormat *data);
 static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling);
-static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize);
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t xsize, uint16_t ysize);
 
 
 // sd
@@ -67,7 +75,7 @@ void lcd_process(void)
 	// lcd_demo();
 	//jpeg_demo();
 
-	//mjpeg_demo();
+	mjpeg_demo();
 
 }
 
@@ -102,6 +110,7 @@ void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 
 }
 
+#ifdef JPEG_ON
 
 void jpeg_demo(void)
 {
@@ -131,7 +140,7 @@ void jpeg_demo(void)
 
     // Convert the YCbCr format into the RGBB565 format
     DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
-    DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, 0, 0, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+    DMA2D_CopyBuffer((uint32_t *)JPEG_OutputBuffer, (uint32_t *)DECODED_OutputBuffer, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
     doubleFormat pOut;
     pOut.u8Arr = DECODED_OutputBuffer;
@@ -146,10 +155,14 @@ void jpeg_demo(void)
 
 }
 
+#endif
 
 uint8_t isfirstFrame = 1;
 uint8_t FrameRate = 0;
 uint32_t startTime = 0;
+
+#ifdef MJPEG_ON
+
 void mjpeg_demo(void)
 {
 
@@ -212,7 +225,22 @@ void mjpeg_demo(void)
     			DMA2D_CopyBuffer((uint32_t *)jpegOutDataAdreess, (uint32_t *)DECODED_OutputBuffer, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
     			// Change frame buffer
-    			jpegOutDataAdreess = (jpegOutDataAdreess == JPEG_OutputBuffer_0) ? JPEG_OutputBuffer_1 : JPEG_OutputBuffer_0;
+    			jpegOutDataAdreess = (jpegOutDataAdreess == (uint32_t)JPEG_OutputBuffer_0) ? (uint32_t)JPEG_OutputBuffer_1 : (uint32_t)JPEG_OutputBuffer_0;
+//
+    		    uint16_t width = JPEG_Info.ImageWidth;
+    			uint16_t height = JPEG_Info.ImageHeight;
+
+    		    uint16_t xPos = (LCD_WIDTH - width)/2;					// Center the image in x
+    		    uint16_t yPos = (LCD_WIDTH - height)/2;					// Center the image in y
+
+    		    doubleFormat pOut;
+    		    pOut.u8Arr = DECODED_OutputBuffer;
+
+    		    depth24To16(&pOut, width*height, 3);
+
+    		    // Display the image
+    		    lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
+//
 
     		}
 
@@ -242,6 +270,8 @@ void mjpeg_demo(void)
     }
 
 }
+
+#endif
 
 
 void lcd_demo(void)
@@ -608,8 +638,9 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t xsize, uin
 
   uint32_t destination = 0;
 
-  uint16_t x = (LCD_X_Size - JPEG_Info.ImageWidth)/2;
-  uint16_t y = (LCD_Y_Size - JPEG_Info.ImageHeight)/2;
+
+  uint16_t x = (LCD_WIDTH - xsize)/2;
+  uint16_t y = (LCD_HEIGHT - ysize)/2;
 
   /*##-5-  copy the new decoded frame to the LCD Frame buffer ################*/
   destination = (uint32_t)pDst + ((y * LCD_WIDTH) + x) * 4;
