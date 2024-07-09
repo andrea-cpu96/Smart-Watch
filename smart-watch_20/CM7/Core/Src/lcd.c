@@ -7,18 +7,12 @@
 
 #include "main.h"
 #include "lcd.h"
-
 #include "bmp.h"
 #include "AVI_parser.h"
-
 #ifdef MJPEG_ON
-
 #include "decode_DMA.h"
-
 #else
-
 #include "decode_polling.h"
-
 #endif
 
 
@@ -43,7 +37,7 @@ uint8_t rtext[_MAX_SS];											// File read buffer
 BMP *bmp;
 
 //JPEG
-DMA2D_HandleTypeDef    DMA2D_Handle;
+DMA2D_HandleTypeDef DMA2D_Handle;
 JPEG_ConfTypeDef JPEG_Info;										// Contains the JPEG file information
 
 // AVI
@@ -51,6 +45,21 @@ AVI_CONTEXT AVI_Handel;  										// AVI Parser Handle
 
 // lcd
 uint8_t color[3];
+
+
+
+
+/********************************************************************************
+ * 																				*
+ * 																				*
+ * 																				*
+ * 								GLOBAL FUNCTIONS								*
+ * 																				*
+ * 																				*
+ * 																				*
+ ********************************************************************************/
+
+
 
 
 void lcd_init(void)
@@ -170,7 +179,7 @@ void mjpeg_demo(void)
 	uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE] ;
 
 	uint8_t JPEG_OutputBuffer_0[MAX_BUFFER_SIZE]; 					// RAW buffer 0
-	//uint8_t JPEG_OutputBuffer_1[MAX_BUFFER_SIZE]; 					// RAW buffer 1
+	//uint8_t JPEG_OutputBuffer_1[MAX_BUFFER_SIZE]; 				// RAW buffer 1
 	uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
 
 	uint32_t jpegOutDataAdreess = (uint32_t)JPEG_OutputBuffer_0;
@@ -187,6 +196,7 @@ void mjpeg_demo(void)
     	if(AVI_ParserInit(&AVI_Handel, &file, MJPEG_VideoBuffer, MJPEG_VID_BUFFER_SIZE, MJPEG_AudioBuffer, MJPEG_AUD_BUFFER_SIZE) != 0)
     		while(1);
 
+    	// Get current tick to track the frame time
     	startTime = HAL_GetTick();
 
     	do
@@ -318,7 +328,18 @@ void sd_image_demo(void)
 }
 
 
-///////////////////////////////////////////////////////// PRIVATE FUNCTIONS
+
+
+/********************************************************************************
+ * 																				*
+ * 																				*
+ * 																				*
+ * 								PRIVATE FUNCTIONS								*
+ * 																				*
+ * 																				*
+ * 																				*
+ ********************************************************************************/
+
 
 
 static void triangle_ex(void)

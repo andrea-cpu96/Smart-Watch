@@ -286,32 +286,36 @@ AVISTATUS __AVI_Init( AVI_CONTEXT * pavi, uint8_t *buf, uint32_t size)
   * @param  AudioBufferSize: audio buffer size
 * @retval AVI status (0 : no Error, 1: Error occurred)
   */
-uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, FIL *file, uint8_t *pVideoBuffer, uint32_t VideoBufferSize, uint8_t *pAudioBuffer, uint32_t AudioBufferSize)
+uint32_t AVI_ParserInit(AVI_CONTEXT *pavi, FIL *file, uint8_t *pVideoBuffer, uint32_t VideoBufferSize, uint8_t *pAudioBuffer, uint32_t AudioBufferSize)
 {
-  uint32_t readSize= 0;
+
+  UINT readSize= 0;
   
+
+  // Initialize some parameters for the AVI file handler
   pavi->pVideoBuffer = pVideoBuffer;
   pavi->VideoBufferSize = VideoBufferSize;
-
   pavi->pAudioBuffer = pAudioBuffer;
   pavi->AudioBufferSize = AudioBufferSize;
   
+  // Go to the beginning of the file
   f_lseek(file, 0 );
   
-  f_read(file, pavi->pVideoBuffer, VideoBufferSize,(UINT*) &readSize );
-  if(readSize != VideoBufferSize)
-  {
-    return 1;
-  }
-  else if(__AVI_Init(pavi, pavi->pVideoBuffer, VideoBufferSize) != AVI_OK)
-  {
-    return 1;    
-  }
+  // Fill the videoBuffer with the first 96kB of the file
+  f_read(file, pavi->pVideoBuffer, VideoBufferSize, &readSize);
 
+  // Manage the error if present
+  if(readSize != VideoBufferSize)
+    return 1;
+  else if(__AVI_Init(pavi, pavi->pVideoBuffer, VideoBufferSize) != AVI_OK)
+    return 1;    
+
+  // Initialize other parameters for the AVI file handler
   pavi->FileSize= f_size(file);
   pavi->CurrentImage=0;  
   
   return  0;
+
 }
 
 /**
@@ -320,20 +324,25 @@ uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, FIL *file, uint8_t *pVideoBuffer, ui
   * @param  file:   AVI file
   * @retval type of frame  (audio frame or video frame )
   */
-uint32_t AVI_GetFrame(AVI_CONTEXT * pavi, FIL *file)  
+uint32_t AVI_GetFrame(AVI_CONTEXT *pavi, FIL *file)
 {
+
   uint32_t  offset ;
   uint32_t readSize = 0;
   
+
   if(pavi->CurrentImage== 0 )
   {
     
-    f_lseek(file, 0 ); /* Go to the file start */
-    /* Read data*/
+	// Go to the beginning of the file
+    f_lseek(file, 0 );
+
+    // File the videoBuffer with the first 96kB of file data
     f_read(file, pavi->pVideoBuffer, pavi->VideoBufferSize, (UINT*)&readSize );
     
-    /* Check for "movi" tag */
-    offset = __AVI_SearchID(pavi->pVideoBuffer,pavi->VideoBufferSize,(uint8_t*)"movi");
+    // Check for "movi" tag
+    offset = __AVI_SearchID(pavi->pVideoBuffer, pavi->VideoBufferSize, (uint8_t*)"movi");
+
     /* Read first Frame info*/
     __AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + offset +4);
     /* go to the first frame offset in the avi file*/

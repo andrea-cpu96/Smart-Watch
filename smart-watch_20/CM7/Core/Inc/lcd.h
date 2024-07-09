@@ -12,6 +12,7 @@
 #include "jpeg_utils.h"
 #include "fatfs.h"
 
+
 extern FATFS SDFatFs;  				// File system object for SD card logical drive
 extern FIL file;    	      		// MJPEG File object
 extern char fileName[];
@@ -22,14 +23,14 @@ extern uint8_t rtext[_MAX_SS];		// File read buffer
 #define LCD_WIDTH						240
 #define LCD_HEIGHT						240
 
-#define IMAGE_MAX_WIDTH					240
-#define IMAGE_MAX_HEIGHT				240
-#define BYTE_PER_PIXEL					3	// 16 bit RGB565
+#define IMAGE_MAX_WIDTH					LCD_WIDTH
+#define IMAGE_MAX_HEIGHT				LCD_HEIGHT
+#define BYTE_PER_PIXEL					3					// 24 bit RGB888 ( 16 bit RGB565 )
 
 #define MAX_BUFFER_SIZE					( IMAGE_MAX_WIDTH * IMAGE_MAX_HEIGHT * BYTE_PER_PIXEL )
 
 #define MJPEG_VID_BUFFER_SIZE 			((uint32_t)(1024 *96))
-#define MJPEG_AUD_BUFFER_SIZE 			((uint32_t)(1024 *16))
+#define MJPEG_AUD_BUFFER_SIZE 			((uint32_t)(1024 *0))         // No audio currently
 
 
 // Process function
