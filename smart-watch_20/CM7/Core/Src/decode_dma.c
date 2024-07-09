@@ -53,7 +53,8 @@ uint32_t JPEG_Decode_DMA(JPEG_HandleTypeDef *hjpeg, uint32_t FrameSourceAddress 
   Jpeg_HWDecodingEnd = 0;
   
   /* Start JPEG decoding with DMA method */
-  HAL_JPEG_Decode_DMA(hjpeg ,(uint8_t *)JPEGSourceAddress ,CHUNK_SIZE_IN ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT);
+  //HAL_JPEG_Decode_DMA(hjpeg ,(uint8_t *)JPEGSourceAddress ,CHUNK_SIZE_IN ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT);
+  HAL_JPEG_Decode(hjpeg, (uint8_t *)JPEGSourceAddress, CHUNK_SIZE_IN, (uint8_t *)FrameBufferAddress, CHUNK_SIZE_OUT, HAL_MAX_DELAY);
   
   return 0;
   

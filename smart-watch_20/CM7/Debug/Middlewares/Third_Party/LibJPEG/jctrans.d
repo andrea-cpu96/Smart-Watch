@@ -1,5 +1,5 @@
 Middlewares/Third_Party/LibJPEG/jctrans.o: \
- D:/Andrea/Embedded/repositories/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jctrans.c \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/smart-watch_20/Middlewares/Third_Party/LibJPEG/source/jctrans.c \
  ../../Middlewares/Third_Party/LibJPEG/include/jinclude.h \
  ../LIBJPEG/Target/jconfig.h ../LIBJPEG/Target/jdata_conf.h \
  ../../Middlewares/Third_Party/FatFs/src/ff.h \

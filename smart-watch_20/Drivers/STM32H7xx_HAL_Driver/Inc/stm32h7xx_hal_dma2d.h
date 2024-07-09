@@ -31,7 +31,7 @@ extern "C" {
   * @{
   */
 
-
+#if defined (DMA2D)
 
 /** @addtogroup DMA2D DMA2D
   * @brief DMA2D HAL module driver
@@ -712,3 +712,4 @@ uint32_t               HAL_DMA2D_GetError(DMA2D_HandleTypeDef *hdma2d);
 }
 #endif
 
+#endif /* STM32H7xx_HAL_DMA2D_H */

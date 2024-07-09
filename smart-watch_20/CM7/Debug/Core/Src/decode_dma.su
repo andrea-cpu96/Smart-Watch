@@ -1,6 +1,6 @@
 ../Core/Src/decode_dma.c:46:10:JPEG_Decode_DMA	32	static
-../Core/Src/decode_dma.c:69:6:HAL_JPEG_InfoReadyCallback	16	static
-../Core/Src/decode_dma.c:79:6:HAL_JPEG_GetDataCallback	24	static
-../Core/Src/decode_dma.c:111:6:HAL_JPEG_DataReadyCallback	24	static
-../Core/Src/decode_dma.c:124:6:HAL_JPEG_ErrorCallback	16	static
-../Core/Src/decode_dma.c:134:6:HAL_JPEG_DecodeCpltCallback	16	static
+../Core/Src/decode_dma.c:70:6:HAL_JPEG_InfoReadyCallback	16	static
+../Core/Src/decode_dma.c:80:6:HAL_JPEG_GetDataCallback	24	static
+../Core/Src/decode_dma.c:112:6:HAL_JPEG_DataReadyCallback	24	static
+../Core/Src/decode_dma.c:125:6:HAL_JPEG_ErrorCallback	16	static
+../Core/Src/decode_dma.c:135:6:HAL_JPEG_DecodeCpltCallback	16	static

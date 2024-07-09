@@ -170,7 +170,7 @@ void mjpeg_demo(void)
 	uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE] ;
 
 	uint8_t JPEG_OutputBuffer_0[MAX_BUFFER_SIZE]; 					// RAW buffer 0
-	uint8_t JPEG_OutputBuffer_1[MAX_BUFFER_SIZE]; 					// RAW buffer 1
+	//uint8_t JPEG_OutputBuffer_1[MAX_BUFFER_SIZE]; 					// RAW buffer 1
 	uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
 
 	uint32_t jpegOutDataAdreess = (uint32_t)JPEG_OutputBuffer_0;
@@ -225,7 +225,9 @@ void mjpeg_demo(void)
     			DMA2D_CopyBuffer((uint32_t *)jpegOutDataAdreess, (uint32_t *)DECODED_OutputBuffer, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
     			// Change frame buffer
-    			jpegOutDataAdreess = (jpegOutDataAdreess == (uint32_t)JPEG_OutputBuffer_0) ? (uint32_t)JPEG_OutputBuffer_1 : (uint32_t)JPEG_OutputBuffer_0;
+    			//jpegOutDataAdreess = (jpegOutDataAdreess == (uint32_t)JPEG_OutputBuffer_0) ? (uint32_t)JPEG_OutputBuffer_1 : (uint32_t)JPEG_OutputBuffer_0;
+    			jpegOutDataAdreess = (uint32_t)JPEG_OutputBuffer_0;
+
 //
     		    uint16_t width = JPEG_Info.ImageWidth;
     			uint16_t height = JPEG_Info.ImageHeight;
@@ -639,8 +641,8 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t xsize, uin
   uint32_t destination = 0;
 
 
-  uint16_t x = (LCD_WIDTH - xsize)/2;
-  uint16_t y = (LCD_HEIGHT - ysize)/2;
+  uint16_t x =  ( (LCD_WIDTH - xsize) / 2 );
+  uint16_t y = ( (LCD_HEIGHT - ysize) / 2 );
 
   /*##-5-  copy the new decoded frame to the LCD Frame buffer ################*/
   destination = (uint32_t)pDst + ((y * LCD_WIDTH) + x) * 4;
