@@ -2,7 +2,6 @@
 "./Core/Src/AVI_parser.o"
 "./Core/Src/GC9A01.o"
 "./Core/Src/bmp.o"
-"./Core/Src/decode_dma.o"
 "./Core/Src/decode_polling.o"
 "./Core/Src/lcd.o"
 "./Core/Src/main.o"

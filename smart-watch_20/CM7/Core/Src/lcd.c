@@ -9,11 +9,8 @@
 #include "lcd.h"
 #include "bmp.h"
 #include "AVI_parser.h"
-#ifdef MJPEG_ON
-#include "decode_DMA.h"
-#else
 #include "decode_polling.h"
-#endif
+
 
 
 static void triangle_ex(void);
@@ -207,13 +204,13 @@ void mjpeg_demo(void)
     		if(FrameType == AVI_VIDEO_FRAME)
     		{
 
-    			AVI_Handel.CurrentImage ++;
+    			AVI_Handel.CurrentImage++;
 
     			// Start decoding the current JPEG frame with DMA (Not Blocking ) Method
-    			JPEG_Decode_DMA(&hjpeg,(uint32_t) MJPEG_VideoBuffer ,AVI_Handel.FrameSize, jpegOutDataAdreess );
+    			JPEG_DecodePolling(&hjpeg, &AVI_Handel, (uint32_t)jpegOutDataAdreess);
 
     			// Wait till end of JPEG decoding
-    			while(Jpeg_HWDecodingEnd == 0);
+    			while(Jpeg_Decoding_End == 0);
 
     			if(isfirstFrame == 1)
     			{

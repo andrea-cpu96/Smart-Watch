@@ -22,6 +22,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "AVI_parser.h"
 #include "lcd.h"
 
 
@@ -36,6 +37,6 @@ extern uint32_t Jpeg_Decoding_End;
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestAddress);
+uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, AVI_CONTEXT* AVI_Handel, uint32_t DestAddress);
 
 #endif /* __DECODE_POLLING_H */

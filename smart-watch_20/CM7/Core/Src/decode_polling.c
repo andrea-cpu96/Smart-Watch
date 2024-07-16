@@ -18,17 +18,15 @@
 
 #include "decode_polling.h"
 
-#ifdef JPEG_ON
 
 typedef struct
 {
+
   uint8_t *DataBuffer;
   uint32_t DataBufferSize;
 
 }JPEG_Data_BufferTypeDef;
 
-
-FIL *pFile;     /* pointer to File object */
 
 uint8_t MCU_Data_OutBuffer[CHUNK_SIZE_OUT];
 uint8_t JPEG_Data_InBuffer[CHUNK_SIZE_IN];
@@ -42,6 +40,9 @@ uint32_t Jpeg_Decoding_End = 0;
 
 uint32_t FrameBufferAddress;
 
+uint8_t *startSourceAddress;
+uint8_t *pVideoBuffer;
+
 
 /**
   * @brief  Decode_Polling
@@ -50,22 +51,28 @@ uint32_t FrameBufferAddress;
   * @param  DestAddress : ARGB destination Frame Buffer Address.
   * @retval None
   */
-uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestAddress)
+uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, AVI_CONTEXT* AVI_Handel, uint32_t DestAddress)
 {
-  pFile = file;
+
+
+  startSourceAddress = AVI_Handel->pVideoBuffer;
   FrameBufferAddress = DestAddress;
+  pVideoBuffer = AVI_Handel->pVideoBuffer;
 
-  /* Read from JPG file and fill the input buffer */
-  if(f_read (pFile, JPEG_InBuffer.DataBuffer , CHUNK_SIZE_IN, (UINT*)(&JPEG_InBuffer.DataBufferSize)) != FR_OK)
-	  while(1);
+  // Read from JPG file and fill the input buffer
+  memcpy(JPEG_InBuffer.DataBuffer, AVI_Handel->pVideoBuffer, CHUNK_SIZE_IN*sizeof(uint8_t));
 
-  /* Update the file Offset*/
+  // Increment the input buffer pointer
+  pVideoBuffer += CHUNK_SIZE_IN;
+
+  // Update the file Offset
   Inputfile_Offset = JPEG_InBuffer.DataBufferSize;
 
-  /* Start JPEG decoding with polling (Blocking) method */
+  //Start JPEG decoding with polling (Blocking) method
   HAL_JPEG_Decode(hjpeg ,JPEG_InBuffer.DataBuffer ,JPEG_InBuffer.DataBufferSize ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT,HAL_MAX_DELAY);
 
   return 0;
+
 }
 
 
@@ -87,21 +94,21 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pIn
   */
 void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)
 {
+
   if(NbDecodedData != JPEG_InBuffer.DataBufferSize)
   {
+
     Inputfile_Offset = Inputfile_Offset - JPEG_InBuffer.DataBufferSize + NbDecodedData;
-    f_lseek(pFile,Inputfile_Offset);
+    pVideoBuffer = ( startSourceAddress + Inputfile_Offset );
+
   }
 
-  if(f_read (pFile, JPEG_InBuffer.DataBuffer , CHUNK_SIZE_IN, (UINT*)(&JPEG_InBuffer.DataBufferSize)) == FR_OK)
-  {
-    Inputfile_Offset += JPEG_InBuffer.DataBufferSize;
-    HAL_JPEG_ConfigInputBuffer(hjpeg, JPEG_InBuffer.DataBuffer, JPEG_InBuffer.DataBufferSize);
-  }
-  else
-  {
-	  while(1);
-  }
+  // Read from JPG file and fill the input buffer
+  memcpy(JPEG_InBuffer.DataBuffer, pVideoBuffer, CHUNK_SIZE_IN*sizeof(uint8_t));
+
+  Inputfile_Offset += JPEG_InBuffer.DataBufferSize;
+  HAL_JPEG_ConfigInputBuffer(hjpeg, JPEG_InBuffer.DataBuffer, JPEG_InBuffer.DataBufferSize);
+
 }
 
 /**
@@ -117,6 +124,7 @@ void HAL_JPEG_DataReadyCallback (JPEG_HandleTypeDef *hjpeg, uint8_t *pDataOut, u
   FrameBufferAddress += OutDataLength;
 
   HAL_JPEG_ConfigOutputBuffer(hjpeg, (uint8_t *)FrameBufferAddress, CHUNK_SIZE_OUT);
+
 }
 
 /**
@@ -126,7 +134,9 @@ void HAL_JPEG_DataReadyCallback (JPEG_HandleTypeDef *hjpeg, uint8_t *pDataOut, u
   */
 void HAL_JPEG_ErrorCallback(JPEG_HandleTypeDef *hjpeg)
 {
+
   while(1);
+
 }
 
 /**
@@ -136,7 +146,8 @@ void HAL_JPEG_ErrorCallback(JPEG_HandleTypeDef *hjpeg)
   */
 void HAL_JPEG_DecodeCpltCallback(JPEG_HandleTypeDef *hjpeg)
 {
+
   Jpeg_Decoding_End = 1;
+
 }
 
-#endif

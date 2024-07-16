@@ -38,15 +38,16 @@ Core/Src/decode_polling.o: ../Core/Src/decode_polling.c \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Core/Inc/lcd.h ../Core/Inc/GC9A01.h ../../Utilities/JPEG/jpeg_utils.h \
- ../Core/Inc/jpeg_utils_conf.h ../FATFS/App/fatfs.h \
+ ../Core/Inc/AVI_parser.h ../FATFS/App/fatfs.h \
  ../../Middlewares/Third_Party/FatFs/src/ff.h \
  ../../Middlewares/Third_Party/FatFs/src/integer.h \
  ../FATFS/Target/ffconf.h ../Core/Inc/main.h \
  ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h \
  ../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../../Middlewares/Third_Party/FatFs/src/diskio.h \
- ../../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h
+ ../../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
+ ../Core/Inc/lcd.h ../Core/Inc/GC9A01.h ../../Utilities/JPEG/jpeg_utils.h \
+ ../Core/Inc/jpeg_utils_conf.h
 ../Core/Inc/decode_polling.h:
 ../Core/Inc/main.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
@@ -87,10 +88,7 @@ Core/Src/decode_polling.o: ../Core/Src/decode_polling.c \
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../Core/Inc/lcd.h:
-../Core/Inc/GC9A01.h:
-../../Utilities/JPEG/jpeg_utils.h:
-../Core/Inc/jpeg_utils_conf.h:
+../Core/Inc/AVI_parser.h:
 ../FATFS/App/fatfs.h:
 ../../Middlewares/Third_Party/FatFs/src/ff.h:
 ../../Middlewares/Third_Party/FatFs/src/integer.h:
@@ -102,3 +100,7 @@ Core/Src/decode_polling.o: ../Core/Src/decode_polling.c \
 ../../Middlewares/Third_Party/FatFs/src/diskio.h:
 ../../Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/sd_diskio.h:
+../Core/Inc/lcd.h:
+../Core/Inc/GC9A01.h:
+../../Utilities/JPEG/jpeg_utils.h:
+../Core/Inc/jpeg_utils_conf.h:

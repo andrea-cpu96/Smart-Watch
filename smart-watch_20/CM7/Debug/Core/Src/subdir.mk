@@ -8,7 +8,6 @@ C_SRCS += \
 ../Core/Src/AVI_parser.c \
 ../Core/Src/GC9A01.c \
 ../Core/Src/bmp.c \
-../Core/Src/decode_dma.c \
 ../Core/Src/decode_polling.c \
 ../Core/Src/lcd.c \
 ../Core/Src/main.c \
@@ -21,7 +20,6 @@ OBJS += \
 ./Core/Src/AVI_parser.o \
 ./Core/Src/GC9A01.o \
 ./Core/Src/bmp.o \
-./Core/Src/decode_dma.o \
 ./Core/Src/decode_polling.o \
 ./Core/Src/lcd.o \
 ./Core/Src/main.o \
@@ -34,7 +32,6 @@ C_DEPS += \
 ./Core/Src/AVI_parser.d \
 ./Core/Src/GC9A01.d \
 ./Core/Src/bmp.d \
-./Core/Src/decode_dma.d \
 ./Core/Src/decode_polling.d \
 ./Core/Src/lcd.d \
 ./Core/Src/main.d \
@@ -51,7 +48,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/AVI_parser.cyclo ./Core/Src/AVI_parser.d ./Core/Src/AVI_parser.o ./Core/Src/AVI_parser.su ./Core/Src/GC9A01.cyclo ./Core/Src/GC9A01.d ./Core/Src/GC9A01.o ./Core/Src/GC9A01.su ./Core/Src/bmp.cyclo ./Core/Src/bmp.d ./Core/Src/bmp.o ./Core/Src/bmp.su ./Core/Src/decode_dma.cyclo ./Core/Src/decode_dma.d ./Core/Src/decode_dma.o ./Core/Src/decode_dma.su ./Core/Src/decode_polling.cyclo ./Core/Src/decode_polling.d ./Core/Src/decode_polling.o ./Core/Src/decode_polling.su ./Core/Src/lcd.cyclo ./Core/Src/lcd.d ./Core/Src/lcd.o ./Core/Src/lcd.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/stm32h7xx_hal_msp.cyclo ./Core/Src/stm32h7xx_hal_msp.d ./Core/Src/stm32h7xx_hal_msp.o ./Core/Src/stm32h7xx_hal_msp.su ./Core/Src/stm32h7xx_it.cyclo ./Core/Src/stm32h7xx_it.d ./Core/Src/stm32h7xx_it.o ./Core/Src/stm32h7xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su
+	-$(RM) ./Core/Src/AVI_parser.cyclo ./Core/Src/AVI_parser.d ./Core/Src/AVI_parser.o ./Core/Src/AVI_parser.su ./Core/Src/GC9A01.cyclo ./Core/Src/GC9A01.d ./Core/Src/GC9A01.o ./Core/Src/GC9A01.su ./Core/Src/bmp.cyclo ./Core/Src/bmp.d ./Core/Src/bmp.o ./Core/Src/bmp.su ./Core/Src/decode_polling.cyclo ./Core/Src/decode_polling.d ./Core/Src/decode_polling.o ./Core/Src/decode_polling.su ./Core/Src/lcd.cyclo ./Core/Src/lcd.d ./Core/Src/lcd.o ./Core/Src/lcd.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/stm32h7xx_hal_msp.cyclo ./Core/Src/stm32h7xx_hal_msp.d ./Core/Src/stm32h7xx_hal_msp.o ./Core/Src/stm32h7xx_hal_msp.su ./Core/Src/stm32h7xx_it.cyclo ./Core/Src/stm32h7xx_it.d ./Core/Src/stm32h7xx_it.o ./Core/Src/stm32h7xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su
 
 .PHONY: clean-Core-2f-Src
 
