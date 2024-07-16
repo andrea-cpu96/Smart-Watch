@@ -172,18 +172,22 @@ uint32_t startTime = 0;
 
 #ifdef MJPEG_ON
 
+uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE];
+uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE];
+uint8_t JPEG_OutputBuffer_0[MAX_BUFFER_SIZE];
+uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];
+
 void mjpeg_demo(void)
 {
-
-	uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE] ;
-	uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE] ;
-
-	uint8_t JPEG_OutputBuffer_0[MAX_BUFFER_SIZE]; 					// RAW buffer 0
+					// RAW buffer 0
 	//uint8_t JPEG_OutputBuffer_1[MAX_BUFFER_SIZE]; 				// RAW buffer 1
-	uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
 
 	uint32_t jpegOutDataAdreess = (uint32_t)JPEG_OutputBuffer_0;
 	uint32_t FrameType = 0;
+
+	memset(MJPEG_VideoBuffer, 255, MJPEG_VID_BUFFER_SIZE*sizeof(uint8_t));
+	memset(MJPEG_AudioBuffer, 255, MJPEG_AUD_BUFFER_SIZE*sizeof(uint8_t));
+	memset(JPEG_OutputBuffer_0, 255, MAX_BUFFER_SIZE*sizeof(uint8_t));
 
 	// Open the MJPEG avi file with read access
     if(f_open(&file, FILE_NAME, FA_READ) == FR_OK)

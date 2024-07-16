@@ -30,7 +30,7 @@ extern uint8_t rtext[_MAX_SS];		// File read buffer
 #define MAX_BUFFER_SIZE					( IMAGE_MAX_WIDTH * IMAGE_MAX_HEIGHT * BYTE_PER_PIXEL )
 
 #define MJPEG_VID_BUFFER_SIZE 			((uint32_t)(1024 *96))
-#define MJPEG_AUD_BUFFER_SIZE 			((uint32_t)(1024 *0))         // No audio currently
+#define MJPEG_AUD_BUFFER_SIZE 			((uint32_t)(1024 *16))         // No audio currently
 
 
 // Process function

@@ -20,7 +20,7 @@
 
 #ifdef MJPEG_ON
 
-#define CHUNK_SIZE_IN  ((uint32_t)(64 * 1024)) 
+#define CHUNK_SIZE_IN  ((uint32_t)(64 * 1024))
 #define CHUNK_SIZE_OUT ((uint32_t)(64 * 1024))
 
 
