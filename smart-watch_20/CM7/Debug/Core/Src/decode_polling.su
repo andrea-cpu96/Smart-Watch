@@ -1,6 +1,6 @@
 ../Core/Src/decode_polling.c:54:10:JPEG_DecodePolling	32	static
-../Core/Src/decode_polling.c:87:6:HAL_JPEG_InfoReadyCallback	16	static
-../Core/Src/decode_polling.c:97:6:HAL_JPEG_GetDataCallback	16	static
-../Core/Src/decode_polling.c:127:6:HAL_JPEG_DataReadyCallback	24	static
-../Core/Src/decode_polling.c:141:6:HAL_JPEG_ErrorCallback	16	static
-../Core/Src/decode_polling.c:153:6:HAL_JPEG_DecodeCpltCallback	16	static
+../Core/Src/decode_polling.c:91:6:HAL_JPEG_InfoReadyCallback	16	static
+../Core/Src/decode_polling.c:101:6:HAL_JPEG_GetDataCallback	16	static
+../Core/Src/decode_polling.c:131:6:HAL_JPEG_DataReadyCallback	24	static
+../Core/Src/decode_polling.c:156:6:HAL_JPEG_ErrorCallback	16	static
+../Core/Src/decode_polling.c:168:6:HAL_JPEG_DecodeCpltCallback	16	static

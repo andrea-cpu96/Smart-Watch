@@ -55,14 +55,16 @@ uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, AVI_CONTEXT* AVI_Handel, 
 {
 
 
+  Jpeg_Decoding_End = 0;
+
   startSourceAddress = AVI_Handel->pVideoBuffer;
   FrameBufferAddress = DestAddress;
   pVideoBuffer = AVI_Handel->pVideoBuffer;
 
   // Read from JPG file and fill the input buffer
 
-  memcpy(JPEG_InBuffer.DataBuffer, AVI_Handel->pVideoBuffer, AVI_Handel->FrameSize*sizeof(uint8_t));
-  JPEG_InBuffer.DataBufferSize = AVI_Handel->FrameSize;
+  memcpy(JPEG_InBuffer.DataBuffer, AVI_Handel->pVideoBuffer, AVI_Handel->VideoBufferSize*sizeof(uint8_t));
+  JPEG_InBuffer.DataBufferSize = AVI_Handel->VideoBufferSize;
 
   // Increment the input buffer pointer
   pVideoBuffer += 0; 		//JPEG_InBuffer.DataBufferSize;
@@ -71,7 +73,9 @@ uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, AVI_CONTEXT* AVI_Handel, 
   Inputfile_Offset = JPEG_InBuffer.DataBufferSize;
 
   //Start JPEG decoding with polling (Blocking) method
-  HAL_JPEG_Decode(hjpeg ,JPEG_InBuffer.DataBuffer ,JPEG_InBuffer.DataBufferSize ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT,HAL_MAX_DELAY);
+  HAL_JPEG_Decode(hjpeg ,JPEG_InBuffer.DataBuffer ,JPEG_InBuffer.DataBufferSize ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT, 500);
+
+  Jpeg_Decoding_End = 1;
 
   return 0;
 
@@ -97,17 +101,17 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pIn
 void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)
 {
 
-  if(NbDecodedData != JPEG_InBuffer.DataBufferSize)
-  {
+  //if(NbDecodedData != ( JPEG_InBuffer.DataBufferSize - 2))
+  //{
 
     //Inputfile_Offset = Inputfile_Offset - JPEG_InBuffer.DataBufferSize + NbDecodedData;
     //pVideoBuffer = ( startSourceAddress + Inputfile_Offset );
 
 	// Il CHUNKIN è pari al numero di dati nel frame da decodificare
 	// solo una iterazione deve esserci
-	while(1);
+	//while(1);
 
-  }
+  //}
 /*
   // Read from JPG file and fill the input buffer
   memcpy(JPEG_InBuffer.DataBuffer, pVideoBuffer, CHUNK_SIZE_IN*sizeof(uint8_t));
@@ -127,9 +131,20 @@ void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)
 void HAL_JPEG_DataReadyCallback (JPEG_HandleTypeDef *hjpeg, uint8_t *pDataOut, uint32_t OutDataLength)
 {
   /* Update JPEG encoder output buffer address*/
-  FrameBufferAddress += OutDataLength;
+	if(JPEG->DOR == 0x80808080)
+	{
 
-  HAL_JPEG_ConfigOutputBuffer(hjpeg, (uint8_t *)FrameBufferAddress, CHUNK_SIZE_OUT);
+		HAL_JPEG_Abort(hjpeg);
+		Jpeg_Decoding_End = 1;
+
+	}
+	else
+	{
+
+		FrameBufferAddress += OutDataLength;
+		HAL_JPEG_ConfigOutputBuffer(hjpeg, (uint8_t *)FrameBufferAddress, CHUNK_SIZE_OUT);
+
+	}
 
 }
 

@@ -361,6 +361,7 @@ uint32_t AVI_GetFrame(AVI_CONTEXT *pavi, FIL *file)
        
     /* Read The current frame + the header of the next frame (8 bytes) */
     f_read(file, pavi->pVideoBuffer, pavi->FrameSize + 8 , (UINT*)&readSize );
+    pavi->VideoBufferSize =  pavi->FrameSize;
     
     /* Get the info of the next frame */
     __AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + pavi->aviInfo.StreamSize );

@@ -218,6 +218,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
+#include "decode_polling.h"
 
 /** @addtogroup STM32H7xx_HAL_Driver
   * @{
@@ -1667,7 +1668,7 @@ HAL_StatusTypeDef  HAL_JPEG_Decode(JPEG_HandleTypeDef *hjpeg, uint8_t *pDataIn, 
     JPEG_Init_Process(hjpeg);
 
     /*JPEG data processing : In/Out FIFO transfer*/
-    while ((JPEG_Process(hjpeg) == JPEG_PROCESS_ONGOING))
+    while (( (JPEG_Process(hjpeg) == JPEG_PROCESS_ONGOING) && !(Jpeg_Decoding_End) ))
     {
       if (Timeout != HAL_MAX_DELAY)
       {

@@ -206,18 +206,19 @@ void mjpeg_demo(void)
 
     			AVI_Handel.CurrentImage++;
 
-    			// Start decoding the current JPEG frame with DMA (Not Blocking ) Method
-    			JPEG_DecodePolling(&hjpeg, &AVI_Handel, (uint32_t)jpegOutDataAdreess);
-
-    			// Wait till end of JPEG decoding
-    			while(Jpeg_Decoding_End == 0);
-
     			if(isfirstFrame == 1)
     			{
 
     				// First time
 
-    				isfirstFrame = 0;
+    				isfirstFrame++;
+
+    				// Start decoding the current JPEG frame with DMA (Not Blocking ) Method
+    				JPEG_DecodePolling(&hjpeg, &AVI_Handel, (uint32_t)jpegOutDataAdreess);
+
+    				// Wait till end of JPEG decoding
+    				while(Jpeg_Decoding_End == 0);
+
 
     				// Get JPEG Info
     				HAL_JPEG_GetInfo(&hjpeg, &JPEG_Info);
@@ -226,30 +227,47 @@ void mjpeg_demo(void)
     				DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
 
     			}
+    			else
+    			{
+
+        			if(AVI_Handel.CurrentImage >= 0)
+        			{
+
+        				// Start decoding the current JPEG frame with DMA (Not Blocking ) Method
+        				JPEG_DecodePolling(&hjpeg, &AVI_Handel, (uint32_t)jpegOutDataAdreess);
+
+        				// Wait till end of JPEG decoding
+        				while(Jpeg_Decoding_End == 0);
 
 
-    			// Copy the Decoded frame to the display frame buffer using the DMA2D
-    			DMA2D_CopyBuffer((uint32_t *)jpegOutDataAdreess, (uint32_t *)DECODED_OutputBuffer, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+        				isfirstFrame++;
 
-    			// Change frame buffer
-    			//jpegOutDataAdreess = (jpegOutDataAdreess == (uint32_t)JPEG_OutputBuffer_0) ? (uint32_t)JPEG_OutputBuffer_1 : (uint32_t)JPEG_OutputBuffer_0;
-    			jpegOutDataAdreess = (uint32_t)JPEG_OutputBuffer_0;
+        				// Copy the Decoded frame to the display frame buffer using the DMA2D
+        				DMA2D_CopyBuffer((uint32_t *)jpegOutDataAdreess, (uint32_t *)DECODED_OutputBuffer, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+        				// Change frame buffer
+        				//jpegOutDataAdreess = (jpegOutDataAdreess == (uint32_t)JPEG_OutputBuffer_0) ? (uint32_t)JPEG_OutputBuffer_1 : (uint32_t)JPEG_OutputBuffer_0;
+        				jpegOutDataAdreess = (uint32_t)JPEG_OutputBuffer_0;
 
 //
-    		    uint16_t width = JPEG_Info.ImageWidth;
-    			uint16_t height = JPEG_Info.ImageHeight;
+        				uint16_t width = JPEG_Info.ImageWidth;
+        				uint16_t height = JPEG_Info.ImageHeight;
 
-    		    uint16_t xPos = (LCD_WIDTH - width)/2;					// Center the image in x
-    		    uint16_t yPos = (LCD_WIDTH - height)/2;					// Center the image in y
+        				uint16_t xPos = (LCD_WIDTH - width)/2;					// Center the image in x
+        				uint16_t yPos = (LCD_WIDTH - height)/2;					// Center the image in y
 
-    		    doubleFormat pOut;
-    		    pOut.u8Arr = DECODED_OutputBuffer;
+        				doubleFormat pOut;
+        				pOut.u8Arr = DECODED_OutputBuffer;
 
-    		    depth24To16(&pOut, width*height, 3);
+        				depth24To16(&pOut, width*height, 3);
 
-    		    // Display the image
-    		    lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
+        				// Display the image
+        				lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
 //
+
+        			}
+
+    			}
 
     		}
 
