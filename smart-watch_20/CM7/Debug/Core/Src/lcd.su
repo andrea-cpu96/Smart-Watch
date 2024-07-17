@@ -1,7 +1,7 @@
 ../Core/Src/lcd.c:62:6:lcd_init	8	static
 ../Core/Src/lcd.c:77:6:lcd_process	8	static
 ../Core/Src/lcd.c:89:6:lcd_draw	32	static
-../Core/Src/lcd.c:172:6:mjpeg_demo	443952	static
+../Core/Src/lcd.c:179:6:mjpeg_demo	48	static
 ../Core/Src/lcd.c:286:6:lcd_demo	8	static
 ../Core/Src/lcd.c:318:6:sd_image_demo	8	static
 ../Core/Src/lcd.c:342:13:triangle_ex	16	static

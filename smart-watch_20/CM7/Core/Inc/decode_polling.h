@@ -26,8 +26,8 @@
 #include "lcd.h"
 
 
-#define CHUNK_SIZE_IN  			((uint32_t)(4096))
-#define CHUNK_SIZE_OUT 			((uint32_t)(64 * 1024))
+#define CHUNK_SIZE_IN  			((uint32_t)(40 * 1024))
+#define CHUNK_SIZE_OUT 			((uint32_t)(40 * 1024))
 
 
 extern uint32_t Jpeg_Decoding_End;

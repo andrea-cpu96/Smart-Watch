@@ -344,9 +344,11 @@ uint32_t AVI_GetFrame(AVI_CONTEXT *pavi, FIL *file)
     offset = __AVI_SearchID(pavi->pVideoBuffer, pavi->VideoBufferSize, (uint8_t*)"movi");
 
     /* Read first Frame info*/
-    __AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + offset +4);
-    /* go to the first frame offset in the avi file*/
-    f_lseek(file, offset + 12 );
+    __AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + offset +4);	// 4 byte di offset per per via dell'ID movi
+
+    // Si sposta ai dati del primo frame
+    f_lseek(file, offset + 12 );								// 12 byte di offset dovuti alle informazioni
+    															// legate all'ID movi
     
   }
 

@@ -60,10 +60,12 @@ uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, AVI_CONTEXT* AVI_Handel, 
   pVideoBuffer = AVI_Handel->pVideoBuffer;
 
   // Read from JPG file and fill the input buffer
-  memcpy(JPEG_InBuffer.DataBuffer, AVI_Handel->pVideoBuffer, CHUNK_SIZE_IN*sizeof(uint8_t));
+
+  memcpy(JPEG_InBuffer.DataBuffer, AVI_Handel->pVideoBuffer, AVI_Handel->FrameSize*sizeof(uint8_t));
+  JPEG_InBuffer.DataBufferSize = AVI_Handel->FrameSize;
 
   // Increment the input buffer pointer
-  pVideoBuffer += CHUNK_SIZE_IN;
+  pVideoBuffer += 0; 		//JPEG_InBuffer.DataBufferSize;
 
   // Update the file Offset
   Inputfile_Offset = JPEG_InBuffer.DataBufferSize;
@@ -98,17 +100,21 @@ void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)
   if(NbDecodedData != JPEG_InBuffer.DataBufferSize)
   {
 
-    Inputfile_Offset = Inputfile_Offset - JPEG_InBuffer.DataBufferSize + NbDecodedData;
-    pVideoBuffer = ( startSourceAddress + Inputfile_Offset );
+    //Inputfile_Offset = Inputfile_Offset - JPEG_InBuffer.DataBufferSize + NbDecodedData;
+    //pVideoBuffer = ( startSourceAddress + Inputfile_Offset );
+
+	// Il CHUNKIN è pari al numero di dati nel frame da decodificare
+	// solo una iterazione deve esserci
+	while(1);
 
   }
-
+/*
   // Read from JPG file and fill the input buffer
   memcpy(JPEG_InBuffer.DataBuffer, pVideoBuffer, CHUNK_SIZE_IN*sizeof(uint8_t));
 
   Inputfile_Offset += JPEG_InBuffer.DataBufferSize;
   HAL_JPEG_ConfigInputBuffer(hjpeg, JPEG_InBuffer.DataBuffer, JPEG_InBuffer.DataBufferSize);
-
+*/
 }
 
 /**

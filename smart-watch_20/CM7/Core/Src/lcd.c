@@ -163,21 +163,21 @@ void jpeg_demo(void)
 
 #endif
 
+
+#ifdef MJPEG_ON
+
 uint8_t isfirstFrame = 1;
 uint8_t FrameRate = 0;
 uint32_t startTime = 0;
 
-#ifdef MJPEG_ON
+uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE] ;
+uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE] ;
+uint8_t JPEG_OutputBuffer_0[MAX_BUFFER_SIZE]; 					// RAW buffer 0
+uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
+
 
 void mjpeg_demo(void)
 {
-
-	uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE] ;
-	uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE] ;
-
-	uint8_t JPEG_OutputBuffer_0[MAX_BUFFER_SIZE]; 					// RAW buffer 0
-	//uint8_t JPEG_OutputBuffer_1[MAX_BUFFER_SIZE]; 				// RAW buffer 1
-	uint8_t DECODED_OutputBuffer[MAX_BUFFER_SIZE];					// Decoded buffer
 
 	uint32_t jpegOutDataAdreess = (uint32_t)JPEG_OutputBuffer_0;
 	uint32_t FrameType = 0;
