@@ -41,7 +41,10 @@ uint32_t Jpeg_Decoding_End = 0;
 uint32_t FrameBufferAddress;
 
 uint8_t *startSourceAddress;
-uint8_t *pVideoBuffer;
+
+uint32_t Input_frameIndex;
+uint32_t Input_frameIndex;
+
 
 
 /**
@@ -57,23 +60,20 @@ uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, AVI_CONTEXT* AVI_Handel, 
 
   Jpeg_Decoding_End = 0;
 
+  Input_frameIndex = 0;
+  Input_frameSize = AVI_Handel->VideoBufferSize;
+
   startSourceAddress = AVI_Handel->pVideoBuffer;
   FrameBufferAddress = DestAddress;
-  pVideoBuffer = AVI_Handel->pVideoBuffer;
 
   // Read from JPG file and fill the input buffer
 
-  memcpy(JPEG_InBuffer.DataBuffer, AVI_Handel->pVideoBuffer, AVI_Handel->VideoBufferSize*sizeof(uint8_t));
-  JPEG_InBuffer.DataBufferSize = AVI_Handel->VideoBufferSize;
-
-  // Increment the input buffer pointer
-  pVideoBuffer += 0; 		//JPEG_InBuffer.DataBufferSize;
-
-  // Update the file Offset
-  Inputfile_Offset = JPEG_InBuffer.DataBufferSize;
+  //memcpy(JPEG_InBuffer.DataBuffer, AVI_Handel->pVideoBuffer, Input_frameSize*sizeof(uint8_t));
+  JPEG_InBuffer.DataBuffer = AVI_Handel->pVideoBuffer;
+  JPEG_InBuffer.DataBufferSize = Input_frameSize;
 
   //Start JPEG decoding with polling (Blocking) method
-  HAL_JPEG_Decode(hjpeg ,JPEG_InBuffer.DataBuffer ,JPEG_InBuffer.DataBufferSize ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT, 500);
+  HAL_JPEG_Decode(hjpeg ,JPEG_InBuffer.DataBuffer, Input_frameSize, (uint8_t *)FrameBufferAddress, CHUNK_SIZE_OUT, 500);
 
   Jpeg_Decoding_End = 1;
 
@@ -101,24 +101,34 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pIn
 void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)
 {
 
-  //if(NbDecodedData != ( JPEG_InBuffer.DataBufferSize - 2))
-  //{
+	  uint32_t inDataLength;
 
-    //Inputfile_Offset = Inputfile_Offset - JPEG_InBuffer.DataBufferSize + NbDecodedData;
-    //pVideoBuffer = ( startSourceAddress + Inputfile_Offset );
 
-	// Il CHUNKIN è pari al numero di dati nel frame da decodificare
-	// solo una iterazione deve esserci
-	//while(1);
+	  Input_frameIndex += NbDecodedData;
 
-  //}
-/*
-  // Read from JPG file and fill the input buffer
-  memcpy(JPEG_InBuffer.DataBuffer, pVideoBuffer, CHUNK_SIZE_IN*sizeof(uint8_t));
+	  if( Input_frameIndex < Input_frameSize)
+	  {
 
-  Inputfile_Offset += JPEG_InBuffer.DataBufferSize;
-  HAL_JPEG_ConfigInputBuffer(hjpeg, JPEG_InBuffer.DataBuffer, JPEG_InBuffer.DataBufferSize);
-*/
+		  JPEG_InBuffer.DataBuffer = JPEG_InBuffer.DataBuffer + NbDecodedData;
+
+	    if((Input_frameSize - Input_frameIndex) >= CHUNK_SIZE_IN)
+	      inDataLength = CHUNK_SIZE_IN;
+	    else
+	      inDataLength = Input_frameSize - Input_frameIndex;
+
+	  }
+	  else
+	  {
+
+	    inDataLength = 0;
+
+	  }
+
+	  HAL_JPEG_ConfigInputBuffer(hjpeg, (uint8_t *)JPEG_InBuffer.DataBuffer, inDataLength);
+
+	  //startSourceAddress += inDataLength;
+	  //JPEG_InBuffer.DataBuffer = startSourceAddress;
+
 }
 
 /**
@@ -134,8 +144,10 @@ void HAL_JPEG_DataReadyCallback (JPEG_HandleTypeDef *hjpeg, uint8_t *pDataOut, u
 	if(JPEG->DOR == 0x80808080)
 	{
 
-		HAL_JPEG_Abort(hjpeg);
-		Jpeg_Decoding_End = 1;
+		//HAL_JPEG_Abort(hjpeg);
+		//Jpeg_Decoding_End = 1;
+
+		while(1);
 
 	}
 	else

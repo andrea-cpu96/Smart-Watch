@@ -331,11 +331,11 @@ uint32_t AVI_GetFrame(AVI_CONTEXT *pavi, FIL *file)
   uint32_t readSize = 0;
   
 
-  if(pavi->CurrentImage== 0 )
+  if(pavi->CurrentImage == 0 )
   {
     
 	// Go to the beginning of the file
-    f_lseek(file, 0 );
+    f_lseek(file, 0);
 
     // File the videoBuffer with the first 96kB of file data
     f_read(file, pavi->pVideoBuffer, pavi->VideoBufferSize, (UINT*)&readSize );
@@ -343,12 +343,13 @@ uint32_t AVI_GetFrame(AVI_CONTEXT *pavi, FIL *file)
     // Check for "movi" tag
     offset = __AVI_SearchID(pavi->pVideoBuffer, pavi->VideoBufferSize, (uint8_t*)"movi");
 
-    /* Read first Frame info*/
-    __AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + offset +4);	// 4 byte di offset per per via dell'ID movi
+    // Read first Frame info
+    // 4 byte di offset per per via dell'ID movi
+    __AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + offset + 4);
 
     // Si sposta ai dati del primo frame
-    f_lseek(file, offset + 12 );								// 12 byte di offset dovuti alle informazioni
-    															// legate all'ID movi
+    // 12 byte di offset dovuti alle informazioni legate all'ID movi
+    f_lseek(file, offset + 12);
     
   }
 
@@ -357,6 +358,7 @@ uint32_t AVI_GetFrame(AVI_CONTEXT *pavi, FIL *file)
   
   if(pavi->aviInfo.StreamID  ==  AVI_VIDS_FLAG)
   {
+
     /* the Frame is a Video Frame */
        
     /* Read The current frame + the header of the next frame (8 bytes) */
@@ -365,23 +367,22 @@ uint32_t AVI_GetFrame(AVI_CONTEXT *pavi, FIL *file)
     
     /* Get the info of the next frame */
     __AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + pavi->aviInfo.StreamSize );
+
     /* Return VIDEO frame */
     return AVI_VIDEO_FRAME;
-  }
-  if (pavi->aviInfo.StreamID  ==  AVI_AUDS_FLAG)
-  { /* the Frame is an Audio Frame */
-    
-    /* Read The current frame + the header of the next frame (8 bytes) */
-    f_read(file, pavi->pAudioBuffer, pavi->FrameSize + 8, (UINT*)&readSize );
 
-    /* Get the info of the next frame */
-    __AVI_GetStreamInfo(pavi, pavi->pAudioBuffer + pavi->aviInfo.StreamSize );
-    /* Return VIDEO frame */
-    return AVI_AUDIO_FRAME;
+  }
+
+  if (pavi->aviInfo.StreamID  ==  AVI_AUDS_FLAG)
+  {
+
+	  // Non sono previste traccie audio nel file
+	  while(1);
     
   }
   
   return 0;
+
 }
 
 
