@@ -1,0 +1,11 @@
+../Drivers/BSP/Components/is42s32800j.c:64:9:IS42S32800J_Init	6
+../Drivers/BSP/Components/is42s32800j.c:102:9:IS42S32800J_ClockEnable	2
+../Drivers/BSP/Components/is42s32800j.c:126:9:IS42S32800J_Precharge	2
+../Drivers/BSP/Components/is42s32800j.c:150:9:IS42S32800J_ModeRegConfig	2
+../Drivers/BSP/Components/is42s32800j.c:183:9:IS42S32800J_TimingConfig	2
+../Drivers/BSP/Components/is42s32800j.c:204:9:IS42S32800J_RefreshMode	2
+../Drivers/BSP/Components/is42s32800j.c:228:9:IS42S32800J_RefreshRate	2
+../Drivers/BSP/Components/is42s32800j.c:247:9:IS42S32800J_EnterPowerMode	2
+../Drivers/BSP/Components/is42s32800j.c:271:9:IS42S32800J_ExitPowerMode	2
+../Drivers/BSP/Components/is42s32800j.c:295:9:IS42S32800J_Sendcmd	2
+../Drivers/BSP/Components/is42s32800j.c:320:16:IS42S32800J_Delay	2

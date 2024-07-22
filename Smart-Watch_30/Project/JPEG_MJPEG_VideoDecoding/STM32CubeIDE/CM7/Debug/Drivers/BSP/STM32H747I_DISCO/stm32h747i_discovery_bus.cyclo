@@ -1,0 +1,16 @@
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:189:9:BSP_I2C4_Init	4
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:240:9:BSP_I2C4_DeInit	3
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:267:26:MX_I2C4_Init	4
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:313:9:BSP_I2C4_WriteReg	3
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:350:9:BSP_I2C4_ReadReg	3
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:387:9:BSP_I2C4_WriteReg16	3
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:424:9:BSP_I2C4_ReadReg16	3
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:460:9:BSP_I2C4_IsReady	2
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:482:9:BSP_GetTick	1
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:571:17:I2C_GetTiming	7
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:609:13:I2C_Compute_PRESC_SCLDEL_SDADEL	11
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:690:17:I2C_Compute_SCLL_SCLH	12
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:768:13:I2C4_MspInit	1
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:813:13:I2C4_MspDeInit	1
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:839:16:I2C4_WriteReg	2
+../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c:858:16:I2C4_ReadReg	2

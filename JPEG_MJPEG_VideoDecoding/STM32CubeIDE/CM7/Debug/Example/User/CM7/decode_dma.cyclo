@@ -1,6 +1,0 @@
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/decode_dma.c:59:10:JPEG_Decode_DMA	1
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/decode_dma.c:82:6:HAL_JPEG_InfoReadyCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/decode_dma.c:92:6:HAL_JPEG_GetDataCallback	3
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/decode_dma.c:124:6:HAL_JPEG_DataReadyCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/decode_dma.c:137:6:HAL_JPEG_ErrorCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/decode_dma.c:147:6:HAL_JPEG_DecodeCpltCallback	1

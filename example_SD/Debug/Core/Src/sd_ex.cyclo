@@ -1,5 +1,0 @@
-../Core/Src/sd_ex.c:32:6:sd_process	2
-../Core/Src/sd_ex.c:52:6:videoPlayer	1
-../Core/Src/sd_ex.c:64:6:playBmp	4
-../Core/Src/sd_ex.c:146:13:playGif	5
-../Core/Src/sd_ex.c:201:6:ferror_handler	2

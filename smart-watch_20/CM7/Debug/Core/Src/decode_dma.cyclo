@@ -1,6 +1,0 @@
-../Core/Src/decode_dma.c:46:10:JPEG_Decode_DMA	1
-../Core/Src/decode_dma.c:70:6:HAL_JPEG_InfoReadyCallback	1
-../Core/Src/decode_dma.c:80:6:HAL_JPEG_GetDataCallback	3
-../Core/Src/decode_dma.c:112:6:HAL_JPEG_DataReadyCallback	1
-../Core/Src/decode_dma.c:125:6:HAL_JPEG_ErrorCallback	1
-../Core/Src/decode_dma.c:135:6:HAL_JPEG_DecodeCpltCallback	1

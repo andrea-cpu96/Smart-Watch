@@ -1,5 +1,0 @@
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/AVI_parser.c:42:10:__AVI_SearchID	6
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/AVI_parser.c:63:11:__AVI_GetStreamInfo	4
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/AVI_parser.c:87:11:__AVI_Init	28
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/AVI_parser.c:289:10:AVI_ParserInit	3
-C:/Users/Fato/Desktop/Nuova cartella/Nuova cartella/STM32Cube_FW_H7_V1.11.0/Projects/STM32H747I-DISCO/Examples/JPEG/JPEG_MJPEG_VideoDecoding/CM7/Src/AVI_parser.c:323:10:AVI_GetFrame	4
