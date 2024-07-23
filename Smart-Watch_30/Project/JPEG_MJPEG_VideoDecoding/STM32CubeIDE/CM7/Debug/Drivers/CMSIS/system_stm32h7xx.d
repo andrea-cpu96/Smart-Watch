@@ -8,7 +8,7 @@ Drivers/CMSIS/system_stm32h7xx.o: ../Drivers/CMSIS/system_stm32h7xx.c \
  ../../../../../Drivers/CMSIS/Include/mpu_armv7.h \
  ../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
- ../../../CM7/Inc/stm32h7xx_hal_conf.h \
+ ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/stm32h7xx_hal_conf.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
@@ -55,7 +55,7 @@ Drivers/CMSIS/system_stm32h7xx.o: ../Drivers/CMSIS/system_stm32h7xx.c \
 ../../../../../Drivers/CMSIS/Include/mpu_armv7.h:
 ../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
-../../../CM7/Inc/stm32h7xx_hal_conf.h:
+../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/stm32h7xx_hal_conf.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:

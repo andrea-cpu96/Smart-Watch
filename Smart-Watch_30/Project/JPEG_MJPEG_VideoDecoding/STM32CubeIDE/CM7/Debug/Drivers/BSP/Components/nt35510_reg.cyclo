@@ -1,2 +1,0 @@
-../Drivers/BSP/Components/nt35510_reg.c:57:9:nt35510_read_reg	1
-../Drivers/BSP/Components/nt35510_reg.c:69:9:nt35510_write_reg	1

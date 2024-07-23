@@ -1,0 +1,5 @@
+../Example/User/CM7/Src/stm32h7xx_hal_msp.c:51:6:HAL_JPEG_MspInit	24	static
+../Example/User/CM7/Src/stm32h7xx_hal_msp.c:131:6:HAL_JPEG_MspDeInit	16	static
+../Example/User/CM7/Src/stm32h7xx_hal_msp.c:143:6:HAL_SPI_MspInit	256	static
+../Example/User/CM7/Src/stm32h7xx_hal_msp.c:194:6:HAL_SPI_MspDeInit	16	static
+../Example/User/CM7/Src/stm32h7xx_hal_msp.c:220:6:HAL_DMA2D_MspInit	24	static

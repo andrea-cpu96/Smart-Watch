@@ -9,14 +9,17 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Middlewares/FatFs/Options/subdir.mk
--include Middlewares/FatFs/Core/subdir.mk
+-include Middlewares/FatFs/src/subdir.mk
 -include Example/User/Startup/subdir.mk
--include Example/User/CM7/subdir.mk
--include Drivers/STM32H7xx_HAL_Driver/subdir.mk
+-include Example/User/CM7/Src/subdir.mk
+-include Drivers/STM32H7xx_HAL_Driver/Src/Legacy/subdir.mk
+-include Drivers/STM32H7xx_HAL_Driver/Src/subdir.mk
 -include Drivers/CMSIS/subdir.mk
 -include Drivers/BSP/STM32H747I_DISCO/subdir.mk
--include Drivers/BSP/Components/subdir.mk
+-include Drivers/BSP/Components/otm8009a/subdir.mk
+-include Drivers/BSP/Components/nt35510/subdir.mk
+-include Drivers/BSP/Components/is42s32800j/subdir.mk
+-include Drivers/BSP/Components/adv7533/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)

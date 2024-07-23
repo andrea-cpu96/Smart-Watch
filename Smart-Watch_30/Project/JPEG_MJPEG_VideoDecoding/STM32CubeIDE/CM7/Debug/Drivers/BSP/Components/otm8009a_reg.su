@@ -1,2 +1,0 @@
-../Drivers/BSP/Components/otm8009a_reg.c:57:9:otm8009a_read_reg	32	static
-../Drivers/BSP/Components/otm8009a_reg.c:69:9:otm8009a_write_reg	32	static

@@ -1,9 +1,9 @@
 Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.o: \
- ../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.c \
- ../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.h \
+ D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_bus.c \
+ D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_bus.h \
  ../../../Common/Inc/stm32h747i_discovery_conf.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
- ../../../CM7/Inc/stm32h7xx_hal_conf.h \
+ ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/stm32h7xx_hal_conf.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h \
  ../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
@@ -49,11 +49,11 @@ Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.o: \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_errno.h
-../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.h:
+ D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_errno.h
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_bus.h:
 ../../../Common/Inc/stm32h747i_discovery_conf.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
-../../../CM7/Inc/stm32h7xx_hal_conf.h:
+../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/stm32h7xx_hal_conf.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:
 ../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
@@ -99,4 +99,4 @@ Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_bus.o: \
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery_errno.h:
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_errno.h:
