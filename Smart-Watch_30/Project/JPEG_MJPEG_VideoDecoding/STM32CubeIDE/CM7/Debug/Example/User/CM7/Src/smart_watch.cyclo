@@ -1,6 +1,6 @@
-../Example/User/CM7/Src/smart_watch.c:44:6:smart_watch_process	13
-../Example/User/CM7/Src/smart_watch.c:166:13:depth24To16	3
-../Example/User/CM7/Src/smart_watch.c:205:13:lcd_draw	2
-../Example/User/CM7/Src/smart_watch.c:252:13:DMA2D_Init	7
-../Example/User/CM7/Src/smart_watch.c:317:13:DMA2D_CopyBuffer	1
-../Example/User/CM7/Src/smart_watch.c:337:13:SD_Initialize	1
+../Example/User/CM7/Src/smart_watch.c:44:6:smart_watch_process	14
+../Example/User/CM7/Src/smart_watch.c:201:13:depth24To16	3
+../Example/User/CM7/Src/smart_watch.c:240:13:lcd_draw	2
+../Example/User/CM7/Src/smart_watch.c:287:13:DMA2D_Init	7
+../Example/User/CM7/Src/smart_watch.c:352:13:DMA2D_CopyBuffer	1
+../Example/User/CM7/Src/smart_watch.c:372:13:SD_Initialize	1

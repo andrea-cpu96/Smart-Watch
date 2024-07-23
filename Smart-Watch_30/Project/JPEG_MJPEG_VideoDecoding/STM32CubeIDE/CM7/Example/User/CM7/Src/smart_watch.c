@@ -44,6 +44,33 @@ AVI_CONTEXT AVI_Handel;  /* AVI Parser Handle*/
 void smart_watch_process(void)
 {
 
+  char *file_name[24];
+  file_name[0] = "video_000.avi";
+  file_name[1] = "video_001.avi";
+  file_name[2] = "video_002.avi";
+  file_name[3] = "video_003.avi";
+  file_name[4] = "video_004.avi";
+  file_name[5] = "video_005.avi";
+  file_name[6] = "video_006.avi";
+  file_name[7] = "video_007.avi";
+  file_name[8] = "video_008.avi";
+  file_name[9] = "video_009.avi";
+  file_name[10] = "video_010.avi";
+  file_name[11] = "video_011.avi";
+  file_name[12] = "video_012.avi";
+  file_name[13] = "video_013.avi";
+  file_name[14] = "video_014.avi";
+  file_name[15] = "video_015.avi";
+  file_name[16] = "video_016.avi";
+  file_name[17] = "video_017.avi";
+  file_name[18] = "video_018.avi";
+  file_name[19] = "video_019.avi";
+  file_name[20] = "video_020.avi";
+  file_name[21] = "video_021.avi";
+  file_name[22] = "video_022.avi";
+  file_name[23] = "video_023.avi";
+
+
   /*##-3- Link the micro SD disk I/O driver ##################################*/
   if(FATFS_LinkDriver(&SD_Driver, SDPath) == 0)
   {
@@ -55,91 +82,99 @@ void smart_watch_process(void)
       /*##-5- Register the file system object to the FatFs module ##############*/
       if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
       {
-        /*##-6- Open the MJPEG avi file with read access #######################*/
-        if(f_open(&MJPEG_File, "video.avi", FA_READ) == FR_OK)
-        {
 
-          isfirstFrame = 1;
+    	for(int i = 0 ; i < 24 ; i++)
+    	{
 
-          /* parse the AVI file Header*/
-          if(AVI_ParserInit(&AVI_Handel, &MJPEG_File, MJPEG_VideoBuffer, MJPEG_VID_BUFFER_SIZE, MJPEG_AudioBuffer, MJPEG_AUD_BUFFER_SIZE) != 0)
-          {
+    		char *name = file_name[i];
 
-            while(1);
+    		/*##-6- Open the MJPEG avi file with read access #######################*/
+    		if(f_open(&MJPEG_File, name, FA_READ) == FR_OK)
+    		{
 
-          }
+    			isfirstFrame = 1;
 
-          do
-          {
+    			/* parse the AVI file Header*/
+    			if(AVI_ParserInit(&AVI_Handel, &MJPEG_File, MJPEG_VideoBuffer, MJPEG_VID_BUFFER_SIZE, MJPEG_AudioBuffer, MJPEG_AUD_BUFFER_SIZE) != 0)
+    			{
 
-  		    //uint32_t oldTime = HAL_GetTick();
+    				while(1);
 
-            FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+    			}
 
-            if(FrameType == AVI_VIDEO_FRAME)
-            {
+    			do
+    			{
 
-              AVI_Handel.CurrentImage ++;
+    				//uint32_t oldTime = HAL_GetTick();
+
+    				FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+
+    				if(FrameType == AVI_VIDEO_FRAME)
+    				{
+
+    					AVI_Handel.CurrentImage ++;
 
 
-              JPEG_Decode_DMA(&JPEG_Handle,(uint32_t) MJPEG_VideoBuffer ,AVI_Handel.FrameSize, jpegOutDataAdreess );
+    					JPEG_Decode_DMA(&JPEG_Handle,(uint32_t) MJPEG_VideoBuffer ,AVI_Handel.FrameSize, jpegOutDataAdreess );
 
-              while(Jpeg_HWDecodingEnd == 0);
+    					while(Jpeg_HWDecodingEnd == 0);
 
-              if(isfirstFrame == 1)
-              {
+    					if(isfirstFrame == 1)
+    					{
 
-                isfirstFrame = 0;
+    						isfirstFrame = 0;
 
-                HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
+    						HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
 
-                DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+    						DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
 
-              }
+    					}
 
-              DMA2D_CopyBuffer((uint32_t *)jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+    					DMA2D_CopyBuffer((uint32_t *)jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
-              jpegOutDataAdreess = (jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
+    					jpegOutDataAdreess = (jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
 
-            }
+    				}
 
-		    uint16_t width = JPEG_Info.ImageWidth;
-			uint16_t height = JPEG_Info.ImageHeight;
+    				uint16_t width = JPEG_Info.ImageWidth;
+    				uint16_t height = JPEG_Info.ImageHeight;
 
-		    uint16_t xPos = (LCD_X_Size - width)/2;					// Center the image in x
-		    uint16_t yPos = (LCD_Y_Size - height)/2;					// Center the image in y
+    				uint16_t xPos = (LCD_X_Size - width)/2;					// Center the image in x
+    				uint16_t yPos = (LCD_Y_Size - height)/2;					// Center the image in y
 
-		    doubleFormat pOut;
-		    pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
+    				doubleFormat pOut;
+    				pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
 
-		    depth24To16(&pOut, ( width * height ), 3);
+    				depth24To16(&pOut, ( width * height ), 3);
 
-		    //uint32_t newTime = 0;
-		    //uint32_t elapsed = 0;
+    				//uint32_t newTime = 0;
+    				//uint32_t elapsed = 0;
 
-		    // Display the image
-		    lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
+    				// Display the image
+    				lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
 
-		    //newTime = HAL_GetTick();
+    				//newTime = HAL_GetTick();
 
-		    //elapsed = newTime - oldTime;
+    				//elapsed = newTime - oldTime;
 
-		    //HAL_Delay(1);
+    				//HAL_Delay(1);
 
-          }while(AVI_Handel.CurrentImage  <  AVI_Handel.aviInfo.TotalFrame);
+    			}while(AVI_Handel.CurrentImage  <  AVI_Handel.aviInfo.TotalFrame);
 
-          HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50);  /* wait for the Last DMA2D transfer to ends */
+    			HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50);  /* wait for the Last DMA2D transfer to ends */
 
-          /*Close the avi file*/
-          f_close(&MJPEG_File);
+    			/*Close the avi file*/
+    			f_close(&MJPEG_File);
 
-        }
-        else /* Can't Open avi file*/
-        {
+    		}
+    		else /* Can't Open avi file*/
+    		{
 
-          file_error = 1;
+    			file_error = 1;
 
-        }
+    		}
+
+    	}
 
       }
 
