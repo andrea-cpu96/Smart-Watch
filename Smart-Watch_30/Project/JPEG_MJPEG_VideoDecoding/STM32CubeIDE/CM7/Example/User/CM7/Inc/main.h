@@ -103,6 +103,7 @@ extern char SDPath[4]; /* SD card logical drive path */
 extern FIL MJPEG_File;          /* MJPEG File object */
 
 extern SPI_HandleTypeDef hspi5;
+extern TIM_HandleTypeDef htim3;
 
 
 /* Exported macro ------------------------------------------------------------*/

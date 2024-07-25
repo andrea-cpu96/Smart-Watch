@@ -40,6 +40,9 @@ char SDPath[4]; /* SD card logical drive path */
 FIL MJPEG_File;          /* MJPEG File object */
 AVI_CONTEXT AVI_Handel;  /* AVI Parser Handle*/
 
+uint16_t frameToSkip = 0;
+uint16_t frame_time;
+
 
 void smart_watch_process(void)
 {
@@ -105,6 +108,26 @@ void smart_watch_process(void)
     			do
     			{
 
+    				/*
+    				if(( AVI_Handel.CurrentImage % 2 ))
+    				{
+
+    					AVI_Handel.CurrentImage ++;
+    					continue;
+
+    				}
+					*/
+
+    				if(frameToSkip > 0)
+    				{
+
+    					frameToSkip--;
+    					AVI_Handel.CurrentImage ++;
+    					continue;
+
+
+    				}
+
     				//uint32_t oldTime = HAL_GetTick();
 
     				FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
@@ -127,6 +150,10 @@ void smart_watch_process(void)
     						HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
 
     						DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+    						frame_time = AVI_Handel.aviInfo.SecPerFrame;
+
+    						HAL_TIM_Base_Start_IT(&htim3);
 
     					}
 
@@ -201,14 +228,20 @@ void smart_watch_process(void)
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 {
 
+	static uint8_t swap = 0;
+
 	uint8_t b;
 	uint8_t g;
 	uint8_t r;
 
 	int i = 0;
 
-    if(AVI_Handel.CurrentImage % 2)
+
+
+    if(swap)
     {
+
+    	swap = 0;
 
     	i = 0;
     	length /= 2;
@@ -217,6 +250,8 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
     }
     else
     {
+
+    	swap = 1;
 
     	i = ( length / 2 ) - 2000;
 
@@ -240,11 +275,17 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 static void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 {
 
+	   static uint8_t swap = 0;
+
 	   struct GC9A01_frame frame;
 
+
+
 	    // Imposta il frame per l'intera area specificata
-	   	if(AVI_Handel.CurrentImage%2)
+	   	if(swap)
 	   	{
+
+	   		swap = 0;
 
 	        frame.start.X = 0;
 	        frame.start.Y = 0;
@@ -254,6 +295,8 @@ static void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t
 	   	}
 	   	else
 	   	{
+
+	   		swap = 1;
 
 	   		data += ( 240 * 240 );
 

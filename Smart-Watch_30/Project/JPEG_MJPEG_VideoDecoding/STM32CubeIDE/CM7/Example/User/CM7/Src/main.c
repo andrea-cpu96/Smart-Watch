@@ -31,6 +31,7 @@ JPEG_HandleTypeDef    			JPEG_Handle;
 DMA2D_HandleTypeDef    			DMA2D_Handle;
 JPEG_ConfTypeDef  		     	JPEG_Info;
 
+TIM_HandleTypeDef htim3;
 SPI_HandleTypeDef hspi5;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -39,6 +40,7 @@ static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
 
 static void MX_SPI5_Init(void);
+static void MX_TIM3_Init(void);
 static void MX_GPIO_Init(void);
 
 
@@ -66,6 +68,7 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI5_Init();
 
+  MX_TIM3_Init();
   GC9A01_init();
  
  /*Initialize The SDRAM */  
@@ -202,6 +205,9 @@ static void SystemClock_Config(void)
   
   /* Enables the I/O Compensation Cell */    
   HAL_EnableCompensationCell();  
+
+  //uint32_t sisclk = HAL_RCC_GetSysClockFreq();
+  //HAL_Delay(1);
 
 }
 
@@ -346,11 +352,56 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
+  GPIO_InitStruct.Pin =  GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
 
+static void MX_TIM3_Init(void)
+{
 
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 17499;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 9999;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+
+}
 
 
 #ifdef  USE_FULL_ASSERT

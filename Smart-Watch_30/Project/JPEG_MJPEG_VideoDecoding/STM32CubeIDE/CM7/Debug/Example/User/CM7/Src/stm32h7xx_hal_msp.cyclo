@@ -3,3 +3,5 @@
 ../Example/User/CM7/Src/stm32h7xx_hal_msp.c:143:6:HAL_SPI_MspInit	3
 ../Example/User/CM7/Src/stm32h7xx_hal_msp.c:194:6:HAL_SPI_MspDeInit	2
 ../Example/User/CM7/Src/stm32h7xx_hal_msp.c:220:6:HAL_DMA2D_MspInit	2
+../Example/User/CM7/Src/stm32h7xx_hal_msp.c:240:6:HAL_TIM_Base_MspInit	2
+../Example/User/CM7/Src/stm32h7xx_hal_msp.c:261:6:HAL_TIM_Base_MspDeInit	2
