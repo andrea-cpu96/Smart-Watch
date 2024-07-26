@@ -9,4 +9,4 @@
 ../Example/User/CM7/Src/stm32h7xx_it.c:137:6:SysTick_Handler	8	static
 ../Example/User/CM7/Src/stm32h7xx_it.c:155:6:JPEG_IRQHandler	8	static
 ../Example/User/CM7/Src/stm32h7xx_it.c:166:6:MDMA_IRQHandler	8	static
-../Example/User/CM7/Src/stm32h7xx_it.c:175:6:TIM3_IRQHandler	16	static
+../Example/User/CM7/Src/stm32h7xx_it.c:175:6:TIM3_IRQHandler	8	static

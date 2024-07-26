@@ -176,18 +176,6 @@ void TIM3_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM3_IRQn 0 */
 
- HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-
-  static uint16_t frames_old = 0;
-
-  uint16_t frames = abs( AVI_Handel.CurrentImage - frames_old );
-
-  uint16_t frame_actual = (2 / (float)( frame_time / 1000000.0 ) );
-
-  frameToSkip = ( frame_actual - frames );
-
-  frames_old = AVI_Handel.CurrentImage;
-
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */

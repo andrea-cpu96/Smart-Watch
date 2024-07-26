@@ -1,6 +1,7 @@
-../Example/User/CM7/Src/smart_watch.c:47:6:smart_watch_process	144	static
-../Example/User/CM7/Src/smart_watch.c:228:13:depth24To16	24	static
-../Example/User/CM7/Src/smart_watch.c:275:13:lcd_draw	40	static
-../Example/User/CM7/Src/smart_watch.c:330:13:DMA2D_Init	24	static
-../Example/User/CM7/Src/smart_watch.c:395:13:DMA2D_CopyBuffer	48	static
-../Example/User/CM7/Src/smart_watch.c:415:13:SD_Initialize	8	static
+../Example/User/CM7/Src/smart_watch.c:32:6:smart_watch_process	8	static
+../Example/User/CM7/Src/smart_watch.c:51:13:mjpeg_video_processing	176	static
+../Example/User/CM7/Src/smart_watch.c:235:13:depth24To16	24	static
+../Example/User/CM7/Src/smart_watch.c:283:13:lcd_draw	40	static
+../Example/User/CM7/Src/smart_watch.c:333:13:DMA2D_Init	24	static
+../Example/User/CM7/Src/smart_watch.c:412:13:DMA2D_CopyBuffer	48	static
+../Example/User/CM7/Src/smart_watch.c:432:13:SD_Initialize	8	static
