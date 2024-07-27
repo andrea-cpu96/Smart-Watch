@@ -18,6 +18,8 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth
 static void SD_Initialize(void);
 static void mjpeg_video_processing(void);
 static void file_handler(void);
+static void user_buttons_handler(void);
+static void parameters_reset(void);
 
 
 // FATFS can't handle huge files a time,
@@ -36,7 +38,7 @@ char SDPath[4]; 												// SD card logical drive path
 FIL MJPEG_File;          										// MJPEG File object
 AVI_CONTEXT AVI_Handel;  										// AVI Parser Handle
 
-uint8_t isfirstFrame = 0;
+video_t video;													// Video data structure
 
 
 void smart_watch_init(void)
@@ -67,6 +69,8 @@ void smart_watch_init(void)
 	file_name[22] = "video_022.avi";
 	file_name[23] = "video_023.avi";
 
+
+	parameters_reset();
 
 	// SD card initialization
 	// Link the micro SD disk I/O driver
@@ -121,7 +125,7 @@ void smart_watch_process(void)
 		mjpeg_video_processing();
 
 		// Check for user buttons pressed
-		//user_buttons_handler();
+		user_buttons_handler();
 
 	}
 
@@ -134,85 +138,70 @@ void smart_watch_process(void)
 static void mjpeg_video_processing(void)
 {
 
-	  static uint16_t width;
-	  static uint16_t height;
-	  static uint16_t xPos = 0;
-	  static uint16_t yPos = 0;
-
-	  static uint32_t FrameType = 0;
-
-	  static int frameToSkip = 0;										// Defines for each cycle how many frames time skip
-	  static uint16_t frame_time;	  									// Holds the time duration of the single frame
-	  static uint32_t actual_time = 0; 								// Takes trace of the actual time
-	  static uint32_t tick_offset = 0;
-
-	  static uint32_t jpegOutDataAdreess = JPEG_OUTPUT_DATA_BUFFER0; 	// Buffer for the decoded data
-
-
 	  // Save the frame into MJPEG_VideoBuffer
-	  FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+	  video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
 
-	  if(frameToSkip > 0)
+	  if(video.frameToSkip > 0)
 	  {
 
 		  // Skip frames until the the watch time is
 		  // synchronized with the actual time
 
-		  frameToSkip--;
+		  video.frameToSkip--;
 		  AVI_Handel.CurrentImage++;
 
 	  }
-	  else if(FrameType == AVI_VIDEO_FRAME)
+	  else if(video.FrameType == AVI_VIDEO_FRAME)
 	  {
 
 		  AVI_Handel.CurrentImage ++;
 
 		  // Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
-		  JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, jpegOutDataAdreess);
+		  JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
 
 		  while(Jpeg_HWDecodingEnd == 0);
 
-		  if(isfirstFrame == 1)
+		  if(video.isfirstFrame == 1)
 		  {
 
-			  isfirstFrame = 0;
+			  video.isfirstFrame = 0;
 
 			  HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
 
 			  DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
 
-			  width = JPEG_Info.ImageWidth;
-			  height = JPEG_Info.ImageHeight;
-			  xPos =  ( ( LCD_Y_SIZE - width ) / 2 );					// Center the image in x
-			  yPos = ( ( LCD_Y_SIZE - height ) / 2 );					// Center the image in y
+			  video.width = JPEG_Info.ImageWidth;
+			  video.height = JPEG_Info.ImageHeight;
+			  video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
+			  video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
-			  frame_time = AVI_Handel.aviInfo.SecPerFrame;
+			  video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
 
 			  //HAL_TIM_Base_Start(&htim3);
-			  tick_offset = HAL_GetTick();
+			  video.tick_offset = HAL_GetTick();
 
 		  }
 
 		  // Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-		  DMA2D_CopyBuffer((uint32_t *)jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+		  DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
-		  jpegOutDataAdreess = (jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
+		  video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
 
 		  // Implements the data conversion from RGB888 to RGB565
 		  doubleFormat pOut;
 		  pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
-		  depth24To16(&pOut, ( width * height ), 3);
+		  depth24To16(&pOut, ( video.width * video.height ), 3);
 
 		  // Display the image
-		  lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
+		  lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
 
 		  // Obtain the number of frames to skip the next cycle
-		  actual_time = ( HAL_GetTick() - tick_offset );
-		  float watch_time = ( AVI_Handel.CurrentImage * ( frame_time / 1000.0 ) );
-		  frameToSkip = ( ( actual_time - watch_time ) / ( frame_time / 1000.0 ) );
+		  video.actual_time = ( HAL_GetTick() - video.tick_offset );
+		  float watch_time = ( AVI_Handel.CurrentImage * ( video.frame_time / 1000.0 ) );
+		  video.frameToSkip = ( ( video.actual_time - watch_time ) / ( video.frame_time / 1000.0 ) );
 
-		  if(frameToSkip < 0)
-			  frameToSkip = 0;
+		  if(video.frameToSkip < 0)
+			  video.frameToSkip = 0;
 
 	  }
 
@@ -238,7 +227,7 @@ static void file_handler(void)
     	 if(f_open(&MJPEG_File, name, FA_READ) == FR_OK)
     	 {
 
-    		 isfirstFrame = 1;
+    		 video.isfirstFrame = 1;
 
     		 // parse the AVI file Header
     		 if(AVI_ParserInit(&AVI_Handel, &MJPEG_File, MJPEG_VideoBuffer, MJPEG_VID_BUFFER_SIZE, MJPEG_AudioBuffer, MJPEG_AUD_BUFFER_SIZE) != 0)
@@ -271,6 +260,34 @@ static void file_handler(void)
      }
 
 }
+
+
+static void user_buttons_handler(void)
+{
+
+	//HAL_Delay(100);
+
+}
+
+
+static void parameters_reset(void)
+{
+
+	video.width = 0;
+	video.height = 0;
+	video.xPos = 0;
+	video.yPos = 0;
+
+	video.FrameType = 0;
+
+	video.frameToSkip = 0;
+	video.frame_time = 0;
+	video.actual_time = 0;
+	video.tick_offset = 0;
+	video.jpegOutDataAdreess = JPEG_OUTPUT_DATA_BUFFER0;
+
+}
+
 
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 {

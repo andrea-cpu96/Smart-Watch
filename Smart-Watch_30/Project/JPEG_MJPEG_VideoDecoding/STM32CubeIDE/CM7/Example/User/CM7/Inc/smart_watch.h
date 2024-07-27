@@ -19,11 +19,27 @@
 #define TIMER_TIME					10.0
 
 
-extern uint16_t frame_time;
-extern uint16_t frameToSkip;
-extern AVI_CONTEXT AVI_Handel;
-
 extern __IO uint32_t Jpeg_HWDecodingEnd;
+
+
+typedef struct
+{
+
+	uint8_t isfirstFrame;
+	uint8_t FrameType;
+	uint16_t width;
+	uint16_t height;
+	uint16_t xPos;
+	uint16_t yPos;
+
+	int frameToSkip;											// Defines for each cycle how many frames time skip
+	uint16_t frame_time;	  									// Holds the time duration of the single frame
+	uint32_t actual_time; 										// Takes trace of the actual time
+	uint32_t tick_offset;
+
+	uint32_t jpegOutDataAdreess; 								// Buffer for the decoded data
+
+}video_t;
 
 
 void smart_watch_init(void);
