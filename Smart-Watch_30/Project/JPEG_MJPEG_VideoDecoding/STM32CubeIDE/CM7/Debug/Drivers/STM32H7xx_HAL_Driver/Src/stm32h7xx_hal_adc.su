@@ -35,32 +35,32 @@
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8199:22:LL_ADC_DisableIT_AWD1	16	static
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8210:22:LL_ADC_DisableIT_AWD2	16	static
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8221:22:LL_ADC_DisableIT_AWD3	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:407:19:HAL_ADC_Init	48	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:842:19:HAL_ADC_DeInit	32	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1095:13:HAL_ADC_MspInit	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1112:13:HAL_ADC_MspDeInit	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1397:19:HAL_ADC_Start	32	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1518:19:HAL_ADC_Stop	24	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1572:19:HAL_ADC_PollForConversion	40	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1735:19:HAL_ADC_PollForEvent	32	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1884:19:HAL_ADC_Start_IT	32	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2059:19:HAL_ADC_Stop_IT	24	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2112:19:HAL_ADC_Start_DMA	32	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2259:19:HAL_ADC_Stop_DMA	24	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2344:10:HAL_ADC_GetValue	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2361:6:HAL_ADC_IRQHandler	48	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2721:13:HAL_ADC_ConvCpltCallback	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2736:13:HAL_ADC_ConvHalfCpltCallback	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2751:13:HAL_ADC_LevelOutOfWindowCallback	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2773:13:HAL_ADC_ErrorCallback	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2819:19:HAL_ADC_ConfigChannel	144	static,ignoring_inline_asm
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3135:19:HAL_ADC_AnalogWDGConfig	88	static,ignoring_inline_asm
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3497:10:HAL_ADC_GetState	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3511:10:HAL_ADC_GetError	16	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3541:19:ADC_ConversionStop	40	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3675:19:ADC_Enable	24	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3754:19:ADC_Disable	24	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3816:6:ADC_DMAConvCplt	24	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3894:6:ADC_DMAHalfConvCplt	24	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3912:6:ADC_DMAError	24	static
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3938:6:ADC_ConfigureBoostMode	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:407:19:HAL_ADC_Init	48	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:842:19:HAL_ADC_DeInit	32	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1095:13:HAL_ADC_MspInit	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1112:13:HAL_ADC_MspDeInit	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1397:19:HAL_ADC_Start	32	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1518:19:HAL_ADC_Stop	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1572:19:HAL_ADC_PollForConversion	40	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1735:19:HAL_ADC_PollForEvent	32	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:1884:19:HAL_ADC_Start_IT	32	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2059:19:HAL_ADC_Stop_IT	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2112:19:HAL_ADC_Start_DMA	32	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2259:19:HAL_ADC_Stop_DMA	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2344:10:HAL_ADC_GetValue	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2361:6:HAL_ADC_IRQHandler	48	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2721:13:HAL_ADC_ConvCpltCallback	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2736:13:HAL_ADC_ConvHalfCpltCallback	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2751:13:HAL_ADC_LevelOutOfWindowCallback	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2773:13:HAL_ADC_ErrorCallback	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:2819:19:HAL_ADC_ConfigChannel	144	static,ignoring_inline_asm
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3135:19:HAL_ADC_AnalogWDGConfig	88	static,ignoring_inline_asm
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3497:10:HAL_ADC_GetState	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3511:10:HAL_ADC_GetError	16	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3541:19:ADC_ConversionStop	40	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3675:19:ADC_Enable	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3754:19:ADC_Disable	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3816:6:ADC_DMAConvCplt	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3894:6:ADC_DMAHalfConvCplt	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3912:6:ADC_DMAError	24	static
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c:3938:6:ADC_ConfigureBoostMode	24	static

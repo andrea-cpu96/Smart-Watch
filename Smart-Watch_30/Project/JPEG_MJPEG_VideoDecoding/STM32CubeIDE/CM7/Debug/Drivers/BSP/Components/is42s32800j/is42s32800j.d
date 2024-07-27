@@ -1,6 +1,6 @@
 Drivers/BSP/Components/is42s32800j/is42s32800j.o: \
- C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/Components/is42s32800j/is42s32800j.c \
- C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/Components/is42s32800j/is42s32800j.h \
+ D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/Components/is42s32800j/is42s32800j.c \
+ D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/Components/is42s32800j/is42s32800j.h \
  ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/is42s32800j_conf.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/stm32h7xx_hal_conf.h \
@@ -51,7 +51,7 @@ Drivers/BSP/Components/is42s32800j/is42s32800j.o: \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
-C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/Components/is42s32800j/is42s32800j.h:
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/Components/is42s32800j/is42s32800j.h:
 ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/is42s32800j_conf.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/stm32h7xx_hal_conf.h:

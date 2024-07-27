@@ -85,9 +85,10 @@ static void mjpeg_video_processing(void)
 	  uint32_t sd_detection_error = 0;
 	  uint32_t FrameType = 0;
 
-	  uint16_t frameToSkip = 0;									// Defines for each cycle how many frames time skip
+	  int frameToSkip = 0;									// Defines for each cycle how many frames time skip
 	  uint16_t frame_time;	  									// Holds the time duration of the single frame
-	  float actual_time = 0; 									// Takes trace of the actual time
+	  uint32_t actual_time = 0; 									// Takes trace of the actual time
+	  uint32_t tick_offset = 0;
 
 	  uint32_t jpegOutDataAdreess = JPEG_OUTPUT_DATA_BUFFER0; 	// Buffer for the decoded data
 
@@ -105,6 +106,8 @@ static void mjpeg_video_processing(void)
 	      // Register the file system object to the FatFs module
 	      if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
 	      {
+
+	        uint8_t swap = 0;
 
 	    	// Cycles 24 files equivalent to 12h
 	    	for(int i = 0 ; i < 24 ; i++)
@@ -127,7 +130,10 @@ static void mjpeg_video_processing(void)
 	    			do
 	    			{
 
-	    				if(frameToSkip > 0)
+	    				// Save the frame into MJPEG_VideoBuffer
+	    				FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+
+	    				if(swap || ( frameToSkip > 0 ))
 	    				{
 
 	    					// Skip frames until the the watch time is
@@ -138,9 +144,6 @@ static void mjpeg_video_processing(void)
 	    					continue;
 
 	    				}
-
-	    				// Save the frame into MJPEG_VideoBuffer
-	    				FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
 
 	    				if(FrameType == AVI_VIDEO_FRAME)
 	    				{
@@ -163,7 +166,8 @@ static void mjpeg_video_processing(void)
 
 	    						frame_time = AVI_Handel.aviInfo.SecPerFrame;
 
-	    						HAL_TIM_Base_Start(&htim3);
+	    						//HAL_TIM_Base_Start(&htim3);
+	    						tick_offset = HAL_GetTick();
 
 	    					}
 
@@ -188,10 +192,14 @@ static void mjpeg_video_processing(void)
 	    				// Display the image
 	    				lcd_draw(xPos, yPos, width, height, pOut.u8Arr);
 
+
 	    				// Obtain the number of frames to skip the next cycle
-	    				actual_time += ( (float)( __HAL_TIM_GET_COUNTER(&htim3) / TIMER_MAX_COUNT ) * (float)TIMER_TIME );
-	    				float watch_time = ( AVI_Handel.CurrentImage * ( frame_time / 1000000.0 ) );
-	    				frameToSkip = ( ( actual_time - watch_time ) / ( frame_time / 1000000.0 ) );
+	    				actual_time = ( HAL_GetTick() - tick_offset );
+	    				float watch_time = ( AVI_Handel.CurrentImage * ( frame_time / 1000.0 ) );
+	    				frameToSkip = ( ( actual_time - watch_time ) / ( frame_time / 1000.0 ) );
+
+	    				if(frameToSkip < 0)
+	    					frameToSkip = 0;
 
 	    			}while(AVI_Handel.CurrentImage  <  AVI_Handel.aviInfo.TotalFrame);
 

@@ -16,7 +16,7 @@
 #define LCD_Y_SIZE					240
 
 #define TIMER_MAX_COUNT				9999.0
-#define TIMER_TIME					2.0
+#define TIMER_TIME					10.0
 
 
 extern uint16_t frame_time;
