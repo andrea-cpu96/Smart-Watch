@@ -26,6 +26,7 @@ extern AVI_CONTEXT AVI_Handel;
 extern __IO uint32_t Jpeg_HWDecodingEnd;
 
 
+void smart_watch_init(void);
 void smart_watch_process(void);
 
 

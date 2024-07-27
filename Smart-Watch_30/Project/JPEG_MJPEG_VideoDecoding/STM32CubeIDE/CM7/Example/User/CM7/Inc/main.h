@@ -31,48 +31,51 @@
 
 #include "AVI_parser.h"
 
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
+
 #define MDMA_INSTANCE MDMA_Channel0
 
 #define LCD_FRAME_BUFFER         0xD0A00000
 #define JPEG_OUTPUT_DATA_BUFFER0 0xD0600000
 #define JPEG_OUTPUT_DATA_BUFFER1 0xD0800000
 
+// SD
 #define SDIO1_D2_Pin GPIO_PIN_10
 #define SDIO1_D2_GPIO_Port GPIOC
 #define SDIO1_D3_Pin GPIO_PIN_11
 #define SDIO1_D3_GPIO_Port GPIOC
-#define OSC32_OUT_Pin GPIO_PIN_15
-#define OSC32_OUT_GPIO_Port GPIOC
-#define OSC32_IN_Pin GPIO_PIN_14
-#define OSC32_IN_GPIO_Port GPIOC
 #define SDIO1_CK_Pin GPIO_PIN_12
 #define SDIO1_CK_GPIO_Port GPIOC
 #define SDIO1_CMD_Pin GPIO_PIN_2
 #define SDIO1_CMD_GPIO_Port GPIOD
-#define STLINK_TX_Pin GPIO_PIN_10
-#define STLINK_TX_GPIO_Port GPIOA
-#define STLINK_RX_Pin GPIO_PIN_9
-#define STLINK_RX_GPIO_Port GPIOA
 #define SDIO1_D0_Pin GPIO_PIN_8
 #define SDIO1_D0_GPIO_Port GPIOC
 #define SDIO1_D1_Pin GPIO_PIN_9
 #define SDIO1_D1_GPIO_Port GPIOC
-#define CEC_CK_MCO1_Pin GPIO_PIN_8
-#define CEC_CK_MCO1_GPIO_Port GPIOA
+// OSCILLATOR 32kHz
+#define OSC32_OUT_Pin GPIO_PIN_15
+#define OSC32_OUT_GPIO_Port GPIOC
+#define OSC32_IN_Pin GPIO_PIN_14
+#define OSC32_IN_GPIO_Port GPIOC
+// OSCILLATOR
 #define OSC_OUT_Pin GPIO_PIN_1
 #define OSC_OUT_GPIO_Port GPIOH
 #define OSC_IN_Pin GPIO_PIN_0
 #define OSC_IN_GPIO_Port GPIOH
+// STLINK
+#define STLINK_TX_Pin GPIO_PIN_10
+#define STLINK_TX_GPIO_Port GPIOA
+#define STLINK_RX_Pin GPIO_PIN_9
+#define STLINK_RX_GPIO_Port GPIOA
+// SPI
 #define ARD_D13_Pin GPIO_PIN_0
 #define ARD_D13_GPIO_Port GPIOK
-#define GC9A01_CS_Pin GPIO_PIN_1
-#define GC9A01_CS_GPIO_Port GPIOK
 #define ARD_D12_Pin GPIO_PIN_11
 #define ARD_D12_GPIO_Port GPIOJ
 #define ARD_D11_Pin GPIO_PIN_10
 #define ARD_D11_GPIO_Port GPIOJ
+// DISPLAY LCD
+#define GC9A01_CS_Pin GPIO_PIN_1
+#define GC9A01_CS_GPIO_Port GPIOK
 #define GC9A01_BL_Pin GPIO_PIN_0
 #define GC9A01_BL_GPIO_Port GPIOJ
 #define GC9A01_DC_Pin GPIO_PIN_6
@@ -82,6 +85,7 @@
 
 #define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
 
+
 typedef union
 {
 
@@ -90,6 +94,7 @@ typedef union
 
 }doubleFormat;
 
+
 extern JPEG_HandleTypeDef    			JPEG_Handle;
 extern DMA2D_HandleTypeDef    			DMA2D_Handle;
 extern JPEG_ConfTypeDef  		     	JPEG_Info;
@@ -97,19 +102,15 @@ extern JPEG_ConfTypeDef  		     	JPEG_Info;
 extern uint32_t LCD_X_Size;
 extern uint32_t LCD_Y_Size;
 
-extern FATFS SDFatFs;  /* File system object for SD card logical drive */
-extern char SDPath[4]; /* SD card logical drive path */
+extern FATFS SDFatFs;  					// File system object for SD card logical drive
+extern char SDPath[4]; 					// SD card logical drive path
 
-extern FIL MJPEG_File;          /* MJPEG File object */
+extern FIL MJPEG_File;          		// MJPEG File object
 
 extern SPI_HandleTypeDef hspi5;
 extern TIM_HandleTypeDef htim3;
 
 
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
 void Error_Handler(void);
 
 #endif /* __MAIN_H */

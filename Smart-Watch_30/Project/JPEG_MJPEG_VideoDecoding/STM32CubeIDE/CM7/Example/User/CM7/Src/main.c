@@ -89,6 +89,8 @@ int main(void)
   JPEG_Handle.Instance = JPEG;
   HAL_JPEG_Init(&JPEG_Handle);    
 
+  smart_watch_init();
+
   smart_watch_process();
 
   /* Infinite loop */
