@@ -321,6 +321,7 @@ static void MX_SPI5_Init(void)
 
 static void MX_GPIO_Init(void)
 {
+
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 /* USER CODE BEGIN MX_GPIO_Init_1 */
 /* USER CODE END MX_GPIO_Init_1 */
@@ -354,11 +355,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
-  GPIO_InitStruct.Pin =  GPIO_PIN_12;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  // Configure GPIO pins for user buttons
+  HAL_GPIO_WritePin(GPIOJ, BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin, GPIO_PIN_SET);
+  GPIO_InitStruct.Pin =  BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */

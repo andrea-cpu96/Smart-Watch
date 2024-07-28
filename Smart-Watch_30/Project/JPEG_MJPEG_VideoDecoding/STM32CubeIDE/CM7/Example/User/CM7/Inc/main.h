@@ -82,6 +82,15 @@
 #define GC9A01_DC_GPIO_Port GPIOJ
 #define GC9A01_RST_Pin GPIO_PIN_5
 #define GC9A01_RST_GPIO_Port GPIOJ
+// WATCH BUTTONS
+#define BUTTON_MINUS_Pin GPIO_PIN_0
+#define BUTTON_MINUS_GPIO_Port GPIOJ
+#define BUTTON_PLUS_Pin GPIO_PIN_7
+#define BUTTON_PLUS_GPIO_Port GPIOJ
+#define BUTTON_SETTING_Pin GPIO_PIN_3
+#define BUTTON_SETTING_GPIO_Port GPIOJ
+
+
 
 #define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
 

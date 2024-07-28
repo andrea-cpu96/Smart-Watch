@@ -19,12 +19,30 @@
 #define TIMER_TIME					10.0
 
 
-extern __IO uint32_t Jpeg_HWDecodingEnd;
+enum mode
+{
+
+	SETTING_MODE = 0,
+	NORMAL_MODE
+
+};
+
+
+enum settings
+{
+
+	SET_IDLE = 0,
+	SET_HOURS,
+	SET_MINUTES,
+	SET_START
+
+};
 
 
 typedef struct
 {
 
+	uint8_t file_idx;
 	uint8_t isfirstFrame;
 	uint8_t FrameType;
 	uint16_t width;
@@ -39,7 +57,13 @@ typedef struct
 
 	uint32_t jpegOutDataAdreess; 								// Buffer for the decoded data
 
+	enum mode video_mode;
+	enum settings set;
+
 }video_t;
+
+
+extern __IO uint32_t Jpeg_HWDecodingEnd;
 
 
 void smart_watch_init(void);

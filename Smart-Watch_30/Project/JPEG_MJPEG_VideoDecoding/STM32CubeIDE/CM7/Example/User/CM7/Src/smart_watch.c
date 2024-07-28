@@ -17,16 +17,18 @@ static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling);
 static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth, uint16_t ImageHeight);
 static void SD_Initialize(void);
 static void mjpeg_video_processing(void);
-static void file_handler(void);
+static void file_handler(uint8_t openFile);
 static void user_buttons_handler(void);
 static void parameters_reset(void);
+static void clock_setting(void);
+static void clock_normal(void);
+static void show_frame(uint32_t frame_num);
 
 
 // FATFS can't handle huge files a time,
 // so I separated it into multiple video
 // of 30 minutes each one
 const char *file_name[24];
-uint8_t file_idx = 0;			// Keep track of the file index
 const char *name;
 
 uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE];
@@ -71,6 +73,8 @@ void smart_watch_init(void)
 
 
 	parameters_reset();
+
+	video.video_mode = SETTING_MODE;				// First time setting
 
 	// SD card initialization
 	// Link the micro SD disk I/O driver
@@ -119,7 +123,7 @@ void smart_watch_process(void)
 	{
 
 		// Check if new file needs to be open
-		file_handler();
+		file_handler(0);
 
 		// Video processing unit
 		mjpeg_video_processing();
@@ -138,77 +142,282 @@ void smart_watch_process(void)
 static void mjpeg_video_processing(void)
 {
 
-	  // Save the frame into MJPEG_VideoBuffer
-	  video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+	switch(video.video_mode)
+	{
 
-	  if(video.frameToSkip > 0)
-	  {
+		default:
+		case SETTING_MODE:
 
-		  // Skip frames until the the watch time is
-		  // synchronized with the actual time
+			clock_setting();
 
-		  video.frameToSkip--;
-		  AVI_Handel.CurrentImage++;
+			break;
 
-	  }
-	  else if(video.FrameType == AVI_VIDEO_FRAME)
-	  {
+		case NORMAL_MODE:
 
-		  AVI_Handel.CurrentImage ++;
+			clock_normal();
 
-		  // Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
-		  JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+			break;
 
-		  while(Jpeg_HWDecodingEnd == 0);
-
-		  if(video.isfirstFrame == 1)
-		  {
-
-			  video.isfirstFrame = 0;
-
-			  HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
-
-			  DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
-
-			  video.width = JPEG_Info.ImageWidth;
-			  video.height = JPEG_Info.ImageHeight;
-			  video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
-			  video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
-
-			  video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
-
-			  //HAL_TIM_Base_Start(&htim3);
-			  video.tick_offset = HAL_GetTick();
-
-		  }
-
-		  // Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-		  DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
-
-		  video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
-
-		  // Implements the data conversion from RGB888 to RGB565
-		  doubleFormat pOut;
-		  pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
-		  depth24To16(&pOut, ( video.width * video.height ), 3);
-
-		  // Display the image
-		  lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
-
-		  // Obtain the number of frames to skip the next cycle
-		  video.actual_time = ( HAL_GetTick() - video.tick_offset );
-		  float watch_time = ( AVI_Handel.CurrentImage * ( video.frame_time / 1000.0 ) );
-		  video.frameToSkip = ( ( video.actual_time - watch_time ) / ( video.frame_time / 1000.0 ) );
-
-		  if(video.frameToSkip < 0)
-			  video.frameToSkip = 0;
-
-	  }
+	}
 
 }
 
 
-static void file_handler(void)
+static void clock_setting(void)
+{
+
+	switch(video.set)
+	{
+
+		default:
+		case SET_IDLE:
+
+			while(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin));
+
+			parameters_reset();
+
+			video.set = SET_HOURS;
+
+			break;
+
+		case SET_HOURS:
+
+			show_frame(0);
+
+			// If button plus
+			if(!HAL_GPIO_ReadPin(BUTTON_PLUS_GPIO_Port, BUTTON_PLUS_Pin))
+			{
+
+				HAL_Delay(200);
+
+				if(video.file_idx % 2)
+					video.file_idx += 1;
+				else
+					video.file_idx += 2;
+
+				video.file_idx %= 24;
+
+				file_handler(1);
+
+			}
+
+			// If button minus
+			if(!HAL_GPIO_ReadPin(BUTTON_MINUS_GPIO_Port, BUTTON_MINUS_Pin))
+			{
+
+				HAL_Delay(200);
+
+				if(video.file_idx >= 2)
+					video.file_idx -= 2;
+				else
+					video.file_idx = 22;
+
+				file_handler(1);
+
+			}
+
+			// If button settings
+			if(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin))
+			{
+
+				HAL_Delay(200);
+
+				video.set = SET_MINUTES;
+
+			}
+
+			break;
+
+		case SET_MINUTES:
+
+			// If button plus
+			if(!HAL_GPIO_ReadPin(BUTTON_PLUS_GPIO_Port, BUTTON_PLUS_Pin))
+			{
+
+				HAL_Delay(200);
+
+				show_frame(1800);
+
+			}
+
+			// If button minus
+			if(!HAL_GPIO_ReadPin(BUTTON_MINUS_GPIO_Port, BUTTON_MINUS_Pin))
+			{
+
+				HAL_Delay(200);
+
+				if(video.file_idx >= 1)
+					video.file_idx -= 1;
+				else
+					video.file_idx = 0;
+				show_frame(0);
+
+			}
+
+			// If button settings
+			if(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin))
+			{
+
+				HAL_Delay(200);
+
+				video.set = SET_START;
+
+			}
+
+
+			break;
+
+		case SET_START:
+
+			video.set = SET_IDLE;
+			video.video_mode = NORMAL_MODE;
+
+			break;
+
+	}
+
+}
+
+
+static void clock_normal(void)
+{
+
+	// Save the frame into MJPEG_VideoBuffer
+	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+
+	if(video.frameToSkip > 0)
+	{
+
+		// Skip frames until the the watch time is
+		// synchronized with the actual time
+
+		video.frameToSkip--;
+		AVI_Handel.CurrentImage++;
+
+	}
+	else if(video.FrameType == AVI_VIDEO_FRAME)
+	{
+
+		AVI_Handel.CurrentImage++;
+
+		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
+		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+
+		while(Jpeg_HWDecodingEnd == 0);
+
+		if(video.isfirstFrame == 1)
+		{
+
+			video.isfirstFrame = 0;
+
+			HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
+
+			DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+			video.width = JPEG_Info.ImageWidth;
+			video.height = JPEG_Info.ImageHeight;
+			video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
+			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
+
+			video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
+
+			video.tick_offset = HAL_GetTick();
+
+		}
+
+		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
+		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+		video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
+
+		// Implements the data conversion from RGB888 to RGB565
+		doubleFormat pOut;
+		pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
+		depth24To16(&pOut, ( video.width * video.height ), 3);
+
+		// Display the image
+		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
+
+		// Obtain the number of frames to skip the next cycle
+		video.actual_time = ( HAL_GetTick() - video.tick_offset );
+		float watch_time = ( AVI_Handel.CurrentImage * ( video.frame_time / 1000.0 ) );
+		video.frameToSkip = ( ( video.actual_time - watch_time ) / ( video.frame_time / 1000.0 ) );
+
+		if(video.frameToSkip < 0)
+			video.frameToSkip = 0;
+
+	}
+
+}
+
+
+static void show_frame(uint32_t frame_num)
+{
+
+	for(int i = 0 ; i < frame_num ; i++)
+	{
+
+		// Save the frame into MJPEG_VideoBuffer
+		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+
+		AVI_Handel.CurrentImage++;
+
+	}
+
+	for(int i = 0 ; i < 2 ; i++)
+	{
+
+		// Save the frame into MJPEG_VideoBuffer
+		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+
+		if(video.FrameType == AVI_VIDEO_FRAME)
+		{
+
+			AVI_Handel.CurrentImage++;
+
+			// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
+			JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+
+			while(Jpeg_HWDecodingEnd == 0);
+
+			if(video.isfirstFrame == 1)
+			{
+
+				video.isfirstFrame = 0;
+
+				HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
+
+				DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+				video.width = JPEG_Info.ImageWidth;
+				video.height = JPEG_Info.ImageHeight;
+				video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
+				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
+
+				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
+
+			}
+
+			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
+			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+			video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
+
+			// Implements the data conversion from RGB888 to RGB565
+			doubleFormat pOut;
+			pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
+			depth24To16(&pOut, ( video.width * video.height ), 3);
+
+			lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
+
+		}
+
+	}
+
+}
+
+
+static void file_handler(uint8_t openFile)
 {
 
 	  // Each file takes 30m
@@ -216,12 +425,15 @@ static void file_handler(void)
      static uint8_t  new_file_flag = 1;
 
 
-     if(new_file_flag)
+     if(new_file_flag || openFile)
      {
+
+    	 if(openFile)
+    		 f_close(&MJPEG_File);
 
     	 new_file_flag = 0;
 
-    	 name = file_name[file_idx];
+    	 name = file_name[video.file_idx];
 
     	 // Open the MJPEG avi file with read access
     	 if(f_open(&MJPEG_File, name, FA_READ) == FR_OK)
@@ -247,13 +459,15 @@ static void file_handler(void)
      if(AVI_Handel.CurrentImage  >=  AVI_Handel.aviInfo.TotalFrame)
      {
 
-    	 file_idx++;
-		 file_idx %= 24;	// Restart the index every 24 files ( 12h )
+    	 video.file_idx++;
+		 video.file_idx %= 24;	// Restart the index every 24 files ( 12h )
 
 		 HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50);  /* wait for the Last DMA2D transfer to ends */
 
 		 // Close the avi file
 		 f_close(&MJPEG_File);
+
+		 parameters_reset();
 
 		 new_file_flag = 1;
 
@@ -265,7 +479,37 @@ static void file_handler(void)
 static void user_buttons_handler(void)
 {
 
-	//HAL_Delay(100);
+	static uint8_t first = 1;
+	static uint32_t button_timer = 0;
+
+
+	// Long press enters in setting mode
+	if(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin))
+	{
+
+		if(first)
+		{
+
+			first = 0;
+			button_timer = HAL_GetTick();
+
+		}
+
+		if(abs( HAL_GetTick() - button_timer ) >= 3000)
+		{
+
+			video.video_mode = SETTING_MODE;
+			video.set = SET_IDLE;
+
+		}
+
+	}
+	else
+	{
+
+		first = 1;
+
+	}
 
 }
 
@@ -278,6 +522,7 @@ static void parameters_reset(void)
 	video.xPos = 0;
 	video.yPos = 0;
 
+	video.file_idx = 0;
 	video.FrameType = 0;
 
 	video.frameToSkip = 0;
@@ -285,6 +530,9 @@ static void parameters_reset(void)
 	video.actual_time = 0;
 	video.tick_offset = 0;
 	video.jpegOutDataAdreess = JPEG_OUTPUT_DATA_BUFFER0;
+
+	//video.video_mode = NORMAL_MODE;
+	video.set = SET_IDLE;
 
 }
 
