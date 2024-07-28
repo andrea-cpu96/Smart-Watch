@@ -166,6 +166,9 @@ static void mjpeg_video_processing(void)
 static void clock_setting(void)
 {
 
+	static uint8_t minutes_count = 0;
+
+
 	switch(video.set)
 	{
 
@@ -230,13 +233,33 @@ static void clock_setting(void)
 
 		case SET_MINUTES:
 
+			show_frame(0);
+
 			// If button plus
 			if(!HAL_GPIO_ReadPin(BUTTON_PLUS_GPIO_Port, BUTTON_PLUS_Pin))
 			{
 
 				HAL_Delay(200);
 
-				show_frame(1800);
+				minutes_count++;
+
+				if(minutes_count > 29)
+				{
+
+					minutes_count = 0;
+
+					video.file_idx += 1;
+					video.file_idx %= 24;
+
+					file_handler(1);
+
+				}
+				else
+				{
+
+					show_frame(1800);
+
+				}
 
 			}
 
@@ -246,10 +269,14 @@ static void clock_setting(void)
 
 				HAL_Delay(200);
 
-				if(video.file_idx >= 1)
-					video.file_idx -= 1;
+
+				if(video.file_idx % 2)
+					minutes_count = 30;
 				else
-					video.file_idx = 0;
+					minutes_count = 0;
+
+				file_handler(1);
+
 				show_frame(0);
 
 			}
@@ -283,7 +310,7 @@ static void clock_normal(void)
 {
 
 	// Save the frame into MJPEG_VideoBuffer
-	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
 	if(video.frameToSkip > 0)
 	{
@@ -322,6 +349,7 @@ static void clock_normal(void)
 			video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
 
 			video.tick_offset = HAL_GetTick();
+			video.watch_offset = ( ( AVI_Handel.CurrentImage - 1 ) * video.frame_time );
 
 		}
 
@@ -340,7 +368,7 @@ static void clock_normal(void)
 
 		// Obtain the number of frames to skip the next cycle
 		video.actual_time = ( HAL_GetTick() - video.tick_offset );
-		float watch_time = ( AVI_Handel.CurrentImage * ( video.frame_time / 1000.0 ) );
+		float watch_time = ( AVI_Handel.CurrentImage * ( video.frame_time / 1000.0 ) - video.watch_offset );
 		video.frameToSkip = ( ( video.actual_time - watch_time ) / ( video.frame_time / 1000.0 ) );
 
 		if(video.frameToSkip < 0)
@@ -357,8 +385,7 @@ static void show_frame(uint32_t frame_num)
 	for(int i = 0 ; i < frame_num ; i++)
 	{
 
-		// Save the frame into MJPEG_VideoBuffer
-		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+		AVI_GetFrame(&AVI_Handel, &MJPEG_File, 1);
 
 		AVI_Handel.CurrentImage++;
 
@@ -368,7 +395,7 @@ static void show_frame(uint32_t frame_num)
 	{
 
 		// Save the frame into MJPEG_VideoBuffer
-		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File);
+		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
 		if(video.FrameType == AVI_VIDEO_FRAME)
 		{

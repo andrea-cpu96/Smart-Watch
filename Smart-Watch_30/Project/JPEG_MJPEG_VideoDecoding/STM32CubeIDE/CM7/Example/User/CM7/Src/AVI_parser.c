@@ -320,7 +320,7 @@ uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, FIL *file, uint8_t *pVideoBuffer, ui
   * @param  file:   AVI file
   * @retval type of frame  (audio frame or video frame )
   */
-uint32_t AVI_GetFrame(AVI_CONTEXT * pavi, FIL *file)  
+uint32_t AVI_GetFrame(AVI_CONTEXT * pavi, FIL *file, uint8_t skipFlag)
 {
   uint32_t  offset ;
   uint32_t readSize = 0;
@@ -330,7 +330,7 @@ uint32_t AVI_GetFrame(AVI_CONTEXT * pavi, FIL *file)
     
     f_lseek(file, 0 ); /* Go to the file start */
     /* Read data*/
-    f_read(file, pavi->pVideoBuffer, pavi->VideoBufferSize, (UINT*)&readSize );
+    f_read(file, pavi->pVideoBuffer, pavi->VideoBufferSize, (UINT*)&readSize);
     
     /* Check for "movi" tag */
     offset = __AVI_SearchID(pavi->pVideoBuffer,pavi->VideoBufferSize,(uint8_t*)"movi");
@@ -341,19 +341,52 @@ uint32_t AVI_GetFrame(AVI_CONTEXT * pavi, FIL *file)
     
   }
 
-  /* Get the current frame size */
-  pavi->FrameSize = pavi->aviInfo.StreamSize; 
   
   if(pavi->aviInfo.StreamID  ==  AVI_VIDS_FLAG)
   {
     /* the Frame is a Video Frame */
        
-    /* Read The current frame + the header of the next frame (8 bytes) */
-    f_read(file, pavi->pVideoBuffer, pavi->FrameSize + 8 , (UINT*)&readSize );
+	if(skipFlag == 1)
+	{
+
+		/* Get the current frame size */
+		pavi->FrameSize = pavi->aviInfo.StreamSize;
+
+		f_lseek(file, f_tell(file) + pavi->FrameSize);
+
+	    f_read(file,  pavi->pVideoBuffer, 8, (UINT*)&readSize);
+
+	    __AVI_GetStreamInfo(pavi,  pavi->pVideoBuffer);
+
+	}
+	else if(skipFlag == 2)
+	{
+
+		f_lseek(file, f_tell(file) - pavi->FrameSize - 8 - 8);
+
+	    f_read(file,  pavi->pVideoBuffer, 8, (UINT*)&readSize);
+
+	    __AVI_GetStreamInfo(pavi,  pavi->pVideoBuffer);
+
+		// Get the previous frame size
+		pavi->FrameSize = pavi->aviInfo.StreamSize;
+
+	}
+	else
+	{
+
+		/* Get the current frame size */
+		pavi->FrameSize = pavi->aviInfo.StreamSize;
+
+		/* Read The current frame + the header of the next frame (8 bytes) */
+		f_read(file, pavi->pVideoBuffer, pavi->FrameSize + 8 , (UINT*)&readSize );
+
+		/* Get the info of the next frame */
+		__AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + pavi->aviInfo.StreamSize );
+    	/* Return VIDEO frame */
+
+	}
     
-    /* Get the info of the next frame */
-    __AVI_GetStreamInfo(pavi, pavi->pVideoBuffer + pavi->aviInfo.StreamSize );
-    /* Return VIDEO frame */
     return AVI_VIDEO_FRAME;
   }
   if (pavi->aviInfo.StreamID  ==  AVI_AUDS_FLAG)

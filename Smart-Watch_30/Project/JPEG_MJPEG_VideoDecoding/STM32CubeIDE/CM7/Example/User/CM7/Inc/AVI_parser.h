@@ -225,7 +225,7 @@ typedef struct
 
 /* Exported functions ------------------------------------------------------- */  
 uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, FIL *file, uint8_t *pVideoBuffer, uint32_t VideoBufferSize, uint8_t *pAudioBuffer, uint32_t AudioBufferSize);
-uint32_t AVI_GetFrame(AVI_CONTEXT * pavi, FIL *file);
+uint32_t AVI_GetFrame(AVI_CONTEXT * pavi, FIL *file, uint8_t skipFlag);
 
 
 #if defined(__cplusplus)
