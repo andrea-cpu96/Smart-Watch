@@ -11,17 +11,22 @@
 #include "GC9A01.h"
 
 
-static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
-static void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
 static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling);
 static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth, uint16_t ImageHeight);
+
 static void SD_Initialize(void);
+
 static void mjpeg_video_processing(void);
 static void file_handler(uint8_t openFile);
 static void user_buttons_handler(void);
+
 static void parameters_reset(void);
+
 static void clock_setting(void);
 static void clock_normal(void);
+
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
+static void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
 static void show_frame(uint32_t frame_num);
 
 
@@ -74,7 +79,8 @@ void smart_watch_init(void)
 
 	parameters_reset();
 
-	video.video_mode = SETTING_MODE;				// First time setting
+	// First time setting
+	video.video_mode = SETTING_MODE;
 
 	// SD card initialization
 	// Link the micro SD disk I/O driver
@@ -177,8 +183,6 @@ static void clock_setting(void)
 
 			while(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin));
 
-			parameters_reset();
-
 			video.set = SET_HOURS;
 
 			break;
@@ -192,6 +196,9 @@ static void clock_setting(void)
 			{
 
 				HAL_Delay(200);
+
+				video.time.Hours++;
+				video.time.Hours %= 12;
 
 				if(video.file_idx % 2)
 					video.file_idx += 1;
@@ -209,6 +216,11 @@ static void clock_setting(void)
 			{
 
 				HAL_Delay(200);
+
+				if(video.time.Hours > 0)
+					video.time.Hours--;
+				else
+					video.time.Hours = 11;
 
 				if(video.file_idx >= 2)
 					video.file_idx -= 2;
@@ -241,6 +253,9 @@ static void clock_setting(void)
 
 				HAL_Delay(200);
 
+				video.time.Minutes++;
+				video.time.Minutes %= 60;
+
 				minutes_count++;
 
 				if(minutes_count > 29)
@@ -269,15 +284,22 @@ static void clock_setting(void)
 
 				HAL_Delay(200);
 
-
 				if(video.file_idx % 2)
+				{
+
+					video.time.Minutes = 30;
 					minutes_count = 30;
+
+				}
 				else
+				{
+
+					video.time.Minutes = 0;
 					minutes_count = 0;
 
-				file_handler(1);
+				}
 
-				show_frame(0);
+				file_handler(1);
 
 			}
 
@@ -290,7 +312,6 @@ static void clock_setting(void)
 				video.set = SET_START;
 
 			}
-
 
 			break;
 
@@ -351,6 +372,8 @@ static void clock_normal(void)
 			video.tick_offset = HAL_GetTick();
 			video.watch_offset = ( ( AVI_Handel.CurrentImage - 1 ) * video.frame_time );
 
+			HAL_RTC_SetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+
 		}
 
 		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
@@ -373,6 +396,8 @@ static void clock_normal(void)
 
 		if(video.frameToSkip < 0)
 			video.frameToSkip = 0;
+
+		HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
 
 	}
 
@@ -418,7 +443,7 @@ static void show_frame(uint32_t frame_num)
 
 				video.width = JPEG_Info.ImageWidth;
 				video.height = JPEG_Info.ImageHeight;
-				video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
+				video.xPos = ( ( LCD_X_SIZE - video.width ) / 2 );					// Center the image in x
 				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
 				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
@@ -489,9 +514,9 @@ static void file_handler(uint8_t openFile)
     	 video.file_idx++;
 		 video.file_idx %= 24;	// Restart the index every 24 files ( 12h )
 
-		 HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50);  /* wait for the Last DMA2D transfer to ends */
+		 //  wait for the Last DMA2D transfer to ends
+		 HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50);
 
-		 // Close the avi file
 		 f_close(&MJPEG_File);
 
 		 parameters_reset();
