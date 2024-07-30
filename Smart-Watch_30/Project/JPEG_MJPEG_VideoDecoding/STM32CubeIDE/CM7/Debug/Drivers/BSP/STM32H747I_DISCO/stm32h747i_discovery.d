@@ -1,6 +1,6 @@
 Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery.o: \
- D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.c \
- D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.h \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.c \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.h \
  ../../../Common/Inc/stm32h747i_discovery_conf.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/stm32h7xx_hal_conf.h \
@@ -39,6 +39,8 @@ Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery.o: \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dsi.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
+ ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc.h \
+ ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc_ex.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h \
@@ -51,8 +53,8 @@ Drivers/BSP/STM32H747I_DISCO/stm32h747i_discovery.o: \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_errno.h
-D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.h:
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_errno.h
+C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.h:
 ../../../Common/Inc/stm32h747i_discovery_conf.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/stm32h7xx_hal_conf.h:
@@ -91,6 +93,8 @@ D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dsi.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h:
+../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc.h:
+../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc_ex.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h:
@@ -103,4 +107,4 @@ D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_errno.h:
+C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_errno.h:

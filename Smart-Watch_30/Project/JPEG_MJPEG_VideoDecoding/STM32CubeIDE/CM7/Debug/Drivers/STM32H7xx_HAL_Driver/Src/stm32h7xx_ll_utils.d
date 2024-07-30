@@ -1,5 +1,5 @@
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.o: \
- D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c \
+ C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_utils.h \
  ../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
  ../../../../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h \
@@ -38,6 +38,8 @@ Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.o: \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dsi.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
+ ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc.h \
+ ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc_ex.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h \
@@ -92,6 +94,8 @@ Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.o: \
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dsi.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h:
+../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc.h:
+../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc_ex.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h:

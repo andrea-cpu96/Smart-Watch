@@ -18,141 +18,107 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "main.h"
 #include "GC9A01.h"
 #include "smart_watch.h"
 
-/* Private typedef -----------------------------------------------------------*/
 
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-JPEG_HandleTypeDef    			JPEG_Handle;
-DMA2D_HandleTypeDef    			DMA2D_Handle;
-JPEG_ConfTypeDef  		     	JPEG_Info;
-
-TIM_HandleTypeDef htim3;
+JPEG_HandleTypeDef JPEG_Handle;
+DMA2D_HandleTypeDef DMA2D_Handle;
+JPEG_ConfTypeDef JPEG_Info;
+RTC_HandleTypeDef hrtc;
 SPI_HandleTypeDef hspi5;
 
-/* Private function prototypes -----------------------------------------------*/
+
 static void SystemClock_Config(void);
 static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
-
+static void MX_RTC_Init(void);
 static void MX_SPI5_Init(void);
-static void MX_TIM3_Init(void);
 static void MX_GPIO_Init(void);
 
 
-/* Private functions ---------------------------------------------------------*/
-
-/**
-  * @brief  Main program
-  * @param  None
-  * @retval None
-  */
 int main(void)
 {
 
-  /* Configure the MPU attributes as Write Through for SDRAM*/
-  MPU_Config();
-   
-  /* Enable the CPU Cache */
+  // System configurations
+  MPU_Config();							// Parameters configuration for external SDRAM
   CPU_CACHE_Enable();
-  
   HAL_Init();
+  SystemClock_Config(); 				// System-Clock; HSE 200MHz, RTC-Clock; LSE 32kHz
   
-  /* Configure the system clock to 400 MHz */
-  SystemClock_Config();
-  
+  // Microcntroller's peripherals initialization
   MX_GPIO_Init();
   MX_SPI5_Init();
+  MX_RTC_Init();
 
-  MX_TIM3_Init();
+  // External peripherals initialization
   GC9A01_init();
- 
- /*Initialize The SDRAM */  
   BSP_SDRAM_Init(0);
 
-  /* Initialize the LCD */
-  //BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  //UTIL_LCD_SetFuncDriver(&LCD_Driver);
-  //UTIL_LCD_SetLayer(0);
-  //UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
-  //UTIL_LCD_SetFont(&Font24);
-  
-  //BSP_LCD_GetXSize(0 ,&LCD_X_Size);
-  //BSP_LCD_GetYSize(0 ,&LCD_Y_Size);
-  
-  /*##-2- Initialize the HW JPEG Codec  ######################################*/
-  /* Init the HAL JPEG driver */
+  // JPEG initialization
   JPEG_Handle.Instance = JPEG;
   HAL_JPEG_Init(&JPEG_Handle);    
 
+////////////////////////////////////////////////	APPLICATION SECTION
+
+  // Application initialization
   smart_watch_init();
 
+  // Application process
   smart_watch_process();
 
-  /* Infinite loop */
   while (1);
 
 }
 
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  None
-  * @retval None
-  */
+
 void Error_Handler(void)
 {
 
-  /* Turn LED3 on */
   while(1);
 
 }
 
 
-/**
-  * @brief  System Clock Configuration
-  *         The system Clock is configured as follow : 
-  *            System Clock source            = PLL (HSE)
-  *            SYSCLK(Hz)                     = 400000000 (CPU Clock)
-  *            HCLK(Hz)                       = 200000000 (AXI and AHBs Clock)
-  *            AHB Prescaler                  = 2
-  *            D1 APB3 Prescaler              = 2 (APB3 Clock  100MHz)
-  *            D2 APB1 Prescaler              = 2 (APB1 Clock  100MHz)
-  *            D2 APB2 Prescaler              = 2 (APB2 Clock  100MHz)
-  *            D3 APB4 Prescaler              = 2 (APB4 Clock  100MHz)
-  *            HSE Frequency(Hz)              = 25000000
-  *            PLL_M                          = 5
-  *            PLL_N                          = 160
-  *            PLL_P                          = 2
-  *            PLL_Q                          = 4
-  *            PLL_R                          = 2
-  *            VDD(V)                         = 3.3
-  *            Flash Latency(WS)              = 4
-  * @param  None
-  * @retval None
-  */
+// System Clock Configuration
+// The system Clock is configured as follow :
+// System Clock source            = PLL (HSE)
+// SYSCLK(Hz)                     = 175000000 (CPU Clock)
+// HCLK(Hz)                       = 87500000 (AXI and AHBs Clock)
+// AHB Prescaler                  = 2
+// D1 APB3 Prescaler              = 2 (APB3 Clock  43.75MHz)
+// D2 APB1 Prescaler              = 2 (APB1 Clock  43.75MHz)
+// D2 APB2 Prescaler              = 2 (APB2 Clock  43.75MHz)
+// D3 APB4 Prescaler              = 2 (APB4 Clock  43.75MHz)
+// HSE Frequency(Hz)              = 25000000
+// PLL_M                          = 5
+// PLL_N                          = 70
+// PLL_P                          = 2
+// PLL_Q                          = 4
+// PLL_R                          = 2
+// VDD(V)                         = 3.3
+// Flash Latency(WS)              = 4
 static void SystemClock_Config(void)
 {
+
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   HAL_StatusTypeDef ret = HAL_OK;
 
-  /*!< Supply configuration update enable */
   HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
-     regarding system frequency refer to product datasheet.  */
+  // The voltage scaling allows optimizing the power consumption when the device is
+  // clocked below the maximum system frequency
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
 
-  /* Enable HSE Oscillator and activate PLL with HSE as source */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  // Clocks configurations
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
   RCC_OscInitStruct.CSIState = RCC_CSI_OFF;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -173,7 +139,7 @@ static void SystemClock_Config(void)
     Error_Handler();
   }
 
-/* Select PLL as system clock source and configure  bus clocks dividers */
+  // CLocks assignment to peripheral buses
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_D1PCLK1 | RCC_CLOCKTYPE_PCLK1 | \
                                  RCC_CLOCKTYPE_PCLK2  | RCC_CLOCKTYPE_D3PCLK1);
 
@@ -192,42 +158,32 @@ static void SystemClock_Config(void)
 
  /*
   Note : The activation of the I/O Compensation Cell is recommended with communication  interfaces
-          (GPIO, SPI, FMC, QSPI ...)  when  operating at  high frequencies(please refer to product datasheet)       
+          (GPIO, SPI, FMC, QSPI ...)  when  operating at  high frequencies
           The I/O Compensation Cell activation  procedure requires :
         - The activation of the CSI clock
         - The activation of the SYSCFG clock
         - Enabling the I/O Compensation Cell : setting bit[0] of register SYSCFG_CCCSR
  */
  
-  /*activate CSI clock mondatory for I/O Compensation Cell*/  
   __HAL_RCC_CSI_ENABLE() ;
-    
-  /* Enable SYSCFG clock mondatory for I/O Compensation Cell */
   __HAL_RCC_SYSCFG_CLK_ENABLE() ;
-  
-  /* Enables the I/O Compensation Cell */    
   HAL_EnableCompensationCell();  
-
-  //uint32_t sisclk = HAL_RCC_GetSysClockFreq();
-  //HAL_Delay(1);
 
 }
 
-/**
-  * @brief  Configure the MPU attributes as Write Through for External SDRAM.
-  * @note   The Base Address is SDRAM_DEVICE_ADDR .
-  *         The Configured Region Size is 32MB because same as SDRAM size.
-  * @param  None
-  * @retval None
-  */
+
+// Configure the MPU attributes as Write Through for External SDRAM.
+// The Base Address is SDRAM_DEVICE_ADDR .
+// The Configured Region Size is 32MB because same as SDRAM size.
 static void MPU_Config(void)
 {
+
   MPU_Region_InitTypeDef MPU_InitStruct;
   
-  /* Disable the MPU */
+
   HAL_MPU_Disable();
 
-  /* Configure the MPU as Strongly ordered for not defined regions */
+  // Configure the MPU as Strongly ordered for not defined regions
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x00;
   MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
@@ -242,7 +198,7 @@ static void MPU_Config(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-  /* Configure the MPU attributes as WT for SDRAM */
+  // Configure the MPU attributes as WT for SDRAM
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = SDRAM_DEVICE_ADDR;
   MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
@@ -257,36 +213,23 @@ static void MPU_Config(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-  /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+
 }
 
 
-/**
-* @brief  CPU L1-Cache enable.
-* @param  None
-* @retval None
-*/
 static void CPU_CACHE_Enable(void)
 {
-  /* Enable I-Cache */
-  SCB_EnableICache();
 
-  /* Enable D-Cache */
+  SCB_EnableICache();
   SCB_EnableDCache();
+
 }
+
 
 static void MX_SPI5_Init(void)
 {
 
-  /* USER CODE BEGIN SPI5_Init 0 */
-
-  /* USER CODE END SPI5_Init 0 */
-
-  /* USER CODE BEGIN SPI5_Init 1 */
-
-  /* USER CODE END SPI5_Init 1 */
-  /* SPI5 parameter configuration*/
   hspi5.Instance = SPI5;
   hspi5.Init.Mode = SPI_MODE_MASTER;
   hspi5.Init.Direction = SPI_DIRECTION_2LINES;
@@ -309,13 +252,12 @@ static void MX_SPI5_Init(void)
   hspi5.Init.MasterReceiverAutoSusp = SPI_MASTER_RX_AUTOSUSP_DISABLE;
   hspi5.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_DISABLE;
   hspi5.Init.IOSwap = SPI_IO_SWAP_DISABLE;
+
   if (HAL_SPI_Init(&hspi5) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN SPI5_Init 2 */
 
-  /* USER CODE END SPI5_Init 2 */
 
 }
 
@@ -323,10 +265,9 @@ static void MX_GPIO_Init(void)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
 
-  /* GPIO Ports Clock Enable */
+
+  // GPIO Ports Clock Enable
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -335,76 +276,74 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOK_CLK_ENABLE();
   __HAL_RCC_GPIOJ_CLK_ENABLE();
 
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GC9A01_CS_GPIO_Port, GC9A01_CS_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOJ, GC9A01_BL_Pin|GC9A01_DC_Pin|GC9A01_RST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOJ, BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin, GPIO_PIN_SET);
 
-  /*Configure GPIO pin : GC9A01_CS_Pin */
+  // Configure GPIO pin - GC9A01_CS_Pin
   GPIO_InitStruct.Pin = GC9A01_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GC9A01_CS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : GC9A01_BL_Pin GC9A01_DC_Pin GC9A01_RST_Pin */
+  // Configure GPIO pins - GC9A01_BL_Pin ; GC9A01_DC_Pin ; GC9A01_RST_Pin
   GPIO_InitStruct.Pin = GC9A01_BL_Pin|GC9A01_DC_Pin|GC9A01_RST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
-  // Configure GPIO pins for user buttons
-  HAL_GPIO_WritePin(GPIOJ, BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin, GPIO_PIN_SET);
+  // Configure GPIO pins - BUTTON_MINUS_Pin ; BUTTON_PLUS_Pin ; BUTTON_SETTING_Pin
   GPIO_InitStruct.Pin =  BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
-
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
 }
 
-static void MX_TIM3_Init(void)
+
+static void MX_RTC_Init(void)
 {
 
-  /* USER CODE BEGIN TIM3_Init 0 */
+  RTC_TimeTypeDef sTime = {0};
+  RTC_DateTypeDef sDate = {0};
 
-  /* USER CODE END TIM3_Init 0 */
 
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-
-  /* USER CODE BEGIN TIM3_Init 1 */
-
-  /* USER CODE END TIM3_Init 1 */
-  htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 21874;
-  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 9999;
-  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4;
-  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  hrtc.Instance = RTC;
+  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+  hrtc.Init.AsynchPrediv = 127;
+  hrtc.Init.SynchPrediv = 255;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
+  if (HAL_RTC_Init(&hrtc) != HAL_OK)
   {
     Error_Handler();
   }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM3_Init 2 */
 
-  /* USER CODE END TIM3_Init 2 */
+
+  sTime.Hours = 0;
+  sTime.Minutes = 0;
+  sTime.Seconds = 0;
+  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  sDate.WeekDay = RTC_WEEKDAY_MONDAY;
+  sDate.Month = RTC_MONTH_JANUARY;
+  sDate.Date = 1;
+  sDate.Year = 0;
+
+  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
 }
 
@@ -429,12 +368,4 @@ void assert_failed(uint8_t *file, uint32_t line)
   }
 }
 #endif
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
 

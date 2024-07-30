@@ -116,8 +116,8 @@ extern char SDPath[4]; 					// SD card logical drive path
 
 extern FIL MJPEG_File;          		// MJPEG File object
 
+extern RTC_HandleTypeDef hrtc;
 extern SPI_HandleTypeDef hspi5;
-extern TIM_HandleTypeDef htim3;
 
 
 void Error_Handler(void);

@@ -16,54 +16,23 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/** @addtogroup STM32H7xx_HAL_Examples
-  * @{
-  */
 
-/** @addtogroup MJPEG_VideoDecoding
-  * @{
-  */
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
-
-/** @defgroup HAL_MSP_Private_Functions
-  * @{
-  */
-
-/**
-  * @brief JPEG MSP Initialization
-  *        This function configures the hardware resources used in this example:
-  *           - Peripheral's clock enable
-  *           - NVIC configuration for JPEG interrupt request enable
-  *           - DMA configuration for transmission request by peripheral
-  *           - NVIC configuration for DMA interrupt request enable
-  * @param hjpeg: JPEG handle pointer
-  * @retval None
-  */
 void HAL_JPEG_MspInit(JPEG_HandleTypeDef *hjpeg)
 {
+
   static MDMA_HandleTypeDef   hmdmaIn;
   static MDMA_HandleTypeDef   hmdmaOut;  
   
-  /* Enable JPEG clock */
+
   __HAL_RCC_JPGDECEN_CLK_ENABLE();
   
-  /* Enable MDMA clock */
   __HAL_RCC_MDMA_CLK_ENABLE();
   
   HAL_NVIC_SetPriority(JPEG_IRQn, 0x07, 0x0F);
   HAL_NVIC_EnableIRQ(JPEG_IRQn);  
   
-  /* Input MDMA */
-  /* Set the parameters to be configured */ 
   hmdmaIn.Init.Priority           = MDMA_PRIORITY_HIGH;
   hmdmaIn.Init.Endianness         = MDMA_LITTLE_ENDIANNESS_PRESERVE;
   hmdmaIn.Init.SourceInc          = MDMA_SRC_INC_BYTE;
@@ -76,24 +45,18 @@ void HAL_JPEG_MspInit(JPEG_HandleTypeDef *hjpeg)
   hmdmaIn.Init.SourceBlockAddressOffset = 0;
   hmdmaIn.Init.DestBlockAddressOffset  = 0;
   
-  /*Using JPEG Input FIFO Threshold as a trigger for the MDMA*/
-  hmdmaIn.Init.Request = MDMA_REQUEST_JPEG_INFIFO_TH; /* Set the MDMA HW trigger to JPEG Input FIFO Threshold flag*/  
+  hmdmaIn.Init.Request = MDMA_REQUEST_JPEG_INFIFO_TH;
   hmdmaIn.Init.TransferTriggerMode = MDMA_BUFFER_TRANSFER;  
-  hmdmaIn.Init.BufferTransferLength = 32; /*Set the MDMA buffer size to the JPEG FIFO threshold size i.e 32 bytes (8 words)*/
+  hmdmaIn.Init.BufferTransferLength = 32;
   
   hmdmaIn.Instance = MDMA_Channel1;
   
-  /* Associate the DMA handle */
   __HAL_LINKDMA(hjpeg, hdmain, hmdmaIn);
   
-  /* DeInitialize the DMA Stream */
   HAL_MDMA_DeInit(&hmdmaIn);  
-  /* Initialize the DMA stream */
+
   HAL_MDMA_Init(&hmdmaIn);
   
-  
-  /* Output MDMA */
-  /* Set the parameters to be configured */ 
   hmdmaOut.Init.Priority        = MDMA_PRIORITY_VERY_HIGH;
   hmdmaOut.Init.Endianness      = MDMA_LITTLE_ENDIANNESS_PRESERVE;
   hmdmaOut.Init.SourceInc       = MDMA_SRC_INC_DISABLE;
@@ -106,19 +69,16 @@ void HAL_JPEG_MspInit(JPEG_HandleTypeDef *hjpeg)
   hmdmaOut.Init.SourceBlockAddressOffset = 0;
   hmdmaOut.Init.DestBlockAddressOffset  = 0;
   
-  
-  /*Using JPEG Output FIFO Threshold as a trigger for the MDMA*/
-  hmdmaOut.Init.Request              = MDMA_REQUEST_JPEG_OUTFIFO_TH; /* Set the MDMA HW trigger to JPEG Output FIFO Threshold flag*/ 
+  hmdmaOut.Init.Request              = MDMA_REQUEST_JPEG_OUTFIFO_TH;
   hmdmaOut.Init.TransferTriggerMode  = MDMA_BUFFER_TRANSFER;    
-  hmdmaOut.Init.BufferTransferLength = 32; /*Set the MDMA buffer size to the JPEG FIFO threshold size i.e 32 bytes (8 words)*/
+  hmdmaOut.Init.BufferTransferLength = 32;
   
   hmdmaOut.Instance = MDMA_Channel0;
-  /* DeInitialize the DMA Stream */
+
   HAL_MDMA_DeInit(&hmdmaOut);  
-  /* Initialize the DMA stream */
+
   HAL_MDMA_Init(&hmdmaOut);
   
-  /* Associate the DMA handle */
   __HAL_LINKDMA(hjpeg, hdmaout, hmdmaOut);
   
   
@@ -130,13 +90,13 @@ void HAL_JPEG_MspInit(JPEG_HandleTypeDef *hjpeg)
 
 void HAL_JPEG_MspDeInit(JPEG_HandleTypeDef *hjpeg)
 {
+
   HAL_NVIC_DisableIRQ(MDMA_IRQn);
   
-  /* DeInitialize the MDMA Stream */
   HAL_MDMA_DeInit(hjpeg->hdmain);
   
-  /* DeInitialize the MDMA Stream */
   HAL_MDMA_DeInit(hjpeg->hdmaout);
+
 }
 
 
@@ -146,12 +106,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
   if(hspi->Instance==SPI5)
   {
-  /* USER CODE BEGIN SPI5_MspInit 0 */
 
-  /* USER CODE END SPI5_MspInit 0 */
-
-  /** Initializes the peripherals clock
-  */
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SPI5;
     PeriphClkInitStruct.Spi45ClockSelection = RCC_SPI45CLKSOURCE_D2PCLK1;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
@@ -159,16 +114,11 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
       Error_Handler();
     }
 
-    /* Peripheral clock enable */
     __HAL_RCC_SPI5_CLK_ENABLE();
 
     __HAL_RCC_GPIOK_CLK_ENABLE();
     __HAL_RCC_GPIOJ_CLK_ENABLE();
-    /**SPI5 GPIO Configuration
-    PK0     ------> SPI5_SCK
-    PJ11     ------> SPI5_MISO
-    PJ10     ------> SPI5_MOSI
-    */
+
     GPIO_InitStruct.Pin = ARD_D13_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -183,10 +133,6 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI5;
     HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
-  /* USER CODE BEGIN SPI5_MspInit 1 */
-
-  /* USER CODE END SPI5_MspInit 1 */
-
   }
 
 }
@@ -195,24 +141,13 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 {
   if(hspi->Instance==SPI5)
   {
-  /* USER CODE BEGIN SPI5_MspDeInit 0 */
 
-  /* USER CODE END SPI5_MspDeInit 0 */
-    /* Peripheral clock disable */
     __HAL_RCC_SPI5_CLK_DISABLE();
 
-    /**SPI5 GPIO Configuration
-    PK0     ------> SPI5_SCK
-    PJ11     ------> SPI5_MISO
-    PJ10     ------> SPI5_MOSI
-    */
     HAL_GPIO_DeInit(ARD_D13_GPIO_Port, ARD_D13_Pin);
 
     HAL_GPIO_DeInit(GPIOJ, ARD_D12_Pin|ARD_D11_Pin);
 
-  /* USER CODE BEGIN SPI5_MspDeInit 1 */
-
-  /* USER CODE END SPI5_MspDeInit 1 */
   }
 
 }
@@ -221,71 +156,46 @@ void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef* hdma2d)
 {
   if(hdma2d->Instance==DMA2D)
   {
-  /* USER CODE BEGIN DMA2D_MspInit 0 */
 
-  /* USER CODE END DMA2D_MspInit 0 */
-    /* Peripheral clock enable */
     __HAL_RCC_DMA2D_CLK_ENABLE();
-    /* DMA2D interrupt Init */
+
     HAL_NVIC_SetPriority(DMA2D_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(DMA2D_IRQn);
-  /* USER CODE BEGIN DMA2D_MspInit 1 */
-
-  /* USER CODE END DMA2D_MspInit 1 */
 
   }
 
 }
 
-void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
+
+void HAL_RTC_MspInit(RTC_HandleTypeDef* hrtc)
 {
-  if(htim_base->Instance==TIM3)
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+  if(hrtc->Instance==RTC)
   {
-  /* USER CODE BEGIN TIM3_MspInit 0 */
 
-  /* USER CODE END TIM3_MspInit 0 */
-    /* Peripheral clock enable */
-    __HAL_RCC_TIM3_CLK_ENABLE();
-    /* TIM3 interrupt Init */
-    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(TIM3_IRQn);
-  /* USER CODE BEGIN TIM3_MspInit 1 */
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+    {
+      Error_Handler();
+    }
 
-  /* USER CODE END TIM3_MspInit 1 */
+    __HAL_RCC_RTC_ENABLE();
 
   }
 
 }
 
 
-void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
+void HAL_RTC_MspDeInit(RTC_HandleTypeDef* hrtc)
 {
-  if(htim_base->Instance==TIM3)
+  if(hrtc->Instance==RTC)
   {
-  /* USER CODE BEGIN TIM3_MspDeInit 0 */
 
-  /* USER CODE END TIM3_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_TIM3_CLK_DISABLE();
+    __HAL_RCC_RTC_DISABLE();
 
-    /* TIM3 interrupt DeInit */
-    HAL_NVIC_DisableIRQ(TIM3_IRQn);
-  /* USER CODE BEGIN TIM3_MspDeInit 1 */
-
-  /* USER CODE END TIM3_MspDeInit 1 */
   }
 
 }
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
 
