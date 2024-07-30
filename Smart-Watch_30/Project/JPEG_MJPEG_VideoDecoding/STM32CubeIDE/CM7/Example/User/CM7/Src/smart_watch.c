@@ -309,6 +309,8 @@ static void clock_setting(void)
 
 				HAL_Delay(200);
 
+				video.isfirstFrame = 1;
+
 				video.set = SET_START;
 
 			}
@@ -370,8 +372,10 @@ static void clock_normal(void)
 			video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
 
 			video.tick_offset = HAL_GetTick();
-			video.watch_offset = ( ( AVI_Handel.CurrentImage - 1 ) * video.frame_time );
 
+			video.watch_offset = (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000.0 ) );
+
+			video.time.Seconds = ( (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000000.0 ) ) % 60 );
 			HAL_RTC_SetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
 
 		}
@@ -397,7 +401,9 @@ static void clock_normal(void)
 		if(video.frameToSkip < 0)
 			video.frameToSkip = 0;
 
-		HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+	    RTC_DateTypeDef sDate = {0};
+	    HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+	    HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 
 	}
 
