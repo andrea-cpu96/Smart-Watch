@@ -372,7 +372,6 @@ static void clock_normal(void)
 			video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
 
 			video.tick_offset = HAL_GetTick();
-
 			video.watch_offset = (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000.0 ) );
 
 			video.time.Seconds = ( (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000000.0 ) ) % 60 );
@@ -525,8 +524,6 @@ static void file_handler(uint8_t openFile)
 
 		 f_close(&MJPEG_File);
 
-		 parameters_reset();
-
 		 new_file_flag = 1;
 
      }
@@ -579,6 +576,10 @@ static void parameters_reset(void)
 	video.height = 0;
 	video.xPos = 0;
 	video.yPos = 0;
+
+	video.time.Hours = 0;
+	video.time.Minutes = 0;
+	video.time.Seconds = 0;
 
 	video.file_idx = 0;
 	video.FrameType = 0;

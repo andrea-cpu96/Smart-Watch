@@ -30,13 +30,13 @@
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_rcc.h:4657:26:LL_RCC_PLL2_IsReady	2
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_rcc.h:4969:26:LL_RCC_PLL3_IsReady	2
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_pwr.h:1595:26:LL_PWR_GetRegulVoltageScaling	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:289:6:LL_Init1msTick	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:306:6:LL_mDelay	4
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:474:6:LL_SetSystemCoreClock	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:501:13:LL_PLL_ConfigSystemClock_HSI	4
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:597:13:LL_PLL_ConfigSystemClock_HSE	5
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:691:13:LL_SetFlashLatency	29
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:920:17:UTILS_GetPLLOutputFrequency	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:941:20:UTILS_IsPLLsReady	4
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:979:17:UTILS_CalcPLLClockFreq	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:999:20:UTILS_EnablePLLAndSwitchSystem	6
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:289:6:LL_Init1msTick	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:306:6:LL_mDelay	4
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:474:6:LL_SetSystemCoreClock	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:501:13:LL_PLL_ConfigSystemClock_HSI	4
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:597:13:LL_PLL_ConfigSystemClock_HSE	5
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:691:13:LL_SetFlashLatency	29
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:920:17:UTILS_GetPLLOutputFrequency	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:941:20:UTILS_IsPLLsReady	4
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:979:17:UTILS_CalcPLLClockFreq	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c:999:20:UTILS_EnablePLLAndSwitchSystem	6

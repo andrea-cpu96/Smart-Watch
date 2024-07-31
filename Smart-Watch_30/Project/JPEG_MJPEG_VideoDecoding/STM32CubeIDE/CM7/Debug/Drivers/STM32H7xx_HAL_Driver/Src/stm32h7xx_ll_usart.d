@@ -1,2 +1,2 @@
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usart.o: \
- C:/Users/Fato/Desktop/Nuova\ cartella/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usart.c
+ D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usart.c

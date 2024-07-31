@@ -1,26 +1,26 @@
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:143:9:BSP_SD_Init	6
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:237:9:BSP_SD_DeInit	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:272:26:MX_SDMMC1_SD_Init	2
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:379:9:BSP_SD_DetectITConfig	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:422:13:BSP_SD_DetectCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:437:9:BSP_SD_IsDetected	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:470:9:BSP_SD_ReadBlocks	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:499:9:BSP_SD_WriteBlocks	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:528:9:BSP_SD_ReadBlocks_DMA	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:556:9:BSP_SD_WriteBlocks_DMA	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:584:9:BSP_SD_ReadBlocks_IT	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:612:9:BSP_SD_WriteBlocks_IT	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:640:9:BSP_SD_Erase	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:668:9:BSP_SD_GetCardState	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:679:9:BSP_SD_GetCardInfo	3
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:704:6:HAL_SD_AbortCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:714:6:HAL_SD_TxCpltCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:724:6:HAL_SD_RxCpltCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:754:6:BSP_SD_DETECT_IRQHandler	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:764:6:BSP_SD_IRQHandler	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:775:13:BSP_SD_AbortCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:786:13:BSP_SD_WriteCpltCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:797:13:BSP_SD_ReadCpltCallback	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:846:13:SD_EXTI_Callback	1
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:858:13:SD_MspInit	2
-C:/Users/Fato/Desktop/Nuova cartella/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:926:13:SD_MspDeInit	2
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:143:9:BSP_SD_Init	6
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:237:9:BSP_SD_DeInit	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:272:26:MX_SDMMC1_SD_Init	2
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:379:9:BSP_SD_DetectITConfig	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:422:13:BSP_SD_DetectCallback	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:437:9:BSP_SD_IsDetected	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:470:9:BSP_SD_ReadBlocks	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:499:9:BSP_SD_WriteBlocks	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:528:9:BSP_SD_ReadBlocks_DMA	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:556:9:BSP_SD_WriteBlocks_DMA	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:584:9:BSP_SD_ReadBlocks_IT	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:612:9:BSP_SD_WriteBlocks_IT	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:640:9:BSP_SD_Erase	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:668:9:BSP_SD_GetCardState	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:679:9:BSP_SD_GetCardInfo	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:704:6:HAL_SD_AbortCallback	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:714:6:HAL_SD_TxCpltCallback	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:724:6:HAL_SD_RxCpltCallback	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:754:6:BSP_SD_DETECT_IRQHandler	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:764:6:BSP_SD_IRQHandler	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:775:13:BSP_SD_AbortCallback	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:786:13:BSP_SD_WriteCpltCallback	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:797:13:BSP_SD_ReadCpltCallback	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:846:13:SD_EXTI_Callback	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:858:13:SD_MspInit	2
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c:926:13:SD_MspDeInit	2
