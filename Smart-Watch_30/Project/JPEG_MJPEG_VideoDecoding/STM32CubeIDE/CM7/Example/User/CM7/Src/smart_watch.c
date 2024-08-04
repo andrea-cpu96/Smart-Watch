@@ -348,12 +348,14 @@ static void clock_normal(void)
 
 		video.frameToSkip--;
 		AVI_Handel.CurrentImage++;
+		video.frameCount++;
 
 	}
 	else if(video.FrameType == AVI_VIDEO_FRAME)
 	{
 
 		AVI_Handel.CurrentImage++;
+		video.frameCount++;
 
 		if(video.display_status == DISPLAY_OFF)
 		{
@@ -386,9 +388,9 @@ static void clock_normal(void)
 				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
 
 				video.tick_offset = HAL_GetTick();
-				video.watch_offset = (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000.0 ) );
+				video.watch_offset = (uint32_t)( ( video.frameCount - 1 ) * ( video.frame_time / 1000.0 ) );
 
-				video.time.Seconds = ( (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000000.0 ) ) % 60 );
+				video.time.Seconds = ( (uint32_t)( ( video.frameCount - 1 ) * ( video.frame_time / 1000000.0 ) ) % 60 );
 				HAL_RTC_SetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
 
 			}
@@ -412,7 +414,7 @@ static void clock_normal(void)
 
 		// Obtain the number of frames to skip the next cycle
 		video.actual_time = ( HAL_GetTick() - video.tick_offset );
-		float watch_time = ( AVI_Handel.CurrentImage * ( video.frame_time / 1000.0 ) - video.watch_offset );
+		float watch_time = ( video.frameCount * ( video.frame_time / 1000.0 ) - video.watch_offset );
 		video.frameToSkip = ( ( video.actual_time - watch_time ) / ( video.frame_time / 1000.0 ) );
 
 		if(video.frameToSkip < 0)
@@ -436,6 +438,7 @@ static void show_frame(uint32_t frame_num)
 		AVI_GetFrame(&AVI_Handel, &MJPEG_File, 1);
 
 		AVI_Handel.CurrentImage++;
+		video.frameCount++;
 
 	}
 
@@ -449,6 +452,7 @@ static void show_frame(uint32_t frame_num)
 		{
 
 			AVI_Handel.CurrentImage++;
+			video.frameCount++;
 
 			// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
 			JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
@@ -666,6 +670,8 @@ static void parameters_reset(void)
 	video.display_ts = video.time.Seconds;
 
 	video.display_status = DISPLAY_ON;
+
+	video.frameCount = 0;
 
 	//video.video_mode = NORMAL_MODE;
 	video.set = SET_IDLE;

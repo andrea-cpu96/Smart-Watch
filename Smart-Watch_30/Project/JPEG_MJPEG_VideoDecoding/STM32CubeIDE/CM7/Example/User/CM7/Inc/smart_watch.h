@@ -53,6 +53,7 @@ typedef struct
 	uint16_t height;
 	uint16_t xPos;
 	uint16_t yPos;
+	uint32_t frameCount;
 
 	int frameToSkip;											// Defines for each cycle how many frames time skip
 	uint16_t frame_time;	  									// Holds the time duration of the single frame

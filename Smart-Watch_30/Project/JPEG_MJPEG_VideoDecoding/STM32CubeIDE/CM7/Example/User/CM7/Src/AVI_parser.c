@@ -309,7 +309,7 @@ uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, FIL *file, uint8_t *pVideoBuffer, ui
   }
 
   pavi->FileSize= f_size(file);
-  pavi->CurrentImage=0;  
+  pavi->CurrentImage=0;
   
   return  0;
 }
