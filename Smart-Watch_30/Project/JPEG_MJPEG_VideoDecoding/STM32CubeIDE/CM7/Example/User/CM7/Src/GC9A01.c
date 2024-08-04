@@ -2,22 +2,6 @@
 #include "GC9A01.h"
 
 
-#define ORIENTATION 2   // Set the display orientation 0,1,2,3
-
-// Command codes:
-#define COL_ADDR_SET        0x2A
-#define ROW_ADDR_SET        0x2B
-#define MEM_WR              0x2C
-#define COLOR_MODE          0x3A
-#define COLOR_MODE__12_BIT  0x03
-#define COLOR_MODE__16_BIT  0x05
-#define COLOR_MODE__18_BIT  0x06
-#define MEM_WR_CONT         0x3C
-#define ON                  1
-#define OFF                 0
-
-
-
 //////////////////////////////////////////////// GLOBAL FUNCTIONS
 
 
@@ -346,6 +330,19 @@ void GC9A01_set_frame(struct GC9A01_frame frame) {
     data[3] = frame.end.Y & 0xFF;
     GC9A01_write_data(data, sizeof(data));
     
+}
+
+
+void GC9A01_sleep_mode(uint8_t command)
+{
+
+	if(command)
+		GC9A01_write_command(SLEEP_MODE_ON);
+	else
+		GC9A01_write_command(SLEEP_MODE_OFF);
+
+	HAL_Delay(120);
+
 }
 
 ////////////////////////////////////////////////

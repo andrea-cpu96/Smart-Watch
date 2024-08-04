@@ -15,9 +15,11 @@
 #define LCD_X_SIZE					240
 #define LCD_Y_SIZE					240
 
-#define TIMER_MAX_COUNT				9999.0
-#define TIMER_TIME					10.0
+#define TIME_ELAPSED(current, ts)	( ( current - ts ) > 0 ? ( current - ts ) : ( ts - current ) )
+#define DISPLAY_STANDBY_TIMER		30
 
+#define DISPLAY_ON					1
+#define DISPLAY_OFF					0
 
 enum mode
 {
@@ -62,6 +64,10 @@ typedef struct
 
 	enum mode video_mode;
 	enum settings set;
+
+	uint32_t display_ts;
+
+	uint8_t display_status;
 
 }video_t;
 

@@ -221,12 +221,14 @@ typedef struct
 } AVI_CONTEXT;
 
 
+extern uint8_t *frame_buffer;
 
 
 /* Exported functions ------------------------------------------------------- */  
 uint32_t AVI_ParserInit(AVI_CONTEXT * pavi, FIL *file, uint8_t *pVideoBuffer, uint32_t VideoBufferSize, uint8_t *pAudioBuffer, uint32_t AudioBufferSize);
 uint32_t AVI_GetFrame(AVI_CONTEXT * pavi, FIL *file, uint8_t skipFlag);
 
+AVISTATUS __AVI_GetStreamInfo( AVI_CONTEXT * pavi, uint8_t* buf);
 
 #if defined(__cplusplus)
 }

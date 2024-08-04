@@ -19,6 +19,7 @@ static void SD_Initialize(void);
 static void mjpeg_video_processing(void);
 static void file_handler(uint8_t openFile);
 static void user_buttons_handler(void);
+static void battery_management(void);
 
 static void parameters_reset(void);
 
@@ -136,6 +137,9 @@ void smart_watch_process(void)
 
 		// Check for user buttons pressed
 		user_buttons_handler();
+
+		// Battery management
+		battery_management();
 
 	}
 
@@ -335,6 +339,7 @@ static void clock_normal(void)
 	// Save the frame into MJPEG_VideoBuffer
 	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
+
 	if(video.frameToSkip > 0)
 	{
 
@@ -350,47 +355,60 @@ static void clock_normal(void)
 
 		AVI_Handel.CurrentImage++;
 
-		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
-		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
-
-		while(Jpeg_HWDecodingEnd == 0);
-
-		if(video.isfirstFrame == 1)
+		if(video.display_status == DISPLAY_OFF)
 		{
 
-			video.isfirstFrame = 0;
+			HAL_Delay(50);
 
-			HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
+		}
+		else
+		{
 
-			DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+			// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
+			JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
 
-			video.width = JPEG_Info.ImageWidth;
-			video.height = JPEG_Info.ImageHeight;
-			video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
-			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
+			while(Jpeg_HWDecodingEnd == 0);
 
-			video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
+			if(video.isfirstFrame == 1)
+			{
 
-			video.tick_offset = HAL_GetTick();
-			video.watch_offset = (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000.0 ) );
+				video.isfirstFrame = 0;
 
-			video.time.Seconds = ( (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000000.0 ) ) % 60 );
-			HAL_RTC_SetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+				HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
+
+				DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+				video.width = JPEG_Info.ImageWidth;
+				video.height = JPEG_Info.ImageHeight;
+				video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
+				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
+
+				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
+
+				video.tick_offset = HAL_GetTick();
+				video.watch_offset = (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000.0 ) );
+
+				video.time.Seconds = ( (uint32_t)( ( AVI_Handel.CurrentImage - 1 ) * ( video.frame_time / 1000000.0 ) ) % 60 );
+				HAL_RTC_SetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+
+			}
+
+			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
+			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+			video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
+
+			// Implements the data conversion from RGB888 to RGB565
+			doubleFormat pOut;
+			pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
+			depth24To16(&pOut, ( video.width * video.height ), 3);
+
+			// Display the image
+			lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
 
 		}
 
-		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
-
-		video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
-
-		// Implements the data conversion from RGB888 to RGB565
-		doubleFormat pOut;
-		pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
-		depth24To16(&pOut, ( video.width * video.height ), 3);
-
-		// Display the image
-		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
+		// Synchronization
 
 		// Obtain the number of frames to skip the next cycle
 		video.actual_time = ( HAL_GetTick() - video.tick_offset );
@@ -538,6 +556,39 @@ static void user_buttons_handler(void)
 	static uint32_t button_timer = 0;
 
 
+	if(video.video_mode == SETTING_MODE)
+		return;
+
+	if(video.display_status == DISPLAY_OFF)
+	{
+
+		if(!( HAL_GPIO_ReadPin(BUTTON_MINUS_GPIO_Port, BUTTON_MINUS_Pin) &&
+			  HAL_GPIO_ReadPin(BUTTON_PLUS_GPIO_Port, BUTTON_PLUS_Pin) &&
+			  HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin) ))
+		{
+
+			GC9A01_sleep_mode(OFF);
+			video.display_status = DISPLAY_ON;
+
+			// Settings
+
+			RTC_DateTypeDef sDate = {0};
+			HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+			HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+/*
+			video.file_idx = ( ( video.time.Hours * 2 ) % 24 );
+			video.file_idx += ( video.time.Minutes ) >= 30 ? 1 : 0;
+
+			file_handler(1);
+
+			show_frame(( video.time.Minutes % 30 ) * 1800 );
+*/
+			video.display_ts = video.time.Seconds;
+
+		}
+
+	}
+
 	// Long press enters in setting mode
 	if(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin))
 	{
@@ -569,6 +620,28 @@ static void user_buttons_handler(void)
 }
 
 
+static void battery_management()
+{
+
+
+	if(video.display_status == DISPLAY_ON)
+	{
+
+		if(TIME_ELAPSED(video.time.Seconds, video.display_ts) > DISPLAY_STANDBY_TIMER)
+		{
+
+			GC9A01_sleep_mode(ON);
+
+			video.display_status = DISPLAY_OFF;
+
+		}
+
+	}
+
+}
+
+
+
 static void parameters_reset(void)
 {
 
@@ -589,6 +662,10 @@ static void parameters_reset(void)
 	video.actual_time = 0;
 	video.tick_offset = 0;
 	video.jpegOutDataAdreess = JPEG_OUTPUT_DATA_BUFFER0;
+
+	video.display_ts = video.time.Seconds;
+
+	video.display_status = DISPLAY_ON;
 
 	//video.video_mode = NORMAL_MODE;
 	video.set = SET_IDLE;

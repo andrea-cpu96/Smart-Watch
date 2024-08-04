@@ -18,6 +18,9 @@
 #define ON                  1
 #define OFF                 0
 
+#define SLEEP_MODE_ON		0x10
+#define SLEEP_MODE_OFF		0x11
+
 
 // Hardware abstraction layer
 // Should be defined by the user of the library
@@ -41,5 +44,7 @@ void GC9A01_write_continue(uint8_t *data, size_t len);
 void GC9A01_write_data(uint8_t *data, size_t len);
 void GC9A01_write_command(uint8_t cmd);
 void GC9A01_spi_tx(uint8_t *data, uint16_t size);
+
+void GC9A01_sleep_mode(uint8_t command);
 
 #endif

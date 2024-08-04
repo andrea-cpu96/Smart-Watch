@@ -296,7 +296,7 @@ static void MX_GPIO_Init(void)
 
   // Configure GPIO pins - BUTTON_MINUS_Pin ; BUTTON_PLUS_Pin ; BUTTON_SETTING_Pin
   GPIO_InitStruct.Pin =  BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
