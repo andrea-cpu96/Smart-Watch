@@ -1,8 +1,8 @@
-../Example/User/CM7/Src/main.c:42:5:main	1
-../Example/User/CM7/Src/main.c:77:6:Error_Handler	1
-../Example/User/CM7/Src/main.c:103:13:SystemClock_Config	4
-../Example/User/CM7/Src/main.c:178:13:MPU_Config	1
-../Example/User/CM7/Src/main.c:221:13:CPU_CACHE_Enable	5
-../Example/User/CM7/Src/main.c:230:13:MX_SPI5_Init	2
-../Example/User/CM7/Src/main.c:264:13:MX_GPIO_Init	1
-../Example/User/CM7/Src/main.c:307:13:MX_RTC_Init	4
+../Example/User/CM7/Src/main.c:34:5:main	1
+../Example/User/CM7/Src/main.c:69:6:Error_Handler	1
+../Example/User/CM7/Src/main.c:95:6:SystemClock_Config	4
+../Example/User/CM7/Src/main.c:170:6:MPU_Config	1
+../Example/User/CM7/Src/main.c:213:6:CPU_CACHE_Enable	5
+../Example/User/CM7/Src/main.c:222:6:MX_SPI5_Init	2
+../Example/User/CM7/Src/main.c:257:6:MX_GPIO_Init	2
+../Example/User/CM7/Src/main.c:324:6:MX_RTC_Init	4

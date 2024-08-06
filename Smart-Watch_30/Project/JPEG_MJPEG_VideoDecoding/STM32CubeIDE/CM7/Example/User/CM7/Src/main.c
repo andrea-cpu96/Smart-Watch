@@ -31,14 +31,6 @@ RTC_HandleTypeDef hrtc;
 SPI_HandleTypeDef hspi5;
 
 
-static void SystemClock_Config(void);
-static void MPU_Config(void);
-static void CPU_CACHE_Enable(void);
-static void MX_RTC_Init(void);
-static void MX_SPI5_Init(void);
-static void MX_GPIO_Init(void);
-
-
 int main(void)
 {
 
@@ -49,7 +41,7 @@ int main(void)
   SystemClock_Config(); 				// System-Clock; HSE 200MHz, RTC-Clock; LSE 32kHz
   
   // Microcntroller's peripherals initialization
-  MX_GPIO_Init();
+  MX_GPIO_Init(0);
   MX_SPI5_Init();
   MX_RTC_Init();
 
@@ -100,7 +92,7 @@ void Error_Handler(void)
 // PLL_R                          = 2
 // VDD(V)                         = 3.3
 // Flash Latency(WS)              = 4
-static void SystemClock_Config(void)
+void SystemClock_Config(void)
 {
 
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
@@ -164,10 +156,10 @@ static void SystemClock_Config(void)
         - The activation of the SYSCFG clock
         - Enabling the I/O Compensation Cell : setting bit[0] of register SYSCFG_CCCSR
  */
- 
+
   __HAL_RCC_CSI_ENABLE() ;
   __HAL_RCC_SYSCFG_CLK_ENABLE() ;
-  HAL_EnableCompensationCell();  
+  HAL_EnableCompensationCell();
 
 }
 
@@ -175,7 +167,7 @@ static void SystemClock_Config(void)
 // Configure the MPU attributes as Write Through for External SDRAM.
 // The Base Address is SDRAM_DEVICE_ADDR .
 // The Configured Region Size is 32MB because same as SDRAM size.
-static void MPU_Config(void)
+void MPU_Config(void)
 {
 
   MPU_Region_InitTypeDef MPU_InitStruct;
@@ -218,7 +210,7 @@ static void MPU_Config(void)
 }
 
 
-static void CPU_CACHE_Enable(void)
+void CPU_CACHE_Enable(void)
 {
 
   SCB_EnableICache();
@@ -227,7 +219,7 @@ static void CPU_CACHE_Enable(void)
 }
 
 
-static void MX_SPI5_Init(void)
+void MX_SPI5_Init(void)
 {
 
   hspi5.Instance = SPI5;
@@ -261,7 +253,8 @@ static void MX_SPI5_Init(void)
 
 }
 
-static void MX_GPIO_Init(void)
+
+void MX_GPIO_Init(uint8_t it_en)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -276,9 +269,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOK_CLK_ENABLE();
   __HAL_RCC_GPIOJ_CLK_ENABLE();
 
+
   HAL_GPIO_WritePin(GC9A01_CS_GPIO_Port, GC9A01_CS_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOJ, GC9A01_BL_Pin|GC9A01_DC_Pin|GC9A01_RST_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOJ, BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin, GPIO_PIN_SET);
+  //HAL_GPIO_WritePin(GPIOJ, BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin, GPIO_PIN_SET);
 
   // Configure GPIO pin - GC9A01_CS_Pin
   GPIO_InitStruct.Pin = GC9A01_CS_Pin;
@@ -294,17 +288,40 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
-  // Configure GPIO pins - BUTTON_MINUS_Pin ; BUTTON_PLUS_Pin ; BUTTON_SETTING_Pin
-  GPIO_InitStruct.Pin =  BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
+  if(it_en)
+  {
+
+	  GPIO_InitStruct.Pin = ( BUTTON_MINUS_Pin | BUTTON_PLUS_Pin | BUTTON_SETTING_Pin );
+	  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+	  GPIO_InitStruct.Pull = GPIO_PULLUP;
+	  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
+
+	  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+	  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+	  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+	  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+	  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
+	  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+
+  }
+  else
+  {
+
+	  // Configure GPIO pins - BUTTON_MINUS_Pin ; BUTTON_PLUS_Pin ; BUTTON_SETTING_Pin
+	  GPIO_InitStruct.Pin =  BUTTON_MINUS_Pin|BUTTON_PLUS_Pin|BUTTON_SETTING_Pin;
+	  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	  GPIO_InitStruct.Pull = GPIO_PULLUP;
+	  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
+
+  }
 
 }
 
 
-static void MX_RTC_Init(void)
+void MX_RTC_Init(void)
 {
 
   RTC_TimeTypeDef sTime = {0};

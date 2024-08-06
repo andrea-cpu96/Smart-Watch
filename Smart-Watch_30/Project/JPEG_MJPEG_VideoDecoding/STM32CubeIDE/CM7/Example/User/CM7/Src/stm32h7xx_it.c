@@ -81,8 +81,6 @@ void SysTick_Handler(void)
 
   HAL_IncTick();
 
-
-
 }
 
 
@@ -97,4 +95,28 @@ void MDMA_IRQHandler()
   /* Check the interrupt and clear flag */
   HAL_MDMA_IRQHandler(JPEG_Handle.hdmain);
   HAL_MDMA_IRQHandler(JPEG_Handle.hdmaout);  
+}
+
+
+void EXTI0_IRQHandler(void)
+{
+
+    HAL_GPIO_EXTI_IRQHandler(BUTTON_MINUS_Pin);
+
+}
+
+
+void EXTI3_IRQHandler(void)
+{
+
+    HAL_GPIO_EXTI_IRQHandler(BUTTON_SETTING_Pin);
+
+}
+
+
+void EXTI9_5_IRQHandler(void)
+{
+
+    HAL_GPIO_EXTI_IRQHandler(BUTTON_PLUS_Pin);
+
 }

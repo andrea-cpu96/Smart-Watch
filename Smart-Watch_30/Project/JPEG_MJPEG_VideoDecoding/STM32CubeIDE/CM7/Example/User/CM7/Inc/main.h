@@ -122,6 +122,12 @@ extern RTC_HandleTypeDef hrtc;
 extern SPI_HandleTypeDef hspi5;
 
 
+void SystemClock_Config(void);
+void MPU_Config(void);
+void CPU_CACHE_Enable(void);
+void MX_RTC_Init(void);
+void MX_SPI5_Init(void);
+void MX_GPIO_Init(uint8_t it_en);
 void Error_Handler(void);
 
 #endif /* __MAIN_H */

@@ -46,7 +46,7 @@ typedef struct
 
 	RTC_TimeTypeDef time;
 
-	uint8_t file_idx;
+	uint16_t file_idx;
 	uint8_t isfirstFrame;
 	uint8_t FrameType;
 	uint16_t width;
@@ -59,7 +59,6 @@ typedef struct
 	uint16_t frame_time;	  									// Holds the time duration of the single frame
 	uint32_t actual_time; 										// Takes trace of the actual time
 	uint32_t tick_offset;
-	uint32_t watch_offset;
 
 	uint32_t jpegOutDataAdreess; 								// Buffer for the decoded data
 
