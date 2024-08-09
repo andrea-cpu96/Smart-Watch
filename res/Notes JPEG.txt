@@ -1,0 +1,63 @@
+								JPEG
+
+
+Images are compressed in order to save space.
+
+
+****** MCU BLOCKS ******
+
+
+MCU (Minimum COded Unit) is the smallest unit of data that JPEG processes at one time.
+
+It consists of a block of image data in YCbCr format. 
+
+The exact composition of an MCU depends on the chrominance subsampling scheme used. 
+
+1) 4:4:4 Subsampling:
+
+	No subsampling. Each pixel has full resolution for Y, Cb, and Cr.
+	An MCU typically contains 1 block of 8x8 pixels for Y, 1 block of 8x8 pixels for Cb, and 1 block of 8x8 pixels for Cr.
+
+2) 4:2:2 Subsampling:
+
+	Horizontal subsampling by a factor of 2 for Cb and Cr.
+	An MCU typically contains 1 block of 8x8 pixels for Y, 1 block of 8x8 pixels for Cb, and 1 block of 8x8 pixels for Cr.
+	However, the Cb and Cr blocks cover only half the horizontal resolution compared to Y. So effectively, for every two Y blocks 	horizontally, there is one Cb block and one Cr block.
+
+3) 4:2:0 Subsampling:
+
+	Horizontal and vertical subsampling by a factor of 2 for Cb and Cr.
+	An MCU typically contains 1 block of 8x8 pixels for Y, 1 block of 8x8 pixels for Cb, and 1 block of 8x8 pixels for Cr.
+	Here, the Cb and Cr blocks cover half the horizontal and half the vertical resolution compared to Y. So effectively, for every 	four Y blocks, there is one Cb block and one Cr block.
+
+So in any case an MCU block is 3*8*8 = 192 BYTES in space, but in 1) it rappresents 8*8 pixels, in 2) 16*8 pixels and in 3) 16*16 pixels.
+
+****** YCbCr SUBSAMPLING ******
+
+
+An image is reppresented according to the RGB format, but, in order to save space, a conversion to YCbCr format is done 
+during JPEG compression.
+ 
+Y; luminance
+Cb; blue-difference chrominance
+Cr; red-difference chrominance
+
+Human eyes are more sensible to the Y component, so Cb and Cr compenents can be reduced in order to save space without significantly 
+affecting affecting the perceived image quality. 
+
+This process is called CHROMINANCE SUBSAMPLING.
+
+J; width of the reference block (usually 4)
+a; number of chrominance samples in the first row of the block
+b; number of chrominance samples in the second row of the block
+
+JPEG_444_SUBSAMPLING; means NO CHROMINANCE SUBSAMPLING is performed.
+-> J = 4 ; a = 4 ; b = 4
+-> higher quality, but more space and more processing complexity
+
+Other formats are 4:2:2 and 4:2:0.
+
+
+
+
+

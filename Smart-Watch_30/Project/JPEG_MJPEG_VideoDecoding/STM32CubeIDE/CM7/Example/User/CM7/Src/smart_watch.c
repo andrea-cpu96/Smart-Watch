@@ -548,7 +548,7 @@ static void battery_management()
 		{
 
 			// Enable interrupts for user buttons
-			MX_GPIO_Init(1);
+			//MX_GPIO_Init(1);
 
 			parameters_reset();
 
@@ -837,10 +837,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 	// Wake up
 
-	HAL_NVIC_DisableIRQ(EXTI0_IRQn);
-	HAL_NVIC_DisableIRQ(EXTI3_IRQn);
-	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+	//HAL_NVIC_DisableIRQ(EXTI0_IRQn);
+	//HAL_NVIC_DisableIRQ(EXTI3_IRQn);
+	//HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 
-	MX_GPIO_Init(0);
+	//MX_GPIO_Init(0);
 
 }

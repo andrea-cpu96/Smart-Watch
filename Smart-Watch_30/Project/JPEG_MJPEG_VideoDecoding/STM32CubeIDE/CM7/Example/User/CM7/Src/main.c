@@ -41,7 +41,7 @@ int main(void)
   SystemClock_Config(); 				// System-Clock; HSE 200MHz, RTC-Clock; LSE 32kHz
   
   // Microcntroller's peripherals initialization
-  MX_GPIO_Init(0);
+  MX_GPIO_Init(1);
   MX_SPI5_Init();
   MX_RTC_Init();
 
