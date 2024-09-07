@@ -35,7 +35,7 @@ int main(void)
 {
 
   // System configurations
-  MPU_Config();							// Parameters configuration for external SDRAM
+  //MPU_Config();							// Parameters configuration for external SDRAM
   CPU_CACHE_Enable();
   HAL_Init();
   SystemClock_Config(); 				// System-Clock; HSE 200MHz, RTC-Clock; LSE 32kHz
@@ -47,7 +47,7 @@ int main(void)
 
   // External peripherals initialization
   GC9A01_init();
-  BSP_SDRAM_Init(0);
+  //BSP_SDRAM_Init(0);
 
   // JPEG initialization
   JPEG_Handle.Instance = JPEG;
@@ -167,6 +167,7 @@ void SystemClock_Config(void)
 // Configure the MPU attributes as Write Through for External SDRAM.
 // The Base Address is SDRAM_DEVICE_ADDR .
 // The Configured Region Size is 32MB because same as SDRAM size.
+/*
 void MPU_Config(void)
 {
 
@@ -208,6 +209,7 @@ void MPU_Config(void)
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 
 }
+*/
 
 
 void CPU_CACHE_Enable(void)
