@@ -16,7 +16,7 @@
 #define LCD_Y_SIZE					240
 
 #define TIME_ELAPSED(current, ts)	( ( current - ts ) > 0 ? ( current - ts ) : ( ts - current ) )
-#define DISPLAY_STANDBY_TIMER		30
+#define DISPLAY_STANDBY_TIMER		59
 
 #define DISPLAY_ON					1
 #define DISPLAY_OFF					0

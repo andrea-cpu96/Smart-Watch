@@ -62,7 +62,7 @@ uint32_t JPEG_Decode_DMA(JPEG_HandleTypeDef *hjpeg, uint32_t FrameSourceAddress 
   FrameBufferAddress = DestAddress;
   Input_frameIndex=0;
   Input_frameSize = FrameSize;
-  
+
   Jpeg_HWDecodingEnd = 0;
   
   /* Start JPEG decoding with DMA method */

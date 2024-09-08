@@ -54,7 +54,7 @@ video_t video;													// Video data structure
 // Pre elaborated data buffer
 uint8_t	preElab_data[200*1024] __attribute__((section(".d1"), nocommon));
 // Output data buffer (format RGB565)
-uint8_t output_data[300*1024] __attribute__((section(".d1"), nocommon));
+uint8_t output_data[100*1024] __attribute__((section(".d1"), nocommon));
 
 
 void smart_watch_init(void)
@@ -550,7 +550,7 @@ static void battery_management()
 	if(video.display_status == DISPLAY_ON)
 	{
 
-		if(TIME_ELAPSED(video.time.Seconds, video.display_ts) > DISPLAY_STANDBY_TIMER)
+		if(TIME_ELAPSED(video.time.Seconds, video.display_ts) >= DISPLAY_STANDBY_TIMER)
 		{
 
 			// Enable interrupts for user buttons

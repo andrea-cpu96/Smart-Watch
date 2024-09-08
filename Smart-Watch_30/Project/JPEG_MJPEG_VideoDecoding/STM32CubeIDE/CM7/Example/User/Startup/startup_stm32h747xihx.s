@@ -48,13 +48,13 @@
 /* end address for the .bss_d1 section. defined in linker script */
 .word  _ebss_d1
 /* start address for the .bss_d2 section. defined in linker script */
-.word  _sbss_d2
+//word  _sbss_d2
 /* end address for the .bss_d2 section. defined in linker script */
-.word  _ebss_d2
+//.word  _ebss_d2
 /* start address for the .bss_d3 section. defined in linker script */
-.word  _sbss_d3
+//.word  _sbss_d3
 /* end address for the .bss_d3 section. defined in linker script */
-.word  _ebss_d3
+//.word  _ebss_d3
 
 /**
  * @brief  This is the code that gets called when the processor first
@@ -99,7 +99,7 @@ LoopCopyDataInit:
     ldr r2, =_sbss_d1
     ldr r4, =_ebss_d1
     bl FillZeroSegments
-
+/*
     ldr r2, =_sbss_d2
     ldr r4, =_ebss_d2
     bl FillZeroSegments
@@ -107,7 +107,7 @@ LoopCopyDataInit:
     ldr r2, =_sbss_d3
     ldr r4, =_ebss_d3
     bl FillZeroSegments
-
+*/
 FillZeroSegments:
     movs r3, #0
     b LoopFillZerobss
