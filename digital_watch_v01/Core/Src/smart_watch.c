@@ -43,7 +43,7 @@ uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE];
 uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE];
 
 FATFS SDFatFs;  												// File system object for SD card logical drive
-char SDPath[4]; 												// SD card logical drive path
+//char SDPath[4]; 												// SD card logical drive path
 
 FIL MJPEG_File;          										// MJPEG File object
 AVI_CONTEXT AVI_Handel;  										// AVI Parser Handle
@@ -73,7 +73,7 @@ void smart_watch_init(void)
 		// Init the SD Card
 	    SD_Initialize();
 
-	    if(BSP_SD_IsDetected(0))
+	    if(BSP_SD_IsDetected())
 	    {
 
 	      // Register the file system object to the FatFs module
@@ -164,7 +164,7 @@ static void clock_setting(void)
 		default:
 		case SET_IDLE:
 
-			while(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin));
+			while(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin));
 
 			video.set = SET_HOURS;
 
@@ -175,7 +175,7 @@ static void clock_setting(void)
 			show_frame(0);
 
 			// If button plus
-			if(!HAL_GPIO_ReadPin(BUTTON_PLUS_GPIO_Port, BUTTON_PLUS_Pin))
+			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
 			{
 
 				HAL_Delay(200);
@@ -190,7 +190,7 @@ static void clock_setting(void)
 			}
 
 			// If button minus
-			if(!HAL_GPIO_ReadPin(BUTTON_MINUS_GPIO_Port, BUTTON_MINUS_Pin))
+			if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
 			{
 
 				HAL_Delay(200);
@@ -207,7 +207,7 @@ static void clock_setting(void)
 			}
 
 			// If button settings
-			if(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin))
+			if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
 			{
 
 				HAL_Delay(200);
@@ -223,7 +223,7 @@ static void clock_setting(void)
 			show_frame(0);
 
 			// If button plus
-			if(!HAL_GPIO_ReadPin(BUTTON_PLUS_GPIO_Port, BUTTON_PLUS_Pin))
+			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
 			{
 
 				HAL_Delay(200);
@@ -241,7 +241,7 @@ static void clock_setting(void)
 			}
 
 			// If button minus
-			if(!HAL_GPIO_ReadPin(BUTTON_MINUS_GPIO_Port, BUTTON_MINUS_Pin))
+			if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
 			{
 
 				HAL_Delay(200);
@@ -260,7 +260,7 @@ static void clock_setting(void)
 			}
 
 			// If button settings
-			if(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin))
+			if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
 			{
 
 				HAL_Delay(200);
@@ -513,7 +513,7 @@ static void user_buttons_handler(void)
 		return;
 
 	// Long press enters in setting mode
-	if(!HAL_GPIO_ReadPin(BUTTON_SETTING_GPIO_Port, BUTTON_SETTING_Pin))
+	if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
 	{
 
 		if(first)
@@ -833,7 +833,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth
 static void SD_Initialize(void)
 {
 
-  BSP_SD_Init(0);
+  BSP_SD_Init();
 
 }
 

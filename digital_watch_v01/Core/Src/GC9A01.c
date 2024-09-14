@@ -355,7 +355,7 @@ void GC9A01_spi_tx(uint8_t *data, uint16_t size)
 {
 
 
-	ret = HAL_SPI_Transmit(&hspi5, data, size, HAL_MAX_DELAY);
+	ret = HAL_SPI_Transmit(&hspi1, data, size, HAL_MAX_DELAY);
 
 	if(ret != HAL_OK)
 		return;

@@ -1,0 +1,12 @@
+../Core/Src/GC9A01.c:8:6:GC9A01_set_reset	16	static
+../Core/Src/GC9A01.c:16:6:GC9A01_set_data_command	16	static
+../Core/Src/GC9A01.c:24:6:GC9A01_set_chip_select	16	static
+../Core/Src/GC9A01.c:32:6:GC9A01_write_command	16	static
+../Core/Src/GC9A01.c:39:6:GC9A01_write_data	16	static
+../Core/Src/GC9A01.c:46:20:GC9A01_write_byte	16	static
+../Core/Src/GC9A01.c:50:6:GC9A01_write	16	static
+../Core/Src/GC9A01.c:55:6:GC9A01_write_continue	16	static
+../Core/Src/GC9A01.c:60:6:GC9A01_init	8	static
+../Core/Src/GC9A01.c:315:6:GC9A01_set_frame	24	static
+../Core/Src/GC9A01.c:336:6:GC9A01_sleep_mode	16	static
+../Core/Src/GC9A01.c:354:6:GC9A01_spi_tx	16	static
