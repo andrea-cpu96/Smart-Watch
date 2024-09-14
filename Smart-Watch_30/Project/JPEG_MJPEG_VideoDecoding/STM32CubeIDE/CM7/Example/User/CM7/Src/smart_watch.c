@@ -51,6 +51,12 @@ AVI_CONTEXT AVI_Handel;  										// AVI Parser Handle
 video_t video;													// Video data structure
 
 
+// Pre elaborated data buffer
+uint8_t	preElab_data[200*1024] __attribute__((section(".d1"), nocommon));
+// Output data buffer (format RGB565)
+uint8_t output_data[100*1024] __attribute__((section(".d1"), nocommon));
+
+
 void smart_watch_init(void)
 {
 
@@ -339,13 +345,13 @@ static void clock_normal(void)
 		}
 
 		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
-		video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
+		//video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
 
 		// Implements the data conversion from RGB888 to RGB565
 		doubleFormat pOut;
-		pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
+		pOut.u8Arr = (uint8_t *)output_data;
 		depth24To16(&pOut, ( video.width * video.height ), 3);
 
 		// Display the image
@@ -419,13 +425,13 @@ static void show_frame(uint32_t frame_num)
 			}
 
 			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)LCD_FRAME_BUFFER, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
-			video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
+			//video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
 
 			// Implements the data conversion from RGB888 to RGB565
 			doubleFormat pOut;
-			pOut.u8Arr = (uint8_t *)LCD_FRAME_BUFFER;
+			pOut.u8Arr = (uint8_t *)output_data;
 			depth24To16(&pOut, ( video.width * video.height ), 3);
 
 			lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
@@ -544,7 +550,7 @@ static void battery_management()
 	if(video.display_status == DISPLAY_ON)
 	{
 
-		if(TIME_ELAPSED(video.time.Seconds, video.display_ts) > DISPLAY_STANDBY_TIMER)
+		if(TIME_ELAPSED(video.time.Seconds, video.display_ts) >= DISPLAY_STANDBY_TIMER)
 		{
 
 			// Enable interrupts for user buttons
@@ -613,7 +619,7 @@ static void parameters_reset(void)
 	video.frame_time = 0;
 	video.actual_time = 0;
 	video.tick_offset = 0;
-	video.jpegOutDataAdreess = JPEG_OUTPUT_DATA_BUFFER0;
+	video.jpegOutDataAdreess = (uint32_t)preElab_data;
 
 	video.display_ts = video.time.Seconds;
 

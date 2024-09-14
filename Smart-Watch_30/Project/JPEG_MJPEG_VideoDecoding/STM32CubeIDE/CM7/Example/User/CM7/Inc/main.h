@@ -23,7 +23,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
 
-#include "stm32h747i_discovery_sdram.h"
+//#include "stm32h747i_discovery_sdram.h"
 #include "stm32h747i_discovery_sd.h"
 
 #include "ff_gen_drv.h"
@@ -34,9 +34,11 @@
 
 #define MDMA_INSTANCE MDMA_Channel0
 
+/*
 #define LCD_FRAME_BUFFER         0xD0000000
 #define JPEG_OUTPUT_DATA_BUFFER0 0xD0600000
 #define JPEG_OUTPUT_DATA_BUFFER1 0xD0800000
+*/
 
 #define VIDEO_BUFFER			 LCD_FRAME_BUFFER
 

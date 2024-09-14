@@ -44,9 +44,16 @@ _Min_Stack_Size = 0x2000 ; /* required amount of stack */
 MEMORY
 {
 FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 1024K
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 192K
-ITCMRAM (xrw)      : ORIGIN = 0x00000000, LENGTH = 64K
+RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 128k
+RAM_D1 (xrw)    : ORIGIN = 0x24000000, LENGTH = 384k
 }
+
+/*
+RAM_D2 (xrw)    : ORIGIN = 0x30000000, LENGTH = 288K
+RAM_D3 (xrw)    : ORIGIN = 0x38000000, LENGTH = 64K
+ITCMRAM (xrw)   : ORIGIN = 0x00000000, LENGTH = 64K
+}
+*/
 
 /* Define output sections */
 SECTIONS
@@ -135,7 +142,7 @@ SECTIONS
   
   /* Uninitialized data section */
   . = ALIGN(4);
-  .bss :
+  .bss (NOLOAD):
   {
     /* This is used by the startup in order to initialize the .bss section */
     _sbss = .;         /* define a global symbol at bss start */
@@ -147,7 +154,7 @@ SECTIONS
     . = ALIGN(4);
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
-  } >RAM
+  } >RAM AT>RAM
 
   /* User_heap_stack section, used to check that there is enough RAM left */
   ._user_heap_stack :
@@ -160,7 +167,52 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
+    /* Uninitialized data section */
+  .d1 (NOLOAD):
+  {
   
+    . = ALIGN(4);
+    /* This is used by the startup in order to initialize the .bss_d1 section */
+    _sbss_d1 = .;         /* define a global symbol at bss start */
+    __bss_start_d1__ = _sbss_d1;
+    *(.d1)
+    *(.d1*)
+
+    . = ALIGN(4);
+    _ebss_d1 = .;         /* define a global symbol at bss end */
+    __bss_end_d1__ = _ebss_d1;
+  } >RAM_D1 AT>RAM_D1
+  
+/*  
+  .d2 (NOLOAD):
+  {
+  
+    . = ALIGN(4);
+    _sbss_d2 = .;         
+    __bss_start_d2__ = _sbss_d2;
+    *(.d2)
+    *(.d2*)
+
+    . = ALIGN(4);
+    _ebss_d2 = .;        
+    __bss_end_d2__ = _ebss_d2;
+  } >RAM_D2 AT>RAM_D2
+
+
+  .d3 (NOLOAD):
+  {
+  
+  	. = ALIGN(4);  
+    _sbss_d3 = .;      
+    __bss_start_d3__ = _sbss_d3;
+    *(.d3)
+    *(.d3*)
+
+    . = ALIGN(4);
+    _ebss_d3 = .;       
+    __bss_end_d3__ = _ebss_d3;
+  } >RAM_D3 AT>RAM_D3
+*/
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

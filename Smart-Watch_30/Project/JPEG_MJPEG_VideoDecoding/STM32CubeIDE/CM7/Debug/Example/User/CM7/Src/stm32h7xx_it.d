@@ -52,12 +52,9 @@ Example/User/CM7/Src/stm32h7xx_it.o: \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../../../../../Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.h \
+ ../../../../../Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.h \
  ../../../Common/Inc/stm32h747i_discovery_conf.h \
  ../../../../../Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_errno.h \
- ../../../../../Drivers/BSP/STM32H747I-DISCO/../Components/is42s32800j/is42s32800j.h \
- ../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/is42s32800j_conf.h \
- ../../../../../Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.h \
  ../../../../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../../../../../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../../../../../Middlewares/Third_Party/FatFs/src/integer.h \
@@ -120,12 +117,9 @@ Example/User/CM7/Src/stm32h7xx_it.o: \
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../../../../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../../../../../Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.h:
+../../../../../Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.h:
 ../../../Common/Inc/stm32h747i_discovery_conf.h:
 ../../../../../Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_errno.h:
-../../../../../Drivers/BSP/STM32H747I-DISCO/../Components/is42s32800j/is42s32800j.h:
-../../../STM32CubeIDE/CM7/Example/User/CM7/Inc/is42s32800j_conf.h:
-../../../../../Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.h:
 ../../../../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
 ../../../../../Middlewares/Third_Party/FatFs/src/diskio.h:
 ../../../../../Middlewares/Third_Party/FatFs/src/integer.h:
