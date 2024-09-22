@@ -1,0 +1,6 @@
+../Example/User/CM7/Src/decode_dma.c:59:10:JPEG_Decode_DMA	32	static
+../Example/User/CM7/Src/decode_dma.c:82:6:HAL_JPEG_InfoReadyCallback	16	static
+../Example/User/CM7/Src/decode_dma.c:92:6:HAL_JPEG_GetDataCallback	24	static
+../Example/User/CM7/Src/decode_dma.c:124:6:HAL_JPEG_DataReadyCallback	24	static
+../Example/User/CM7/Src/decode_dma.c:137:6:HAL_JPEG_ErrorCallback	16	static
+../Example/User/CM7/Src/decode_dma.c:147:6:HAL_JPEG_DecodeCpltCallback	16	static

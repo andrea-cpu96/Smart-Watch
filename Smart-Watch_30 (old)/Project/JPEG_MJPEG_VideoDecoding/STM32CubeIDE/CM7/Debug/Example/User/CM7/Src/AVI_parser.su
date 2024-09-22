@@ -1,0 +1,5 @@
+../Example/User/CM7/Src/AVI_parser.c:42:10:__AVI_SearchID	32	static
+../Example/User/CM7/Src/AVI_parser.c:63:11:__AVI_GetStreamInfo	16	static
+../Example/User/CM7/Src/AVI_parser.c:87:11:__AVI_Init	64	static
+../Example/User/CM7/Src/AVI_parser.c:289:10:AVI_ParserInit	32	static
+../Example/User/CM7/Src/AVI_parser.c:323:10:AVI_GetFrame	32	static

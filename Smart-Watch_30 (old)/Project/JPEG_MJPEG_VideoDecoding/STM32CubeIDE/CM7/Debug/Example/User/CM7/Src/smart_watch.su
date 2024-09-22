@@ -1,0 +1,16 @@
+../Example/User/CM7/Src/smart_watch.c:60:6:smart_watch_init	8	static
+../Example/User/CM7/Src/smart_watch.c:106:6:smart_watch_process	8	static
+../Example/User/CM7/Src/smart_watch.c:134:13:mjpeg_video_processing	8	static
+../Example/User/CM7/Src/smart_watch.c:158:13:clock_setting	8	static
+../Example/User/CM7/Src/smart_watch.c:292:13:clock_normal	40	static
+../Example/User/CM7/Src/smart_watch.c:379:13:show_frame	48	static
+../Example/User/CM7/Src/smart_watch.c:446:13:file_handler	32	static
+../Example/User/CM7/Src/smart_watch.c:505:13:user_buttons_handler	8	static
+../Example/User/CM7/Src/smart_watch.c:546:13:battery_management	16	static,ignoring_inline_asm
+../Example/User/CM7/Src/smart_watch.c:603:13:parameters_reset	4	static
+../Example/User/CM7/Src/smart_watch.c:636:13:depth24To16	24	static
+../Example/User/CM7/Src/smart_watch.c:684:13:lcd_draw	40	static
+../Example/User/CM7/Src/smart_watch.c:734:13:DMA2D_Init	24	static
+../Example/User/CM7/Src/smart_watch.c:813:13:DMA2D_CopyBuffer	48	static
+../Example/User/CM7/Src/smart_watch.c:833:13:SD_Initialize	8	static
+../Example/User/CM7/Src/smart_watch.c:841:6:HAL_GPIO_EXTI_Callback	16	static

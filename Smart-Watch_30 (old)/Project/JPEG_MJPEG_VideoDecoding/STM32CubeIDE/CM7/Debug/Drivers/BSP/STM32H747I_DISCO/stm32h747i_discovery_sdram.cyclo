@@ -1,0 +1,7 @@
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c:106:9:BSP_SDRAM_Init	4
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c:168:9:BSP_SDRAM_DeInit	2
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c:199:26:MX_SDRAM_Init	2
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c:317:9:BSP_SDRAM_SendCmd	3
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c:341:6:BSP_SDRAM_IRQHandler	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c:360:13:SDRAM_MspInit	1
+D:/Andrea/Embedded/repositories/Smart-Watch/Smart-Watch_30/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c:457:13:SDRAM_MspDeInit	1

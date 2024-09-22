@@ -1,4 +1,4 @@
-								JPEG
+						JPEG
 
 
 Images are compressed in order to save space.
@@ -31,6 +31,7 @@ The exact composition of an MCU depends on the chrominance subsampling scheme us
 	Here, the Cb and Cr blocks cover half the horizontal and half the vertical resolution compared to Y. So effectively, for every 	four Y blocks, there is one Cb block and one Cr block.
 
 So in any case an MCU block is 3*8*8 = 192 BYTES in space, but in 1) it rappresents 8*8 pixels, in 2) 16*8 pixels and in 3) 16*16 pixels.
+
 
 ****** YCbCr SUBSAMPLING ******
 

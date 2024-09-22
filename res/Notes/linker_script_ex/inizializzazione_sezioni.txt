@@ -1,0 +1,56 @@
+.word  _sbss
+/* end address for the .bss section. defined in linker script */
+.word  _ebss
+/* stack used for SystemInit_ExtMemCtl; always internal RAM used */
+
+.word  _sbss_d1
+/* end address for the .bss section. defined in linker script */
+.word  _ebss_d1
+/* stack used for SystemInit_ExtMemCtl; always internal RAM used */
+
+.word  _sbss_d2
+/* end address for the .bss section. defined in linker script */
+.word  _ebss_d2
+/* stack used for SystemInit_ExtMemCtl; always internal RAM used */
+
+.word  _sbss_d3
+/* end address for the .bss section. defined in linker script */
+.word  _ebss_d3
+/* stack used for SystemInit_ExtMemCtl; always internal RAM used */
+
+
+
+// COMMON RAM
+
+LoopCopyDataInit:
+  adds r4, r0, r3
+  cmp r4, r1
+  bcc CopyDataInit
+/* Zero fill the bss segment. */
+  ldr r2, =_sbss
+  ldr r4, =_ebss
+  movs r3, #0
+  b LoopFillZerobss
+/* Zero fill the bss_d1 segment. */
+  ldr r2, =_sbss_d1
+  ldr r4, =_ebss_d1
+  movs r3, #0
+  b LoopFillZerobss
+/* Zero fill the bss_d2 segment. */
+  ldr r2, =_sbss_d2
+  ldr r4, =_ebss_d2
+  movs r3, #0
+  b LoopFillZerobss
+/* Zero fill the bss_d3 segment. */
+  ldr r2, =_sbss_d3
+  ldr r4, =_ebss_d3
+  movs r3, #0
+  b LoopFillZerobss
+
+FillZerobss:
+  str  r3, [r2]
+  adds r2, r2, #4
+
+LoopFillZerobss:
+  cmp r2, r4
+  bcc FillZerobss

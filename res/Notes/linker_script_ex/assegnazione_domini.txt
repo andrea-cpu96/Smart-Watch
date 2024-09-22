@@ -1,0 +1,3 @@
+int myArray_D1[100] __attribute__((section(".bss_d1")));
+int myArray_D2[100] __attribute__((section(".bss_d2")));
+int myArray_D3[100] __attribute__((section(".bss_d3")));
