@@ -1,5 +1,5 @@
 FATFS/Target/bsp_driver_sd.o: ../FATFS/Target/bsp_driver_sd.c \
- ../FATFS/Target/bsp_driver_sd.h \
+ ../Core/Inc/bsp_driver_sd.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
@@ -41,8 +41,8 @@ FATFS/Target/bsp_driver_sd.o: ../FATFS/Target/bsp_driver_sd.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
- ../FATFS/Target/fatfs_platform.h
-../FATFS/Target/bsp_driver_sd.h:
+ ../Core/Inc/fatfs_platform.h
+../Core/Inc/bsp_driver_sd.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
@@ -84,4 +84,4 @@ FATFS/Target/bsp_driver_sd.o: ../FATFS/Target/bsp_driver_sd.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
-../FATFS/Target/fatfs_platform.h:
+../Core/Inc/fatfs_platform.h:

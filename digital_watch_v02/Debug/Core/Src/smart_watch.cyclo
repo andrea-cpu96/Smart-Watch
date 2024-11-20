@@ -1,0 +1,11 @@
+../Core/Src/smart_watch.c:53:6:smart_watch_init	3
+../Core/Src/smart_watch.c:99:6:smart_watch_process	1
+../Core/Src/smart_watch.c:116:5:smart_watch_test_sd	6
+../Core/Src/smart_watch.c:169:6:smart_watch_test_display	2
+../Core/Src/smart_watch.c:185:13:mjpeg_video_processing	6
+../Core/Src/smart_watch.c:229:13:file_handler	6
+../Core/Src/smart_watch.c:272:13:parameters_reset	1
+../Core/Src/smart_watch.c:298:13:DMA2D_Init	7
+../Core/Src/smart_watch.c:377:13:DMA2D_CopyBuffer	1
+../Core/Src/smart_watch.c:397:13:SD_Initialize	1
+../Core/Src/smart_watch.c:410:6:lcd_draw	2

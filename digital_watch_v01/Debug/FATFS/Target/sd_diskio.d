@@ -1,9 +1,6 @@
 FATFS/Target/sd_diskio.o: ../FATFS/Target/sd_diskio.c \
- ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
- ../Middlewares/Third_Party/FatFs/src/diskio.h \
- ../Middlewares/Third_Party/FatFs/src/integer.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/ffconf.h \
- ../FATFS/Target/sd_diskio.h ../FATFS/Target/bsp_driver_sd.h \
+ ../Core/Inc/ff_gen_drv.h ../Core/Inc/diskio.h ../Core/Inc/integer.h \
+ ../Core/Inc/ff.h ../Core/Inc/ffconf.h ../Core/Inc/main.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
@@ -45,14 +42,15 @@ FATFS/Target/sd_diskio.o: ../FATFS/Target/sd_diskio.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
- ../FATFS/Target/fatfs_platform.h
-../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
-../Middlewares/Third_Party/FatFs/src/diskio.h:
-../Middlewares/Third_Party/FatFs/src/integer.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../FATFS/Target/ffconf.h:
-../FATFS/Target/sd_diskio.h:
-../FATFS/Target/bsp_driver_sd.h:
+ ../Core/Inc/ff_gen_drv.h ../Core/Inc/sd_diskio.h \
+ ../Core/Inc/bsp_driver_sd.h ../Core/Inc/fatfs_platform.h \
+ ../Core/Inc/AVI_parser.h ../Core/Inc/sd_diskio.h
+../Core/Inc/ff_gen_drv.h:
+../Core/Inc/diskio.h:
+../Core/Inc/integer.h:
+../Core/Inc/ff.h:
+../Core/Inc/ffconf.h:
+../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
@@ -94,4 +92,9 @@ FATFS/Target/sd_diskio.o: ../FATFS/Target/sd_diskio.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
-../FATFS/Target/fatfs_platform.h:
+../Core/Inc/ff_gen_drv.h:
+../Core/Inc/sd_diskio.h:
+../Core/Inc/bsp_driver_sd.h:
+../Core/Inc/fatfs_platform.h:
+../Core/Inc/AVI_parser.h:
+../Core/Inc/sd_diskio.h:

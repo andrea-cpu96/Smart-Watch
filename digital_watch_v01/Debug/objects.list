@@ -47,5 +47,4 @@
 "./Middlewares/Third_Party/FatFs/src/ff.o"
 "./Middlewares/Third_Party/FatFs/src/ff_gen_drv.o"
 "./Middlewares/Third_Party/FatFs/src/option/syscall.o"
-"./Middlewares/Third_Party/FatFs/src/option/unicode.o"
 "./Utilities/JPEG/jpeg_utils.o"

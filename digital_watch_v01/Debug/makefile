@@ -65,8 +65,8 @@ all: main-build
 main-build: digital_watch_v01.elf secondary-outputs
 
 # Tool invocations
-digital_watch_v01.elf digital_watch_v01.map: $(OBJS) $(USER_OBJS) D:\Andrea\Embedded\workspace\digital_watch_v01\STM32H7B0RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "digital_watch_v01.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Andrea\Embedded\workspace\digital_watch_v01\STM32H7B0RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="digital_watch_v01.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+digital_watch_v01.elf digital_watch_v01.map: $(OBJS) $(USER_OBJS) D:\Andrea\Embedded\repositories\Smart-Watch\digital_watch_v01\STM32H7B0RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "digital_watch_v01.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Andrea\Embedded\repositories\Smart-Watch\digital_watch_v01\STM32H7B0RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="digital_watch_v01.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -43,20 +43,24 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
-SD_HandleTypeDef hsd1;
-SPI_HandleTypeDef hspi1;
 
-JPEG_HandleTypeDef JPEG_Handle;
-DMA2D_HandleTypeDef DMA2D_Handle;
-JPEG_ConfTypeDef JPEG_Info;
+DMA2D_HandleTypeDef hdma2d;
+
+JPEG_HandleTypeDef hjpeg;
+
 RTC_HandleTypeDef hrtc;
+
+SD_HandleTypeDef hsd1;
+
+SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-//static void MPU_Config(void);
+void SystemClock_Config(void);
+static void MPU_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_DMA2D_Init(void);
@@ -85,9 +89,8 @@ int main(void)
   /* USER CODE END 1 */
 
   /* MPU Configuration--------------------------------------------------------*/
-  //MPU_Config();
-  SCB_EnableICache();
-  SCB_EnableDCache();
+  MPU_Config();
+
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
@@ -115,17 +118,19 @@ int main(void)
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   GC9A01_init();
-  /* USER CODE END 2 */
-
-  // Application initialization
   smart_watch_init();
-
-  // Application process
   smart_watch_process();
+  /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while(1);
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
 }
 
 /**
@@ -146,7 +151,7 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
 
@@ -158,16 +163,17 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE|RCC_OSCILLATORTYPE_LSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
+  RCC_OscInitStruct.HSICalibrationValue = 64;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 2;
-  RCC_OscInitStruct.PLL.PLLN = 32;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 4;
+  RCC_OscInitStruct.PLL.PLLN = 8;
   RCC_OscInitStruct.PLL.PLLP = 2;
-  RCC_OscInitStruct.PLL.PLLQ = 2;
-  RCC_OscInitStruct.PLL.PLLR = 2;
+  RCC_OscInitStruct.PLL.PLLQ = 128;
+  RCC_OscInitStruct.PLL.PLLR = 3;
   RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_3;
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
   RCC_OscInitStruct.PLL.PLLFRACN = 0;
@@ -182,14 +188,14 @@ void SystemClock_Config(void)
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
                               |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV2;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -217,7 +223,7 @@ static void MX_ADC1_Init(void)
   /** Common config
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV2;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
   hadc1.Init.Resolution = ADC_RESOLUTION_16B;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
@@ -278,22 +284,22 @@ static void MX_DMA2D_Init(void)
   /* USER CODE BEGIN DMA2D_Init 1 */
 
   /* USER CODE END DMA2D_Init 1 */
-  DMA2D_Handle.Instance = DMA2D;
-  DMA2D_Handle.Init.Mode = DMA2D_M2M;
-  DMA2D_Handle.Init.ColorMode = DMA2D_OUTPUT_ARGB8888;
-  DMA2D_Handle.Init.OutputOffset = 0;
-  DMA2D_Handle.LayerCfg[1].InputOffset = 0;
-  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
-  DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-  DMA2D_Handle.LayerCfg[1].InputAlpha = 0;
-  DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA;
-  DMA2D_Handle.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR;
-  DMA2D_Handle.LayerCfg[1].ChromaSubSampling = DMA2D_NO_CSS;
-  if (HAL_DMA2D_Init(&DMA2D_Handle) != HAL_OK)
+  hdma2d.Instance = DMA2D;
+  hdma2d.Init.Mode = DMA2D_M2M;
+  hdma2d.Init.ColorMode = DMA2D_OUTPUT_ARGB8888;
+  hdma2d.Init.OutputOffset = 0;
+  hdma2d.LayerCfg[1].InputOffset = 0;
+  hdma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
+  hdma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  hdma2d.LayerCfg[1].InputAlpha = 0;
+  hdma2d.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA;
+  hdma2d.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR;
+  hdma2d.LayerCfg[1].ChromaSubSampling = DMA2D_NO_CSS;
+  if (HAL_DMA2D_Init(&hdma2d) != HAL_OK)
   {
     Error_Handler();
   }
-  if (HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1) != HAL_OK)
+  if (HAL_DMA2D_ConfigLayer(&hdma2d, 1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -318,8 +324,8 @@ static void MX_JPEG_Init(void)
   /* USER CODE BEGIN JPEG_Init 1 */
 
   /* USER CODE END JPEG_Init 1 */
-  JPEG_Handle.Instance = JPEG;
-  if (HAL_JPEG_Init(&JPEG_Handle) != HAL_OK)
+  hjpeg.Instance = JPEG;
+  if (HAL_JPEG_Init(&hjpeg) != HAL_OK)
   {
     Error_Handler();
   }
@@ -465,7 +471,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(TP1_GPIO_Port, TP1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GC9A01_CS_Pin|GC9A01_DC_Pin|GC9A01_RST_Pin|GC9A01_BL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GC9A01_CS_Pin|GC9A01_DC_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GC9A01_RST_Pin|GC9A01_BL_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PLUS_BTN_Pin MINUS_BTN_Pin */
   GPIO_InitStruct.Pin = PLUS_BTN_Pin|MINUS_BTN_Pin;
@@ -509,13 +518,16 @@ static void MX_GPIO_Init(void)
 /* USER CODE END 4 */
 
  /* MPU Configuration */
-/*
+
 void MPU_Config(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct = {0};
 
+  /* Disables the MPU */
   HAL_MPU_Disable();
 
+  /** Initializes and configures the Region and the memory to be protected
+  */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.Number = MPU_REGION_NUMBER0;
   MPU_InitStruct.BaseAddress = 0x0;
@@ -529,11 +541,11 @@ void MPU_Config(void)
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-
+  /* Enables the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 
 }
-*/
+
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None

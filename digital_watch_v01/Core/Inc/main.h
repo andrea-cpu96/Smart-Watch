@@ -33,6 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
+#include "ff.h"
 
 #include "AVI_parser.h"
 /* USER CODE END Includes */
