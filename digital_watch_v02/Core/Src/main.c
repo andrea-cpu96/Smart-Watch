@@ -63,6 +63,7 @@ static void MX_SDMMC1_SD_Init(void);
 static void MX_SPI1_Init(void);
 /* USER CODE BEGIN PFP */
 static int test_process(void);
+static int print_log(FIL *log_file, TEST_STATUS_t status, char *test_name);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -391,40 +392,72 @@ static void MX_GPIO_Init(void)
 static int test_process(void)
 {
 
-	 char buff[50];
-	 char res[20];
-	 unsigned int bw = 0;
-	 unsigned int btw = 0;
 	 test_pass_t pass = {0};
+	 FIL log;
+
 
 	 if(TEST_DISPLAY)
-		 smart_watch_test_display();
+		 // Sends data to the display to show an image
+		 pass.display_pass = (TEST_STATUS_t)smart_watch_test_display();
+	 else
+		 pass.display_pass = NA;
 
 	 if(TEST_SD)
 		 // Reads all the data from a file caled a000.avi and re-writes them in out.avi
 		 // Requires few minutes to complete
 		 pass.sd_pass = (TEST_STATUS_t)smart_watch_test_sd();
+	 else
+		 pass.sd_pass = NA;
 
-	 if(TEST_MJPEG);
-		 /*** IN PROGRESS ***/
+	 if(TEST_MJPEG)
+		 /* IN PROGRESS */
+	 	 smart_watch_test_mjpeg();
+	 else
+		 pass.mjpeg_pass = NA;
 
-	 FIL log;
 	 if(f_open(&log, "log.txt", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
 		 return -1;
 
- 	 snprintf(res, sizeof(res), "%s", ( pass.sd_pass == PASSED ) ? "PASSED" : "NOT PASSED");
- 	 snprintf(buff, sizeof(buff), "SD_TEST\t%s\n", res);
+	 print_log(&log, pass.display_pass, "DISPLAY_TEST");
+	 print_log(&log, pass.sd_pass, "SD_TEST");
+	 print_log(&log, pass.mjpeg_pass, "MJPEG_TEST");
+
+ 	 f_close(&log);
+
+ 	 return 1;
+
+}
+
+
+static int print_log(FIL *log_file, TEST_STATUS_t status, char *test_name)
+{
+
+	 char buff[50];
+	 char res[20];
+	 unsigned int bw = 0;
+	 unsigned int btw = 0;
+
+	 if(status == NA)
+	 {
+
+		 snprintf(res, sizeof(res), "%s", "NA");
+		 snprintf(buff, sizeof(buff), "%-20s%20s\n\n", test_name, res);
+
+	 }
+	 else
+	 {
+
+		 snprintf(res, sizeof(res), "%s", ( status == PASSED ) ? "PASSED" : "NOT PASSED");
+		 snprintf(buff, sizeof(buff), "%-20s%20s\n\n", test_name, res);
+
+	 }
 
  	 btw = strlen(buff);
- 	 if(f_write(&log, buff, btw, &bw) != FR_OK)
+ 	 if(f_write(log_file, buff, btw, &bw) != FR_OK)
  		return -1;
 
  	 if(bw != btw)
  		return -1;
-
- 	 /*	IN PROGRESS */
-
- 	 f_close(&log);
 
  	 return 1;
 

@@ -123,13 +123,20 @@ int smart_watch_test_sd(void)
 	unsigned int br = 0;
 	unsigned int bw = 0;
 
+
 	if(f_open(&fileToRead, "a000.avi", FA_READ) != FR_OK)
-		while(1);
+		return -1;
 
 	HAL_Delay(1000);
 
 	if(f_open(&fileToWrite, "out.avi", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
-		while(1);
+	{
+
+		f_close(&fileToRead);
+
+		return -1;
+
+	}
 
 	HAL_Delay(1000);
 
@@ -166,18 +173,76 @@ int smart_watch_test_sd(void)
 
 }
 
-void smart_watch_test_display(void)
+int smart_watch_test_display(void)
 {
 
-	uint8_t data[2*240*240+10];
+	uint8_t data1[2*240*240+10];
+	uint8_t data2[2*240*240+10];
+
 
 	for(int i = 0 ; i < 2*240*240 + 10 ; i++)
-		data[i] = 0xf8;
+	{
+		data1[i] = 0xf8;
+		data2[i] = 0x25;
+	}
 
-	lcd_draw(0, 0, 240, 240, data);
-	lcd_draw(0, 0, 240, 240, data);
+	if(lcd_draw(0, 0, 240, 240, data1) < 0)
+		return -1;
+	if(lcd_draw(0, 0, 240, 240, data1) < 0)
+		return -1;
+
+	if(lcd_draw(0, 0, 240, 240, data2) < 0)
+		return -1;
+	if(lcd_draw(0, 0, 240, 240, data2) < 0)
+		return -1;
+
+	return 1;
 
 }
+
+
+void smart_watch_test_mjpeg(void)
+{
+
+	file_handler(0);
+
+	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
+
+	if(video.FrameType == AVI_VIDEO_FRAME)
+	{
+
+		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
+		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+
+		f_close(&MJPEG_File);
+
+		while(Jpeg_HWDecodingEnd == 0);
+
+		if(video.isfirstFrame == 1)
+		{
+
+			video.isfirstFrame = 0;
+
+			HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
+
+			DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+			video.width = JPEG_Info.ImageWidth;
+			video.height = JPEG_Info.ImageHeight;
+			video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
+			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
+
+			video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
+
+		}
+
+		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
+		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+	}
+
+}
+
 
 ////////////////////////////////////////////////////// PRIVATE FUNCTIONS
 
@@ -407,52 +472,56 @@ static void SD_Initialize(void)
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
+int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 {
 
 	   static uint8_t swap = 1;
 	   struct GC9A01_frame frame;
 
+	   int ret = 0;
 
-		// Only half of the frame is handled per time
-		// Alternate the top and bottom half every cycle
-	   	if(swap)
-	   	{
 
-	   		swap = 0;
+	   // Only half of the frame is handled per time
+	   // Alternate the top and bottom half every cycle
+	   if(swap)
+	   {
 
-	        frame.start.X = 0;
-	        frame.start.Y = 0;
-	        frame.end.X = 239;
-	        frame.end.Y = 119;
+		   swap = 0;
 
-	   	}
-	   	else
-	   	{
+	       frame.start.X = 0;
+	       frame.start.Y = 0;
+	       frame.end.X = 239;
+	       frame.end.Y = 119;
 
-	   		swap = 1;
+	   }
+	   else
+	   {
 
-	   		data += ( 240 * 240 );
+		   swap = 1;
 
-	        frame.start.X = 0;
-	        frame.start.Y = 120;
-	        frame.end.X = 239;
-	        frame.end.Y = 239;
+		   data += ( 240 * 240 );
 
-	   	}
+	       frame.start.X = 0;
+	       frame.start.Y = 120;
+	       frame.end.X = 239;
+	       frame.end.Y = 239;
 
-	   	// Sends the block of data in a single time
+	   }
 
-	    GC9A01_set_frame(frame);
-	    GC9A01_write_command(MEM_WR);
+	   // Sends the block of data in a single time
 
-	    GC9A01_set_data_command(ON);
-	    GC9A01_set_chip_select(OFF);
+	   GC9A01_set_frame(frame);
+	   GC9A01_write_command(MEM_WR);
 
-	    uint32_t total_bytes = wd * ht;		// 2 byte per pixel
-	    GC9A01_spi_tx(data, total_bytes);
+	   GC9A01_set_data_command(ON);
+	   GC9A01_set_chip_select(OFF);
 
-	    GC9A01_set_chip_select(ON);
+	   uint32_t total_bytes = wd * ht;		// 2 byte per pixel
+	   ret = GC9A01_spi_tx(data, total_bytes);
+
+	   GC9A01_set_chip_select(ON);
+
+	   return ret;
 
 }
 

@@ -77,10 +77,11 @@ extern __IO uint32_t Jpeg_HWDecodingEnd;
 
 void smart_watch_init(void);
 void smart_watch_process(void);
-void lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
+int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
 
 int smart_watch_test_sd(void);
-void smart_watch_test_display(void);
+int smart_watch_test_display(void);
+void smart_watch_test_mjpeg(void);
 
 
 #endif /* EXAMPLE_USER_CM7_SMART_WATCH_H_ */
