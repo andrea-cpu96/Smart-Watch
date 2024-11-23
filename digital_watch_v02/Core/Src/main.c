@@ -103,11 +103,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA2D_Init();
-  MX_JPEG_Init();
   MX_SDMMC1_SD_Init();
   MX_SPI1_Init();
   //MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
+  HAL_Delay(500);
+  JPEG_Handle.Instance = JPEG;
+  MX_JPEG_Init();
+
   HAL_Delay(500);
   GC9A01_init();
   HAL_Delay(500);
@@ -411,9 +414,10 @@ static int test_process(void)
 
 	 if(TEST_MJPEG)
 		 /* IN PROGRESS */
-	 	 smart_watch_test_mjpeg();
+		 pass.mjpeg_pass = (TEST_STATUS_t)smart_watch_test_mjpeg();
 	 else
 		 pass.mjpeg_pass = NA;
+
 
 	 if(f_open(&log, "log.txt", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
 		 return -1;

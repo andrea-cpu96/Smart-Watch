@@ -199,5 +199,16 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /* USER CODE BEGIN 1 */
+void JPEG_IRQHandler(void)
+{
+  HAL_JPEG_IRQHandler(&JPEG_Handle);
+}
 
+
+void MDMA_IRQHandler()
+{
+  /* Check the interrupt and clear flag */
+  HAL_MDMA_IRQHandler(JPEG_Handle.hdmain);
+  HAL_MDMA_IRQHandler(JPEG_Handle.hdmaout);
+}
 /* USER CODE END 1 */

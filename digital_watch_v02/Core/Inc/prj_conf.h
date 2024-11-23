@@ -11,7 +11,7 @@
 #define TEST						1
 #define TEST_SD						1
 #define TEST_DISPLAY				1
-#define TEST_MJPEG					0
+#define TEST_MJPEG					1
 
 
 typedef enum test_status

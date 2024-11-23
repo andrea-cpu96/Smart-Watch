@@ -7,3 +7,5 @@
 ../Core/Src/stm32h7xx_it.c:157:6:DebugMon_Handler	1
 ../Core/Src/stm32h7xx_it.c:170:6:PendSV_Handler	1
 ../Core/Src/stm32h7xx_it.c:183:6:SysTick_Handler	1
+../Core/Src/stm32h7xx_it.c:202:6:JPEG_IRQHandler	1
+../Core/Src/stm32h7xx_it.c:208:6:MDMA_IRQHandler	1

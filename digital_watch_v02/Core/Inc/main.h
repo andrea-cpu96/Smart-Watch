@@ -65,13 +65,19 @@ extern SPI_HandleTypeDef hspi1;
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
+typedef union
+{
 
+	uint16_t *u16Arr;
+	uint8_t *u8Arr;
+
+}doubleFormat;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
 
 /* USER CODE BEGIN Private defines */
-
+#define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

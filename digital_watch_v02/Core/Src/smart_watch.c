@@ -26,10 +26,12 @@ static void file_handler(uint8_t openFile);
 
 static void parameters_reset(void);
 
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap);
+
 // FATFS can't handle huge files a time,
 // so I separated it into multiple video
 // of 30 minutes each one
-char *file_name[720];
+//char *file_name[720];
 char name[14];
 
 uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE];
@@ -45,9 +47,9 @@ video_t video;													// Video data structure
 
 
 // Pre elaborated data buffer
-uint8_t	preElab_data[200*1024];
+uint8_t	preElab_data[300*1024];
 // Output data buffer (format RGB565)
-uint8_t output_data[100*1024];
+uint8_t output_data[200*1024];
 
 
 void smart_watch_init(void)
@@ -173,6 +175,7 @@ int smart_watch_test_sd(void)
 
 }
 
+
 int smart_watch_test_display(void)
 {
 
@@ -186,14 +189,14 @@ int smart_watch_test_display(void)
 		data2[i] = 0x25;
 	}
 
-	if(lcd_draw(0, 0, 240, 240, data1) < 0)
+	if(lcd_draw(0, 0, 240, 240, data1, 0) < 0)
 		return -1;
-	if(lcd_draw(0, 0, 240, 240, data1) < 0)
+	if(lcd_draw(0, 0, 240, 240, data1, 1) < 0)
 		return -1;
 
-	if(lcd_draw(0, 0, 240, 240, data2) < 0)
+	if(lcd_draw(0, 0, 240, 240, data2, 0) < 0)
 		return -1;
-	if(lcd_draw(0, 0, 240, 240, data2) < 0)
+	if(lcd_draw(0, 0, 240, 240, data2, 1) < 0)
 		return -1;
 
 	return 1;
@@ -201,8 +204,11 @@ int smart_watch_test_display(void)
 }
 
 
-void smart_watch_test_mjpeg(void)
+int smart_watch_test_mjpeg(void)
 {
+
+	uint8_t swap = 0;
+
 
 	file_handler(0);
 
@@ -212,9 +218,14 @@ void smart_watch_test_mjpeg(void)
 	{
 
 		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
-		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+		if(JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess) < 0)
+		{
 
-		f_close(&MJPEG_File);
+			f_close(&MJPEG_File);
+
+			return -1;
+
+		}
 
 		while(Jpeg_HWDecodingEnd == 0);
 
@@ -239,12 +250,140 @@ void smart_watch_test_mjpeg(void)
 		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
 		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
+		doubleFormat pOut;
+		pOut.u8Arr = (uint8_t *)output_data;
+
+		depth24To16(&pOut, ( video.width * video.height ), 3, swap);
+
+		if(lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap) < 0)
+		{
+
+			f_close(&MJPEG_File);
+
+			return -1;
+
+		}
+
+		swap = ( ( swap ) ? 0 : 1 );
+
+		if(lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap) < 0)
+		{
+
+			f_close(&MJPEG_File);
+
+			return -1;
+
+		}
+
 	}
+	else
+	{
+
+		f_close(&MJPEG_File);
+
+		return -1;
+
+	}
+
+	f_close(&MJPEG_File);
+
+	return 1;
+
+}
+
+
+int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, uint8_t swap)
+{
+
+	   struct GC9A01_frame frame;
+
+	   int ret = 0;
+
+
+	   // Only half of the frame is handled per time
+	   // Alternate the top and bottom half every cycle
+	   if(swap)
+	   {
+
+	       frame.start.X = 0;
+	       frame.start.Y = 0;
+	       frame.end.X = 239;
+	       frame.end.Y = 119;
+
+	   }
+	   else
+	   {
+
+		   data += ( 240 * 240 );
+
+	       frame.start.X = 0;
+	       frame.start.Y = 120;
+	       frame.end.X = 239;
+	       frame.end.Y = 239;
+
+	   }
+
+	   // Sends the block of data in a single time
+
+	   GC9A01_set_frame(frame);
+	   GC9A01_write_command(MEM_WR);
+
+	   GC9A01_set_data_command(ON);
+	   GC9A01_set_chip_select(OFF);
+
+	   uint32_t total_bytes = wd * ht;		// 2 byte per pixel
+	   ret = GC9A01_spi_tx(data, total_bytes);
+
+	   GC9A01_set_chip_select(ON);
+
+	   return ret;
 
 }
 
 
 ////////////////////////////////////////////////////// PRIVATE FUNCTIONS
+
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap)
+{
+
+	uint8_t b;
+	uint8_t g;
+	uint8_t r;
+
+	int i = 0;
+
+/*
+	// Only half of the frame is handled per time
+	// Alternate the top and bottom half every cycle
+    if(swap)
+    {
+
+    	i = 0;
+    	length /= 2;
+    	length += 1000;
+
+    }
+    else
+    {
+
+    	i = ( length / 2 ) - 2000;
+
+    }
+*/
+
+	for( ; i < length ; i++)
+	{
+
+		b = pxArr->u8Arr[i*bpx];
+		g = pxArr->u8Arr[i*bpx+1];
+		r = pxArr->u8Arr[i*bpx+2];
+
+		pxArr->u16Arr[i] = color565(r, g, b);
+		pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
+
+	}
+
+}
 
 
 static void mjpeg_video_processing(void)
@@ -257,8 +396,6 @@ static void mjpeg_video_processing(void)
 
 		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
 		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
-
-		f_close(&MJPEG_File);
 
 		while(Jpeg_HWDecodingEnd == 0);
 
@@ -470,59 +607,3 @@ static void SD_Initialize(void)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
-int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
-{
-
-	   static uint8_t swap = 1;
-	   struct GC9A01_frame frame;
-
-	   int ret = 0;
-
-
-	   // Only half of the frame is handled per time
-	   // Alternate the top and bottom half every cycle
-	   if(swap)
-	   {
-
-		   swap = 0;
-
-	       frame.start.X = 0;
-	       frame.start.Y = 0;
-	       frame.end.X = 239;
-	       frame.end.Y = 119;
-
-	   }
-	   else
-	   {
-
-		   swap = 1;
-
-		   data += ( 240 * 240 );
-
-	       frame.start.X = 0;
-	       frame.start.Y = 120;
-	       frame.end.X = 239;
-	       frame.end.Y = 239;
-
-	   }
-
-	   // Sends the block of data in a single time
-
-	   GC9A01_set_frame(frame);
-	   GC9A01_write_command(MEM_WR);
-
-	   GC9A01_set_data_command(ON);
-	   GC9A01_set_chip_select(OFF);
-
-	   uint32_t total_bytes = wd * ht;		// 2 byte per pixel
-	   ret = GC9A01_spi_tx(data, total_bytes);
-
-	   GC9A01_set_chip_select(ON);
-
-	   return ret;
-
-}
-
-

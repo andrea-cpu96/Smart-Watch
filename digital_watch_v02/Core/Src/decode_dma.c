@@ -56,7 +56,7 @@ uint32_t Input_frameIndex;
   * @param  DestAddress : YCbCr destination Frame Buffer Address.
   * @retval None
   */
-uint32_t JPEG_Decode_DMA(JPEG_HandleTypeDef *hjpeg, uint32_t FrameSourceAddress ,uint32_t FrameSize, uint32_t DestAddress)
+int JPEG_Decode_DMA(JPEG_HandleTypeDef *hjpeg, uint32_t FrameSourceAddress ,uint32_t FrameSize, uint32_t DestAddress)
 {
   JPEGSourceAddress =  FrameSourceAddress ;
   FrameBufferAddress = DestAddress;
@@ -66,10 +66,11 @@ uint32_t JPEG_Decode_DMA(JPEG_HandleTypeDef *hjpeg, uint32_t FrameSourceAddress 
   Jpeg_HWDecodingEnd = 0;
   
   /* Start JPEG decoding with DMA method */
-  HAL_JPEG_Decode_DMA(hjpeg ,(uint8_t *)JPEGSourceAddress ,CHUNK_SIZE_IN ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT);
+  if(HAL_JPEG_Decode_DMA(hjpeg ,(uint8_t *)JPEGSourceAddress ,CHUNK_SIZE_IN ,(uint8_t *)FrameBufferAddress ,CHUNK_SIZE_OUT) != HAL_OK)
+	  return -1;
   
   
-  return 0;
+  return 1;
   
 }
 
