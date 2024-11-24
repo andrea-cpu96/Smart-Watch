@@ -1,10 +1,10 @@
 ../Core/Src/smart_watch.c:55:6:smart_watch_init	3
-../Core/Src/smart_watch.c:101:6:smart_watch_process	1
-../Core/Src/smart_watch.c:118:5:smart_watch_test_sd	6
-../Core/Src/smart_watch.c:179:5:smart_watch_test_display	6
-../Core/Src/smart_watch.c:207:5:smart_watch_test_mjpeg	9
-../Core/Src/smart_watch.c:295:5:lcd_draw	2
-../Core/Src/smart_watch.c:346:13:depth24To16	2
+../Core/Src/smart_watch.c:90:6:smart_watch_process	1
+../Core/Src/smart_watch.c:107:5:smart_watch_test_sd	6
+../Core/Src/smart_watch.c:168:5:smart_watch_test_display	6
+../Core/Src/smart_watch.c:196:5:smart_watch_test_mjpeg	9
+../Core/Src/smart_watch.c:297:5:lcd_draw	2
+../Core/Src/smart_watch.c:348:13:depth24To16	3
 ../Core/Src/smart_watch.c:389:13:mjpeg_video_processing	6
 ../Core/Src/smart_watch.c:431:13:file_handler	6
 ../Core/Src/smart_watch.c:474:13:parameters_reset	1

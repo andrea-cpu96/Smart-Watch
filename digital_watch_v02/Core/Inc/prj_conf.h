@@ -9,8 +9,8 @@
 #define INC_PRJ_CONF_H_
 
 #define TEST						1
-#define TEST_SD						1
-#define TEST_DISPLAY				1
+#define TEST_SD						0
+#define TEST_DISPLAY				0
 #define TEST_MJPEG					1
 
 

@@ -68,24 +68,13 @@ void smart_watch_init(void)
 		// Init the SD Card
 	    SD_Initialize();
 
-	    //if(BSP_SD_IsDetected())
-	    //{
+	    // Register the file system object to the FatFs module
+	    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
+	    {
 
-	      // Register the file system object to the FatFs module
-	      if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
-	      {
+	    	while(1);
 
-	    	  while(1);
-
-	      }
-
-	    //}
-	    //else
-  		//{
-
-  			//while(1);
-
-  		//}
+	    }
 
   	}
 	else
@@ -207,18 +196,82 @@ int smart_watch_test_display(void)
 int smart_watch_test_mjpeg(void)
 {
 
-	uint8_t swap = 0;
+	static uint8_t swap = 0;
+
+	unsigned long tempStart;
+	unsigned long tempStop;
+	unsigned long tempDiff[3];
 
 
 	file_handler(0);
 
-	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
-
-	if(video.FrameType == AVI_VIDEO_FRAME)
+	for(int i = 0 ; i < 100 ; i++)
 	{
 
-		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
-		if(JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess) < 0)
+		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
+
+		if(video.FrameType == AVI_VIDEO_FRAME)
+		{
+
+			AVI_Handel.CurrentImage++;
+			video.frameCount++;
+
+			// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
+			if(JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess) < 0)
+			{
+
+				f_close(&MJPEG_File);
+
+				return -1;
+
+			}
+
+			while(Jpeg_HWDecodingEnd == 0);
+
+			if(video.isfirstFrame == 1)
+			{
+
+				video.isfirstFrame = 0;
+
+				HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
+
+				DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+				video.width = JPEG_Info.ImageWidth;
+				video.height = JPEG_Info.ImageHeight;
+				video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
+				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
+
+				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
+
+			}
+
+			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
+			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+			doubleFormat pOut;
+			pOut.u8Arr = (uint8_t *)output_data;
+
+			tempStart = HAL_GetTick();
+
+			depth24To16(&pOut, ( video.width * video.height ), 3, swap);
+
+			tempStop = HAL_GetTick();
+			tempDiff[0] = ( ( tempStop - tempStart ) );
+
+			if(lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap) < 0)
+			{
+
+				f_close(&MJPEG_File);
+
+				return -1;
+
+			}
+
+			swap = ( ( swap ) ? 0 : 1 );
+
+		}
+		else
 		{
 
 			f_close(&MJPEG_File);
@@ -227,61 +280,10 @@ int smart_watch_test_mjpeg(void)
 
 		}
 
-		while(Jpeg_HWDecodingEnd == 0);
+		tempStop = HAL_GetTick();
+		tempDiff[1] = ( ( tempStop - tempStart ) - tempDiff[0]);
 
-		if(video.isfirstFrame == 1)
-		{
-
-			video.isfirstFrame = 0;
-
-			HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
-
-			DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
-
-			video.width = JPEG_Info.ImageWidth;
-			video.height = JPEG_Info.ImageHeight;
-			video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
-			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
-
-			video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
-
-		}
-
-		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
-
-		doubleFormat pOut;
-		pOut.u8Arr = (uint8_t *)output_data;
-
-		depth24To16(&pOut, ( video.width * video.height ), 3, swap);
-
-		if(lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap) < 0)
-		{
-
-			f_close(&MJPEG_File);
-
-			return -1;
-
-		}
-
-		swap = ( ( swap ) ? 0 : 1 );
-
-		if(lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap) < 0)
-		{
-
-			f_close(&MJPEG_File);
-
-			return -1;
-
-		}
-
-	}
-	else
-	{
-
-		f_close(&MJPEG_File);
-
-		return -1;
+		tempDiff[2] = 0;
 
 	}
 
@@ -352,7 +354,6 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8
 
 	int i = 0;
 
-/*
 	// Only half of the frame is handled per time
 	// Alternate the top and bottom half every cycle
     if(swap)
@@ -369,7 +370,6 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8
     	i = ( length / 2 ) - 2000;
 
     }
-*/
 
 	for( ; i < length ; i++)
 	{
