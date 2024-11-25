@@ -1,4 +1,4 @@
-../Core/Src/AVI_parser.c:42:10:__AVI_SearchID	6
+../Core/Src/AVI_parser.c:42:10:__AVI_SearchID	7
 ../Core/Src/AVI_parser.c:63:11:__AVI_GetStreamInfo	4
 ../Core/Src/AVI_parser.c:87:11:__AVI_Init	28
 ../Core/Src/AVI_parser.c:289:10:AVI_ParserInit	3

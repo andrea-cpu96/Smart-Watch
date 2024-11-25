@@ -205,7 +205,7 @@ int smart_watch_test_mjpeg(void)
 
 	file_handler(0);
 
-	for(int i = 0 ; i < 100 ; i++)
+	for(int i = 0 ; i < 1200 ; i++)
 	{
 
 		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
