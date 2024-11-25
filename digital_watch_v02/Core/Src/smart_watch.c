@@ -24,6 +24,8 @@ static void SD_Initialize(void);
 static void mjpeg_video_processing(void);
 static void file_handler(uint8_t openFile);
 
+static void clock_normal(void);
+
 static void parameters_reset(void);
 
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap);
@@ -389,10 +391,25 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8
 static void mjpeg_video_processing(void)
 {
 
+	clock_normal();
+
+}
+
+
+static void clock_normal(void)
+{
+
+	static uint8_t swap = 0;
+
+
+	// Save the frame into MJPEG_VideoBuffer
 	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
 	if(video.FrameType == AVI_VIDEO_FRAME)
 	{
+
+		AVI_Handel.CurrentImage++;
+		video.frameCount++;
 
 		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
 		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
@@ -413,15 +430,20 @@ static void mjpeg_video_processing(void)
 			video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
 			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
-			video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
-
-			video.tick_offset = HAL_GetTick();
-			video.frameCount = 1;
-
 		}
 
 		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
 		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+		// Implements the data conversion from RGB888 to RGB565
+		doubleFormat pOut;
+		pOut.u8Arr = (uint8_t *)output_data;
+		depth24To16(&pOut, ( video.width * video.height ), 3, swap);
+
+		// Display the image
+		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
+
+		swap = ( ( swap ) ? 0 : 1 );
 
 	}
 
@@ -431,42 +453,58 @@ static void mjpeg_video_processing(void)
 static void file_handler(uint8_t openFile)
 {
 
-	  // Each file takes 30m
+   // Each file takes 1m
 
-     static uint8_t  new_file_flag = 1;
+   static uint8_t  new_file_flag = 1;
 
 
-     if(new_file_flag || openFile)
-     {
+   if(new_file_flag || openFile)
+   {
 
-    	 if(openFile)
-    		 f_close(&MJPEG_File);
+  	 if(openFile)
+  		 f_close(&MJPEG_File);
 
-    	 new_file_flag = 0;
+  	 new_file_flag = 0;
 
-    	 // Open the MJPEG avi file with read access
-    	 if(f_open(&MJPEG_File, "a000.avi", FA_READ) == FR_OK)
-    	 {
+  	 char file_idx_str[4];
+  	 snprintf(file_idx_str, sizeof(file_idx_str), "%03d", video.file_idx);
+  	 snprintf(name, sizeof(name), "a%s.avi", file_idx_str);
 
-    		 video.isfirstFrame = 1;
+  	 // Open the MJPEG avi file with read access
+  	 if(f_open(&MJPEG_File, name, FA_READ) == FR_OK)
+  	 {
 
-    		 // parse the AVI file Header
-    		 if(AVI_ParserInit(&AVI_Handel, &MJPEG_File, MJPEG_VideoBuffer, MJPEG_VID_BUFFER_SIZE, MJPEG_AudioBuffer, MJPEG_AUD_BUFFER_SIZE) != 0)
-    			 while(1);
+  		 video.isfirstFrame = 1;
 
-    	 }
-    	 else
-    	 {
+  		 // parse the AVI file Header
+  		 if(AVI_ParserInit(&AVI_Handel, &MJPEG_File, MJPEG_VideoBuffer, MJPEG_VID_BUFFER_SIZE, MJPEG_AudioBuffer, MJPEG_AUD_BUFFER_SIZE) != 0)
+  			 while(1);
 
-    		 while(1);
+  	 }
+  	 else
+  	 {
 
-    	 }
+  		 while(1);
 
-     }
+  	 }
 
-     //f_close(&MJPEG_File);
+   }
 
-     new_file_flag = 1;
+   // Check for the end of the video
+   if(AVI_Handel.CurrentImage  >=  AVI_Handel.aviInfo.TotalFrame)
+   {
+
+  	 video.file_idx++;
+		 video.file_idx %= 720;	// Restart the index every 24 files ( 12h )
+
+		 //  wait for the Last DMA2D transfer to ends
+		 HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50);
+
+		 f_close(&MJPEG_File);
+
+		 new_file_flag = 1;
+
+   }
 
 }
 
