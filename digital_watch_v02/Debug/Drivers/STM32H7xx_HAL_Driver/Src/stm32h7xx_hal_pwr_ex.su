@@ -4,7 +4,7 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:512:10:HAL_PWREx_GetVoltageRange	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:538:19:HAL_PWREx_ControlStopModeVoltageScaling	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:553:10:HAL_PWREx_GetStopModeVoltageRange	0	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:739:6:HAL_PWREx_EnterSTOP2Mode	0	static,ignoring_inline_asm
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:739:6:HAL_PWREx_EnterSTOP2Mode	4	static,ignoring_inline_asm
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:816:6:HAL_PWREx_EnterSTOPMode	4	static,ignoring_inline_asm
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:939:6:HAL_PWREx_ClearPendingEvent	0	static,ignoring_inline_asm
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:986:6:HAL_PWREx_EnterSTANDBYMode	0	static,ignoring_inline_asm
@@ -13,7 +13,7 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1226:6:HAL_PWREx_DisableFlashPowerDown	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1255:6:HAL_PWREx_EnableMemoryShutOff	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1281:6:HAL_PWREx_DisableMemoryShutOff	0	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1302:6:HAL_PWREx_EnableWakeUpPin	8	static,ignoring_inline_asm
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1302:6:HAL_PWREx_EnableWakeUpPin	4	static,ignoring_inline_asm
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1344:6:HAL_PWREx_DisableWakeUpPin	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1369:10:HAL_PWREx_GetWakeupFlag	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1394:19:HAL_PWREx_ClearWakeupFlag	0	static
@@ -39,8 +39,8 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1882:10:HAL_PWREx_GetTemperatureLevel	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1913:10:HAL_PWREx_GetVBATLevel	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1944:24:HAL_PWREx_GetMMCVoltage	0	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1976:6:HAL_PWREx_ConfigAVD	0	static
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:1976:6:HAL_PWREx_ConfigAVD	4	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:2025:6:HAL_PWREx_EnableAVD	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:2035:6:HAL_PWREx_DisableAVD	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:2131:13:HAL_PWREx_AVDCallback	0	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:2046:6:HAL_PWREx_PVD_AVD_IRQHandler	8	static
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c:2046:6:HAL_PWREx_PVD_AVD_IRQHandler	16	static

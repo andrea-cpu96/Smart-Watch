@@ -6,7 +6,7 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:327:13:HAL_IncTick	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:338:17:HAL_GetTick	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:347:10:HAL_GetTickPrio	0	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:356:19:HAL_SetTickFreq	8	static
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:356:19:HAL_SetTickFreq	16	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:389:21:HAL_GetTickFreq	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:405:13:HAL_Delay	16	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:431:13:HAL_SuspendTick	0	static
@@ -43,7 +43,7 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1065:6:HAL_SetFMCMemorySwappingConfig	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1077:10:HAL_GetFMCMemorySwappingConfig	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1094:6:HAL_EXTI_EdgeConfig	8	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1120:6:HAL_EXTI_GenerateSWInterrupt	4	static
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1120:6:HAL_EXTI_GenerateSWInterrupt	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1135:6:HAL_EXTI_D1_ClearFlag	0	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1170:6:HAL_EXTI_D1_EventInputConfig	4	static
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1170:6:HAL_EXTI_D1_EventInputConfig	8	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c:1264:6:HAL_EXTI_D3_EventInputConfig	8	static

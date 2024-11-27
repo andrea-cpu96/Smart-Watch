@@ -1,5 +1,5 @@
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:3548:17:SD_FindSCR	10
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:3717:10:SD_SwitchSpeed	12
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:3548:17:SD_FindSCR.constprop	11
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:616:13:HAL_SD_MspInit	1
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:631:13:HAL_SD_MspDeInit	1
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:559:19:HAL_SD_DeInit	2
@@ -22,13 +22,13 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2307:19:HAL_SD_GetCardStatus	16
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2377:19:HAL_SD_GetCardInfo	1
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2402:19:HAL_SD_ConfigWideBusOperation	23
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:338:19:HAL_SD_Init	10
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2566:19:HAL_SD_ConfigSpeedBusOperation	17
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2864:25:HAL_SD_GetCardState	2
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:338:19:HAL_SD_Init	9
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2566:19:HAL_SD_ConfigSpeedBusOperation	16
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2887:19:HAL_SD_Abort	13
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2983:19:HAL_SD_Abort_IT	3
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:2983:19:HAL_SD_Abort_IT	4
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:4090:13:HAL_SDEx_Read_DMADoubleBuf0CpltCallback	1
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:4105:13:HAL_SDEx_Read_DMADoubleBuf1CpltCallback	1
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:4120:13:HAL_SDEx_Write_DMADoubleBuf0CpltCallback	1
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:4135:13:HAL_SDEx_Write_DMADoubleBuf1CpltCallback	1
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:1533:6:HAL_SD_IRQHandler	31
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c:1533:6:HAL_SD_IRQHandler	32

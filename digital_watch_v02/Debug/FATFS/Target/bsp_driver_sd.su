@@ -5,7 +5,7 @@
 ../FATFS/Target/bsp_driver_sd.c:161:16:BSP_SD_WriteBlocks_DMA	8	static
 ../FATFS/Target/bsp_driver_sd.c:183:16:BSP_SD_Erase	8	static
 ../FATFS/Target/bsp_driver_sd.c:207:16:BSP_SD_GetCardState	8	static
-../FATFS/Target/bsp_driver_sd.c:217:13:BSP_SD_GetCardInfo	8	static
+../FATFS/Target/bsp_driver_sd.c:217:13:BSP_SD_GetCardInfo	0	static
 ../FATFS/Target/bsp_driver_sd.c:262:13:BSP_SD_AbortCallback	0	static
 ../FATFS/Target/bsp_driver_sd.c:231:6:HAL_SD_AbortCallback	8	static
 ../FATFS/Target/bsp_driver_sd.c:272:13:BSP_SD_WriteCpltCallback	0	static

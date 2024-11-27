@@ -1,10 +1,8 @@
-../Core/Src/smart_watch.c:350:13:depth24To16	4
-../Core/Src/smart_watch.c:453:13:file_handler	7
-../Core/Src/smart_watch.c:538:13:DMA2D_Init	7
-../Core/Src/smart_watch.c:617:13:DMA2D_CopyBuffer	1
+../Core/Src/smart_watch.c:453:13:file_handler.constprop	5
+../Core/Src/smart_watch.c:538:13:DMA2D_Init.constprop	7
 ../Core/Src/smart_watch.c:57:6:smart_watch_init	3
+../Core/Src/smart_watch.c:92:6:smart_watch_process	10
 ../Core/Src/smart_watch.c:109:5:smart_watch_test_sd	6
-../Core/Src/smart_watch.c:299:5:lcd_draw	2
-../Core/Src/smart_watch.c:92:6:smart_watch_process	6
 ../Core/Src/smart_watch.c:170:5:smart_watch_test_display	5
-../Core/Src/smart_watch.c:198:5:smart_watch_test_mjpeg	9
+../Core/Src/smart_watch.c:198:5:smart_watch_test_mjpeg	12
+../Core/Src/smart_watch.c:299:5:lcd_draw	2

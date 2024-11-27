@@ -318,7 +318,7 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 	   else
 	   {
 
-		   data += ( 240 * 240 );
+		   data += ( 240 * 240 ) ;
 
 	       frame.start.X = 0;
 	       frame.start.Y = 120;

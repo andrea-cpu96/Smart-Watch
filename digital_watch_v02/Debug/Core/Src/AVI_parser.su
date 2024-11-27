@@ -1,5 +1,5 @@
-../Core/Src/AVI_parser.c:42:10:__AVI_SearchID	12	static
+../Core/Src/AVI_parser.c:42:10:__AVI_SearchID	16	static
 ../Core/Src/AVI_parser.c:63:11:__AVI_GetStreamInfo	0	static
-../Core/Src/AVI_parser.c:87:11:__AVI_Init	16	static
-../Core/Src/AVI_parser.c:289:10:AVI_ParserInit	24	static
+../Core/Src/AVI_parser.c:87:11:__AVI_Init	20	static
+../Core/Src/AVI_parser.c:289:10:AVI_ParserInit	32	static
 ../Core/Src/AVI_parser.c:323:10:AVI_GetFrame	32	static
