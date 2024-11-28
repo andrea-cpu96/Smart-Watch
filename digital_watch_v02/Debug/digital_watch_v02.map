@@ -8607,37 +8607,36 @@ LOAD D:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x080027ac        0xc ./Core/Src/decode_dma.o
                 0x080027ac                HAL_JPEG_DecodeCpltCallback
  .text.SystemClock_Config
-                0x080027b8       0xb0 ./Core/Src/main.o
+                0x080027b8       0xb4 ./Core/Src/main.o
                 0x080027b8                SystemClock_Config
  .text.startup.main
-                0x08002868      0x280 ./Core/Src/main.o
-                0x08002868                main
+                0x0800286c      0x280 ./Core/Src/main.o
+                0x0800286c                main
  .text.Error_Handler
-                0x08002ae8        0x4 ./Core/Src/main.o
-                0x08002ae8                Error_Handler
+                0x08002aec        0x4 ./Core/Src/main.o
+                0x08002aec                Error_Handler
  .text.file_handler.constprop.0
-                0x08002aec       0xc0 ./Core/Src/smart_watch.o
+                0x08002af0       0xc0 ./Core/Src/smart_watch.o
  .text.DMA2D_Init.constprop.0
-                0x08002bac       0x98 ./Core/Src/smart_watch.o
+                0x08002bb0       0x98 ./Core/Src/smart_watch.o
  .text.smart_watch_init
-                0x08002c44       0x5c ./Core/Src/smart_watch.o
-                0x08002c44                smart_watch_init
+                0x08002c48       0x5c ./Core/Src/smart_watch.o
+                0x08002c48                smart_watch_init
  .text.smart_watch_process
-                0x08002ca0      0x1f8 ./Core/Src/smart_watch.o
-                0x08002ca0                smart_watch_process
+                0x08002ca4      0x1f8 ./Core/Src/smart_watch.o
+                0x08002ca4                smart_watch_process
  .text.HAL_MspInit
-                0x08002e98       0x24 ./Core/Src/stm32h7xx_hal_msp.o
-                0x08002e98                HAL_MspInit
+                0x08002e9c       0x24 ./Core/Src/stm32h7xx_hal_msp.o
+                0x08002e9c                HAL_MspInit
  .text.HAL_DMA2D_MspInit
-                0x08002ebc       0x34 ./Core/Src/stm32h7xx_hal_msp.o
-                0x08002ebc                HAL_DMA2D_MspInit
+                0x08002ec0       0x34 ./Core/Src/stm32h7xx_hal_msp.o
+                0x08002ec0                HAL_DMA2D_MspInit
  .text.HAL_JPEG_MspInit
-                0x08002ef0      0x100 ./Core/Src/stm32h7xx_hal_msp.o
-                0x08002ef0                HAL_JPEG_MspInit
+                0x08002ef4      0x100 ./Core/Src/stm32h7xx_hal_msp.o
+                0x08002ef4                HAL_JPEG_MspInit
  .text.HAL_SD_MspInit
-                0x08002ff0      0x124 ./Core/Src/stm32h7xx_hal_msp.o
-                0x08002ff0                HAL_SD_MspInit
- *fill*         0x08003114        0x4 
+                0x08002ff4      0x124 ./Core/Src/stm32h7xx_hal_msp.o
+                0x08002ff4                HAL_SD_MspInit
  .text.HAL_SPI_MspInit
                 0x08003118       0xac ./Core/Src/stm32h7xx_hal_msp.o
                 0x08003118                HAL_SPI_MspInit
@@ -9984,37 +9983,37 @@ LOAD D:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_macro   0x000351c0       0x58 ./Middlewares/Third_Party/FatFs/src/ff.o
  .debug_macro   0x00035218      0x399 ./Middlewares/Third_Party/FatFs/src/ff_gen_drv.o
 
-.debug_line     0x00000000    0x35e77
+.debug_line     0x00000000    0x35e80
  .debug_line    0x00000000     0x13df ./Core/Src/AVI_parser.o
  .debug_line    0x000013df     0x4eb5 ./Core/Src/GC9A01.o
  .debug_line    0x00006294      0xb4a ./Core/Src/decode_dma.o
- .debug_line    0x00006dde     0x10d4 ./Core/Src/main.o
- .debug_line    0x00007eb2     0x149b ./Core/Src/smart_watch.o
- .debug_line    0x0000934d      0xe65 ./Core/Src/stm32h7xx_hal_msp.o
- .debug_line    0x0000a1b2      0xb4e ./Core/Src/stm32h7xx_it.o
- .debug_line    0x0000ad00      0x5c6 ./Core/Src/sysmem.o
- .debug_line    0x0000b2c6      0xbbb ./Core/Src/system_stm32h7xx.o
- .debug_line    0x0000be81       0x7a ./Core/Startup/startup_stm32h7b0rbtx.o
- .debug_line    0x0000befb     0x1125 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.o
- .debug_line    0x0000d020      0xfd9 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.o
- .debug_line    0x0000dff9     0x22f2 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma2d.o
- .debug_line    0x000102eb      0xfb0 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.o
- .debug_line    0x0001129b     0x4acd ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_jpeg.o
- .debug_line    0x00015d68     0x1e49 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.o
- .debug_line    0x00017bb1     0x12f4 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.o
- .debug_line    0x00018ea5     0x1d3d ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.o
- .debug_line    0x0001abe2     0x28be ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.o
- .debug_line    0x0001d4a0     0x1fb6 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rtc.o
- .debug_line    0x0001f456     0x31fb ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.o
- .debug_line    0x00022651     0x3353 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.o
- .debug_line    0x000259a4     0x423b ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.o
- .debug_line    0x00029bdf      0xa64 ./FATFS/App/fatfs.o
- .debug_line    0x0002a643      0xbcd ./FATFS/Target/bsp_driver_sd.o
- .debug_line    0x0002b210      0x992 ./FATFS/Target/fatfs_platform.o
- .debug_line    0x0002bba2      0xbfb ./FATFS/Target/sd_diskio.o
- .debug_line    0x0002c79d      0xb19 ./Middlewares/Third_Party/FatFs/src/diskio.o
- .debug_line    0x0002d2b6     0x7f69 ./Middlewares/Third_Party/FatFs/src/ff.o
- .debug_line    0x0003521f      0xc58 ./Middlewares/Third_Party/FatFs/src/ff_gen_drv.o
+ .debug_line    0x00006dde     0x10dd ./Core/Src/main.o
+ .debug_line    0x00007ebb     0x149b ./Core/Src/smart_watch.o
+ .debug_line    0x00009356      0xe65 ./Core/Src/stm32h7xx_hal_msp.o
+ .debug_line    0x0000a1bb      0xb4e ./Core/Src/stm32h7xx_it.o
+ .debug_line    0x0000ad09      0x5c6 ./Core/Src/sysmem.o
+ .debug_line    0x0000b2cf      0xbbb ./Core/Src/system_stm32h7xx.o
+ .debug_line    0x0000be8a       0x7a ./Core/Startup/startup_stm32h7b0rbtx.o
+ .debug_line    0x0000bf04     0x1125 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.o
+ .debug_line    0x0000d029      0xfd9 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.o
+ .debug_line    0x0000e002     0x22f2 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma2d.o
+ .debug_line    0x000102f4      0xfb0 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.o
+ .debug_line    0x000112a4     0x4acd ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_jpeg.o
+ .debug_line    0x00015d71     0x1e49 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.o
+ .debug_line    0x00017bba     0x12f4 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.o
+ .debug_line    0x00018eae     0x1d3d ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.o
+ .debug_line    0x0001abeb     0x28be ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.o
+ .debug_line    0x0001d4a9     0x1fb6 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rtc.o
+ .debug_line    0x0001f45f     0x31fb ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.o
+ .debug_line    0x0002265a     0x3353 ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.o
+ .debug_line    0x000259ad     0x423b ./Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.o
+ .debug_line    0x00029be8      0xa64 ./FATFS/App/fatfs.o
+ .debug_line    0x0002a64c      0xbcd ./FATFS/Target/bsp_driver_sd.o
+ .debug_line    0x0002b219      0x992 ./FATFS/Target/fatfs_platform.o
+ .debug_line    0x0002bbab      0xbfb ./FATFS/Target/sd_diskio.o
+ .debug_line    0x0002c7a6      0xb19 ./Middlewares/Third_Party/FatFs/src/diskio.o
+ .debug_line    0x0002d2bf     0x7f69 ./Middlewares/Third_Party/FatFs/src/ff.o
+ .debug_line    0x00035228      0xc58 ./Middlewares/Third_Party/FatFs/src/ff_gen_drv.o
 
 .debug_str      0x00000000   0x1466d8
  .debug_str     0x00000000   0x13d3f5 ./Core/Src/AVI_parser.o
