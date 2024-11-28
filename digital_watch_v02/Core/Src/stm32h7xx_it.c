@@ -211,4 +211,28 @@ void MDMA_IRQHandler()
   HAL_MDMA_IRQHandler(JPEG_Handle.hdmain);
   HAL_MDMA_IRQHandler(JPEG_Handle.hdmaout);
 }
+
+void EXTI0_IRQHandler(void)
+{
+
+    HAL_GPIO_EXTI_IRQHandler(MINUS_BTN_Pin);
+
+}
+
+
+void EXTI1_IRQHandler(void)
+{
+
+    HAL_GPIO_EXTI_IRQHandler(SET_BTN_Pin);
+
+}
+
+
+void EXTI2_IRQHandler(void)
+{
+
+    HAL_GPIO_EXTI_IRQHandler(PLUS_BTN_Pin);
+
+}
+
 /* USER CODE END 1 */

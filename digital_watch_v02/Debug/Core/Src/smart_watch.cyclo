@@ -6,3 +6,4 @@
 ../Core/Src/smart_watch.c:182:5:smart_watch_test_display	5
 ../Core/Src/smart_watch.c:210:5:smart_watch_test_mjpeg	13
 ../Core/Src/smart_watch.c:322:5:lcd_draw	2
+../Core/Src/smart_watch.c:681:6:HAL_GPIO_EXTI_Callback	1

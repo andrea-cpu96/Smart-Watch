@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#define ORIENTATION 2   // Set the display orientation 0,1,2,3
+#define ORIENTATION 0   // Set the display orientation 0,1,2,3
 
 // Command codes:
 #define COL_ADDR_SET        0x2A

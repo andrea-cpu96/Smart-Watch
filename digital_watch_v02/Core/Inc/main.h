@@ -60,6 +60,13 @@ extern RTC_HandleTypeDef hrtc;
 #define GC9A01_RST_GPIO_Port GPIOB
 #define GC9A01_BL_Pin GPIO_PIN_10
 #define GC9A01_BL_GPIO_Port GPIOB
+
+#define PLUS_BTN_Pin GPIO_PIN_2
+#define PLUS_BTN_GPIO_Port GPIOC
+#define SET_BTN_Pin GPIO_PIN_1
+#define SET_BTN_GPIO_Port GPIOC
+#define MINUS_BTN_Pin GPIO_PIN_0
+#define MINUS_BTN_GPIO_Port GPIOC
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
