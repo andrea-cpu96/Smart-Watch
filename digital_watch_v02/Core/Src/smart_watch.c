@@ -88,9 +88,15 @@ void smart_watch_init(void)
 
 }
 
-
+FIL fileToWrite;
 void smart_watch_process(void)
 {
+
+#ifdef DEBUG_TIME
+	static uint8_t count = 0;
+	if(f_open(&fileToWrite, "time.txt", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
+		while(1);
+#endif
 
 	while(1)
 	{
@@ -100,6 +106,12 @@ void smart_watch_process(void)
 
 		// Video processing unit
 		mjpeg_video_processing();
+
+#ifdef DEBUG_TIME
+		count++;
+		if(count > 100)
+			f_close(&fileToWrite);
+#endif
 
 	}
 
@@ -204,10 +216,17 @@ int smart_watch_test_mjpeg(void)
 	unsigned long tempStop;
 	unsigned long tempDiff[3];
 
+	FIL fileToWrite;
 
 	file_handler(0);
 
-	for(int i = 0 ; i < 1200 ; i++)
+	if(f_open(&fileToWrite, "time.avi", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
+		return -1;
+
+	unsigned int bw = 0;
+	char buff[50];
+
+	for(int i = 0 ; i < 200 ; i++)
 	{
 
 		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
@@ -285,11 +304,15 @@ int smart_watch_test_mjpeg(void)
 		tempStop = HAL_GetTick();
 		tempDiff[1] = ( ( tempStop - tempStart ) - tempDiff[0]);
 
+		snprintf(buff, sizeof(buff), "SPI time = %.2ld\n", tempDiff[1]);
+		f_write(&fileToWrite, buff, sizeof(buff), &bw);
+
 		tempDiff[2] = 0;
 
 	}
 
 	f_close(&MJPEG_File);
+	f_close(&fileToWrite);
 
 	return 1;
 
@@ -440,10 +463,23 @@ static void clock_normal(void)
 		pOut.u8Arr = (uint8_t *)output_data;
 		depth24To16(&pOut, ( video.width * video.height ), 3, swap);
 
+#ifdef DEBUG_TIME
+		uint32_t tempStart = HAL_GetTick();
+#endif
+
 		// Display the image
 		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
 
 		swap = ( ( swap ) ? 0 : 1 );
+
+#ifdef DEBUG_TIME
+		unsigned int bw = 0;
+		char buff[50];
+		long unsigned int tempStop = HAL_GetTick();
+		long unsigned int tempDiff = ( ( tempStop - tempStart ) );
+		snprintf(buff, sizeof(buff), "SPI time = %ld\n", tempDiff);
+		f_write(&fileToWrite, buff, sizeof(buff), &bw);
+#endif
 
 	}
 

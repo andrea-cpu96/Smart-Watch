@@ -7,3 +7,5 @@
 ../Core/Src/stm32h7xx_hal_msp.c:290:6:HAL_SD_MspDeInit	2
 ../Core/Src/stm32h7xx_hal_msp.c:327:6:HAL_SPI_MspInit	3
 ../Core/Src/stm32h7xx_hal_msp.c:374:6:HAL_SPI_MspDeInit	2
+../Core/Src/stm32h7xx_hal_msp.c:397:6:HAL_RTC_MspInit	3
+../Core/Src/stm32h7xx_hal_msp.c:417:6:HAL_RTC_MspDeInit	2
