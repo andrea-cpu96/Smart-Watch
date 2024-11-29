@@ -24,11 +24,15 @@ static void SD_Initialize(void);
 static void mjpeg_video_processing(void);
 static void file_handler(uint8_t openFile);
 
+static void clock_setting(void);
 static void clock_normal(void);
 
 static void parameters_reset(void);
 
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap);
+
+static void show_frame(uint32_t frame_num);
+
 
 // FATFS can't handle huge files a time,
 // so I separated it into multiple video
@@ -414,7 +418,23 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8
 static void mjpeg_video_processing(void)
 {
 
-	clock_normal();
+	switch(video.video_mode)
+	{
+
+		default:
+		case SETTING_MODE:
+
+			clock_setting();
+
+			break;
+
+		case NORMAL_MODE:
+
+			clock_normal();
+
+			break;
+
+	}
 
 }
 
@@ -480,6 +500,140 @@ static void clock_normal(void)
 		snprintf(buff, sizeof(buff), "SPI time = %ld\n", tempDiff);
 		f_write(&fileToWrite, buff, sizeof(buff), &bw);
 #endif
+
+	}
+
+}
+
+
+static void clock_setting(void)
+{
+
+	switch(video.set)
+	{
+
+		default:
+		case SET_IDLE:
+
+			while(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin));
+
+			video.set = SET_HOURS;
+
+			break;
+
+		case SET_HOURS:
+
+			show_frame(0);
+
+			// If button plus
+			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
+			{
+
+				HAL_Delay(200);
+
+				video.time.Hours++;
+				video.time.Hours %= 12;
+
+				video.file_idx = ( video.time.Hours * 60 );
+
+				file_handler(1);
+
+			}
+
+			// If button minus
+			if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
+			{
+
+				HAL_Delay(200);
+
+				if(video.time.Hours > 0)
+					video.time.Hours--;
+				else
+					video.time.Hours = 11;
+
+				video.file_idx = ( video.time.Hours * 60 );
+
+				file_handler(1);
+
+			}
+
+			// If button settings
+			if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
+			{
+
+				HAL_Delay(200);
+
+				video.set = SET_MINUTES;
+
+			}
+
+			break;
+
+		case SET_MINUTES:
+
+			show_frame(0);
+
+			// If button plus
+			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
+			{
+
+				HAL_Delay(200);
+
+				video.time.Minutes++;
+				video.time.Minutes %= 60;
+
+				video.file_idx += video.time.Minutes;
+
+				file_handler(1);
+
+				video.file_idx -= video.time.Minutes;
+
+
+			}
+
+			// If button minus
+			if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
+			{
+
+				HAL_Delay(200);
+
+				if(video.time.Minutes > 0)
+					video.time.Minutes--;
+				else
+					video.time.Minutes = 59;
+
+				video.file_idx += video.time.Minutes;
+
+				file_handler(1);
+
+				video.file_idx -= video.time.Minutes;
+
+			}
+
+			// If button settings
+			if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
+			{
+
+				HAL_Delay(200);
+
+				video.file_idx += video.time.Minutes;
+
+				video.isfirstFrame = 1;
+
+				video.set = SET_START;
+
+			}
+
+			break;
+
+		case SET_START:
+
+			file_handler(1);
+
+			video.set = SET_IDLE;
+			video.video_mode = NORMAL_MODE;
+
+			break;
 
 	}
 
@@ -553,6 +707,10 @@ static void parameters_reset(void)
 	video.xPos = 0;
 	video.yPos = 0;
 
+	video.time.Hours = 0;
+	video.time.Minutes = 0;
+	video.time.Seconds = 0;
+
 	video.file_idx = 0;
 	video.FrameType = 0;
 
@@ -561,6 +719,8 @@ static void parameters_reset(void)
 	video.actual_time = 0;
 	video.tick_offset = 0;
 	video.jpegOutDataAdreess = (uint32_t)preElab_data;
+
+	video.display_ts = video.time.Seconds;
 
 	video.display_status = DISPLAY_ON;
 
@@ -674,6 +834,78 @@ static void SD_Initialize(void)
 {
 
   BSP_SD_Init();
+
+}
+
+
+static void show_frame(uint32_t frame_num)
+{
+
+	static uint8_t swap = 0;
+
+
+	for(int i = 0 ; i < frame_num ; i++)
+	{
+
+		AVI_GetFrame(&AVI_Handel, &MJPEG_File, 1);
+
+		AVI_Handel.CurrentImage++;
+		video.frameCount++;
+
+	}
+
+	for(int i = 0 ; i < 2 ; i++)
+	{
+
+		// Save the frame into MJPEG_VideoBuffer
+		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
+
+		if(video.FrameType == AVI_VIDEO_FRAME)
+		{
+
+			AVI_Handel.CurrentImage++;
+			video.frameCount++;
+
+			// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
+			JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+
+			while(Jpeg_HWDecodingEnd == 0);
+
+			if(video.isfirstFrame == 1)
+			{
+
+				video.isfirstFrame = 0;
+
+				HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
+
+				DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
+
+				video.width = JPEG_Info.ImageWidth;
+				video.height = JPEG_Info.ImageHeight;
+				video.xPos = ( ( LCD_X_SIZE - video.width ) / 2 );					// Center the image in x
+				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
+
+				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
+
+			}
+
+			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
+			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+			//video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
+
+			// Implements the data conversion from RGB888 to RGB565
+			doubleFormat pOut;
+			pOut.u8Arr = (uint8_t *)output_data;
+			depth24To16(&pOut, ( video.width * video.height ), 3, swap);
+			lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
+
+			swap = ( ( swap ) ? 0 : 1 );
+
+
+		}
+
+	}
 
 }
 

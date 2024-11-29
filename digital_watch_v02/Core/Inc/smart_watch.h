@@ -44,7 +44,7 @@ enum settings
 typedef struct
 {
 
-	//RTC_TimeTypeDef time;
+	RTC_TimeTypeDef time;
 
 	uint16_t file_idx;
 	uint8_t isfirstFrame;
