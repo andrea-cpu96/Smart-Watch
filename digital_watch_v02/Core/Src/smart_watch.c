@@ -312,8 +312,6 @@ int smart_watch_test_mjpeg(void)
 				video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
 				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
-				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
-
 			}
 
 			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
@@ -401,7 +399,18 @@ static void clock_normal(void)
 	// Save the frame into MJPEG_VideoBuffer
 	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
-	if(video.FrameType == AVI_VIDEO_FRAME)
+	if(video.frameToSkip > 0)
+	{
+
+		// Skip frames until the the watch time is
+		// synchronized with the actual time
+
+		video.frameToSkip--;
+		AVI_Handel.CurrentImage++;
+		video.frameCount++;
+
+	}
+	else if(video.FrameType == AVI_VIDEO_FRAME)
 	{
 
 		AVI_Handel.CurrentImage++;
@@ -425,6 +434,13 @@ static void clock_normal(void)
 			video.height = JPEG_Info.ImageHeight;
 			video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
 			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
+
+			video.frame_time = ( AVI_Handel.aviInfo.SecPerFrame / 1000.0 );
+			video.tick_offset = HAL_GetTick();									// Tick offset from 0
+
+			video.frameCount = 1;												// Reset the count here for every first frame of the minute chunk
+
+			HAL_RTC_SetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
 
 		}
 
@@ -453,6 +469,22 @@ static void clock_normal(void)
 		snprintf(buff, sizeof(buff), "SPI time = %ld\n", tempDiff);
 		f_write(&fileToWrite, buff, sizeof(buff), &bw);
 #endif
+
+
+/************************* Synchronization ************************/
+
+		video.actual_time = ( HAL_GetTick() - video.tick_offset );
+		float watch_time = ( video.frameCount * video.frame_time );
+		video.frameToSkip = ( ( video.actual_time - watch_time ) / video.frame_time );
+
+		if(video.frameToSkip < 0)
+			video.frameToSkip = 0;
+
+/******************************************************************/
+
+		RTC_DateTypeDef sDate = {0};
+		HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+		HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 
 	}
 
@@ -580,7 +612,7 @@ static void clock_setting(void)
 
 		case SET_START:
 
-			file_handler(1);
+			file_handler(1);							// Start froma the first frame
 
 			video.set = SET_IDLE;
 			video.video_mode = NORMAL_MODE;
@@ -736,8 +768,6 @@ static void show_frame(uint32_t frame_num)
 				video.xPos = ( ( LCD_X_SIZE - video.width ) / 2 );					// Center the image in x
 				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
-				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
-
 			}
 
 			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
@@ -776,7 +806,7 @@ static void parameters_reset(void)
 	video.FrameType = 0;
 
 	video.frameToSkip = 0;
-	video.frame_time = 0;
+	video.frame_time = 0.0;
 	video.actual_time = 0;
 	video.tick_offset = 0;
 	video.jpegOutDataAdreess = (uint32_t)preElab_data;

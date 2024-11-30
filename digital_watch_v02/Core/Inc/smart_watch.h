@@ -56,7 +56,7 @@ typedef struct
 	uint32_t frameCount;
 
 	int frameToSkip;											// Defines for each cycle how many frames time skip
-	uint16_t frame_time;	  									// Holds the time duration of the single frame
+	float frame_time;	  									// Holds the time duration of the single frame
 	uint32_t actual_time; 										// Takes trace of the actual time
 	uint32_t tick_offset;
 
