@@ -16,10 +16,14 @@
 
 #include <stdio.h>
 
+/************************** PRIVATE FUNCTIONS PROTOTPYES **************************/
+
 static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling);
 static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth, uint16_t ImageHeight);
 
 static void SD_Initialize(void);
+
+static void parameters_reset(void);
 
 static void mjpeg_video_processing(void);
 static void file_handler(uint8_t openFile);
@@ -27,36 +31,30 @@ static void file_handler(uint8_t openFile);
 static void clock_setting(void);
 static void clock_normal(void);
 
-static void parameters_reset(void);
-
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap);
-
 static void show_frame(uint32_t frame_num);
 
+#ifdef DEBUG_TIME
+FIL fileToWrite;
+#endif
 
-// FATFS can't handle huge files a time,
-// so I separated it into multiple video
-// of 30 minutes each one
-//char *file_name[720];
-char name[14];
+/************************** GLOBAL VARIABLES **************************/
+
+char name[14];													// File name
+
+FATFS SDFatFs;  												// File system object for SD card logical drive
+FIL MJPEG_File;          										// MJPEG File object
+AVI_CONTEXT AVI_Handel;  										// AVI Parser Handle
 
 uint8_t MJPEG_VideoBuffer[MJPEG_VID_BUFFER_SIZE];
 uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE];
 
-FATFS SDFatFs;  												// File system object for SD card logical drive
-//char SDPath[4]; 												// SD card logical drive path
-
-FIL MJPEG_File;          										// MJPEG File object
-AVI_CONTEXT AVI_Handel;  										// AVI Parser Handle
-
 video_t video;													// Video data structure
 
+uint8_t	preElab_data[300*1024];									// Pre elaborated data buffer
+uint8_t output_data[200*1024];									// Output data buffer (format RGB565)
 
-// Pre elaborated data buffer
-uint8_t	preElab_data[300*1024];
-// Output data buffer (format RGB565)
-uint8_t output_data[200*1024];
-
+/************************** GLOBAL FUNCTIONS **************************/
 
 void smart_watch_init(void)
 {
@@ -92,7 +90,6 @@ void smart_watch_init(void)
 
 }
 
-FIL fileToWrite;
 void smart_watch_process(void)
 {
 
@@ -121,6 +118,55 @@ void smart_watch_process(void)
 
 }
 
+int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, uint8_t swap)
+{
+
+	   struct GC9A01_frame frame;
+
+	   int ret = 0;
+
+
+	   // Only half of the frame is handled per time
+	   // Alternate the top and bottom half every cycle
+	   if(swap)
+	   {
+
+	       frame.start.X = 0;
+	       frame.start.Y = 0;
+	       frame.end.X = 239;
+	       frame.end.Y = 119;
+
+	   }
+	   else
+	   {
+
+		   data += ( 240 * 240 ) ;
+
+	       frame.start.X = 0;
+	       frame.start.Y = 120;
+	       frame.end.X = 239;
+	       frame.end.Y = 239;
+
+	   }
+
+	   // Sends the block of data in a single time
+
+	   GC9A01_set_frame(frame);
+	   GC9A01_write_command(MEM_WR);
+
+	   GC9A01_set_data_command(ON);
+	   GC9A01_set_chip_select(OFF);
+
+	   uint32_t total_bytes = wd * ht;		// 2 byte per pixel
+	   ret = GC9A01_spi_tx(data, total_bytes);
+
+	   GC9A01_set_chip_select(ON);
+
+	   return ret;
+
+}
+
+// TEST FUNCTIONS //
 
 int smart_watch_test_sd(void)
 {
@@ -209,7 +255,6 @@ int smart_watch_test_display(void)
 	return 1;
 
 }
-
 
 int smart_watch_test_mjpeg(void)
 {
@@ -322,98 +367,7 @@ int smart_watch_test_mjpeg(void)
 
 }
 
-
-int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, uint8_t swap)
-{
-
-	   struct GC9A01_frame frame;
-
-	   int ret = 0;
-
-
-	   // Only half of the frame is handled per time
-	   // Alternate the top and bottom half every cycle
-	   if(swap)
-	   {
-
-	       frame.start.X = 0;
-	       frame.start.Y = 0;
-	       frame.end.X = 239;
-	       frame.end.Y = 119;
-
-	   }
-	   else
-	   {
-
-		   data += ( 240 * 240 ) ;
-
-	       frame.start.X = 0;
-	       frame.start.Y = 120;
-	       frame.end.X = 239;
-	       frame.end.Y = 239;
-
-	   }
-
-	   // Sends the block of data in a single time
-
-	   GC9A01_set_frame(frame);
-	   GC9A01_write_command(MEM_WR);
-
-	   GC9A01_set_data_command(ON);
-	   GC9A01_set_chip_select(OFF);
-
-	   uint32_t total_bytes = wd * ht;		// 2 byte per pixel
-	   ret = GC9A01_spi_tx(data, total_bytes);
-
-	   GC9A01_set_chip_select(ON);
-
-	   return ret;
-
-}
-
-
-////////////////////////////////////////////////////// PRIVATE FUNCTIONS
-
-static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap)
-{
-
-	uint8_t b;
-	uint8_t g;
-	uint8_t r;
-
-	int i = 0;
-
-	// Only half of the frame is handled per time
-	// Alternate the top and bottom half every cycle
-    if(swap)
-    {
-
-    	i = 0;
-    	length /= 2;
-    	length += 1000;
-
-    }
-    else
-    {
-
-    	i = ( length / 2 ) - 2000;
-
-    }
-
-	for( ; i < length ; i++)
-	{
-
-		b = pxArr->u8Arr[i*bpx];
-		g = pxArr->u8Arr[i*bpx+1];
-		r = pxArr->u8Arr[i*bpx+2];
-
-		pxArr->u16Arr[i] = color565(r, g, b);
-		pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
-
-	}
-
-}
-
+/************************** PRIVATE FUNCTIONS **************************/
 
 static void mjpeg_video_processing(void)
 {
@@ -437,7 +391,6 @@ static void mjpeg_video_processing(void)
 	}
 
 }
-
 
 static void clock_normal(void)
 {
@@ -504,7 +457,6 @@ static void clock_normal(void)
 	}
 
 }
-
 
 static void clock_setting(void)
 {
@@ -639,7 +591,6 @@ static void clock_setting(void)
 
 }
 
-
 static void file_handler(uint8_t openFile)
 {
 
@@ -698,145 +649,45 @@ static void file_handler(uint8_t openFile)
 
 }
 
-
-static void parameters_reset(void)
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap)
 {
 
-	video.width = 0;
-	video.height = 0;
-	video.xPos = 0;
-	video.yPos = 0;
+	uint8_t b;
+	uint8_t g;
+	uint8_t r;
 
-	video.time.Hours = 0;
-	video.time.Minutes = 0;
-	video.time.Seconds = 0;
+	int i = 0;
 
-	video.file_idx = 0;
-	video.FrameType = 0;
-
-	video.frameToSkip = 0;
-	video.frame_time = 0;
-	video.actual_time = 0;
-	video.tick_offset = 0;
-	video.jpegOutDataAdreess = (uint32_t)preElab_data;
-
-	video.display_ts = video.time.Seconds;
-
-	video.display_status = DISPLAY_ON;
-
-	video.frameCount = 0;
-
-	//video.video_mode = NORMAL_MODE;
-	video.set = SET_IDLE;
-
-}
-
-static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling)
-{
-
-  uint32_t cssMode = JPEG_420_SUBSAMPLING, inputLineOffset = 0;
-
-
-  HAL_DMA2D_MspInit(&DMA2D_Handle);
-
-  if(ChromaSampling == JPEG_420_SUBSAMPLING)
-  {
-
-    cssMode = DMA2D_CSS_420;
-
-    inputLineOffset = xsize % 16;
-    if(inputLineOffset != 0)
+	// Only half of the frame is handled per time
+	// Alternate the top and bottom half every cycle
+    if(swap)
     {
 
-      inputLineOffset = 16 - inputLineOffset;
+    	i = 0;
+    	length /= 2;
+    	length += 1000;
+
+    }
+    else
+    {
+
+    	i = ( length / 2 ) - 2000;
 
     }
 
-  }
-  else if(ChromaSampling == JPEG_444_SUBSAMPLING)
-  {
+	for( ; i < length ; i++)
+	{
 
-    cssMode = DMA2D_NO_CSS;
+		b = pxArr->u8Arr[i*bpx];
+		g = pxArr->u8Arr[i*bpx+1];
+		r = pxArr->u8Arr[i*bpx+2];
 
-    inputLineOffset = xsize % 8;
-    if(inputLineOffset != 0)
-    {
+		pxArr->u16Arr[i] = color565(r, g, b);
+		pxArr->u16Arr[i] = ( ( ( pxArr->u16Arr[i] & 0x00ff ) << 8 ) | (( pxArr->u16Arr[i] & 0xff00 ) >> 8) );
 
-      inputLineOffset = 8 - inputLineOffset;
-
-    }
-
-  }
-  else if(ChromaSampling == JPEG_422_SUBSAMPLING)
-  {
-
-    cssMode = DMA2D_CSS_422;
-
-    inputLineOffset = xsize % 16;
-    if(inputLineOffset != 0)
-    {
-
-      inputLineOffset = 16 - inputLineOffset;
-
-    }
-
-  }
-
-  // Configure the DMA2D Mode, Color Mode and output offset
-  DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
-  DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_RGB888;
-  DMA2D_Handle.Init.OutputOffset = LCD_X_SIZE - xsize;
-  DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  // No Output Alpha Inversion
-  DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     // No Output Red & Blue swap
-
-  // DMA2D Callbacks Configuration
-  DMA2D_Handle.XferCpltCallback  = NULL;
-
-  // Foreground Configuration
-  DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
-  DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
-  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
-  DMA2D_Handle.LayerCfg[1].ChromaSubSampling = cssMode;
-  DMA2D_Handle.LayerCfg[1].InputOffset = inputLineOffset;
-  DMA2D_Handle.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; 		// No ForeGround Red/Blue swap
-  DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; // No ForeGround Alpha inversion
-
-  DMA2D_Handle.Instance = DMA2D;
-
-  // DMA2D Initialization
-  HAL_DMA2D_Init(&DMA2D_Handle);
-  HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
+	}
 
 }
-
-
-static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth, uint16_t ImageHeight)
-{
-
-  uint32_t xPos, yPos, destination;
-
-
-  // calculate the destination transfer address
-  xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
-  yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
-
-  destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
-
-  // wait for the DMA2D transfer to ends
-  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
-  // copy the new decoded frame to the LCD Frame buffer
-  HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, ImageWidth, ImageHeight);
-
-}
-
-
-static void SD_Initialize(void)
-{
-
-  BSP_SD_Init();
-
-}
-
 
 static void show_frame(uint32_t frame_num)
 {
@@ -909,6 +760,143 @@ static void show_frame(uint32_t frame_num)
 
 }
 
+static void parameters_reset(void)
+{
+
+	video.width = 0;
+	video.height = 0;
+	video.xPos = 0;
+	video.yPos = 0;
+
+	video.time.Hours = 0;
+	video.time.Minutes = 0;
+	video.time.Seconds = 0;
+
+	video.file_idx = 0;
+	video.FrameType = 0;
+
+	video.frameToSkip = 0;
+	video.frame_time = 0;
+	video.actual_time = 0;
+	video.tick_offset = 0;
+	video.jpegOutDataAdreess = (uint32_t)preElab_data;
+
+	video.display_ts = video.time.Seconds;
+
+	video.display_status = DISPLAY_ON;
+
+	video.frameCount = 0;
+
+	//video.video_mode = NORMAL_MODE;
+	video.set = SET_IDLE;
+
+}
+
+static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling)
+{
+
+	uint32_t cssMode = JPEG_420_SUBSAMPLING, inputLineOffset = 0;
+
+
+	HAL_DMA2D_MspInit(&DMA2D_Handle);
+
+	if(ChromaSampling == JPEG_420_SUBSAMPLING)
+	{
+
+		cssMode = DMA2D_CSS_420;
+
+		inputLineOffset = xsize % 16;
+		if(inputLineOffset != 0)
+		{
+
+			inputLineOffset = 16 - inputLineOffset;
+
+		}
+
+	}
+	else if(ChromaSampling == JPEG_444_SUBSAMPLING)
+	{
+
+		cssMode = DMA2D_NO_CSS;
+
+		inputLineOffset = xsize % 8;
+		if(inputLineOffset != 0)
+		{
+
+			inputLineOffset = 8 - inputLineOffset;
+
+		}
+
+	}
+	else if(ChromaSampling == JPEG_422_SUBSAMPLING)
+	{
+
+		cssMode = DMA2D_CSS_422;
+
+		inputLineOffset = xsize % 16;
+		if(inputLineOffset != 0)
+		{
+
+			inputLineOffset = 16 - inputLineOffset;
+
+		}
+
+	}
+
+  	// Configure the DMA2D Mode, Color Mode and output offset
+  	DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
+  	DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_RGB888;
+  	DMA2D_Handle.Init.OutputOffset = LCD_X_SIZE - xsize;
+  	DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  // No Output Alpha Inversion
+  	DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     // No Output Red & Blue swap
+
+  	// DMA2D Callbacks Configuration
+  	DMA2D_Handle.XferCpltCallback  = NULL;
+
+  	// Foreground Configuration
+  	DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
+  	DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
+  	DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
+  	DMA2D_Handle.LayerCfg[1].ChromaSubSampling = cssMode;
+  	DMA2D_Handle.LayerCfg[1].InputOffset = inputLineOffset;
+  	DMA2D_Handle.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; 		// No ForeGround Red/Blue swap
+  	DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; // No ForeGround Alpha inversion
+
+  	DMA2D_Handle.Instance = DMA2D;
+
+  	// DMA2D Initialization
+  	HAL_DMA2D_Init(&DMA2D_Handle);
+  	HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
+
+}
+
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t ImageWidth, uint16_t ImageHeight)
+{
+
+	uint32_t xPos, yPos, destination;
+
+
+	// calculate the destination transfer address
+	xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
+	yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
+
+	destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
+
+	// wait for the DMA2D transfer to ends
+	HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
+	// copy the new decoded frame to the LCD Frame buffer
+	HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, ImageWidth, ImageHeight);
+
+}
+
+static void SD_Initialize(void)
+{
+
+	BSP_SD_Init();
+
+}
+
+/************************** CALLBACK FUNCTIONS **************************/
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {

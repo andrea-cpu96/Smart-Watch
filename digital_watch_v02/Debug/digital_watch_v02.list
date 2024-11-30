@@ -23,27 +23,27 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   9 .ARM.attributes 0000002e  00000000  00000000  0000f068  2**0
                   CONTENTS, READONLY
- 10 .debug_info   0003a658  00000000  00000000  0000f096  2**0
+ 10 .debug_info   0003a64a  00000000  00000000  0000f096  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 11 .debug_abbrev 000052e3  00000000  00000000  000496ee  2**0
+ 11 .debug_abbrev 00005369  00000000  00000000  000496e0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 12 .debug_loclists 00022cac  00000000  00000000  0004e9d1  2**0
+ 12 .debug_loclists 00022cac  00000000  00000000  0004ea49  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_aranges 000013e8  00000000  00000000  00071680  2**3
+ 13 .debug_aranges 000013e8  00000000  00000000  000716f8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_rnglists 00004afc  00000000  00000000  00072a68  2**0
+ 14 .debug_rnglists 00004afc  00000000  00000000  00072ae0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_macro  000355d5  00000000  00000000  00077564  2**0
+ 15 .debug_macro  000355d5  00000000  00000000  000775dc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_line   00036350  00000000  00000000  000acb39  2**0
+ 16 .debug_line   0003635d  00000000  00000000  000acbb1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_str    001467c1  00000000  00000000  000e2e89  2**0
+ 17 .debug_str    001467c1  00000000  00000000  000e2f0e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .comment      00000043  00000000  00000000  0022964a  2**0
+ 18 .comment      00000043  00000000  00000000  002296cf  2**0
                   CONTENTS, READONLY
- 19 .debug_frame  000040e4  00000000  00000000  00229690  2**2
+ 19 .debug_frame  000040e4  00000000  00000000  00229714  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_line_str 0000006c  00000000  00000000  0022d774  2**0
+ 20 .debug_line_str 0000006c  00000000  00000000  0022d7f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5462,9 +5462,9 @@ __STATIC_FORCEINLINE void __DSB(void)
  8002b3e:	e7fe      	b.n	8002b3e <Error_Handler+0x2>
 
 08002b40 <file_handler>:
+	}
 
 }
-
 
 static void file_handler(uint8_t openFile)
 {
@@ -5596,14 +5596,14 @@ static void file_handler(uint8_t openFile)
  8002bdc:	b005      	add	sp, #20
  8002bde:	bd30      	pop	{r4, r5, pc}
  8002be0:	24000000 	.word	0x24000000
- 8002be4:	2407d32c 	.word	0x2407d32c
+ 8002be4:	24089b2c 	.word	0x24089b2c
  8002be8:	2407d2a0 	.word	0x2407d2a0
  8002bec:	0800cde8 	.word	0x0800cde8
  8002bf0:	0800cdf0 	.word	0x0800cdf0
  8002bf4:	24089f8c 	.word	0x24089f8c
- 8002bf8:	2407d78c 	.word	0x2407d78c
- 8002bfc:	2407d2e4 	.word	0x2407d2e4
- 8002c00:	2407d78c 	.word	0x2407d78c
+ 8002bf8:	2407d2e4 	.word	0x2407d2e4
+ 8002bfc:	24089ae4 	.word	0x24089ae4
+ 8002c00:	2407d2e4 	.word	0x2407d2e4
  8002c04:	05b05b06 	.word	0x05b05b06
  8002c08:	240000d8 	.word	0x240000d8
 
@@ -5702,14 +5702,14 @@ static void file_handler(uint8_t openFile)
  8002c9c:	b005      	add	sp, #20
  8002c9e:	bd30      	pop	{r4, r5, pc}
  8002ca0:	24000000 	.word	0x24000000
- 8002ca4:	2407d2e4 	.word	0x2407d2e4
+ 8002ca4:	24089ae4 	.word	0x24089ae4
  8002ca8:	2407d2a0 	.word	0x2407d2a0
  8002cac:	0800cde8 	.word	0x0800cde8
  8002cb0:	0800cdf0 	.word	0x0800cdf0
  8002cb4:	24089f8c 	.word	0x24089f8c
- 8002cb8:	2407d32c 	.word	0x2407d32c
- 8002cbc:	2407d78c 	.word	0x2407d78c
- 8002cc0:	2407d78c 	.word	0x2407d78c
+ 8002cb8:	24089b2c 	.word	0x24089b2c
+ 8002cbc:	2407d2e4 	.word	0x2407d2e4
+ 8002cc0:	2407d2e4 	.word	0x2407d2e4
  8002cc4:	05b05b06 	.word	0x05b05b06
  8002cc8:	240000d8 	.word	0x240000d8
 
@@ -5725,134 +5725,129 @@ static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling)
  8002cd0:	4605      	mov	r5, r0
 {
 
-  uint32_t cssMode = JPEG_420_SUBSAMPLING, inputLineOffset = 0;
+	uint32_t cssMode = JPEG_420_SUBSAMPLING, inputLineOffset = 0;
 
 
-  HAL_DMA2D_MspInit(&DMA2D_Handle);
+	HAL_DMA2D_MspInit(&DMA2D_Handle);
  8002cd2:	4822      	ldr	r0, [pc, #136]	@ (8002d5c <DMA2D_Init.constprop.0+0x90>)
  8002cd4:	f000 fb54 	bl	8003380 <HAL_DMA2D_MspInit>
 
-  if(ChromaSampling == JPEG_420_SUBSAMPLING)
+	if(ChromaSampling == JPEG_420_SUBSAMPLING)
  8002cd8:	2e01      	cmp	r6, #1
  8002cda:	d02b      	beq.n	8002d34 <DMA2D_Init.constprop.0+0x68>
-      inputLineOffset = 16 - inputLineOffset;
+			inputLineOffset = 16 - inputLineOffset;
 
-    }
+		}
 
-  }
-  else if(ChromaSampling == JPEG_444_SUBSAMPLING)
+	}
+	else if(ChromaSampling == JPEG_444_SUBSAMPLING)
  8002cdc:	b326      	cbz	r6, 8002d28 <DMA2D_Init.constprop.0+0x5c>
-      inputLineOffset = 8 - inputLineOffset;
+			inputLineOffset = 8 - inputLineOffset;
 
-    }
+		}
 
-  }
-  else if(ChromaSampling == JPEG_422_SUBSAMPLING)
+	}
+	else if(ChromaSampling == JPEG_422_SUBSAMPLING)
  8002cde:	2e02      	cmp	r6, #2
  8002ce0:	d033      	beq.n	8002d4a <DMA2D_Init.constprop.0+0x7e>
-  uint32_t cssMode = JPEG_420_SUBSAMPLING, inputLineOffset = 0;
+	uint32_t cssMode = JPEG_420_SUBSAMPLING, inputLineOffset = 0;
  8002ce2:	2200      	movs	r2, #0
  8002ce4:	2601      	movs	r6, #1
-    }
+		}
 
-  }
+	}
 
-  // Configure the DMA2D Mode, Color Mode and output offset
-  DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
+  	// Configure the DMA2D Mode, Color Mode and output offset
+  	DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
  8002ce6:	4c1d      	ldr	r4, [pc, #116]	@ (8002d5c <DMA2D_Init.constprop.0+0x90>)
  8002ce8:	f44f 3180 	mov.w	r1, #65536	@ 0x10000
-  DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_RGB888;
-  DMA2D_Handle.Init.OutputOffset = LCD_X_SIZE - xsize;
-  DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  // No Output Alpha Inversion
+  	DMA2D_Handle.Init.ColorMode    = DMA2D_OUTPUT_RGB888;
+  	DMA2D_Handle.Init.OutputOffset = LCD_X_SIZE - xsize;
+  	DMA2D_Handle.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  // No Output Alpha Inversion
  8002cec:	2300      	movs	r3, #0
-  DMA2D_Handle.Init.OutputOffset = LCD_X_SIZE - xsize;
+  	DMA2D_Handle.Init.OutputOffset = LCD_X_SIZE - xsize;
  8002cee:	f1c5 05f0 	rsb	r5, r5, #240	@ 0xf0
-  // Foreground Configuration
-  DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
-  DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
-  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
-  DMA2D_Handle.LayerCfg[1].ChromaSubSampling = cssMode;
-  DMA2D_Handle.LayerCfg[1].InputOffset = inputLineOffset;
+  	// Foreground Configuration
+  	DMA2D_Handle.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
+  	DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
+  	DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
+  	DMA2D_Handle.LayerCfg[1].ChromaSubSampling = cssMode;
+  	DMA2D_Handle.LayerCfg[1].InputOffset = inputLineOffset;
  8002cf2:	6462      	str	r2, [r4, #68]	@ 0x44
-  DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; // No ForeGround Alpha inversion
+  	DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; // No ForeGround Alpha inversion
 
-  DMA2D_Handle.Instance = DMA2D;
+  	DMA2D_Handle.Instance = DMA2D;
 
-  // DMA2D Initialization
-  HAL_DMA2D_Init(&DMA2D_Handle);
+  	// DMA2D Initialization
+  	HAL_DMA2D_Init(&DMA2D_Handle);
  8002cf4:	4620      	mov	r0, r4
-  DMA2D_Handle.Instance = DMA2D;
+  	DMA2D_Handle.Instance = DMA2D;
  8002cf6:	4a1a      	ldr	r2, [pc, #104]	@ (8002d60 <DMA2D_Init.constprop.0+0x94>)
-  DMA2D_Handle.LayerCfg[1].ChromaSubSampling = cssMode;
+  	DMA2D_Handle.LayerCfg[1].ChromaSubSampling = cssMode;
  8002cf8:	65e6      	str	r6, [r4, #92]	@ 0x5c
-  DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
+  	DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
  8002cfa:	2601      	movs	r6, #1
-  DMA2D_Handle.XferCpltCallback  = NULL;
+  	DMA2D_Handle.XferCpltCallback  = NULL;
  8002cfc:	6223      	str	r3, [r4, #32]
-  DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
+  	DMA2D_Handle.Init.Mode         = DMA2D_M2M_PFC;
  8002cfe:	e9c4 2100 	strd	r2, r1, [r4]
-  DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
+  	DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
  8002d02:	21ff      	movs	r1, #255	@ 0xff
-  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
+  	DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
  8002d04:	220b      	movs	r2, #11
-  DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
+  	DMA2D_Handle.LayerCfg[1].InputAlpha = 0xFF;
  8002d06:	e9c4 6113 	strd	r6, r1, [r4, #76]	@ 0x4c
-  DMA2D_Handle.Init.OutputOffset = LCD_X_SIZE - xsize;
+  	DMA2D_Handle.Init.OutputOffset = LCD_X_SIZE - xsize;
  8002d0a:	e9c4 6502 	strd	r6, r5, [r4, #8]
-  DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     // No Output Red & Blue swap
+  	DMA2D_Handle.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     // No Output Red & Blue swap
  8002d0e:	e9c4 3304 	strd	r3, r3, [r4, #16]
-  DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
+  	DMA2D_Handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_YCBCR;
  8002d12:	64a2      	str	r2, [r4, #72]	@ 0x48
-  DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; // No ForeGround Alpha inversion
+  	DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; // No ForeGround Alpha inversion
  8002d14:	e9c4 3315 	strd	r3, r3, [r4, #84]	@ 0x54
-  HAL_DMA2D_Init(&DMA2D_Handle);
+  	HAL_DMA2D_Init(&DMA2D_Handle);
  8002d18:	f000 fea2 	bl	8003a60 <HAL_DMA2D_Init>
-  HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
+  	HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
  8002d1c:	4631      	mov	r1, r6
  8002d1e:	4620      	mov	r0, r4
 
 }
  8002d20:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
-  HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
+  	HAL_DMA2D_ConfigLayer(&DMA2D_Handle, 1);
  8002d24:	f000 bfd0 	b.w	8003cc8 <HAL_DMA2D_ConfigLayer>
-    if(inputLineOffset != 0)
+		if(inputLineOffset != 0)
  8002d28:	f015 0207 	ands.w	r2, r5, #7
  8002d2c:	d00b      	beq.n	8002d46 <DMA2D_Init.constprop.0+0x7a>
-      inputLineOffset = 8 - inputLineOffset;
+			inputLineOffset = 8 - inputLineOffset;
  8002d2e:	f1c2 0208 	rsb	r2, r2, #8
  8002d32:	e7d8      	b.n	8002ce6 <DMA2D_Init.constprop.0+0x1a>
-    if(inputLineOffset != 0)
+		if(inputLineOffset != 0)
  8002d34:	f015 020f 	ands.w	r2, r5, #15
  8002d38:	d003      	beq.n	8002d42 <DMA2D_Init.constprop.0+0x76>
-      inputLineOffset = 16 - inputLineOffset;
+			inputLineOffset = 16 - inputLineOffset;
  8002d3a:	f1c2 0210 	rsb	r2, r2, #16
-    cssMode = DMA2D_CSS_420;
+		cssMode = DMA2D_CSS_420;
  8002d3e:	2602      	movs	r6, #2
  8002d40:	e7d1      	b.n	8002ce6 <DMA2D_Init.constprop.0+0x1a>
  8002d42:	2602      	movs	r6, #2
  8002d44:	e7cf      	b.n	8002ce6 <DMA2D_Init.constprop.0+0x1a>
  8002d46:	4632      	mov	r2, r6
  8002d48:	e7cd      	b.n	8002ce6 <DMA2D_Init.constprop.0+0x1a>
-    if(inputLineOffset != 0)
+		if(inputLineOffset != 0)
  8002d4a:	f015 020f 	ands.w	r2, r5, #15
  8002d4e:	d003      	beq.n	8002d58 <DMA2D_Init.constprop.0+0x8c>
-      inputLineOffset = 16 - inputLineOffset;
+			inputLineOffset = 16 - inputLineOffset;
  8002d50:	f1c2 0210 	rsb	r2, r2, #16
-    cssMode = DMA2D_CSS_422;
+		cssMode = DMA2D_CSS_422;
  8002d54:	2601      	movs	r6, #1
  8002d56:	e7c6      	b.n	8002ce6 <DMA2D_Init.constprop.0+0x1a>
-  uint32_t cssMode = JPEG_420_SUBSAMPLING, inputLineOffset = 0;
+	uint32_t cssMode = JPEG_420_SUBSAMPLING, inputLineOffset = 0;
  8002d58:	2601      	movs	r6, #1
  8002d5a:	e7c4      	b.n	8002ce6 <DMA2D_Init.constprop.0+0x1a>
  8002d5c:	240000d8 	.word	0x240000d8
  8002d60:	52001000 	.word	0x52001000
 
 08002d64 <show_frame.constprop.0>:
-		AVI_Handel.CurrentImage++;
-		video.frameCount++;
-
-	}
-
 	for(int i = 0 ; i < 2 ; i++)
  8002d64:	2302      	movs	r3, #2
 static void show_frame(uint32_t frame_num)
@@ -5861,9 +5856,6 @@ static void show_frame(uint32_t frame_num)
  8002d6c:	b087      	sub	sp, #28
  8002d6e:	4d74      	ldr	r5, [pc, #464]	@ (8002f40 <show_frame.constprop.0+0x1dc>)
  8002d70:	461c      	mov	r4, r3
-	{
-
-		// Save the frame into MJPEG_VideoBuffer
 		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
  8002d72:	f8df 91ec 	ldr.w	r9, [pc, #492]	@ 8002f60 <show_frame.constprop.0+0x1fc>
  8002d76:	2200      	movs	r2, #0
@@ -5871,7 +5863,6 @@ static void show_frame(uint32_t frame_num)
  8002d7a:	4630      	mov	r0, r6
  8002d7c:	f7fd fc4a 	bl	8000614 <AVI_GetFrame>
  8002d80:	b2c0      	uxtb	r0, r0
-
 		if(video.FrameType == AVI_VIDEO_FRAME)
  8002d82:	2801      	cmp	r0, #1
 		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
@@ -5883,11 +5874,6 @@ static void show_frame(uint32_t frame_num)
  8002d8a:	d001      	beq.n	8002d90 <show_frame.constprop.0+0x2c>
  8002d8c:	2401      	movs	r4, #1
  8002d8e:	e7f2      	b.n	8002d76 <show_frame.constprop.0+0x12>
-
-		}
-
-	}
-
 }
  8002d90:	b007      	add	sp, #28
  8002d92:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
@@ -5923,34 +5909,43 @@ static void show_frame(uint32_t frame_num)
  8002dc0:	e9d3 1202 	ldrd	r1, r2, [r3, #8]
  8002dc4:	fa1f f882 	uxth.w	r8, r2
  8002dc8:	fa1f fa81 	uxth.w	sl, r1
-  yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
+	uint32_t xPos, yPos, destination;
+
+
+	// calculate the destination transfer address
+	xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
+	yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
  8002dcc:	f1c1 01f0 	rsb	r1, r1, #240	@ 0xf0
-  xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
+	xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
  8002dd0:	f1c2 07f0 	rsb	r7, r2, #240	@ 0xf0
-  destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
+
+	destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
  8002dd4:	f8df b180 	ldr.w	fp, [pc, #384]	@ 8002f58 <show_frame.constprop.0+0x1f4>
-  yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
+	yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
  8002dd8:	0849      	lsrs	r1, r1, #1
 			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
  8002dda:	6b6b      	ldr	r3, [r5, #52]	@ 0x34
-  xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
+	xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
  8002ddc:	087f      	lsrs	r7, r7, #1
-  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
+
+	// wait for the DMA2D transfer to ends
+	HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
  8002dde:	485d      	ldr	r0, [pc, #372]	@ (8002f54 <show_frame.constprop.0+0x1f0>)
-  destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
+	destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
  8002de0:	ebc1 1101 	rsb	r1, r1, r1, lsl #4
 			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
  8002de4:	9303      	str	r3, [sp, #12]
-  destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
+	destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
  8002de6:	eb07 1701 	add.w	r7, r7, r1, lsl #4
-  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
+	HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
  8002dea:	f04f 31ff 	mov.w	r1, #4294967295
  8002dee:	f000 fed3 	bl	8003b98 <HAL_DMA2D_PollForTransfer>
-  HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, ImageWidth, ImageHeight);
+	// copy the new decoded frame to the LCD Frame buffer
+	HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, ImageWidth, ImageHeight);
  8002df2:	4643      	mov	r3, r8
-  destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
+	destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
  8002df4:	eb0b 0787 	add.w	r7, fp, r7, lsl #2
-  HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, ImageWidth, ImageHeight);
+	HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, ImageWidth, ImageHeight);
  8002df8:	f8cd a000 	str.w	sl, [sp]
  8002dfc:	9903      	ldr	r1, [sp, #12]
  8002dfe:	463a      	mov	r2, r7
@@ -6112,16 +6107,16 @@ static void show_frame(uint32_t frame_num)
 				video.frame_time = AVI_Handel.aviInfo.SecPerFrame;
  8002f38:	e748      	b.n	8002dcc <show_frame.constprop.0+0x68>
  8002f3a:	bf00      	nop
- 8002f3c:	2407d2e4 	.word	0x2407d2e4
+ 8002f3c:	24089ae4 	.word	0x24089ae4
  8002f40:	2407d2a0 	.word	0x2407d2a0
- 8002f44:	2407d78c 	.word	0x2407d78c
+ 8002f44:	2407d2e4 	.word	0x2407d2e4
  8002f48:	24000140 	.word	0x24000140
  8002f4c:	24000098 	.word	0x24000098
  8002f50:	240000c4 	.word	0x240000c4
  8002f54:	240000d8 	.word	0x240000d8
  8002f58:	240002a0 	.word	0x240002a0
  8002f5c:	2400e3a0 	.word	0x2400e3a0
- 8002f60:	2407d32c 	.word	0x2407d32c
+ 8002f60:	24089b2c 	.word	0x24089b2c
  8002f64:	2400029d 	.word	0x2400029d
  8002f68:	fffff800 	.word	0xfffff800
 
@@ -6171,7 +6166,12 @@ static void show_frame(uint32_t frame_num)
  8002f9e:	b100      	cbz	r0, 8002fa2 <smart_watch_init+0x36>
 		while(1);
  8002fa0:	e7fe      	b.n	8002fa0 <smart_watch_init+0x34>
-  BSP_SD_Init();
+}
+
+static void SD_Initialize(void)
+{
+
+	BSP_SD_Init();
  8002fa2:	4604      	mov	r4, r0
  8002fa4:	f007 fb24 	bl	800a5f0 <BSP_SD_Init>
 	    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
@@ -6188,7 +6188,7 @@ static void show_frame(uint32_t frame_num)
  8002fbc:	2408a084 	.word	0x2408a084
  8002fc0:	240322a0 	.word	0x240322a0
  8002fc4:	0800d068 	.word	0x0800d068
- 8002fc8:	2407d55c 	.word	0x2407d55c
+ 8002fc8:	24089d5c 	.word	0x24089d5c
 
 08002fcc <smart_watch_process>:
 {
@@ -6274,28 +6274,28 @@ static void show_frame(uint32_t frame_num)
  800305e:	e9d3 3202 	ldrd	r3, r2, [r3, #8]
  8003062:	fa1f fa83 	uxth.w	sl, r3
  8003066:	fa1f f982 	uxth.w	r9, r2
-  yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
+	yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
  800306a:	f1c3 03f0 	rsb	r3, r3, #240	@ 0xf0
-  xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
+	xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
  800306e:	f1c2 08f0 	rsb	r8, r2, #240	@ 0xf0
 		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
  8003072:	f8d4 b034 	ldr.w	fp, [r4, #52]	@ 0x34
-  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
+	HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
  8003076:	f04f 31ff 	mov.w	r1, #4294967295
-  yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
+	yPos = (LCD_Y_SIZE - JPEG_Info.ImageHeight)/2;
  800307a:	085b      	lsrs	r3, r3, #1
-  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
+	HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
  800307c:	489b      	ldr	r0, [pc, #620]	@ (80032ec <smart_watch_process+0x320>)
-  xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
+	xPos = (LCD_X_SIZE - JPEG_Info.ImageWidth)/2;
  800307e:	ea4f 0858 	mov.w	r8, r8, lsr #1
-  destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
+	destination = (uint32_t)pDst + ((yPos * LCD_X_SIZE) + xPos) * 4;
  8003082:	ebc3 1303 	rsb	r3, r3, r3, lsl #4
  8003086:	eb08 1803 	add.w	r8, r8, r3, lsl #4
  800308a:	4b99      	ldr	r3, [pc, #612]	@ (80032f0 <smart_watch_process+0x324>)
  800308c:	eb03 0888 	add.w	r8, r3, r8, lsl #2
-  HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
+	HAL_DMA2D_PollForTransfer(&DMA2D_Handle, HAL_MAX_DELAY);
  8003090:	f000 fd82 	bl	8003b98 <HAL_DMA2D_PollForTransfer>
-  HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, ImageWidth, ImageHeight);
+	HAL_DMA2D_Start(&DMA2D_Handle, (uint32_t)pSrc, destination, ImageWidth, ImageHeight);
  8003094:	464b      	mov	r3, r9
  8003096:	4642      	mov	r2, r8
  8003098:	f8cd a000 	str.w	sl, [sp]
@@ -6601,11 +6601,11 @@ static void show_frame(uint32_t frame_num)
  80032cc:	e79b      	b.n	8003206 <smart_watch_process+0x23a>
  80032ce:	bf00      	nop
  80032d0:	2407d2a0 	.word	0x2407d2a0
- 80032d4:	2407d2e4 	.word	0x2407d2e4
+ 80032d4:	24089ae4 	.word	0x24089ae4
  80032d8:	24000098 	.word	0x24000098
- 80032dc:	2407d32c 	.word	0x2407d32c
+ 80032dc:	24089b2c 	.word	0x24089b2c
  80032e0:	24000140 	.word	0x24000140
- 80032e4:	2407d78c 	.word	0x2407d78c
+ 80032e4:	2407d2e4 	.word	0x2407d2e4
  80032e8:	240000c4 	.word	0x240000c4
  80032ec:	240000d8 	.word	0x240000d8
  80032f0:	240002a0 	.word	0x240002a0
@@ -6658,7 +6658,7 @@ static void show_frame(uint32_t frame_num)
  8003354:	24000140 	.word	0x24000140
 
 08003358 <HAL_GPIO_EXTI_Callback>:
-
+/************************** CALLBACK FUNCTIONS **************************/
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
