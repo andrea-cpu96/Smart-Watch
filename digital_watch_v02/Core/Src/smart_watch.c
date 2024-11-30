@@ -28,6 +28,8 @@ static void parameters_reset(void);
 static void mjpeg_video_processing(void);
 static void file_handler(uint8_t openFile);
 
+static void battery_management(void);
+
 static void clock_setting(void);
 static void clock_normal(void);
 
@@ -107,6 +109,8 @@ void smart_watch_process(void)
 
 		// Video processing unit
 		mjpeg_video_processing();
+
+		battery_management();
 
 #ifdef DEBUG_TIME
 		count++;
@@ -678,6 +682,59 @@ static void file_handler(uint8_t openFile)
 		 new_file_flag = 1;
 
    }
+
+}
+
+static void battery_management(void)
+{
+
+
+	if(video.display_status == DISPLAY_ON)
+	{
+
+		if(TIME_ELAPSED(video.time.Seconds, video.display_ts) >= DISPLAY_STANDBY_TIMER)
+		{
+
+			parameters_reset();
+
+			GC9A01_sleep_mode(ON);
+			video.display_status = DISPLAY_OFF;
+
+			// Stop mode
+
+			HAL_SuspendTick();
+
+			__disable_irq();
+
+			HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
+
+			// Wake up
+
+			__enable_irq();
+
+			HAL_ResumeTick();
+
+			SystemClock_Config();
+
+			GC9A01_init();
+			video.display_status = DISPLAY_ON;
+
+			// Clock setting
+
+			RTC_DateTypeDef sDate = {0};
+			HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+			HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+			video.file_idx = ( ( video.time.Hours % 12 ) * 60 );
+			video.file_idx += video.time.Minutes;
+
+			file_handler(1);
+
+			video.display_ts = video.time.Seconds;
+
+		}
+
+	}
 
 }
 
