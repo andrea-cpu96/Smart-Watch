@@ -692,7 +692,7 @@ static void battery_management(void)
 	if(video.display_status == DISPLAY_ON)
 	{
 
-		if(TIME_ELAPSED(video.time.Seconds, video.display_ts) >= DISPLAY_STANDBY_TIMER)
+		if(video.time.Seconds >= DISPLAY_STANDBY_TIMER)
 		{
 
 			parameters_reset();

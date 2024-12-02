@@ -3,7 +3,7 @@
 ../Core/Src/smart_watch.c:781:13:show_frame.constprop	11
 ../Core/Src/smart_watch.c:630:13:file_handler.constprop	5
 ../Core/Src/smart_watch.c:61:6:smart_watch_init	3
-../Core/Src/smart_watch.c:95:6:smart_watch_process	25
+../Core/Src/smart_watch.c:95:6:smart_watch_process	24
 ../Core/Src/smart_watch.c:125:5:lcd_draw	2
 ../Core/Src/smart_watch.c:175:5:smart_watch_test_sd	6
 ../Core/Src/smart_watch.c:236:5:smart_watch_test_display	5
