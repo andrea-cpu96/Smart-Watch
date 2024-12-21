@@ -8,6 +8,8 @@
 #ifndef INC_PRJ_CONF_H_
 #define INC_PRJ_CONF_H_
 
+#define OPT							1		// Substitute with NOTOPT if you want no optimizations
+
 #define TEST						0
 #define TEST_SD						0
 #define TEST_DISPLAY				0

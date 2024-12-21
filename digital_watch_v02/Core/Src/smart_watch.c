@@ -33,7 +33,7 @@ static void battery_management(void);
 static void clock_setting(void);
 static void clock_normal(void);
 
-static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap);
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
 static void show_frame(uint32_t frame_num);
 
 #ifdef DEBUG_TIME
@@ -54,7 +54,9 @@ uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE];
 video_t video;													// Video data structure
 
 uint8_t	preElab_data[300*1024];									// Pre elaborated data buffer
-uint8_t output_data[200*1024];									// Output data buffer (format RGB565)
+uint8_t output_data1[200*1024];									// Output data buffer (format RGB565)
+uint8_t output_data2[200*1024];
+uint8_t *outputData = output_data1;
 
 /************************** GLOBAL FUNCTIONS **************************/
 
@@ -63,6 +65,14 @@ void smart_watch_init(void)
 
 	parameters_reset();
 
+
+	for(int i = 0 ; i < 200*1024 ; i++)
+	{
+
+		output_data1[i] = 0x00;
+		output_data2[i] = 0xff;
+
+	}
 	// First time setting
 	video.video_mode = SETTING_MODE;
 
@@ -169,6 +179,143 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 	   return ret;
 
 }
+
+
+int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
+{
+
+	   struct GC9A01_frame frame;
+	   static uint16_t full_update = 0;
+	   int ret = 0;
+
+       frame.start.X = 0;
+       frame.start.Y = 0;
+       frame.end.X = 0;
+       frame.end.Y = 0;
+
+       uint16_t *data16 = (uint16_t *)data;
+       uint16_t *buff16o1 = (uint16_t *)output_data1;
+       uint16_t *buff16o2 = (uint16_t *)output_data2;
+
+       uint16_t block_to_send[PX_PER_BLOCK_X*PX_PER_BLOCK_Y] = {0};
+
+       uint8_t update_flag = 1;
+       uint8_t equal_count = 0;
+
+       uint32_t chunk_idx = 0;
+       uint32_t block_idx = 0;
+       uint32_t px_y_idx = 0;
+       uint32_t idx = 0;
+
+       uint8_t spare_flag = 0;
+
+
+       if(full_update == 0)
+       {
+
+
+    	   ret = lcd_draw(sx, sy, wd, ht, data, 0);
+    	   ret |= lcd_draw(sx, sy, wd, ht, data, 1);
+
+    	   full_update = ( ( full_update + 1 ) % FULL_UPDATE_PERIOD );
+
+    	   return ret;
+
+       }
+
+       full_update = ( ( full_update + 1 ) % FULL_UPDATE_PERIOD );
+
+       for(int i = 0 ; i < CHUNKS_NUM ; i++)
+       {
+
+    	   chunk_idx = ( i * PX_PER_BLOCK_X * 240 );
+
+    	   for(int j = 0 ; j < BLOCKS_PER_CHUNK ; j++)
+    	   {
+
+    		   block_idx = ( j * PX_PER_BLOCK_X );
+
+   	    	   frame.start.X = ( j * PX_PER_BLOCK_X );
+   	    	   frame.start.Y = ( i * PX_PER_BLOCK_Y );
+   	    	   frame.end.X = ( frame.start.X + PX_PER_BLOCK_X - 1 );
+    	       frame.end.Y = ( frame.start.Y + PX_PER_BLOCK_Y - 1 );
+
+    		   for(int h = 0 ; h < PX_PER_BLOCK_Y ; h++)
+    		   {
+
+    			   px_y_idx = ( h * 240 );
+
+   				   for(int z = 0 ; z < PX_PER_BLOCK_X ; z++)
+   				   {
+
+   					   idx = ( chunk_idx + block_idx + px_y_idx + z);
+
+   					   block_to_send[(h*PX_PER_BLOCK_X)+z] = data16[idx];
+
+   					   // Check if we are close to the boundaries
+   	        	       if(( frame.start.X <= BORDER_START ) || ( frame.start.Y <= BORDER_START )
+   	        	    		|| ( frame.end.X >= (PX_IN_A_RAW - BORDER_END ) ) || ( frame.end.Y >= ( PX_IN_A_RAW - BORDER_END ) ) )
+   	        	       {
+
+   	        	    	   // We are close to the boundaries
+
+   	        	    	   // Always update here
+   	        	    	   update_flag = 1;
+   	        	    	   continue;
+
+   	        	       }
+
+   					   if(( spare_flag == 0 ) && ( buff16o1[idx] == buff16o2[idx] ))
+   					   {
+
+   						   equal_count++;
+
+   						   if(equal_count >= MAX_EQU_NUM)
+   						   {
+
+   							   update_flag = 0;
+   							   break;
+
+   						   }
+
+   					   }
+
+   					   spare_flag = ( ( spare_flag + 1 ) % SPARE_DIV_FACT );
+
+   				   }
+
+   				   if(update_flag == 0)
+   					   break;
+
+    		   }
+
+    		   if(update_flag)
+    		   {
+
+    			   GC9A01_set_frame(frame);
+    			   GC9A01_write_command(MEM_WR);
+
+    			   GC9A01_set_data_command(ON);
+    			   GC9A01_set_chip_select(OFF);
+
+    			   uint32_t total_bytes = ( BLOCK_SIZE * 2 );		// 2 byte per pixel
+    			   ret = GC9A01_spi_tx((uint8_t *)block_to_send, total_bytes);
+
+    			   GC9A01_set_chip_select(ON);
+
+    		   }
+
+    		   equal_count = 0;
+    		   update_flag = 1;
+
+    	   }
+
+       }
+
+	   return ret;
+
+}
+
 
 // TEST FUNCTIONS //
 
@@ -319,14 +466,14 @@ int smart_watch_test_mjpeg(void)
 			}
 
 			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)outputData, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
 			doubleFormat pOut;
-			pOut.u8Arr = (uint8_t *)output_data;
+			pOut.u8Arr = (uint8_t *)outputData;
 
 			tempStart = HAL_GetTick();
 
-			depth24To16(&pOut, ( video.width * video.height ), 3, swap);
+			depth24To16(&pOut, ( video.width * video.height ), 3);
 
 			tempStop = HAL_GetTick();
 			tempDiff[0] = ( ( tempStop - tempStart ) );
@@ -341,6 +488,7 @@ int smart_watch_test_mjpeg(void)
 			}
 
 			swap = ( ( swap ) ? 0 : 1 );
+			outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
 
 		}
 		else
@@ -397,7 +545,9 @@ static void mjpeg_video_processing(void)
 static void clock_normal(void)
 {
 
+#ifdef DEBUG_TIME
 	static uint8_t swap = 0;
+#endif
 
 
 	// Save the frame into MJPEG_VideoBuffer
@@ -449,21 +599,27 @@ static void clock_normal(void)
 		}
 
 		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)outputData, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
 		// Implements the data conversion from RGB888 to RGB565
 		doubleFormat pOut;
-		pOut.u8Arr = (uint8_t *)output_data;
-		depth24To16(&pOut, ( video.width * video.height ), 3, swap);
+		pOut.u8Arr = (uint8_t *)outputData;
+
+		depth24To16(&pOut, ( video.width * video.height ), 3);
 
 #ifdef DEBUG_TIME
 		uint32_t tempStart = HAL_GetTick();
 #endif
 
 		// Display the image
-		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
+		lcd_draw_opt(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
 
+#ifdef  NOTOPT
+		lcd_draw(video.xPos, video.yPos, video.width, video.height, swap);
 		swap = ( ( swap ) ? 0 : 1 );
+#endif
+
+		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
 
 #ifdef DEBUG_TIME
 		unsigned int bw = 0;
@@ -517,7 +673,7 @@ static void clock_setting(void)
 			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
 			{
 
-				HAL_Delay(200);
+				HAL_Delay(100);
 
 				video.time.Hours++;
 				video.time.Hours %= 12;
@@ -532,7 +688,7 @@ static void clock_setting(void)
 			if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
 			{
 
-				HAL_Delay(200);
+				HAL_Delay(100);
 
 				if(video.time.Hours > 0)
 					video.time.Hours--;
@@ -549,7 +705,7 @@ static void clock_setting(void)
 			if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
 			{
 
-				HAL_Delay(200);
+				HAL_Delay(100);
 
 				video.set = SET_MINUTES;
 
@@ -565,7 +721,7 @@ static void clock_setting(void)
 			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
 			{
 
-				HAL_Delay(200);
+				HAL_Delay(100);
 
 				video.time.Minutes++;
 				video.time.Minutes %= 60;
@@ -583,7 +739,7 @@ static void clock_setting(void)
 			if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
 			{
 
-				HAL_Delay(200);
+				HAL_Delay(100);
 
 				if(video.time.Minutes > 0)
 					video.time.Minutes--;
@@ -602,7 +758,7 @@ static void clock_setting(void)
 			if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
 			{
 
-				HAL_Delay(200);
+				HAL_Delay(100);
 
 				video.file_idx += video.time.Minutes;
 
@@ -738,7 +894,7 @@ static void battery_management(void)
 
 }
 
-static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8_t swap)
+static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 {
 
 	uint8_t b;
@@ -747,22 +903,6 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx, uint8
 
 	int i = 0;
 
-	// Only half of the frame is handled per time
-	// Alternate the top and bottom half every cycle
-    if(swap)
-    {
-
-    	i = 0;
-    	length /= 2;
-    	length += 1000;
-
-    }
-    else
-    {
-
-    	i = ( length / 2 ) - 2000;
-
-    }
 
 	for( ; i < length ; i++)
 	{
@@ -828,18 +968,19 @@ static void show_frame(uint32_t frame_num)
 			}
 
 			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)output_data, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)outputData, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
 
 			//video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
 
 			// Implements the data conversion from RGB888 to RGB565
 			doubleFormat pOut;
-			pOut.u8Arr = (uint8_t *)output_data;
-			depth24To16(&pOut, ( video.width * video.height ), 3, swap);
+			pOut.u8Arr = (uint8_t *)outputData;
+			depth24To16(&pOut, ( video.width * video.height ), 3);
+
 			lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
 
 			swap = ( ( swap ) ? 0 : 1 );
-
+			outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
 
 		}
 
