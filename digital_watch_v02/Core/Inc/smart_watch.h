@@ -38,7 +38,6 @@
 #define BLOCKS_PER_CHUNK			( PX_IN_A_RAW / PX_PER_BLOCK_X )
 #define CHUNKS_NUM					( ( PX_IN_A_RAW * PX_IN_A_RAW ) / ( BLOCKS_PER_CHUNK * BLOCK_SIZE ) )
 
-
 enum mode
 {
 
@@ -65,6 +64,15 @@ enum settings
 
 };
 
+enum button_status
+{
+
+	BTN_NONE = 0,
+	BTN_PLUS,
+	BTN_SET,
+	BTN_MINUS
+
+};
 
 typedef struct
 {

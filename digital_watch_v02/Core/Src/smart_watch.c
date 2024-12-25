@@ -42,6 +42,8 @@ FIL fileToWrite;
 
 /************************** GLOBAL VARIABLES **************************/
 
+enum button_status btn_status = BTN_NONE;
+
 char name[14];													// File name
 
 FATFS SDFatFs;  												// File system object for SD card logical drive
@@ -670,10 +672,12 @@ static void clock_setting(void)
 			show_frame(0);
 
 			// If button plus
-			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
+			if(btn_status == BTN_PLUS)
 			{
 
-				HAL_Delay(100);
+				btn_status = BTN_NONE;
+
+				HAL_Delay(500);
 
 				video.time.Hours++;
 				video.time.Hours %= 12;
@@ -685,10 +689,12 @@ static void clock_setting(void)
 			}
 
 			// If button minus
-			if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
+			if(btn_status == BTN_MINUS)
 			{
 
-				HAL_Delay(100);
+				btn_status = BTN_NONE;
+
+				HAL_Delay(500);
 
 				if(video.time.Hours > 0)
 					video.time.Hours--;
@@ -702,10 +708,12 @@ static void clock_setting(void)
 			}
 
 			// If button settings
-			if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
+			if(btn_status == BTN_SET)
 			{
 
-				HAL_Delay(100);
+				btn_status = BTN_NONE;
+
+				HAL_Delay(500);
 
 				video.set = SET_MINUTES;
 
@@ -718,10 +726,12 @@ static void clock_setting(void)
 			show_frame(0);
 
 			// If button plus
-			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
+			if(btn_status == BTN_PLUS)
 			{
 
-				HAL_Delay(100);
+				btn_status = BTN_NONE;
+
+				HAL_Delay(500);
 
 				video.time.Minutes++;
 				video.time.Minutes %= 60;
@@ -736,10 +746,12 @@ static void clock_setting(void)
 			}
 
 			// If button minus
-			if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
+			if(btn_status == BTN_MINUS)
 			{
 
-				HAL_Delay(100);
+				btn_status = BTN_NONE;
+
+				HAL_Delay(500);
 
 				if(video.time.Minutes > 0)
 					video.time.Minutes--;
@@ -755,10 +767,12 @@ static void clock_setting(void)
 			}
 
 			// If button settings
-			if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
+			if(btn_status == BTN_SET)
 			{
 
-				HAL_Delay(100);
+				btn_status = BTN_NONE;
+
+				HAL_Delay(500);
 
 				video.file_idx += video.time.Minutes;
 
@@ -1128,6 +1142,18 @@ static void SD_Initialize(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+
+	if(video.video_mode == SETTING_MODE)
+	{
+
+		if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
+			btn_status = BTN_PLUS;
+		else if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
+			btn_status = BTN_SET;
+		else if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
+			btn_status = BTN_MINUS;
+
+	}
 
 }
 
