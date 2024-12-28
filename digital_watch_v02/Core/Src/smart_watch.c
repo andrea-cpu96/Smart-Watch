@@ -36,6 +36,10 @@ static void clock_normal(void);
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
 static void show_frame(uint32_t frame_num);
 
+static void enable_btn_int(void);
+static void disable_btn_int(void);
+static void clear_btn_int(void);
+
 #ifdef DEBUG_TIME
 FIL fileToWrite;
 #endif
@@ -108,7 +112,7 @@ void smart_watch_process(void)
 {
 
 #ifdef DEBUG_TIME
-	static uint8_t count = 0;
+	static uint16_t count = 0;
 	if(f_open(&fileToWrite, "time.txt", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
 		while(1);
 #endif
@@ -125,9 +129,14 @@ void smart_watch_process(void)
 		battery_management();
 
 #ifdef DEBUG_TIME
-		count++;
-		if(count > 100)
-			f_close(&fileToWrite);
+		if(video.video_mode == NORMAL_MODE)
+		{
+
+			count++;
+			if(count > 1000)
+				f_close(&fileToWrite);
+
+		}
 #endif
 
 	}
@@ -547,7 +556,7 @@ static void mjpeg_video_processing(void)
 static void clock_normal(void)
 {
 
-#ifdef DEBUG_TIME
+#ifndef OPT
 	static uint8_t swap = 0;
 #endif
 
@@ -613,11 +622,11 @@ static void clock_normal(void)
 		uint32_t tempStart = HAL_GetTick();
 #endif
 
+#ifdef  OPT
 		// Display the image
 		lcd_draw_opt(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
-
-#ifdef  NOTOPT
-		lcd_draw(video.xPos, video.yPos, video.width, video.height, swap);
+#else
+		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
 		swap = ( ( swap ) ? 0 : 1 );
 #endif
 
@@ -627,7 +636,7 @@ static void clock_normal(void)
 		unsigned int bw = 0;
 		char buff[50];
 		long unsigned int tempStop = HAL_GetTick();
-		long unsigned int tempDiff = ( ( tempStop - tempStart ) );
+		volatile long unsigned int tempDiff = ( ( tempStop - tempStart ) );
 		snprintf(buff, sizeof(buff), "SPI time = %ld\n", tempDiff);
 		f_write(&fileToWrite, buff, sizeof(buff), &bw);
 #endif
@@ -677,7 +686,8 @@ static void clock_setting(void)
 
 				btn_status = BTN_NONE;
 
-				HAL_Delay(500);
+				HAL_Delay(300);
+				clear_btn_int();
 
 				video.time.Hours++;
 				video.time.Hours %= 12;
@@ -694,7 +704,8 @@ static void clock_setting(void)
 
 				btn_status = BTN_NONE;
 
-				HAL_Delay(500);
+				HAL_Delay(300);
+				clear_btn_int();
 
 				if(video.time.Hours > 0)
 					video.time.Hours--;
@@ -713,7 +724,8 @@ static void clock_setting(void)
 
 				btn_status = BTN_NONE;
 
-				HAL_Delay(500);
+				HAL_Delay(300);
+				clear_btn_int();
 
 				video.set = SET_MINUTES;
 
@@ -731,7 +743,8 @@ static void clock_setting(void)
 
 				btn_status = BTN_NONE;
 
-				HAL_Delay(500);
+				HAL_Delay(300);
+				clear_btn_int();
 
 				video.time.Minutes++;
 				video.time.Minutes %= 60;
@@ -751,7 +764,8 @@ static void clock_setting(void)
 
 				btn_status = BTN_NONE;
 
-				HAL_Delay(500);
+				HAL_Delay(300);
+				clear_btn_int();
 
 				if(video.time.Minutes > 0)
 					video.time.Minutes--;
@@ -772,7 +786,8 @@ static void clock_setting(void)
 
 				btn_status = BTN_NONE;
 
-				HAL_Delay(500);
+				HAL_Delay(300);
+				clear_btn_int();
 
 				video.file_idx += video.time.Minutes;
 
@@ -794,6 +809,8 @@ static void clock_setting(void)
 			break;
 
 	}
+
+	enable_btn_int();
 
 }
 
@@ -1138,6 +1155,33 @@ static void SD_Initialize(void)
 
 }
 
+static void enable_btn_int(void)
+{
+
+	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+	HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+	HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+
+}
+
+static void disable_btn_int(void)
+{
+
+	HAL_NVIC_DisableIRQ(EXTI0_IRQn);
+	HAL_NVIC_DisableIRQ(EXTI1_IRQn);
+	HAL_NVIC_DisableIRQ(EXTI2_IRQn);
+
+}
+
+static void clear_btn_int(void)
+{
+
+	HAL_NVIC_ClearPendingIRQ(EXTI0_IRQn);
+	HAL_NVIC_ClearPendingIRQ(EXTI1_IRQn);
+	HAL_NVIC_ClearPendingIRQ(EXTI2_IRQn);
+
+}
+
 /************************** CALLBACK FUNCTIONS **************************/
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -1152,6 +1196,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			btn_status = BTN_SET;
 		else if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
 			btn_status = BTN_MINUS;
+
+		disable_btn_int();
 
 	}
 

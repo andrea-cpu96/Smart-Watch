@@ -8,6 +8,15 @@
 #ifndef EXAMPLE_USER_CM7_SMART_WATCH_H_
 #define EXAMPLE_USER_CM7_SMART_WATCH_H_
 
+/* DEBUG SETTINGS */
+
+#define 	NOT_DEBUG_TIME
+
+/* OPTIMIZZATION SETTINGS */
+
+#define 	OPT						// Substitute with NOT_OPT if you want no optimizations
+
+/* MJPEG SETTINGS */
 
 #define MJPEG_VID_BUFFER_SIZE 		((uint32_t)(1024 *50))
 #define MJPEG_AUD_BUFFER_SIZE 		((uint32_t)(1024 *0))
@@ -25,7 +34,7 @@
 #define BLOCK_PX_PER_SIDE			12
 #define SPARE_DIV_FACT				4   // One pixel every SPARE_DIV_FACT is compared
 #define COMPARED_FRAC				4   // Fraction of pixels that subtracted to COMPARED_PX is MAX_EQU_NUM
-#define FULL_UPDATE_PERIOD			18  // Period after that a full update is implemented
+#define FULL_UPDATE_PERIOD			40  // Period after that a full update is implemented
 
 #define BORDER_START				( 2 * BLOCK_PX_PER_SIDE )
 #define BORDER_END					( 2 * BLOCK_PX_PER_SIDE )
