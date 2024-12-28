@@ -263,6 +263,21 @@ int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *da
 
    					   block_to_send[(h*PX_PER_BLOCK_X)+z] = data16[idx];
 
+   	        	       // Check if we are outside the round mask
+   	        	       if( CIRCLE_MASK(frame.start.X, frame.start.Y)
+   	        	    		   && CIRCLE_MASK(frame.start.X, frame.end.Y)
+							   && CIRCLE_MASK(frame.end.X, frame.start.Y)
+							   && CIRCLE_MASK(frame.end.X, frame.end.Y) )
+   	        	       {
+
+   	        	    	   // We are outside the round mask
+
+   	        	    	   // Always skip here
+   	        	    	   update_flag =0;
+   	        	    	   break;
+
+   	        	       }
+
    					   // Check if we are close to the boundaries
    	        	       if(( frame.start.X <= BORDER_START ) || ( frame.start.Y <= BORDER_START )
    	        	    		|| ( frame.end.X >= (PX_IN_A_RAW - BORDER_END ) ) || ( frame.end.Y >= ( PX_IN_A_RAW - BORDER_END ) ) )

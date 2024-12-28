@@ -47,6 +47,14 @@
 #define BLOCKS_PER_CHUNK			( PX_IN_A_RAW / PX_PER_BLOCK_X )
 #define CHUNKS_NUM					( ( PX_IN_A_RAW * PX_IN_A_RAW ) / ( BLOCKS_PER_CHUNK * BLOCK_SIZE ) )
 
+/* OTHERS DEFINITIONS */
+
+#define R							( ( LCD_SIDE_SIZE / 2 ) - 1 ) // Ray of the round display
+#define SQUARE(x)					( (x) * (x) )
+#define PIX_TO_CIRC_COORD(p)		( ( p >= R) ? ( p - R ) : ( R - p ) ) // Put the pixel position in a circle reference (where the center is the 0 position)
+
+#define CIRCLE_MASK(px, py)			( ( SQUARE(PIX_TO_CIRC_COORD(px)) + SQUARE(PIX_TO_CIRC_COORD(py)) ) >= SQUARE(R) )
+
 enum mode
 {
 
