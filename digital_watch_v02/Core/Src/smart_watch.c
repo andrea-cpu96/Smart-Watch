@@ -342,6 +342,75 @@ int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *da
 
 }
 
+int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
+{
+
+	   struct GC9A01_frame frame;
+
+	   int ret = 0;
+
+       frame.start.X = 0;
+       frame.start.Y = 0;
+       frame.end.X = 239;
+       frame.end.Y = 0;
+
+       uint16_t *buff16o1 = (uint16_t *)output_data1;
+       uint16_t *buff16o2 = (uint16_t *)output_data2;
+
+
+	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
+	   {
+
+	       frame.start.X = 0;
+	       frame.start.Y = i;
+	       frame.end.X = ( LCD_SIDE_SIZE - 1 );
+	       frame.end.Y = frame.start.Y;
+
+	       uint8_t out_the_circle_flag = 0;
+
+		   while(( CIRCLE_MASK(frame.start.X, frame.start.Y) ) || ( buff16o1[i*240+frame.start.X] == buff16o2[i*240+frame.start.X] ))
+		   {
+
+			   frame.start.X++;
+
+			   if(frame.start.X > frame.end.X)
+			   {
+
+				   out_the_circle_flag = 1;
+				   break;
+
+			   }
+
+		   }
+
+		   if(out_the_circle_flag)
+			   continue;
+
+		   while(CIRCLE_MASK(frame.end.X, frame.start.Y)|| ( buff16o1[i*240+frame.end.X] == buff16o2[i*240+frame.end.X] ))
+			   frame.end.X--;
+
+		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) * 2 );
+
+		   GC9A01_set_frame(frame);
+		   GC9A01_write_command(MEM_WR);
+
+		   GC9A01_set_data_command(ON);
+		   GC9A01_set_chip_select(OFF);
+
+		   uint32_t start_idx = ( ( i * 240 + frame.start.X ) * 2 );
+
+		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
+
+		   GC9A01_set_chip_select(ON);
+
+		   if(ret == 0)
+			   return ret;
+
+	   }
+
+	   return ret;
+
+}
 
 // TEST FUNCTIONS //
 
@@ -572,7 +641,9 @@ static void clock_normal(void)
 {
 
 #ifndef OPT
+#ifndef OPT2
 	static uint8_t swap = 0;
+#endif
 #endif
 
 
@@ -640,6 +711,9 @@ static void clock_normal(void)
 #ifdef  OPT
 		// Display the image
 		lcd_draw_opt(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
+
+#elif defined(OPT2)
+		lcd_draw_opt2(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
 #else
 		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
 		swap = ( ( swap ) ? 0 : 1 );
@@ -664,7 +738,12 @@ static void clock_normal(void)
 		video.frameToSkip = ( ( video.actual_time - watch_time ) / video.frame_time );
 
 		if(video.frameToSkip < 0)
+		{
+
+			HAL_Delay(-video.frameToSkip);
 			video.frameToSkip = 0;
+
+		}
 
 /******************************************************************/
 

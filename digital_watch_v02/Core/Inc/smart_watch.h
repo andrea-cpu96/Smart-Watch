@@ -14,7 +14,7 @@
 
 /* OPTIMIZZATION SETTINGS */
 
-#define 	OPT						// Substitute with NOT_OPT if you want no optimizations
+#define 	OPT2					// Substitute with NOT_OPT if you want no optimizations
 
 /* MJPEG SETTINGS */
 
@@ -29,12 +29,16 @@
 #define LCD_X_SIZE					LCD_SIDE_SIZE
 #define LCD_Y_SIZE					LCD_SIDE_SIZE
 
-/* FRAME RATE SETTINGS */
+/* FRAME RATE SETTINGS  (only for OPT option) */
 
 #define BLOCK_PX_PER_SIDE			12
 #define SPARE_DIV_FACT				4   // One pixel every SPARE_DIV_FACT is compared
 #define COMPARED_FRAC				4   // Fraction of pixels that subtracted to COMPARED_PX is MAX_EQU_NUM
+#ifdef OPT
 #define FULL_UPDATE_PERIOD			40  // Period after that a full update is implemented
+#else
+#define FULL_UPDATE_PERIOD			200  // Period after that a full update is implemented
+#endif
 
 #define BORDER_START				( 2 * BLOCK_PX_PER_SIDE )
 #define BORDER_END					( 2 * BLOCK_PX_PER_SIDE )
@@ -129,6 +133,7 @@ void smart_watch_init(void);
 void smart_watch_process(void);
 int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, uint8_t swap);
 int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
+int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
 
 int smart_watch_test_sd(void);
 int smart_watch_test_display(void);
