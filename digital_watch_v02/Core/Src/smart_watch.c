@@ -646,6 +646,9 @@ static void clock_normal(void)
 #endif
 #endif
 
+#ifdef DEBUG_TIME
+		uint32_t tempStart = HAL_GetTick();
+#endif
 
 	// Save the frame into MJPEG_VideoBuffer
 	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
@@ -704,9 +707,6 @@ static void clock_normal(void)
 
 		depth24To16(&pOut, ( video.width * video.height ), 3);
 
-#ifdef DEBUG_TIME
-		uint32_t tempStart = HAL_GetTick();
-#endif
 
 #ifdef  OPT
 		// Display the image
@@ -735,12 +735,13 @@ static void clock_normal(void)
 
 		video.actual_time = ( HAL_GetTick() - video.tick_offset );
 		float watch_time = ( video.frameCount * video.frame_time );
-		video.frameToSkip = ( ( video.actual_time - watch_time ) / video.frame_time );
+		int time_diff = ( video.actual_time - watch_time );
+		video.frameToSkip = ( time_diff / video.frame_time );
 
-		if(video.frameToSkip < 0)
+		if(time_diff < 0)
 		{
 
-			HAL_Delay(-video.frameToSkip);
+			HAL_Delay(-time_diff);
 			video.frameToSkip = 0;
 
 		}

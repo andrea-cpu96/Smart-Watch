@@ -1,7 +1,7 @@
-../Core/Src/smart_watch.c:911:13:file_handler	32	static
-../Core/Src/smart_watch.c:1148:13:DMA2D_Init.constprop	16	static
-../Core/Src/smart_watch.c:1046:13:show_frame.constprop	64	static
-../Core/Src/smart_watch.c:911:13:file_handler.constprop	32	static
+../Core/Src/smart_watch.c:912:13:file_handler	32	static
+../Core/Src/smart_watch.c:1149:13:DMA2D_Init.constprop	16	static
+../Core/Src/smart_watch.c:1047:13:show_frame.constprop	64	static
+../Core/Src/smart_watch.c:912:13:file_handler.constprop	32	static
 ../Core/Src/smart_watch.c:69:6:smart_watch_init	16	static
 ../Core/Src/smart_watch.c:146:5:lcd_draw	32	static
 ../Core/Src/smart_watch.c:195:5:lcd_draw_opt	416	static
@@ -10,4 +10,4 @@
 ../Core/Src/smart_watch.c:417:5:smart_watch_test_sd	11656	static
 ../Core/Src/smart_watch.c:478:5:smart_watch_test_display	230464	static
 ../Core/Src/smart_watch.c:505:5:smart_watch_test_mjpeg	680	static
-../Core/Src/smart_watch.c:1281:6:HAL_GPIO_EXTI_Callback	8	static
+../Core/Src/smart_watch.c:1282:6:HAL_GPIO_EXTI_Callback	8	static
