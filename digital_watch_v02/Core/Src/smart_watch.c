@@ -371,8 +371,11 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
        uint8_t out_the_circle_flag = 0;
        uint32_t py;
 
+       uint32_t total_bytes;
+       uint32_t start_idx;
 
-	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
+
+	   for(int i = 1 ; i < LCD_SIDE_SIZE ; i++)
 	   {
 
 	       frame.start.X = 0;
@@ -384,12 +387,12 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 
 	       py = ( i * LCD_SIDE_SIZE );
 
-		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ) || CIRCLE_MASK(frame.start.X, frame.start.Y))
+
+		   while(PIXELS_COMP(buff16o1[py+frame.start.X], buff16o2[py+frame.start.X]))// || CIRCLE_MASK(frame.start.X, frame.start.Y))
 		   {
 
 			   frame.start.X++;
-
-			   if(frame.start.X > frame.end.X)
+			   if(frame.start.X >= LCD_SIDE_SIZE)
 			   {
 
 				   out_the_circle_flag = 1;
@@ -402,10 +405,10 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 		   if(out_the_circle_flag)
 			   continue;
 
-		   while(( buff16o1[py+frame.end.X] == buff16o2[py+frame.end.X] ) || CIRCLE_MASK(frame.end.X, frame.start.Y))
+		   while(PIXELS_COMP(buff16o1[py+frame.end.X], buff16o2[py+frame.end.X]))// || CIRCLE_MASK(frame.end.X, frame.start.Y))
 			   frame.end.X--;
 
-		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) << 1 );
+		   total_bytes = ( ( 1 + frame.end.X - frame.start.X ) << 1 );
 
 		   GC9A01_set_frame(frame);
 		   GC9A01_write_command(MEM_WR);
@@ -413,7 +416,7 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 		   GC9A01_set_data_command(ON);
 		   GC9A01_set_chip_select(OFF);
 
-		   uint32_t start_idx = ( ( py + frame.start.X ) << 1 );
+		   start_idx = ( ( py + frame.start.X ) << 1 );
 
 		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
 
