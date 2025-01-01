@@ -1,6 +1,7 @@
 #include "main.h"
 #include "GC9A01.h"
 
+uint8_t spi_dma_not_ready = 0;
 
 //////////////////////////////////////////////// GLOBAL FUNCTIONS
 
@@ -354,8 +355,12 @@ HAL_StatusTypeDef ret;
 int GC9A01_spi_tx(uint8_t *data, uint16_t size)
 {
 
+	//ret = HAL_SPI_Transmit(&hspi1, data, size, HAL_MAX_DELAY);
 
-	ret = HAL_SPI_Transmit(&hspi1, data, size, HAL_MAX_DELAY);
+	while(spi_dma_not_ready);
+
+	spi_dma_not_ready = 1;
+	ret = HAL_SPI_Transmit_DMA(&hspi1, data, size);
 
 	if(ret != HAL_OK)
 		return -1;

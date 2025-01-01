@@ -21,6 +21,7 @@
 #define SLEEP_MODE_ON		0x10
 #define SLEEP_MODE_OFF		0x11
 
+extern uint8_t spi_dma_not_ready;
 
 // Hardware abstraction layer
 // Should be defined by the user of the library

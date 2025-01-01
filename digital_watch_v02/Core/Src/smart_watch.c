@@ -1298,4 +1298,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 }
 
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+
+	spi_dma_not_ready = 0;
+
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
