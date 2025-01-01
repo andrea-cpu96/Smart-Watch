@@ -3,11 +3,11 @@
 ../Core/Src/smart_watch.c:1047:13:show_frame.constprop	64	static
 ../Core/Src/smart_watch.c:912:13:file_handler.constprop	32	static
 ../Core/Src/smart_watch.c:69:6:smart_watch_init	16	static
-../Core/Src/smart_watch.c:146:5:lcd_draw	32	static
-../Core/Src/smart_watch.c:195:5:lcd_draw_opt	416	static
-../Core/Src/smart_watch.c:345:5:lcd_draw_opt2	48	static
+../Core/Src/smart_watch.c:157:5:lcd_draw	32	static
+../Core/Src/smart_watch.c:206:5:lcd_draw_opt	416	static
+../Core/Src/smart_watch.c:356:5:lcd_draw_opt2	56	static
 ../Core/Src/smart_watch.c:111:6:smart_watch_process	40	static,ignoring_inline_asm
-../Core/Src/smart_watch.c:417:5:smart_watch_test_sd	11656	static
-../Core/Src/smart_watch.c:478:5:smart_watch_test_display	230464	static
-../Core/Src/smart_watch.c:505:5:smart_watch_test_mjpeg	680	static
+../Core/Src/smart_watch.c:430:5:smart_watch_test_sd	11656	static
+../Core/Src/smart_watch.c:491:5:smart_watch_test_display	230464	static
+../Core/Src/smart_watch.c:518:5:smart_watch_test_mjpeg	680	static
 ../Core/Src/smart_watch.c:1282:6:HAL_GPIO_EXTI_Callback	8	static

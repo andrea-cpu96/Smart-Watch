@@ -10,11 +10,11 @@
 
 /* DEBUG SETTINGS */
 
-#define 	NOT_DEBUG_TIME
+#define NOT_DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 
-#define 	OPT2					// Substitute with NOT_OPT if you want no optimizations
+#define OPT2						// Substitute with NOT_OPT if you want no optimizations
 
 /* MJPEG SETTINGS */
 
@@ -58,6 +58,9 @@
 #define PIX_TO_CIRC_COORD(p)		( ( p >= R) ? ( p - R ) : ( R - p ) ) // Put the pixel position in a circle reference (where the center is the 0 position)
 
 #define CIRCLE_MASK(px, py)			( ( SQUARE(PIX_TO_CIRC_COORD(px)) + SQUARE(PIX_TO_CIRC_COORD(py)) ) >= SQUARE(R) )
+
+#define PIXELS_DIFF(pix1, pix2)		( ( pix1 > pix2 ) ? ( pix1 - pix2 ) : ( pix2 - pix1 ) )
+#define PIXELS_COMP(pix1, pix2)		( PIXELS_DIFF(pix1, pix2) < 200 )
 
 enum mode
 {
