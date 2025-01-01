@@ -23,27 +23,27 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   9 .ARM.attributes 0000002e  00000000  00000000  0000f06c  2**0
                   CONTENTS, READONLY
- 10 .debug_info   0003c026  00000000  00000000  0000f09a  2**0
+ 10 .debug_info   0003c03b  00000000  00000000  0000f09a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 11 .debug_abbrev 000055d5  00000000  00000000  0004b0c0  2**0
+ 11 .debug_abbrev 000055d5  00000000  00000000  0004b0d5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 12 .debug_loclists 000233a5  00000000  00000000  00050695  2**0
+ 12 .debug_loclists 00023406  00000000  00000000  000506aa  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_aranges 00001498  00000000  00000000  00073a40  2**3
+ 13 .debug_aranges 00001498  00000000  00000000  00073ab0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_rnglists 00004c19  00000000  00000000  00074ed8  2**0
+ 14 .debug_rnglists 00004c25  00000000  00000000  00074f48  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_macro  00035959  00000000  00000000  00079af1  2**0
+ 15 .debug_macro  00035965  00000000  00000000  00079b6d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_line   0003766b  00000000  00000000  000af44a  2**0
+ 16 .debug_line   0003767b  00000000  00000000  000af4d2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_str    00146e72  00000000  00000000  000e6ab5  2**0
+ 17 .debug_str    00146efa  00000000  00000000  000e6b4d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .comment      00000043  00000000  00000000  0022d927  2**0
+ 18 .comment      00000043  00000000  00000000  0022da47  2**0
                   CONTENTS, READONLY
- 19 .debug_frame  000042a0  00000000  00000000  0022d96c  2**2
+ 19 .debug_frame  000042a0  00000000  00000000  0022da8c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_line_str 0000006c  00000000  00000000  00231c0c  2**0
+ 20 .debug_line_str 0000006c  00000000  00000000  00231d2c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5026,7 +5026,7 @@ void SystemClock_Config(void)
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
  8002878:	6993      	ldr	r3, [r2, #24]
- 800287a:	0498      	lsls	r0, r3, #18
+ 800287a:	0499      	lsls	r1, r3, #18
  800287c:	d5fc      	bpl.n	8002878 <SystemClock_Config+0x40>
 
   /** Initializes the RCC Oscillators according to the specified parameters
@@ -5045,92 +5045,94 @@ void SystemClock_Config(void)
  8002882:	2300      	movs	r3, #0
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_LSE;
  8002884:	2106      	movs	r1, #6
-  RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
- 8002886:	920d      	str	r2, [sp, #52]	@ 0x34
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+ 8002886:	920c      	str	r2, [sp, #48]	@ 0x30
   RCC_OscInitStruct.HSICalibrationValue = 64;
  8002888:	2540      	movs	r5, #64	@ 0x40
-  RCC_OscInitStruct.PLL.PLLQ = 5;
+  RCC_OscInitStruct.HSEState = RCC_HSI_ON;
+ 800288a:	920b      	str	r2, [sp, #44]	@ 0x2c
+  RCC_OscInitStruct.PLL.PLLQ = 6;
   RCC_OscInitStruct.PLL.PLLR = 2;
   RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_3;
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
   RCC_OscInitStruct.PLL.PLLFRACN = 0;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 800288a:	a80a      	add	r0, sp, #40	@ 0x28
+ 800288c:	a80a      	add	r0, sp, #40	@ 0x28
+  RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
+ 800288e:	920d      	str	r2, [sp, #52]	@ 0x34
+  RCC_OscInitStruct.PLL.PLLN = 23;
+ 8002890:	2204      	movs	r2, #4
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_LSE;
- 800288c:	910a      	str	r1, [sp, #40]	@ 0x28
-  RCC_OscInitStruct.HSICalibrationValue = 64;
- 800288e:	950e      	str	r5, [sp, #56]	@ 0x38
+ 8002892:	910a      	str	r1, [sp, #40]	@ 0x28
+  RCC_OscInitStruct.PLL.PLLQ = 6;
+ 8002894:	9118      	str	r1, [sp, #96]	@ 0x60
   RCC_OscInitStruct.PLL.PLLP = 2;
- 8002890:	9417      	str	r4, [sp, #92]	@ 0x5c
+ 8002896:	9417      	str	r4, [sp, #92]	@ 0x5c
+  RCC_OscInitStruct.HSICalibrationValue = 64;
+ 8002898:	950e      	str	r5, [sp, #56]	@ 0x38
   RCC_OscInitStruct.PLL.PLLR = 2;
- 8002892:	9419      	str	r4, [sp, #100]	@ 0x64
-  RCC_OscInitStruct.HSEState = RCC_HSI_ON;
- 8002894:	e9cd 220b 	strd	r2, r2, [sp, #44]	@ 0x2c
+ 800289a:	9419      	str	r4, [sp, #100]	@ 0x64
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
- 8002898:	e9cd 4313 	strd	r4, r3, [sp, #76]	@ 0x4c
-  RCC_OscInitStruct.PLL.PLLN = 23;
- 800289c:	2204      	movs	r2, #4
+ 800289c:	e9cd 4313 	strd	r4, r3, [sp, #76]	@ 0x4c
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
- 800289e:	e9cd 331b 	strd	r3, r3, [sp, #108]	@ 0x6c
+ 80028a0:	e9cd 331b 	strd	r3, r3, [sp, #108]	@ 0x6c
   RCC_OscInitStruct.PLL.PLLN = 23;
- 80028a2:	2317      	movs	r3, #23
- 80028a4:	e9cd 2315 	strd	r2, r3, [sp, #84]	@ 0x54
-  RCC_OscInitStruct.PLL.PLLQ = 5;
- 80028a8:	2305      	movs	r3, #5
- 80028aa:	9318      	str	r3, [sp, #96]	@ 0x60
+ 80028a4:	2317      	movs	r3, #23
+ 80028a6:	e9cd 2315 	strd	r2, r3, [sp, #84]	@ 0x54
   RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_3;
- 80028ac:	230c      	movs	r3, #12
- 80028ae:	931a      	str	r3, [sp, #104]	@ 0x68
+ 80028aa:	230c      	movs	r3, #12
+ 80028ac:	931a      	str	r3, [sp, #104]	@ 0x68
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 80028b0:	f003 fb18 	bl	8005ee4 <HAL_RCC_OscConfig>
- 80028b4:	4603      	mov	r3, r0
- 80028b6:	b108      	cbz	r0, 80028bc <SystemClock_Config+0x84>
+ 80028ae:	f003 fb19 	bl	8005ee4 <HAL_RCC_OscConfig>
+ 80028b2:	4603      	mov	r3, r0
+ 80028b4:	b108      	cbz	r0, 80028ba <SystemClock_Config+0x82>
   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
            Can only be executed in Privileged modes.
  */
 __STATIC_FORCEINLINE void __disable_irq(void)
 {
   __ASM volatile ("cpsid i" : : : "memory");
- 80028b8:	b672      	cpsid	i
+ 80028b6:	b672      	cpsid	i
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
- 80028ba:	e7fe      	b.n	80028ba <SystemClock_Config+0x82>
+ 80028b8:	e7fe      	b.n	80028b8 <SystemClock_Config+0x80>
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
- 80028bc:	223f      	movs	r2, #63	@ 0x3f
+ 80028ba:	223f      	movs	r2, #63	@ 0x3f
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
- 80028be:	9304      	str	r3, [sp, #16]
+ 80028bc:	9304      	str	r3, [sp, #16]
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
- 80028c0:	2308      	movs	r3, #8
+ 80028be:	2308      	movs	r3, #8
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
- 80028c2:	4621      	mov	r1, r4
+ 80028c0:	4621      	mov	r1, r4
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
- 80028c4:	9202      	str	r2, [sp, #8]
+ 80028c2:	9202      	str	r2, [sp, #8]
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
- 80028c6:	2203      	movs	r2, #3
+ 80028c4:	2203      	movs	r2, #3
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
- 80028c8:	a802      	add	r0, sp, #8
+ 80028c6:	a802      	add	r0, sp, #8
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
- 80028ca:	9509      	str	r5, [sp, #36]	@ 0x24
+ 80028c8:	9509      	str	r5, [sp, #36]	@ 0x24
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
- 80028cc:	9203      	str	r2, [sp, #12]
+ 80028ca:	9203      	str	r2, [sp, #12]
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
- 80028ce:	e9cd 3505 	strd	r3, r5, [sp, #20]
+ 80028cc:	e9cd 3505 	strd	r3, r5, [sp, #20]
   RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
- 80028d2:	f44f 6380 	mov.w	r3, #1024	@ 0x400
- 80028d6:	e9cd 5307 	strd	r5, r3, [sp, #28]
+ 80028d0:	f44f 6380 	mov.w	r3, #1024	@ 0x400
+ 80028d4:	e9cd 5307 	strd	r5, r3, [sp, #28]
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
- 80028da:	f003 fe75 	bl	80065c8 <HAL_RCC_ClockConfig>
- 80028de:	b108      	cbz	r0, 80028e4 <SystemClock_Config+0xac>
- 80028e0:	b672      	cpsid	i
+ 80028d8:	f003 fe76 	bl	80065c8 <HAL_RCC_ClockConfig>
+ 80028dc:	b108      	cbz	r0, 80028e2 <SystemClock_Config+0xaa>
+ 80028de:	b672      	cpsid	i
   while (1)
- 80028e2:	e7fe      	b.n	80028e2 <SystemClock_Config+0xaa>
+ 80028e0:	e7fe      	b.n	80028e0 <SystemClock_Config+0xa8>
 }
- 80028e4:	b01f      	add	sp, #124	@ 0x7c
- 80028e6:	bd30      	pop	{r4, r5, pc}
+ 80028e2:	b01f      	add	sp, #124	@ 0x7c
+ 80028e4:	bd30      	pop	{r4, r5, pc}
+ 80028e6:	bf00      	nop
  80028e8:	58024400 	.word	0x58024400
  80028ec:	58024800 	.word	0x58024800
 
@@ -6268,93 +6270,102 @@ static void SD_Initialize(void)
 08003070 <lcd_draw_opt2>:
 {
  8003070:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
- 8003074:	4a44      	ldr	r2, [pc, #272]	@ (8003188 <lcd_draw_opt2+0x118>)
+ 8003074:	f8df b110 	ldr.w	fp, [pc, #272]	@ 8003188 <lcd_draw_opt2+0x118>
 	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
- 8003076:	f04f 0a00 	mov.w	sl, #0
- 800307a:	f8df b110 	ldr.w	fp, [pc, #272]	@ 800318c <lcd_draw_opt2+0x11c>
+ 8003078:	2600      	movs	r6, #0
+ 800307a:	f8df 9110 	ldr.w	r9, [pc, #272]	@ 800318c <lcd_draw_opt2+0x11c>
 {
- 800307e:	b083      	sub	sp, #12
- 8003080:	4690      	mov	r8, r2
+ 800307e:	b085      	sub	sp, #20
 	   int ret = 0;
- 8003082:	4655      	mov	r5, sl
- 8003084:	465f      	mov	r7, fp
-		   while(( CIRCLE_MASK(frame.start.X, frame.start.Y) ) || ( buff16o1[i*240+frame.start.X] == buff16o2[i*240+frame.start.X] ))
- 8003086:	f243 7650 	movw	r6, #14160	@ 0x3750
+ 8003080:	46b2      	mov	sl, r6
+		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ) || CIRCLE_MASK(frame.start.X, frame.start.Y))
+ 8003082:	f243 7550 	movw	r5, #14160	@ 0x3750
+ 8003086:	f10b 0802 	add.w	r8, fp, #2
+ 800308a:	f109 0702 	add.w	r7, r9, #2
 	       frame.start.Y = i;
- 800308a:	f1ca 0377 	rsb	r3, sl, #119	@ 0x77
- 800308e:	f1aa 0177 	sub.w	r1, sl, #119	@ 0x77
- 8003092:	fa1f fe8a 	uxth.w	lr, sl
-		   while(( CIRCLE_MASK(frame.start.X, frame.start.Y) ) || ( buff16o1[i*240+frame.start.X] == buff16o2[i*240+frame.start.X] ))
- 8003096:	2400      	movs	r4, #0
- 8003098:	f1ba 0f76 	cmp.w	sl, #118	@ 0x76
+ 800308e:	f1c6 0177 	rsb	r1, r6, #119	@ 0x77
+ 8003092:	f1a6 0377 	sub.w	r3, r6, #119	@ 0x77
+ 8003096:	b2b0      	uxth	r0, r6
+		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ) || CIRCLE_MASK(frame.start.X, frame.start.Y))
+ 8003098:	46ce      	mov	lr, r9
+ 800309a:	2e76      	cmp	r6, #118	@ 0x76
  800309c:	bfc8      	it	gt
- 800309e:	460b      	movgt	r3, r1
+ 800309e:	4619      	movgt	r1, r3
+ 80030a0:	46dc      	mov	ip, fp
+ 80030a2:	2400      	movs	r4, #0
 	       frame.end.Y = frame.start.Y;
- 80030a0:	f8ad e006 	strh.w	lr, [sp, #6]
-		   while(( CIRCLE_MASK(frame.start.X, frame.start.Y) ) || ( buff16o1[i*240+frame.start.X] == buff16o2[i*240+frame.start.X] ))
- 80030a4:	fb03 f303 	mul.w	r3, r3, r3
- 80030a8:	f1c4 0177 	rsb	r1, r4, #119	@ 0x77
- 80030ac:	2c76      	cmp	r4, #118	@ 0x76
- 80030ae:	fb01 3101 	mla	r1, r1, r1, r3
- 80030b2:	d808      	bhi.n	80030c6 <lcd_draw_opt2+0x56>
- 80030b4:	42b1      	cmp	r1, r6
- 80030b6:	dd0e      	ble.n	80030d6 <lcd_draw_opt2+0x66>
+ 80030a4:	f8ad 000e 	strh.w	r0, [sp, #14]
+		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ) || CIRCLE_MASK(frame.start.X, frame.start.Y))
+ 80030a8:	fb01 f101 	mul.w	r1, r1, r1
+ 80030ac:	f83c 2f02 	ldrh.w	r2, [ip, #2]!
+ 80030b0:	f83e 3f02 	ldrh.w	r3, [lr, #2]!
+ 80030b4:	429a      	cmp	r2, r3
+ 80030b6:	d00b      	beq.n	80030d0 <lcd_draw_opt2+0x60>
+ 80030b8:	f1a4 0377 	sub.w	r3, r4, #119	@ 0x77
+ 80030bc:	f1c4 0277 	rsb	r2, r4, #119	@ 0x77
+ 80030c0:	2c76      	cmp	r4, #118	@ 0x76
+ 80030c2:	fb03 1303 	mla	r3, r3, r3, r1
+ 80030c6:	fb02 1202 	mla	r2, r2, r2, r1
+ 80030ca:	d90f      	bls.n	80030ec <lcd_draw_opt2+0x7c>
+ 80030cc:	42ab      	cmp	r3, r5
+ 80030ce:	dd11      	ble.n	80030f4 <lcd_draw_opt2+0x84>
 			   if(frame.start.X > frame.end.X)
- 80030b8:	3401      	adds	r4, #1
-		   while(( CIRCLE_MASK(frame.start.X, frame.start.Y) ) || ( buff16o1[i*240+frame.start.X] == buff16o2[i*240+frame.start.X] ))
- 80030ba:	f1c4 0177 	rsb	r1, r4, #119	@ 0x77
- 80030be:	2c76      	cmp	r4, #118	@ 0x76
- 80030c0:	fb01 3101 	mla	r1, r1, r1, r3
- 80030c4:	d9f6      	bls.n	80030b4 <lcd_draw_opt2+0x44>
- 80030c6:	f1a4 0177 	sub.w	r1, r4, #119	@ 0x77
- 80030ca:	f243 7050 	movw	r0, #14160	@ 0x3750
- 80030ce:	fb01 3101 	mla	r1, r1, r1, r3
- 80030d2:	4281      	cmp	r1, r0
- 80030d4:	dc05      	bgt.n	80030e2 <lcd_draw_opt2+0x72>
- 80030d6:	f838 0014 	ldrh.w	r0, [r8, r4, lsl #1]
- 80030da:	f837 1014 	ldrh.w	r1, [r7, r4, lsl #1]
- 80030de:	4288      	cmp	r0, r1
- 80030e0:	d10f      	bne.n	8003102 <lcd_draw_opt2+0x92>
-			   if(frame.start.X > frame.end.X)
- 80030e2:	3401      	adds	r4, #1
- 80030e4:	2cf0      	cmp	r4, #240	@ 0xf0
- 80030e6:	d1df      	bne.n	80030a8 <lcd_draw_opt2+0x38>
+ 80030d0:	3401      	adds	r4, #1
+ 80030d2:	2cf0      	cmp	r4, #240	@ 0xf0
+ 80030d4:	d1ea      	bne.n	80030ac <lcd_draw_opt2+0x3c>
 	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
- 80030e8:	f10a 0a01 	add.w	sl, sl, #1
- 80030ec:	f508 78f0 	add.w	r8, r8, #480	@ 0x1e0
- 80030f0:	f507 77f0 	add.w	r7, r7, #480	@ 0x1e0
- 80030f4:	f1ba 0ff0 	cmp.w	sl, #240	@ 0xf0
- 80030f8:	d1c7      	bne.n	800308a <lcd_draw_opt2+0x1a>
+ 80030d6:	3601      	adds	r6, #1
+ 80030d8:	f50b 7bf0 	add.w	fp, fp, #480	@ 0x1e0
+ 80030dc:	f509 79f0 	add.w	r9, r9, #480	@ 0x1e0
+ 80030e0:	2ef0      	cmp	r6, #240	@ 0xf0
+ 80030e2:	d1d4      	bne.n	800308e <lcd_draw_opt2+0x1e>
 }
- 80030fa:	4628      	mov	r0, r5
- 80030fc:	b003      	add	sp, #12
- 80030fe:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
- 8003102:	ebca 190a 	rsb	r9, sl, sl, lsl #4
-		   while(( CIRCLE_MASK(frame.start.X, frame.start.Y) ) || ( buff16o1[i*240+frame.start.X] == buff16o2[i*240+frame.start.X] ))
- 8003106:	25ef      	movs	r5, #239	@ 0xef
- 8003108:	ea4f 1909 	mov.w	r9, r9, lsl #4
+ 80030e4:	4650      	mov	r0, sl
+ 80030e6:	b005      	add	sp, #20
+ 80030e8:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ) || CIRCLE_MASK(frame.start.X, frame.start.Y))
+ 80030ec:	42aa      	cmp	r2, r5
+ 80030ee:	dd01      	ble.n	80030f4 <lcd_draw_opt2+0x84>
+			   if(frame.start.X > frame.end.X)
+ 80030f0:	3401      	adds	r4, #1
+ 80030f2:	e7db      	b.n	80030ac <lcd_draw_opt2+0x3c>
+ 80030f4:	ebc6 1306 	rsb	r3, r6, r6, lsl #4
+		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ) || CIRCLE_MASK(frame.start.X, frame.start.Y))
+ 80030f8:	f04f 0aef 	mov.w	sl, #239	@ 0xef
+ 80030fc:	011b      	lsls	r3, r3, #4
 		   if(out_the_circle_flag)
- 800310c:	e001      	b.n	8003112 <lcd_draw_opt2+0xa2>
- 800310e:	fa1f f58c 	uxth.w	r5, ip
-		   while(CIRCLE_MASK(frame.end.X, frame.start.Y)|| ( buff16o1[i*240+frame.end.X] == buff16o2[i*240+frame.end.X] ))
- 8003112:	2d76      	cmp	r5, #118	@ 0x76
- 8003114:	f1c5 0177 	rsb	r1, r5, #119	@ 0x77
- 8003118:	eb09 0005 	add.w	r0, r9, r5
- 800311c:	f105 3cff 	add.w	ip, r5, #4294967295
+ 80030fe:	e003      	b.n	8003108 <lcd_draw_opt2+0x98>
+			   frame.end.X--;
+ 8003100:	f10a 3aff 	add.w	sl, sl, #4294967295
+ 8003104:	fa1f fa8a 	uxth.w	sl, sl
+		   while(( buff16o1[py+frame.end.X] == buff16o2[py+frame.end.X] ) || CIRCLE_MASK(frame.end.X, frame.start.Y))
+ 8003108:	eb0a 0203 	add.w	r2, sl, r3
+ 800310c:	f838 c012 	ldrh.w	ip, [r8, r2, lsl #1]
+ 8003110:	f837 2012 	ldrh.w	r2, [r7, r2, lsl #1]
+ 8003114:	4594      	cmp	ip, r2
+ 8003116:	d0f3      	beq.n	8003100 <lcd_draw_opt2+0x90>
+ 8003118:	f1ba 0f76 	cmp.w	sl, #118	@ 0x76
+ 800311c:	f1ca 0277 	rsb	r2, sl, #119	@ 0x77
  8003120:	bf88      	it	hi
- 8003122:	f1a5 0177 	subhi.w	r1, r5, #119	@ 0x77
- 8003126:	fb01 3101 	mla	r1, r1, r1, r3
- 800312a:	42b1      	cmp	r1, r6
- 800312c:	dcef      	bgt.n	800310e <lcd_draw_opt2+0x9e>
- 800312e:	f832 1010 	ldrh.w	r1, [r2, r0, lsl #1]
- 8003132:	f83b 0010 	ldrh.w	r0, [fp, r0, lsl #1]
- 8003136:	4281      	cmp	r1, r0
- 8003138:	d0e9      	beq.n	800310e <lcd_draw_opt2+0x9e>
+ 8003122:	f1aa 0277 	subhi.w	r2, sl, #119	@ 0x77
+ 8003126:	fb02 1202 	mla	r2, r2, r2, r1
+ 800312a:	42aa      	cmp	r2, r5
+ 800312c:	dce8      	bgt.n	8003100 <lcd_draw_opt2+0x90>
 		   GC9A01_set_frame(frame);
- 800313a:	ab02      	add	r3, sp, #8
- 800313c:	f8ad e002 	strh.w	lr, [sp, #2]
- 8003140:	f8ad 5004 	strh.w	r5, [sp, #4]
- 8003144:	f8ad 4000 	strh.w	r4, [sp]
+ 800312e:	9301      	str	r3, [sp, #4]
+ 8003130:	ab04      	add	r3, sp, #16
+ 8003132:	f8ad a00c 	strh.w	sl, [sp, #12]
+	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
+ 8003136:	3601      	adds	r6, #1
+		   GC9A01_set_frame(frame);
+ 8003138:	f8ad 4008 	strh.w	r4, [sp, #8]
+	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
+ 800313c:	f50b 7bf0 	add.w	fp, fp, #480	@ 0x1e0
+		   GC9A01_set_frame(frame);
+ 8003140:	f8ad 000a 	strh.w	r0, [sp, #10]
+	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
+ 8003144:	f509 79f0 	add.w	r9, r9, #480	@ 0x1e0
+		   GC9A01_set_frame(frame);
  8003148:	e913 0003 	ldmdb	r3, {r0, r1}
  800314c:	f7ff fa24 	bl	8002598 <GC9A01_set_frame>
 		   GC9A01_write_command(MEM_WR);
@@ -6366,30 +6377,31 @@ static void SD_Initialize(void)
 		   GC9A01_set_chip_select(OFF);
  800315c:	2000      	movs	r0, #0
  800315e:	f7fd fb3b 	bl	80007d8 <GC9A01_set_chip_select>
-		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) * 2 );
- 8003162:	1b29      	subs	r1, r5, r4
+		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) << 1 );
+ 8003162:	ebaa 0104 	sub.w	r1, sl, r4
+		   uint32_t start_idx = ( ( py + frame.start.X ) << 1 );
+ 8003166:	9b01      	ldr	r3, [sp, #4]
 		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
- 8003164:	9b0c      	ldr	r3, [sp, #48]	@ 0x30
-		   uint32_t start_idx = ( ( i * 240 + frame.start.X ) * 2 );
- 8003166:	eb09 0004 	add.w	r0, r9, r4
-		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) * 2 );
+ 8003168:	9a0e      	ldr	r2, [sp, #56]	@ 0x38
+		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) << 1 );
  800316a:	0049      	lsls	r1, r1, #1
+		   uint32_t start_idx = ( ( py + frame.start.X ) << 1 );
+ 800316c:	4423      	add	r3, r4
 		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
- 800316c:	eb03 0040 	add.w	r0, r3, r0, lsl #1
- 8003170:	b289      	uxth	r1, r1
- 8003172:	f7ff faeb 	bl	800274c <GC9A01_spi_tx>
- 8003176:	4605      	mov	r5, r0
+ 800316e:	b289      	uxth	r1, r1
+ 8003170:	eb02 0043 	add.w	r0, r2, r3, lsl #1
+ 8003174:	f7ff faea 	bl	800274c <GC9A01_spi_tx>
+ 8003178:	4682      	mov	sl, r0
 		   GC9A01_set_chip_select(ON);
- 8003178:	2001      	movs	r0, #1
- 800317a:	f7fd fb2d 	bl	80007d8 <GC9A01_set_chip_select>
-		   if(ret == 0)
- 800317e:	2d00      	cmp	r5, #0
- 8003180:	d0bb      	beq.n	80030fa <lcd_draw_opt2+0x8a>
- 8003182:	4a01      	ldr	r2, [pc, #4]	@ (8003188 <lcd_draw_opt2+0x118>)
- 8003184:	e7b0      	b.n	80030e8 <lcd_draw_opt2+0x78>
+ 800317a:	2001      	movs	r0, #1
+ 800317c:	f7fd fb2c 	bl	80007d8 <GC9A01_set_chip_select>
+	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
+ 8003180:	2ef0      	cmp	r6, #240	@ 0xf0
+ 8003182:	d184      	bne.n	800308e <lcd_draw_opt2+0x1e>
+ 8003184:	e7ae      	b.n	80030e4 <lcd_draw_opt2+0x74>
  8003186:	bf00      	nop
- 8003188:	240322a8 	.word	0x240322a8
- 800318c:	240002a8 	.word	0x240002a8
+ 8003188:	240322a6 	.word	0x240322a6
+ 800318c:	240002a6 	.word	0x240002a6
 
 08003190 <smart_watch_process>:
 {

@@ -120,6 +120,10 @@ void smart_watch_process(void)
 	while(1)
 	{
 
+#ifdef DEBUG_TIME
+		uint32_t tempStart = HAL_GetTick();
+#endif
+
 		// Check if new file needs to be open
 		file_handler(0);
 
@@ -129,6 +133,13 @@ void smart_watch_process(void)
 		battery_management();
 
 #ifdef DEBUG_TIME
+		unsigned int bw = 0;
+		char buff[50];
+		long unsigned int tempStop = HAL_GetTick();
+		volatile long unsigned int tempDiff = ( ( tempStop - tempStart ) );
+		snprintf(buff, sizeof(buff), "SPI time = %ld\n", tempDiff);
+		f_write(&fileToWrite, buff, sizeof(buff), &bw);
+
 		if(video.video_mode == NORMAL_MODE)
 		{
 
@@ -357,6 +368,9 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
        uint16_t *buff16o1 = (uint16_t *)output_data1;
        uint16_t *buff16o2 = (uint16_t *)output_data2;
 
+       uint8_t out_the_circle_flag = 0;
+       uint32_t py;
+
 
 	   for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
 	   {
@@ -366,9 +380,11 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 	       frame.end.X = ( LCD_SIDE_SIZE - 1 );
 	       frame.end.Y = frame.start.Y;
 
-	       uint8_t out_the_circle_flag = 0;
+	       out_the_circle_flag = 0;
 
-		   while(( CIRCLE_MASK(frame.start.X, frame.start.Y) ) || ( buff16o1[i*240+frame.start.X] == buff16o2[i*240+frame.start.X] ))
+	       py = ( i * LCD_SIDE_SIZE );
+
+		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ) || CIRCLE_MASK(frame.start.X, frame.start.Y))
 		   {
 
 			   frame.start.X++;
@@ -386,10 +402,10 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 		   if(out_the_circle_flag)
 			   continue;
 
-		   while(CIRCLE_MASK(frame.end.X, frame.start.Y)|| ( buff16o1[i*240+frame.end.X] == buff16o2[i*240+frame.end.X] ))
+		   while(( buff16o1[py+frame.end.X] == buff16o2[py+frame.end.X] ) || CIRCLE_MASK(frame.end.X, frame.start.Y))
 			   frame.end.X--;
 
-		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) * 2 );
+		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) << 1 );
 
 		   GC9A01_set_frame(frame);
 		   GC9A01_write_command(MEM_WR);
@@ -397,14 +413,11 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 		   GC9A01_set_data_command(ON);
 		   GC9A01_set_chip_select(OFF);
 
-		   uint32_t start_idx = ( ( i * 240 + frame.start.X ) * 2 );
+		   uint32_t start_idx = ( ( py + frame.start.X ) << 1 );
 
 		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
 
 		   GC9A01_set_chip_select(ON);
-
-		   if(ret == 0)
-			   return ret;
 
 	   }
 
@@ -646,9 +659,7 @@ static void clock_normal(void)
 #endif
 #endif
 
-#ifdef DEBUG_TIME
-		uint32_t tempStart = HAL_GetTick();
-#endif
+
 
 	// Save the frame into MJPEG_VideoBuffer
 	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
@@ -707,7 +718,6 @@ static void clock_normal(void)
 
 		depth24To16(&pOut, ( video.width * video.height ), 3);
 
-
 #ifdef  OPT
 		// Display the image
 		lcd_draw_opt(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
@@ -720,16 +730,6 @@ static void clock_normal(void)
 #endif
 
 		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
-
-#ifdef DEBUG_TIME
-		unsigned int bw = 0;
-		char buff[50];
-		long unsigned int tempStop = HAL_GetTick();
-		volatile long unsigned int tempDiff = ( ( tempStop - tempStart ) );
-		snprintf(buff, sizeof(buff), "SPI time = %ld\n", tempDiff);
-		f_write(&fileToWrite, buff, sizeof(buff), &bw);
-#endif
-
 
 /************************* Synchronization ************************/
 
