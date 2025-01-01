@@ -108,6 +108,7 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA2D_Init();
   MX_SDMMC1_SD_Init();
+  MX_DMA_Init();
   MX_SPI1_Init();
   MX_RTC_Init();
   //MX_FATFS_Init();
