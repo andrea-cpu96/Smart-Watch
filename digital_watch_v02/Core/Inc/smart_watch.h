@@ -137,6 +137,7 @@ void smart_watch_process(void);
 int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, uint8_t swap);
 int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
 int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
+void lcd_draw_opt3(doubleFormat *data);
 
 int smart_watch_test_sd(void);
 int smart_watch_test_display(void);

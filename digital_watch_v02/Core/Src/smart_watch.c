@@ -428,6 +428,105 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 
 }
 
+void lcd_draw_opt3(doubleFormat *data)
+{
+
+	uint8_t b;
+	uint8_t g;
+	uint8_t r;
+
+	struct GC9A01_frame frame;
+
+    frame.start.X = 0;
+    frame.start.Y = 0;
+    frame.end.X = 239;
+    frame.end.Y = 0;
+
+    uint16_t *buff16o1 = (uint16_t *)output_data1;
+    uint16_t *buff16o2 = (uint16_t *)output_data2;
+
+    struct GC9A01_frame frame_arr[240];
+
+    uint32_t start_idx;
+
+	uint32_t idx_byte16;
+	uint32_t idx_byte8;
+
+	uint8_t equal1_flag;
+	uint8_t equal2_flag;
+
+	uint32_t py;
+
+	uint32_t total_bytes;
+
+
+	for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
+	{
+
+		frame_arr[i].start.X = 0;
+		frame_arr[i].start.Y = i;
+		frame_arr[i].end.X = ( LCD_SIDE_SIZE - 1 );
+		frame_arr[i].end.Y = frame_arr[i].start.Y;
+
+		equal1_flag = 1;
+		equal2_flag = 1;
+
+		for(int j = 0 ; j < LCD_SIDE_SIZE ; j++)
+		{
+
+			idx_byte16 = ( i * LCD_SIDE_SIZE + j );
+			idx_byte8 = ( idx_byte16 * 3 );
+
+			b = data->u8Arr[idx_byte8];
+			g = data->u8Arr[idx_byte8+1];
+			r = data->u8Arr[idx_byte8+2];
+
+			data->u16Arr[idx_byte16] = color565(r, g, b);
+			data->u16Arr[idx_byte16] = ( ( ( data->u16Arr[idx_byte16] & 0x00ff ) << 8 ) | (( data->u16Arr[idx_byte16] & 0xff00 ) >> 8) );
+
+			py = ( i * LCD_SIDE_SIZE );
+
+			if(equal1_flag)
+			{
+
+				if(PIXELS_COMP(buff16o1[py+frame.start.X], buff16o2[py+frame.start.X]))
+					frame_arr[i].start.X++;
+				else
+					equal1_flag = 0;
+
+			}
+
+			if(equal2_flag)
+			{
+
+				if(PIXELS_COMP(buff16o1[py+frame.end.X], buff16o2[py+frame.end.X]))
+					frame_arr[i].end.X--;
+				else
+					equal2_flag = 0;
+
+			}
+
+		}
+
+		total_bytes = ( ( 1 + frame_arr[i].end.X - frame_arr[i].start.X ) << 1 );
+
+		GC9A01_set_frame(frame_arr[i]);
+		GC9A01_write_command(MEM_WR);
+
+		GC9A01_set_data_command(ON);
+		GC9A01_set_chip_select(OFF);
+
+		start_idx = ( ( py + frame_arr[i].start.X ) << 1 );
+
+		GC9A01_spi_tx(&data->u8Arr[start_idx], total_bytes);
+
+		GC9A01_set_chip_select(ON);
+
+	}
+
+}
+
+
 // TEST FUNCTIONS //
 
 int smart_watch_test_sd(void)
@@ -719,7 +818,9 @@ static void clock_normal(void)
 		doubleFormat pOut;
 		pOut.u8Arr = (uint8_t *)outputData;
 
+#ifndef OPT3
 		depth24To16(&pOut, ( video.width * video.height ), 3);
+#endif
 
 #ifdef  OPT
 		// Display the image
@@ -727,10 +828,13 @@ static void clock_normal(void)
 
 #elif defined(OPT2)
 		lcd_draw_opt2(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
+#elif defined(OPT3)
+		int lcd_draw_opt3(&pOut);
 #else
 		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
 		swap = ( ( swap ) ? 0 : 1 );
 #endif
+
 
 		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
 
