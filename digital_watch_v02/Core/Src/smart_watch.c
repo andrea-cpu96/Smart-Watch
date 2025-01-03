@@ -60,9 +60,11 @@ uint8_t MJPEG_AudioBuffer[MJPEG_AUD_BUFFER_SIZE];
 video_t video;													// Video data structure
 
 uint8_t	preElab_data[300*1024];									// Pre elaborated data buffer
-uint8_t output_data1[200*1024];									// Output data buffer (format RGB565)
-uint8_t output_data2[200*1024];
+uint8_t output_data1[LCD_SIDE_SIZE*LCD_SIDE_SIZE*3+100];		// Output data buffer (format RGB565)
+uint8_t output_data2[LCD_SIDE_SIZE*LCD_SIDE_SIZE*3+100];
 uint8_t *outputData = output_data1;
+
+block_t pixel_blocks[BLOCK_NUM];
 
 /************************** GLOBAL FUNCTIONS **************************/
 
@@ -71,14 +73,33 @@ void smart_watch_init(void)
 
 	parameters_reset();
 
-
-	for(int i = 0 ; i < 200*1024 ; i++)
+	for(int i = 0 ; i < BLOCK_NUM ; i++)
 	{
 
-		output_data1[i] = 0x00;
-		output_data2[i] = 0xff;
+		uint32_t idx = ( i % BLOCKS_PER_RAW );
+		uint32_t idy = ( i / BLOCKS_PER_RAW );
+
+		pixel_blocks[i].display_frame.start.X = ( idx * BLOCK_SIDE_SIZE );
+		pixel_blocks[i].display_frame.start.Y = ( idy * BLOCK_SIDE_SIZE );
+		pixel_blocks[i].display_frame.end.X = ( ( idx + 1 ) * BLOCK_SIDE_SIZE );
+		pixel_blocks[i].display_frame.end.Y = ( ( idy + 1 ) * BLOCK_SIDE_SIZE );
+
+		for(int j = 0 ; j < BLOCK_TOT_PIXELS ; j++)
+		{
+
+			uint32_t base_idx = ( pixel_blocks[i].display_frame.start.X +
+					   ( pixel_blocks[i].display_frame.start.Y * LCD_SIDE_SIZE ) );
+			uint32_t line_offs = ( ( j / BLOCK_SIDE_SIZE ) * LCD_SIDE_SIZE );
+			uint32_t pixel_offs = ( j % BLOCK_SIDE_SIZE );
+			uint32_t arr_idx = ( base_idx + line_offs + pixel_offs );
+
+			pixel_blocks[i].buffer_frame1[j] = &output_data1[arr_idx];
+			pixel_blocks[i].buffer_frame2[j] = &output_data2[arr_idx];
+
+		}
 
 	}
+
 	// First time setting
 	video.video_mode = SETTING_MODE;
 

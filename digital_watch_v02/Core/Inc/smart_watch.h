@@ -144,4 +144,19 @@ int smart_watch_test_display(void);
 int smart_watch_test_mjpeg(void);
 
 
+#define BLOCK_SIDE_SIZE			12
+#define BLOCK_TOT_PIXELS		( BLOCK_SIDE_SIZE * BLOCK_SIDE_SIZE )
+#define BLOCK_NUM				( ( LCD_SIDE_SIZE * LCD_SIDE_SIZE ) / BLOCK_TOT_PIXELS )
+
+#define BLOCKS_PER_RAW			( LCD_SIDE_SIZE / BLOCK_SIDE_SIZE )
+
+typedef struct
+{
+
+	struct GC9A01_frame display_frame;
+	uint16_t *buffer_frame1[BLOCK_TOT_PIXELS];
+	uint16_t *buffer_frame2[BLOCK_TOT_PIXELS];
+
+}block_t;
+
 #endif /* EXAMPLE_USER_CM7_SMART_WATCH_H_ */
