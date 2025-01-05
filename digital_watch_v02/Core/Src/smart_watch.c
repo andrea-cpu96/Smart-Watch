@@ -10,10 +10,9 @@
 #include "AVI_parser.h"
 #include "fatfs.h"
 
-#include "GC9A01.h"
-
 #include "smart_watch.h"
 
+#include <arm_math.h>
 #include <stdio.h>
 
 /************************** PRIVATE FUNCTIONS PROTOTPYES **************************/
@@ -40,10 +39,6 @@ static void enable_btn_int(void);
 static void disable_btn_int(void);
 static void clear_btn_int(void);
 
-#ifdef DEBUG_TIME
-FIL fileToWrite;
-#endif
-
 /************************** GLOBAL VARIABLES **************************/
 
 enum button_status btn_status = BTN_NONE;
@@ -64,7 +59,9 @@ uint8_t output_data1[LCD_SIDE_SIZE*LCD_SIDE_SIZE*3+100];		// Output data buffer 
 uint8_t output_data2[LCD_SIDE_SIZE*LCD_SIDE_SIZE*3+100];
 uint8_t *outputData = output_data1;
 
+#ifdef OPT3
 block_t pixel_blocks[BLOCK_NUM];
+#endif
 
 /************************** GLOBAL FUNCTIONS **************************/
 
@@ -73,6 +70,7 @@ void smart_watch_init(void)
 
 	parameters_reset();
 
+#ifdef OPT3
 	for(int i = 0 ; i < BLOCK_NUM ; i++)
 	{
 
@@ -81,24 +79,24 @@ void smart_watch_init(void)
 
 		pixel_blocks[i].display_frame.start.X = ( idx * BLOCK_SIDE_SIZE );
 		pixel_blocks[i].display_frame.start.Y = ( idy * BLOCK_SIDE_SIZE );
-		pixel_blocks[i].display_frame.end.X = ( ( idx + 1 ) * BLOCK_SIDE_SIZE );
-		pixel_blocks[i].display_frame.end.Y = ( ( idy + 1 ) * BLOCK_SIDE_SIZE );
+		pixel_blocks[i].display_frame.end.X = ( ( idx + 1 ) * BLOCK_SIDE_SIZE - 1 );
+		pixel_blocks[i].display_frame.end.Y = ( ( idy + 1 ) * BLOCK_SIDE_SIZE - 1 );
 
-		for(int j = 0 ; j < BLOCK_TOT_PIXELS ; j++)
+		for(int j = 0 ; j < BLOCK_SIDE_SIZE ; j++)
 		{
 
 			uint32_t base_idx = ( pixel_blocks[i].display_frame.start.X +
-					   ( pixel_blocks[i].display_frame.start.Y * LCD_SIDE_SIZE ) );
-			uint32_t line_offs = ( ( j / BLOCK_SIDE_SIZE ) * LCD_SIDE_SIZE );
-			uint32_t pixel_offs = ( j % BLOCK_SIDE_SIZE );
-			uint32_t arr_idx = ( base_idx + line_offs + pixel_offs );
+					   	   	   	( pixel_blocks[i].display_frame.start.Y * LCD_SIDE_SIZE ) );
+			uint32_t line_offs = ( j * LCD_SIDE_SIZE );
+			uint32_t arr_idx = ( base_idx + line_offs );
 
-			pixel_blocks[i].buffer_frame1[j] = &output_data1[arr_idx];
-			pixel_blocks[i].buffer_frame2[j] = &output_data2[arr_idx];
+			pixel_blocks[i].buffer_frame1[j] = &output_data1[arr_idx*2];
+			pixel_blocks[i].buffer_frame2[j] = &output_data2[arr_idx*2];
 
 		}
 
 	}
+#endif
 
 	// First time setting
 	video.video_mode = SETTING_MODE;
@@ -133,9 +131,7 @@ void smart_watch_process(void)
 {
 
 #ifdef DEBUG_TIME
-	static uint16_t count = 0;
-	if(f_open(&fileToWrite, "time.txt", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
-		while(1);
+	static volatile int count = 0;
 #endif
 
 	while(1)
@@ -154,19 +150,13 @@ void smart_watch_process(void)
 		battery_management();
 
 #ifdef DEBUG_TIME
-		unsigned int bw = 0;
-		char buff[50];
 		long unsigned int tempStop = HAL_GetTick();
 		volatile long unsigned int tempDiff = ( ( tempStop - tempStart ) );
-		snprintf(buff, sizeof(buff), "SPI time = %ld\n", tempDiff);
-		f_write(&fileToWrite, buff, sizeof(buff), &bw);
 
 		if(video.video_mode == NORMAL_MODE)
 		{
 
 			count++;
-			if(count > 1000)
-				f_close(&fileToWrite);
 
 		}
 #endif
@@ -223,158 +213,8 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 
 }
 
-
-int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
-{
-
-	   struct GC9A01_frame frame;
-	   static uint16_t full_update = 0;
-	   int ret = 0;
-
-       frame.start.X = 0;
-       frame.start.Y = 0;
-       frame.end.X = 0;
-       frame.end.Y = 0;
-
-       uint16_t *data16 = (uint16_t *)data;
-       uint16_t *buff16o1 = (uint16_t *)output_data1;
-       uint16_t *buff16o2 = (uint16_t *)output_data2;
-
-       uint16_t block_to_send[PX_PER_BLOCK_X*PX_PER_BLOCK_Y] = {0};
-
-       uint8_t update_flag = 1;
-       uint8_t equal_count = 0;
-
-       uint32_t chunk_idx = 0;
-       uint32_t block_idx = 0;
-       uint32_t px_y_idx = 0;
-       uint32_t idx = 0;
-
-       uint8_t spare_flag = 0;
-
-
-       if(full_update == 0)
-       {
-
-
-    	   ret = lcd_draw(sx, sy, wd, ht, data, 0);
-    	   ret |= lcd_draw(sx, sy, wd, ht, data, 1);
-
-    	   full_update = ( ( full_update + 1 ) % FULL_UPDATE_PERIOD );
-
-    	   return ret;
-
-       }
-
-       full_update = ( ( full_update + 1 ) % FULL_UPDATE_PERIOD );
-
-       for(int i = 0 ; i < CHUNKS_NUM ; i++)
-       {
-
-    	   chunk_idx = ( i * PX_PER_BLOCK_X * 240 );
-
-    	   for(int j = 0 ; j < BLOCKS_PER_CHUNK ; j++)
-    	   {
-
-    		   block_idx = ( j * PX_PER_BLOCK_X );
-
-   	    	   frame.start.X = ( j * PX_PER_BLOCK_X );
-   	    	   frame.start.Y = ( i * PX_PER_BLOCK_Y );
-   	    	   frame.end.X = ( frame.start.X + PX_PER_BLOCK_X - 1 );
-    	       frame.end.Y = ( frame.start.Y + PX_PER_BLOCK_Y - 1 );
-
-    		   for(int h = 0 ; h < PX_PER_BLOCK_Y ; h++)
-    		   {
-
-    			   px_y_idx = ( h * 240 );
-
-   				   for(int z = 0 ; z < PX_PER_BLOCK_X ; z++)
-   				   {
-
-   					   idx = ( chunk_idx + block_idx + px_y_idx + z);
-
-   					   block_to_send[(h*PX_PER_BLOCK_X)+z] = data16[idx];
-
-   	        	       // Check if we are outside the round mask
-   	        	       if( CIRCLE_MASK(frame.start.X, frame.start.Y)
-   	        	    		   && CIRCLE_MASK(frame.start.X, frame.end.Y)
-							   && CIRCLE_MASK(frame.end.X, frame.start.Y)
-							   && CIRCLE_MASK(frame.end.X, frame.end.Y) )
-   	        	       {
-
-   	        	    	   // We are outside the round mask
-
-   	        	    	   // Always skip here
-   	        	    	   update_flag =0;
-   	        	    	   break;
-
-   	        	       }
-
-   					   // Check if we are close to the boundaries
-   	        	       if(( frame.start.X <= BORDER_START ) || ( frame.start.Y <= BORDER_START )
-   	        	    		|| ( frame.end.X >= (PX_IN_A_RAW - BORDER_END ) ) || ( frame.end.Y >= ( PX_IN_A_RAW - BORDER_END ) ) )
-   	        	       {
-
-   	        	    	   // We are close to the boundaries
-
-   	        	    	   // Always update here
-   	        	    	   update_flag = 1;
-   	        	    	   continue;
-
-   	        	       }
-
-   					   if(( spare_flag == 0 ) && ( buff16o1[idx] == buff16o2[idx] ))
-   					   {
-
-   						   equal_count++;
-
-   						   if(equal_count >= MAX_EQU_NUM)
-   						   {
-
-   							   update_flag = 0;
-   							   break;
-
-   						   }
-
-   					   }
-
-   					   spare_flag = ( ( spare_flag + 1 ) % SPARE_DIV_FACT );
-
-   				   }
-
-   				   if(update_flag == 0)
-   					   break;
-
-    		   }
-
-    		   if(update_flag)
-    		   {
-
-    			   GC9A01_set_frame(frame);
-    			   GC9A01_write_command(MEM_WR);
-
-    			   GC9A01_set_data_command(ON);
-    			   GC9A01_set_chip_select(OFF);
-
-    			   uint32_t total_bytes = ( BLOCK_SIZE * 2 );		// 2 byte per pixel
-    			   ret = GC9A01_spi_tx((uint8_t *)block_to_send, total_bytes);
-
-    			   GC9A01_set_chip_select(ON);
-
-    		   }
-
-    		   equal_count = 0;
-    		   update_flag = 1;
-
-    	   }
-
-       }
-
-	   return ret;
-
-}
-
-int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
+#ifdef OPT
+int lcd_draw_opt(uint8_t *data)
 {
 
 	   struct GC9A01_frame frame;
@@ -448,8 +288,10 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 	   return ret;
 
 }
+#endif
 
-void lcd_draw_opt3(doubleFormat *data)
+#ifdef OPT2
+void lcd_draw_opt2(doubleFormat *data)
 {
 
 	uint8_t b;
@@ -470,15 +312,19 @@ void lcd_draw_opt3(doubleFormat *data)
 
     uint32_t start_idx;
 
+    uint32_t line_offs;
+
 	uint32_t idx_byte16;
 	uint32_t idx_byte8;
+	uint32_t last_idx_byte16;
+	uint32_t last_idx_byte8;
 
 	uint8_t equal1_flag;
 	uint8_t equal2_flag;
 
-	uint32_t py;
-
 	uint32_t total_bytes;
+
+	uint8_t last_idx = ( LCD_SIDE_SIZE - 1 );
 
 
 	for(int i = 0 ; i < LCD_SIDE_SIZE ; i++)
@@ -492,11 +338,16 @@ void lcd_draw_opt3(doubleFormat *data)
 		equal1_flag = 1;
 		equal2_flag = 1;
 
-		for(int j = 0 ; j < LCD_SIDE_SIZE ; j++)
+		for(int j = 0 ; j < ( LCD_SIDE_SIZE / 2 ) ; j++)
 		{
 
-			idx_byte16 = ( i * LCD_SIDE_SIZE + j );
+			line_offs = ( i * LCD_SIDE_SIZE );
+
+			idx_byte16 = ( line_offs + j );
 			idx_byte8 = ( idx_byte16 * 3 );
+
+			last_idx_byte16 = ( line_offs + last_idx - j );
+			last_idx_byte8 = ( last_idx_byte16 * 3 );
 
 			b = data->u8Arr[idx_byte8];
 			g = data->u8Arr[idx_byte8+1];
@@ -505,12 +356,17 @@ void lcd_draw_opt3(doubleFormat *data)
 			data->u16Arr[idx_byte16] = color565(r, g, b);
 			data->u16Arr[idx_byte16] = ( ( ( data->u16Arr[idx_byte16] & 0x00ff ) << 8 ) | (( data->u16Arr[idx_byte16] & 0xff00 ) >> 8) );
 
-			py = ( i * LCD_SIDE_SIZE );
+			b = data->u8Arr[last_idx_byte8];
+			g = data->u8Arr[last_idx_byte8+1];
+			r = data->u8Arr[last_idx_byte8+2];
+
+			data->u16Arr[last_idx_byte16] = color565(r, g, b);
+			data->u16Arr[last_idx_byte16] = ( ( ( data->u16Arr[last_idx_byte16] & 0x00ff ) << 8 ) | (( data->u16Arr[last_idx_byte16] & 0xff00 ) >> 8) );
 
 			if(equal1_flag)
 			{
 
-				if(PIXELS_COMP(buff16o1[py+frame.start.X], buff16o2[py+frame.start.X]))
+				if(PIXELS_COMP(buff16o1[idx_byte16], buff16o2[idx_byte16]))
 					frame_arr[i].start.X++;
 				else
 					equal1_flag = 0;
@@ -520,7 +376,7 @@ void lcd_draw_opt3(doubleFormat *data)
 			if(equal2_flag)
 			{
 
-				if(PIXELS_COMP(buff16o1[py+frame.end.X], buff16o2[py+frame.end.X]))
+				if(PIXELS_COMP(buff16o1[last_idx_byte16], buff16o2[last_idx_byte16]))
 					frame_arr[i].end.X--;
 				else
 					equal2_flag = 0;
@@ -537,7 +393,7 @@ void lcd_draw_opt3(doubleFormat *data)
 		GC9A01_set_data_command(ON);
 		GC9A01_set_chip_select(OFF);
 
-		start_idx = ( ( py + frame_arr[i].start.X ) << 1 );
+		start_idx = ( ( i*LCD_SIDE_SIZE + frame_arr[i].start.X ) << 1 );
 
 		GC9A01_spi_tx(&data->u8Arr[start_idx], total_bytes);
 
@@ -546,7 +402,86 @@ void lcd_draw_opt3(doubleFormat *data)
 	}
 
 }
+#endif
 
+#ifdef OPT3
+void lcd_draw_opt3(doubleFormat *data)
+{
+
+	uint8_t equals = 0;
+
+	uint16_t *buff1;
+	uint16_t *buff2;
+
+	uint16_t most_rigth_pixel_idx = BLOCK_SIDE_SIZE - 1;
+
+
+	for(int i = 0 ; i < BLOCK_NUM ; i++)
+	{
+
+		equals = 0;
+
+		for(int r = 0 ; r < BLOCK_SIDE_SIZE ; r++)
+		{
+
+			buff1 = (uint16_t *)pixel_blocks[i].buffer_frame1[r];
+			buff2 = (uint16_t *)pixel_blocks[i].buffer_frame2[r];
+
+			if(( r == 0 ) || ( r == ( most_rigth_pixel_idx ) ))
+			{
+
+				// Intermediate pixels
+
+				for(int c = 4 ; c < BLOCK_SIDE_SIZE ; c+=4)
+				{
+
+					if(PIXELS_COMP(buff1[c], buff2[c]))
+						equals++;
+
+				}
+
+			}
+
+			// Side pixels
+
+			if(PIXELS_COMP(buff1[0], buff2[0]))
+				equals++;
+
+			if(PIXELS_COMP(buff1[most_rigth_pixel_idx], buff2[most_rigth_pixel_idx]))
+				equals++;
+
+		}
+
+		if(equals >= 26)
+			continue;
+
+		uint32_t total_bytes = ( BLOCK_SIDE_SIZE << 1 );
+		GC9A01_set_frame(pixel_blocks[i].display_frame);
+		GC9A01_write_command(MEM_WR);
+		GC9A01_set_data_command(ON);
+		GC9A01_set_chip_select(OFF);
+
+		if(data->u8Arr == output_data1)
+		{
+
+			for(int j = 0 ; j < BLOCK_SIDE_SIZE ; j++)
+				GC9A01_spi_tx(pixel_blocks[i].buffer_frame1[j], total_bytes);
+
+		}
+		else
+		{
+
+			for(int j = 0 ; j < BLOCK_SIDE_SIZE ; j++)
+				GC9A01_spi_tx(pixel_blocks[i].buffer_frame2[j], total_bytes);
+
+		}
+
+		GC9A01_set_chip_select(ON);
+
+	}
+
+}
+#endif
 
 // TEST FUNCTIONS //
 
@@ -839,23 +774,20 @@ static void clock_normal(void)
 		doubleFormat pOut;
 		pOut.u8Arr = (uint8_t *)outputData;
 
-#ifndef OPT3
+#ifndef OPT2
 		depth24To16(&pOut, ( video.width * video.height ), 3);
 #endif
-
-#ifdef  OPT
 		// Display the image
-		lcd_draw_opt(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
-
+#ifdef  OPT
+		lcd_draw_opt(pOut.u8Arr);
 #elif defined(OPT2)
-		lcd_draw_opt2(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr);
+		lcd_draw_opt2(&pOut);
 #elif defined(OPT3)
-		int lcd_draw_opt3(&pOut);
+		lcd_draw_opt3(&pOut);
 #else
 		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
 		swap = ( ( swap ) ? 0 : 1 );
 #endif
-
 
 		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
 

@@ -8,13 +8,18 @@
 #ifndef EXAMPLE_USER_CM7_SMART_WATCH_H_
 #define EXAMPLE_USER_CM7_SMART_WATCH_H_
 
+#include "GC9A01.h"
+
 /* DEBUG SETTINGS */
 
 #define DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 
-#define OPT2						// Substitute with NOT_OPT if you want no optimizations
+//#define OPT
+//#define OPT2
+#define OPT3
+
 
 /* MJPEG SETTINGS */
 
@@ -25,42 +30,31 @@
 
 #define LCD_SIDE_SIZE				240
 #define DISPLAY_STANDBY_TIMER		59
-
 #define LCD_X_SIZE					LCD_SIDE_SIZE
 #define LCD_Y_SIZE					LCD_SIDE_SIZE
 
-/* FRAME RATE SETTINGS  (only for OPT option) */
+/* BLOCKS SETTINGS */
 
-#define BLOCK_PX_PER_SIDE			12
-#define SPARE_DIV_FACT				4   // One pixel every SPARE_DIV_FACT is compared
-#define COMPARED_FRAC				4   // Fraction of pixels that subtracted to COMPARED_PX is MAX_EQU_NUM
-#ifdef OPT
-#define FULL_UPDATE_PERIOD			40  // Period after that a full update is implemented
-#else
-#define FULL_UPDATE_PERIOD			200  // Period after that a full update is implemented
+#ifdef OPT3
+#define BLOCK_SIDE_SIZE				12
+#define BLOCKS_PER_RAW				( LCD_SIDE_SIZE / BLOCK_SIDE_SIZE )
+#define BLOCK_TOT_PIXELS			( BLOCK_SIDE_SIZE * BLOCK_SIDE_SIZE )
+#define BLOCK_NUM					( ( LCD_SIDE_SIZE * LCD_SIDE_SIZE ) / BLOCK_TOT_PIXELS )
 #endif
 
-#define BORDER_START				( 2 * BLOCK_PX_PER_SIDE )
-#define BORDER_END					( 2 * BLOCK_PX_PER_SIDE )
-#define COMPARED_PX					( ( BLOCK_PX_PER_SIDE * BLOCK_PX_PER_SIDE ) / SPARE_DIV_FACT )
-#define MAX_EQU_NUM					( COMPARED_PX - ( COMPARED_PX / COMPARED_FRAC ) )
-#define PX_PER_BLOCK_X				BLOCK_PX_PER_SIDE
-#define PX_PER_BLOCK_Y				BLOCK_PX_PER_SIDE
-#define PX_IN_A_RAW					LCD_SIDE_SIZE
-#define BLOCK_SIZE 					( PX_PER_BLOCK_X * PX_PER_BLOCK_Y )
-#define BLOCKS_PER_CHUNK			( PX_IN_A_RAW / PX_PER_BLOCK_X )
-#define CHUNKS_NUM					( ( PX_IN_A_RAW * PX_IN_A_RAW ) / ( BLOCKS_PER_CHUNK * BLOCK_SIZE ) )
-
-/* OTHERS DEFINITIONS */
+/* CIRCULAR MASK */
 
 #define R							( ( LCD_SIDE_SIZE / 2 ) - 1 ) // Ray of the round display
 #define SQUARE(x)					( (x) * (x) )
 #define PIX_TO_CIRC_COORD(p)		( ( p >= R) ? ( p - R ) : ( R - p ) ) // Put the pixel position in a circle reference (where the center is the 0 position)
-
 #define CIRCLE_MASK(px, py)			( ( SQUARE(PIX_TO_CIRC_COORD(px)) + SQUARE(PIX_TO_CIRC_COORD(py)) ) >= SQUARE(R) )
 
+/* OTHERS DEFINITIONS */
+
+#define DIFF_THRESHOLD				5
 #define PIXELS_DIFF(pix1, pix2)		( ( pix1 > pix2 ) ? ( pix1 - pix2 ) : ( pix2 - pix1 ) )
-#define PIXELS_COMP(pix1, pix2)		( PIXELS_DIFF(pix1, pix2) < 200 )
+#define PIXELS_COMP(pix1, pix2)		( PIXELS_DIFF(pix1, pix2) < DIFF_THRESHOLD )
+
 
 enum mode
 {
@@ -128,6 +122,17 @@ typedef struct
 
 }video_t;
 
+#ifdef OPT3
+typedef struct
+{
+
+	struct GC9A01_frame display_frame;
+	uint8_t *buffer_frame1[BLOCK_SIDE_SIZE];
+	uint8_t *buffer_frame2[BLOCK_SIDE_SIZE];
+
+}block_t;
+#endif
+
 
 extern __IO uint32_t Jpeg_HWDecodingEnd;
 
@@ -135,28 +140,19 @@ extern __IO uint32_t Jpeg_HWDecodingEnd;
 void smart_watch_init(void);
 void smart_watch_process(void);
 int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, uint8_t swap);
-int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
-int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data);
+#ifdef OPT
+int lcd_draw_opt(uint8_t *data);
+#endif
+#ifdef OPT2
+void lcd_draw_opt2(doubleFormat *data);
+#endif
+#ifdef OPT3
 void lcd_draw_opt3(doubleFormat *data);
+#endif
 
 int smart_watch_test_sd(void);
 int smart_watch_test_display(void);
 int smart_watch_test_mjpeg(void);
 
-
-#define BLOCK_SIDE_SIZE			12
-#define BLOCK_TOT_PIXELS		( BLOCK_SIDE_SIZE * BLOCK_SIDE_SIZE )
-#define BLOCK_NUM				( ( LCD_SIDE_SIZE * LCD_SIDE_SIZE ) / BLOCK_TOT_PIXELS )
-
-#define BLOCKS_PER_RAW			( LCD_SIDE_SIZE / BLOCK_SIDE_SIZE )
-
-typedef struct
-{
-
-	struct GC9A01_frame display_frame;
-	uint16_t *buffer_frame1[BLOCK_TOT_PIXELS];
-	uint16_t *buffer_frame2[BLOCK_TOT_PIXELS];
-
-}block_t;
 
 #endif /* EXAMPLE_USER_CM7_SMART_WATCH_H_ */
