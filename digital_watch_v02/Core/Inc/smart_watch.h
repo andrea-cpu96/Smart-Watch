@@ -10,11 +10,11 @@
 
 /* DEBUG SETTINGS */
 
-#define NOT_DEBUG_TIME
+#define DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 
-#define OPT2						// Substitute with NOT_OPT if you want no optimizations
+#define OPT						// Substitute with NOT_OPT if you want no optimizations
 
 /* MJPEG SETTINGS */
 

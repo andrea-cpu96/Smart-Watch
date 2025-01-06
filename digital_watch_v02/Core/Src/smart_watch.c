@@ -159,6 +159,8 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 
 	   struct GC9A01_frame frame;
 
+	   uint8_t *pdata;
+
 	   int ret = 0;
 
 
@@ -166,6 +168,8 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 	   // Alternate the top and bottom half every cycle
 	   if(swap)
 	   {
+
+		   pdata = data;
 
 	       frame.start.X = 0;
 	       frame.start.Y = 0;
@@ -176,7 +180,7 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 	   else
 	   {
 
-		   data += ( 240 * 240 ) ;
+		   pdata = &data[240 * 240];
 
 	       frame.start.X = 0;
 	       frame.start.Y = 120;
@@ -194,7 +198,7 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 	   GC9A01_set_chip_select(OFF);
 
 	   uint32_t total_bytes = wd * ht;		// 2 byte per pixel
-	   ret = GC9A01_spi_tx(data, total_bytes);
+	   ret = GC9A01_spi_tx(pdata, total_bytes);
 
 	   GC9A01_set_chip_select(ON);
 
@@ -338,7 +342,7 @@ int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *da
     			   uint32_t total_bytes = ( BLOCK_SIZE * 2 );		// 2 byte per pixel
     			   ret = GC9A01_spi_tx((uint8_t *)block_to_send, total_bytes);
 
-    			   GC9A01_set_chip_select(ON);
+    			   //GC9A01_set_chip_select(ON);
 
     		   }
 
@@ -417,7 +421,7 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 
 		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
 
-		   GC9A01_set_chip_select(ON);
+		   //GC9A01_set_chip_select(ON);
 
 	   }
 
@@ -501,14 +505,16 @@ int smart_watch_test_display(void)
 		data2[i] = 0x25;
 	}
 
-	if(lcd_draw(0, 0, 240, 240, data1, 0) < 0)
-		return -1;
 	if(lcd_draw(0, 0, 240, 240, data1, 1) < 0)
 		return -1;
-
-	if(lcd_draw(0, 0, 240, 240, data2, 0) < 0)
+	if(lcd_draw(0, 0, 240, 240, data1, 0) < 0)
 		return -1;
+
+	HAL_Delay(500);
+
 	if(lcd_draw(0, 0, 240, 240, data2, 1) < 0)
+		return -1;
+	if(lcd_draw(0, 0, 240, 240, data2, 0) < 0)
 		return -1;
 
 	return 1;
@@ -1072,6 +1078,10 @@ static void show_frame(uint32_t frame_num)
 			AVI_Handel.CurrentImage++;
 			video.frameCount++;
 
+#ifdef DMA_MODE
+			while(spi_dma_not_ready);
+#endif
+
 			// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
 			JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
 
@@ -1103,6 +1113,7 @@ static void show_frame(uint32_t frame_num)
 			pOut.u8Arr = (uint8_t *)outputData;
 			depth24To16(&pOut, ( video.width * video.height ), 3);
 
+			GC9A01_set_chip_select(ON);
 			lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
 
 			swap = ( ( swap ) ? 0 : 1 );

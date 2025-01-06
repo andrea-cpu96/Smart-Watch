@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stddef.h>
 
+//#define DMA_MODE
+
 #define ORIENTATION 0   // Set the display orientation 0,1,2,3
 
 // Command codes:
