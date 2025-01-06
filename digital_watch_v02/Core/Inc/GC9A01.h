@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-//#define DMA_MODE
+#define DMA_MODE
 
 #define ORIENTATION 0   // Set the display orientation 0,1,2,3
 
@@ -23,7 +23,7 @@
 #define SLEEP_MODE_ON		0x10
 #define SLEEP_MODE_OFF		0x11
 
-extern uint8_t spi_dma_not_ready;
+extern volatile uint8_t spi_dma_not_ready;
 
 // Hardware abstraction layer
 // Should be defined by the user of the library

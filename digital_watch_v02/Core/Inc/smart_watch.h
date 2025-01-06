@@ -14,7 +14,7 @@
 
 /* OPTIMIZZATION SETTINGS */
 
-#define OPT						// Substitute with NOT_OPT if you want no optimizations
+#define OPT					// Substitute with NOT_OPT if you want no optimizations
 
 /* MJPEG SETTINGS */
 

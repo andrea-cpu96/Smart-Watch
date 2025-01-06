@@ -1,7 +1,7 @@
 #include "main.h"
 #include "GC9A01.h"
 
-uint8_t spi_dma_not_ready = 0;
+uint8_t volatile spi_dma_not_ready = 0;
 
 //////////////////////////////////////////////// GLOBAL FUNCTIONS
 
@@ -15,6 +15,9 @@ void GC9A01_set_reset(uint8_t val) {
 }
 
 void GC9A01_set_data_command(uint8_t val) {
+#ifdef DMA_MODE
+	while(spi_dma_not_ready);
+#endif
     if (val==0) {
     	HAL_GPIO_WritePin(GC9A01_DC_GPIO_Port, GC9A01_DC_Pin, RESET);
     } else {

@@ -210,7 +210,7 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 int lcd_draw_opt(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data)
 {
 
-	   struct GC9A01_frame frame;
+	   volatile struct GC9A01_frame frame;
 	   static uint16_t full_update = 0;
 	   int ret = 0;
 
@@ -388,7 +388,7 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 
 	       py = ( i * LCD_SIDE_SIZE );
 
-		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ) || CIRCLE_MASK(frame.start.X, frame.start.Y))
+		   while(( buff16o1[py+frame.start.X] == buff16o2[py+frame.start.X] ))// || CIRCLE_MASK(frame.start.X, frame.start.Y))
 		   {
 
 			   frame.start.X++;
@@ -406,7 +406,7 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 		   if(out_the_circle_flag)
 			   continue;
 
-		   while(( buff16o1[py+frame.end.X] == buff16o2[py+frame.end.X] ) || CIRCLE_MASK(frame.end.X, frame.start.Y))
+		   while(( buff16o1[py+frame.end.X] == buff16o2[py+frame.end.X] ))// || CIRCLE_MASK(frame.end.X, frame.start.Y))
 			   frame.end.X--;
 
 		   uint32_t total_bytes = ( ( frame.end.X - frame.start.X ) << 1 );
@@ -419,7 +419,8 @@ int lcd_draw_opt2(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *d
 
 		   uint32_t start_idx = ( ( py + frame.start.X ) << 1 );
 
-		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
+		   uint8_t *pdata = &data[start_idx];
+		   ret = GC9A01_spi_tx(pdata, total_bytes);
 
 		   //GC9A01_set_chip_select(ON);
 
@@ -1113,7 +1114,7 @@ static void show_frame(uint32_t frame_num)
 			pOut.u8Arr = (uint8_t *)outputData;
 			depth24To16(&pOut, ( video.width * video.height ), 3);
 
-			GC9A01_set_chip_select(ON);
+			//GC9A01_set_chip_select(ON);
 			lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
 
 			swap = ( ( swap ) ? 0 : 1 );
@@ -1311,6 +1312,26 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
+
+    // Controlla errori FIFO
+    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_FEIF0_4)) {
+       while(1);
+    }
+
+    // Controlla errori Direct Mode
+    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_DMEIF0_4)) {
+        while(1);
+    }
+
+    // Controlla errori di trasferimento
+    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_TEIF0_4)) {
+        while(1);
+    }
+
+    // Controlla completamento trasferimento
+    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_TCIF0_4)) {
+    	while(1);
+    }
 
 	spi_dma_not_ready = 0;
 
