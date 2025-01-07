@@ -47,6 +47,7 @@
 /* Private variables ---------------------------------------------------------*/
 SD_HandleTypeDef hsd1;
 SPI_HandleTypeDef hspi1;
+DMA_HandleTypeDef hdma_spi1_tx;
 
 /* USER CODE BEGIN PV */
 JPEG_HandleTypeDef JPEG_Handle;
@@ -60,6 +61,7 @@ static void MX_GPIO_Init(void);
 static void MX_DMA2D_Init(void);
 static void MX_JPEG_Init(void);
 static void MX_SDMMC1_SD_Init(void);
+static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
@@ -106,6 +108,7 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA2D_Init();
   MX_SDMMC1_SD_Init();
+  MX_DMA_Init();
   MX_SPI1_Init();
   MX_RTC_Init();
   //MX_FATFS_Init();
@@ -306,6 +309,24 @@ static void MX_SDMMC1_SD_Init(void)
   /* USER CODE BEGIN SDMMC1_Init 2 */
 
   /* USER CODE END SDMMC1_Init 2 */
+
+}
+
+/**
+  * @brief DMA1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_DMA_Init(void)
+{
+
+ /* DMA controller clock enable */
+ __HAL_RCC_DMA1_CLK_ENABLE();
+
+ /* DMA interrupt init */
+ /* DMA1_Stream0_IRQn interrupt configuration */
+ HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+ HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
 
 }
 

@@ -42,6 +42,7 @@ extern JPEG_ConfTypeDef  		     	JPEG_Info;
 extern uint32_t LCD_X_Size;
 extern uint32_t LCD_Y_Size;
 extern SPI_HandleTypeDef hspi1;
+extern DMA_HandleTypeDef hdma_spi1_tx;
 extern RTC_HandleTypeDef hrtc;
 /* USER CODE END ET */
 

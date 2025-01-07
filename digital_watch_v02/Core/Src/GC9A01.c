@@ -2,10 +2,16 @@
 #include "GC9A01.h"
 
 
+uint8_t volatile spi_dma_not_ready = 0;
+
+
 //////////////////////////////////////////////// GLOBAL FUNCTIONS
 
 
 void GC9A01_set_reset(uint8_t val) {
+#ifdef DMA_MODE
+	while(spi_dma_not_ready);
+#endif
     if (val==0) {
     	HAL_GPIO_WritePin(GC9A01_RST_GPIO_Port, GC9A01_RST_Pin, RESET);
     } else {
@@ -14,6 +20,9 @@ void GC9A01_set_reset(uint8_t val) {
 }
 
 void GC9A01_set_data_command(uint8_t val) {
+#ifdef DMA_MODE
+	while(spi_dma_not_ready);
+#endif
     if (val==0) {
     	HAL_GPIO_WritePin(GC9A01_DC_GPIO_Port, GC9A01_DC_Pin, RESET);
     } else {
@@ -22,6 +31,9 @@ void GC9A01_set_data_command(uint8_t val) {
 }
 
 void GC9A01_set_chip_select(uint8_t val) {
+#ifdef DMA_MODE
+	while(spi_dma_not_ready);
+#endif
     if (val==0) {
     	HAL_GPIO_WritePin(GC9A01_CS_GPIO_Port, GC9A01_CS_Pin, RESET);
     } else {
@@ -350,12 +362,19 @@ void GC9A01_sleep_mode(uint8_t command)
 
 //////////////////////////////////////////////// PRIVATE FUNCTIONS
 
-HAL_StatusTypeDef ret;
 int GC9A01_spi_tx(uint8_t *data, uint16_t size)
 {
 
+	HAL_StatusTypeDef ret;
 
+
+#ifdef DMA_MODE
+	while(spi_dma_not_ready);
+	spi_dma_not_ready = 1;
+	ret = HAL_SPI_Transmit_DMA(&hspi1, data, size);
+#else
 	ret = HAL_SPI_Transmit(&hspi1, data, size, HAL_MAX_DELAY);
+#endif
 
 	if(ret != HAL_OK)
 		return -1;

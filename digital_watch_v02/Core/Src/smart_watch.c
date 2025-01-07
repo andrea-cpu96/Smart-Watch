@@ -147,6 +147,7 @@ void smart_watch_process(void)
 		// Video processing unit
 		mjpeg_video_processing();
 
+		// Battery management unit
 		battery_management();
 
 #ifdef DEBUG_TIME
@@ -207,7 +208,7 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 	   uint32_t total_bytes = wd * ht;		// 2 byte per pixel
 	   ret = GC9A01_spi_tx(data, total_bytes);
 
-	   GC9A01_set_chip_select(ON);
+	   //GC9A01_set_chip_select(ON);
 
 	   return ret;
 
@@ -281,7 +282,7 @@ int lcd_draw_opt(uint8_t *data)
 
 		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
 
-		   GC9A01_set_chip_select(ON);
+		   //GC9A01_set_chip_select(ON);
 
 	   }
 
@@ -711,18 +712,10 @@ static void mjpeg_video_processing(void)
 static void clock_normal(void)
 {
 
-#ifndef OPT
-#ifndef OPT2
-	static uint8_t swap = 0;
-#endif
-#endif
-
-
-
 	// Save the frame into MJPEG_VideoBuffer
 	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
-	if(video.frameToSkip > 0)
+	if(0)
 	{
 
 		// Skip frames until the the watch time is
@@ -785,8 +778,8 @@ static void clock_normal(void)
 #elif defined(OPT3)
 		lcd_draw_opt3(&pOut);
 #else
-		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
-		swap = ( ( swap ) ? 0 : 1 );
+		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, 0);
+		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, 1);
 #endif
 
 		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
@@ -827,6 +820,8 @@ static void clock_setting(void)
 
 			while(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin));
 
+			video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
+
 			video.set = SET_HOURS;
 
 			break;
@@ -851,6 +846,8 @@ static void clock_setting(void)
 
 				file_handler(1);
 
+				video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
+
 			}
 
 			// If button minus
@@ -870,6 +867,8 @@ static void clock_setting(void)
 				video.file_idx = ( video.time.Hours * 60 );
 
 				file_handler(1);
+
+				video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
 			}
 
@@ -910,6 +909,7 @@ static void clock_setting(void)
 
 				video.file_idx -= video.time.Minutes;
 
+				video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
 			}
 
@@ -932,6 +932,8 @@ static void clock_setting(void)
 				file_handler(1);
 
 				video.file_idx -= video.time.Minutes;
+
+				video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
 			}
 
@@ -1124,7 +1126,6 @@ static void show_frame(uint32_t frame_num)
 	{
 
 		// Save the frame into MJPEG_VideoBuffer
-		video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
 		if(video.FrameType == AVI_VIDEO_FRAME)
 		{
@@ -1355,6 +1356,33 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		disable_btn_int();
 
 	}
+
+}
+
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+
+    // Controlla errori FIFO
+    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_FEIF0_4)) {
+       while(1);
+    }
+
+    // Controlla errori Direct Mode
+    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_DMEIF0_4)) {
+        while(1);
+    }
+
+    // Controlla errori di trasferimento
+    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_TEIF0_4)) {
+        while(1);
+    }
+
+    // Controlla completamento trasferimento
+    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_TCIF0_4)) {
+    	while(1);
+    }
+
+	spi_dma_not_ready = 0;
 
 }
 

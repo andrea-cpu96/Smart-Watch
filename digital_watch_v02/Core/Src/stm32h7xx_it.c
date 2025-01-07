@@ -204,12 +204,29 @@ void JPEG_IRQHandler(void)
   HAL_JPEG_IRQHandler(&JPEG_Handle);
 }
 
-
 void MDMA_IRQHandler()
 {
   /* Check the interrupt and clear flag */
   HAL_MDMA_IRQHandler(JPEG_Handle.hdmain);
   HAL_MDMA_IRQHandler(JPEG_Handle.hdmaout);
+}
+
+void DMA1_Stream0_IRQHandler()
+{
+
+	HAL_DMA_IRQHandler(&hdma_spi1_tx);
+
+}
+
+void SPI1_IRQHandler(void)
+{
+  /* USER CODE BEGIN SPI1_IRQn 0 */
+
+  /* USER CODE END SPI1_IRQn 0 */
+  HAL_SPI_IRQHandler(&hspi1);
+  /* USER CODE BEGIN SPI1_IRQn 1 */
+
+  /* USER CODE END SPI1_IRQn 1 */
 }
 
 void EXTI0_IRQHandler(void)

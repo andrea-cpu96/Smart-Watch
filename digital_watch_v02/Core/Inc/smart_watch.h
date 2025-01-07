@@ -18,7 +18,7 @@
 
 //#define OPT
 //#define OPT2
-#define OPT3
+//#define OPT3
 
 
 /* MJPEG SETTINGS */
