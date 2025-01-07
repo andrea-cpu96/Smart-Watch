@@ -12,7 +12,7 @@
 
 /* DEBUG SETTINGS */
 
-#define DEBUG_TIME
+//#define DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 
@@ -54,6 +54,8 @@
 #define DIFF_THRESHOLD				5
 #define PIXELS_DIFF(pix1, pix2)		( ( pix1 > pix2 ) ? ( pix1 - pix2 ) : ( pix2 - pix1 ) )
 #define PIXELS_COMP(pix1, pix2)		( PIXELS_DIFF(pix1, pix2) < DIFF_THRESHOLD )
+
+#define RESET_ITER_NUM				30
 
 
 enum mode

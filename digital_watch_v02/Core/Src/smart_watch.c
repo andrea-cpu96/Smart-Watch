@@ -39,6 +39,8 @@ static void enable_btn_int(void);
 static void disable_btn_int(void);
 static void clear_btn_int(void);
 
+static void clock_reset_check(void);
+
 /************************** GLOBAL VARIABLES **************************/
 
 enum button_status btn_status = BTN_NONE;
@@ -702,6 +704,7 @@ static void mjpeg_video_processing(void)
 		case NORMAL_MODE:
 
 			clock_normal();
+			clock_reset_check();
 
 			break;
 
@@ -715,7 +718,7 @@ static void clock_normal(void)
 	// Save the frame into MJPEG_VideoBuffer
 	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
-	if(0)
+	if(video.frameToSkip)
 	{
 
 		// Skip frames until the the watch time is
@@ -1308,6 +1311,33 @@ static void SD_Initialize(void)
 {
 
 	BSP_SD_Init();
+
+}
+
+static void clock_reset_check(void)
+{
+
+	static uint16_t count = 0;
+
+
+	if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
+		count++;
+	else
+		count = 0;
+
+	if(count >= RESET_ITER_NUM)
+	{
+
+		count = 0;
+
+		video.video_mode = SETTING_MODE;
+
+		HAL_Delay(300);
+
+		parameters_reset();
+		file_handler(1);
+
+	}
 
 }
 
