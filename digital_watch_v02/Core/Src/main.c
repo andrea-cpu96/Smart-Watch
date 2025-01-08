@@ -83,7 +83,6 @@ int main(void)
 
   /* USER CODE BEGIN 1 */
   SCB_EnableICache();
-  //SCB_EnableDCache();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -91,14 +90,12 @@ int main(void)
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  HAL_Delay(500);
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
-
   HAL_Delay(500);
   /* USER CODE BEGIN SysInit */
 
@@ -111,18 +108,29 @@ int main(void)
   MX_DMA_Init();
   MX_SPI1_Init();
   MX_RTC_Init();
-  //MX_FATFS_Init();
+
   /* USER CODE BEGIN 2 */
-  HAL_Delay(500);
   JPEG_Handle.Instance = JPEG;
   MX_JPEG_Init();
 
   HAL_Delay(500);
+
+  for(int i = 0 ; i < ( LCD_X_SIZE * LCD_Y_SIZE * 2 ) ; i++)
+	  outputData[i] = 0xff;
+
+  // White screen at the startup
+  lcd_draw(outputData);
+
+  HAL_Delay(500);
+
   GC9A01_init();
+
+  // White screen after the init
+  lcd_draw(outputData);
+
   HAL_Delay(500);
 
   smart_watch_init();
-
   HAL_Delay(500);
 
   if(TEST == 0)
@@ -138,8 +146,6 @@ int main(void)
 		  Error_Handler();
 
   }
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */

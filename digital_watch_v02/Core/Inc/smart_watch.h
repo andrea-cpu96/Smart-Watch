@@ -12,7 +12,7 @@
 
 /* DEBUG SETTINGS */
 
-#define DEBUG_TIME
+//#define DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 
@@ -136,7 +136,7 @@ typedef struct
 
 
 extern __IO uint32_t Jpeg_HWDecodingEnd;
-
+extern uint8_t *outputData;
 
 void smart_watch_init(void);
 void smart_watch_process(void);
