@@ -4,9 +4,9 @@
 ../Core/Src/GC9A01.c:33:6:GC9A01_set_chip_select	3
 ../Core/Src/GC9A01.c:44:6:GC9A01_write_command	5
 ../Core/Src/GC9A01.c:51:6:GC9A01_write_data	5
-../Core/Src/GC9A01.c:62:6:GC9A01_write	5
-../Core/Src/GC9A01.c:67:6:GC9A01_write_continue	5
-../Core/Src/GC9A01.c:72:6:GC9A01_init	284
-../Core/Src/GC9A01.c:327:6:GC9A01_set_frame	9
-../Core/Src/GC9A01.c:348:6:GC9A01_sleep_mode	2
-../Core/Src/GC9A01.c:365:5:GC9A01_spi_tx	2
+../Core/Src/GC9A01.c:62:6:GC9A01_write	9
+../Core/Src/GC9A01.c:67:6:GC9A01_write_continue	9
+../Core/Src/GC9A01.c:72:6:GC9A01_init	316
+../Core/Src/GC9A01.c:327:6:GC9A01_set_frame	17
+../Core/Src/GC9A01.c:348:6:GC9A01_sleep_mode	10
+../Core/Src/GC9A01.c:365:5:GC9A01_spi_tx	3

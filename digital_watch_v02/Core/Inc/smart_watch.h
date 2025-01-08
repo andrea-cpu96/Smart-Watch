@@ -12,14 +12,13 @@
 
 /* DEBUG SETTINGS */
 
-//#define DEBUG_TIME
+#define DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 
 //#define OPT
 //#define OPT2
 //#define OPT3
-
 
 /* MJPEG SETTINGS */
 
@@ -141,7 +140,7 @@ extern __IO uint32_t Jpeg_HWDecodingEnd;
 
 void smart_watch_init(void);
 void smart_watch_process(void);
-int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, uint8_t swap);
+int lcd_draw(uint8_t *data);
 #ifdef OPT
 int lcd_draw_opt(uint8_t *data);
 #endif

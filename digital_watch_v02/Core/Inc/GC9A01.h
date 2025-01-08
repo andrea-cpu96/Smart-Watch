@@ -46,7 +46,7 @@ void GC9A01_write_continue(uint8_t *data, size_t len);
 
 void GC9A01_write_data(uint8_t *data, size_t len);
 void GC9A01_write_command(uint8_t cmd);
-int GC9A01_spi_tx(uint8_t *data, uint16_t size);
+int GC9A01_spi_tx(uint8_t *data, uint16_t size, uint8_t join);
 
 void GC9A01_sleep_mode(uint8_t command);
 

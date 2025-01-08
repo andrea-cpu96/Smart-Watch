@@ -134,7 +134,6 @@ int main(void)
   else
   {
 
-
 	  if(test_process() < 0)
 		  Error_Handler();
 
@@ -188,7 +187,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 23;
+  RCC_OscInitStruct.PLL.PLLN = 22;
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLQ = 6;
   RCC_OscInitStruct.PLL.PLLR = 2;

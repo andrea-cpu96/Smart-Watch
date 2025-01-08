@@ -168,7 +168,7 @@ void smart_watch_process(void)
 
 }
 
-int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, uint8_t swap)
+int lcd_draw(uint8_t *data)
 {
 
 	   struct GC9A01_frame frame;
@@ -176,28 +176,10 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 	   int ret = 0;
 
 
-	   // Only half of the frame is handled per time
-	   // Alternate the top and bottom half every cycle
-	   if(swap)
-	   {
-
-	       frame.start.X = 0;
-	       frame.start.Y = 0;
-	       frame.end.X = 239;
-	       frame.end.Y = 119;
-
-	   }
-	   else
-	   {
-
-		   data += ( 240 * 240 ) ;
-
-	       frame.start.X = 0;
-	       frame.start.Y = 120;
-	       frame.end.X = 239;
-	       frame.end.Y = 239;
-
-	   }
+       frame.start.X = 0;
+       frame.start.Y = 0;
+       frame.end.X = ( LCD_X_SIZE - 1 );
+       frame.end.Y = ( LCD_Y_SIZE - 1 );
 
 	   // Sends the block of data in a single time
 
@@ -207,10 +189,13 @@ int lcd_draw(uint16_t sx, uint16_t sy, uint16_t wd, uint16_t ht, uint8_t *data, 
 	   GC9A01_set_data_command(ON);
 	   GC9A01_set_chip_select(OFF);
 
-	   uint32_t total_bytes = wd * ht;		// 2 byte per pixel
-	   ret = GC9A01_spi_tx(data, total_bytes);
+	   uint32_t total_bytes = ( LCD_X_SIZE * LCD_X_SIZE ); // 2 byte per pixel
+	   ret = GC9A01_spi_tx(data, total_bytes, 1);
 
-	   //GC9A01_set_chip_select(ON);
+	   if(ret != 1)
+		   return ret;
+
+	   ret = GC9A01_spi_tx(&data[total_bytes], total_bytes, 0);
 
 	   return ret;
 
@@ -282,7 +267,7 @@ int lcd_draw_opt(uint8_t *data)
 
 		   start_idx = ( ( py + frame.start.X ) << 1 );
 
-		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes);
+		   ret = GC9A01_spi_tx(&data[start_idx], total_bytes, 0);
 
 		   //GC9A01_set_chip_select(ON);
 
@@ -398,7 +383,7 @@ void lcd_draw_opt2(doubleFormat *data)
 
 		start_idx = ( ( i*LCD_SIDE_SIZE + frame_arr[i].start.X ) << 1 );
 
-		GC9A01_spi_tx(&data->u8Arr[start_idx], total_bytes);
+		GC9A01_spi_tx(&data->u8Arr[start_idx], total_bytes, 0);
 
 		GC9A01_set_chip_select(ON);
 
@@ -468,14 +453,14 @@ void lcd_draw_opt3(doubleFormat *data)
 		{
 
 			for(int j = 0 ; j < BLOCK_SIDE_SIZE ; j++)
-				GC9A01_spi_tx(pixel_blocks[i].buffer_frame1[j], total_bytes);
+				GC9A01_spi_tx(pixel_blocks[i].buffer_frame1[j], total_bytes, 0);
 
 		}
 		else
 		{
 
 			for(int j = 0 ; j < BLOCK_SIDE_SIZE ; j++)
-				GC9A01_spi_tx(pixel_blocks[i].buffer_frame2[j], total_bytes);
+				GC9A01_spi_tx(pixel_blocks[i].buffer_frame2[j], total_bytes, 0);
 
 		}
 
@@ -562,14 +547,10 @@ int smart_watch_test_display(void)
 		data2[i] = 0x25;
 	}
 
-	if(lcd_draw(0, 0, 240, 240, data1, 0) < 0)
-		return -1;
-	if(lcd_draw(0, 0, 240, 240, data1, 1) < 0)
+	if(lcd_draw(data1) < 0)
 		return -1;
 
-	if(lcd_draw(0, 0, 240, 240, data2, 0) < 0)
-		return -1;
-	if(lcd_draw(0, 0, 240, 240, data2, 1) < 0)
+	if(lcd_draw(data2) < 0)
 		return -1;
 
 	return 1;
@@ -578,8 +559,6 @@ int smart_watch_test_display(void)
 
 int smart_watch_test_mjpeg(void)
 {
-
-	static uint8_t swap = 0;
 
 	unsigned long tempStart;
 	unsigned long tempStop;
@@ -647,7 +626,7 @@ int smart_watch_test_mjpeg(void)
 			tempStop = HAL_GetTick();
 			tempDiff[0] = ( ( tempStop - tempStart ) );
 
-			if(lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap) < 0)
+			if(lcd_draw(pOut.u8Arr) < 0)
 			{
 
 				f_close(&MJPEG_File);
@@ -656,7 +635,6 @@ int smart_watch_test_mjpeg(void)
 
 			}
 
-			swap = ( ( swap ) ? 0 : 1 );
 			outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
 
 		}
@@ -781,8 +759,7 @@ static void clock_normal(void)
 #elif defined(OPT3)
 		lcd_draw_opt3(&pOut);
 #else
-		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, 0);
-		lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, 1);
+		lcd_draw(pOut.u8Arr);
 #endif
 
 		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
@@ -1112,9 +1089,6 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 static void show_frame(uint32_t frame_num)
 {
 
-	static uint8_t swap = 0;
-
-
 	for(int i = 0 ; i < frame_num ; i++)
 	{
 
@@ -1125,54 +1099,44 @@ static void show_frame(uint32_t frame_num)
 
 	}
 
-	for(int i = 0 ; i < 2 ; i++)
+	if(video.FrameType == AVI_VIDEO_FRAME)
 	{
 
-		// Save the frame into MJPEG_VideoBuffer
+		AVI_Handel.CurrentImage++;
+		video.frameCount++;
 
-		if(video.FrameType == AVI_VIDEO_FRAME)
+		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
+		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+
+		while(Jpeg_HWDecodingEnd == 0);
+
+		if(video.isfirstFrame == 1)
 		{
 
-			AVI_Handel.CurrentImage++;
-			video.frameCount++;
+			video.isfirstFrame = 0;
 
-			// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
-			JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+			HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
 
-			while(Jpeg_HWDecodingEnd == 0);
+			DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
 
-			if(video.isfirstFrame == 1)
-			{
-
-				video.isfirstFrame = 0;
-
-				HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
-
-				DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
-
-				video.width = JPEG_Info.ImageWidth;
-				video.height = JPEG_Info.ImageHeight;
-				video.xPos = ( ( LCD_X_SIZE - video.width ) / 2 );					// Center the image in x
-				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
-
-			}
-
-			// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
-			DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)outputData, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
-
-			//video.jpegOutDataAdreess = (video.jpegOutDataAdreess == JPEG_OUTPUT_DATA_BUFFER0) ? JPEG_OUTPUT_DATA_BUFFER1 : JPEG_OUTPUT_DATA_BUFFER0;
-
-			// Implements the data conversion from RGB888 to RGB565
-			doubleFormat pOut;
-			pOut.u8Arr = (uint8_t *)outputData;
-			depth24To16(&pOut, ( video.width * video.height ), 3);
-
-			lcd_draw(video.xPos, video.yPos, video.width, video.height, pOut.u8Arr, swap);
-
-			swap = ( ( swap ) ? 0 : 1 );
-			outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
+			video.width = JPEG_Info.ImageWidth;
+			video.height = JPEG_Info.ImageHeight;
+			video.xPos = ( ( LCD_X_SIZE - video.width ) / 2 );					// Center the image in x
+			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
 		}
+
+		// Copies the output frame into LCD_FRAME_BUFFER and does the conversion from YCrCb to RGB888
+		DMA2D_CopyBuffer((uint32_t *)video.jpegOutDataAdreess, (uint32_t *)outputData, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+		// Implements the data conversion from RGB888 to RGB565
+		doubleFormat pOut;
+		pOut.u8Arr = (uint8_t *)outputData;
+		depth24To16(&pOut, ( video.width * video.height ), 3);
+
+		lcd_draw(pOut.u8Arr);
+
+		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
 
 	}
 

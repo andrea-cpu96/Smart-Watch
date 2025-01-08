@@ -44,14 +44,14 @@ void GC9A01_set_chip_select(uint8_t val) {
 void GC9A01_write_command(uint8_t cmd) {
     GC9A01_set_data_command(OFF);
     GC9A01_set_chip_select(OFF);
-    GC9A01_spi_tx(&cmd, sizeof(cmd));
+    GC9A01_spi_tx(&cmd, sizeof(cmd), 0);
     GC9A01_set_chip_select(ON);
 }
 
 void GC9A01_write_data(uint8_t *data, size_t len) {
     GC9A01_set_data_command(ON);
     GC9A01_set_chip_select(OFF);
-    GC9A01_spi_tx(data, len);
+    GC9A01_spi_tx(data, len, 0);
     GC9A01_set_chip_select(ON);
 }
 
@@ -362,14 +362,14 @@ void GC9A01_sleep_mode(uint8_t command)
 
 //////////////////////////////////////////////// PRIVATE FUNCTIONS
 
-int GC9A01_spi_tx(uint8_t *data, uint16_t size)
+int GC9A01_spi_tx(uint8_t *data, uint16_t size, uint8_t join)
 {
 
 	HAL_StatusTypeDef ret;
 
 
 #ifdef DMA_MODE
-	while(spi_dma_not_ready);
+	while(spi_dma_not_ready && !join);
 	spi_dma_not_ready = 1;
 	ret = HAL_SPI_Transmit_DMA(&hspi1, data, size);
 #else
