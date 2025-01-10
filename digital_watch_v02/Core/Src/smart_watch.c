@@ -16,8 +16,8 @@
 #include <stdio.h>
 
 
-#define MAX_ITERATIONS_NUM				10000
-
+#define MAX_ATTEMPTS_NUM				10
+#define MAX_ITERATIONS_NUM				1000000
 
 /************************** PRIVATE FUNCTIONS PROTOTPYES **************************/
 
@@ -709,7 +709,7 @@ static int mjpeg_video_processing(void)
 static int clock_normal(void)
 {
 
-	static uint16_t count_iter = 0;
+	static uint32_t count_iter = 0;
 
 
 	// Save the frame into MJPEG_VideoBuffer
@@ -794,7 +794,7 @@ static int clock_normal(void)
 
 			count_iter++;
 
-			if(count_iter >= MAX_ITERATIONS_NUM)
+			if(count_iter >= MAX_ATTEMPTS_NUM)
 				return 0;
 
 		}
@@ -1153,7 +1153,7 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 static int show_frame(uint32_t frame_num)
 {
 
-	static uint16_t count_iter = 0;
+	static uint32_t count_iter = 0;
 
 
 	for(int i = 0 ; i < frame_num ; i++)
@@ -1217,7 +1217,7 @@ static int show_frame(uint32_t frame_num)
 
 			count_iter++;
 
-			if(count_iter >= MAX_ITERATIONS_NUM)
+			if(count_iter >= MAX_ATTEMPTS_NUM)
 				return 0;
 
 		}

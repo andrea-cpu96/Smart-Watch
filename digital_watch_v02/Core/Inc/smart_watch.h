@@ -12,7 +12,7 @@
 
 /* DEBUG SETTINGS */
 
-//#define DEBUG_TIME
+#define DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 

@@ -3,7 +3,7 @@
 ../Core/Src/smart_watch.c:1006:12:file_handler.constprop	32	static
 ../Core/Src/smart_watch.c:1153:12:show_frame.constprop	48	static
 ../Core/Src/smart_watch.c:74:5:smart_watch_init	16	static
-../Core/Src/smart_watch.c:138:5:smart_watch_process	56	static,ignoring_inline_asm
+../Core/Src/smart_watch.c:138:5:smart_watch_process	80	static,ignoring_inline_asm
 ../Core/Src/smart_watch.c:182:5:lcd_draw	24	static
 ../Core/Src/smart_watch.c:487:5:smart_watch_test_sd	11656	static
 ../Core/Src/smart_watch.c:548:5:smart_watch_test_display	230440	static

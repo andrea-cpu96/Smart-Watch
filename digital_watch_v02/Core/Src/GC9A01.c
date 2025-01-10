@@ -1,7 +1,7 @@
 #include "main.h"
 #include "GC9A01.h"
 
-#define MAX_ITERATIONS_NUM				10000
+#define MAX_ITERATIONS_NUM				1000000
 
 
 uint8_t volatile spi_dma_not_ready = 0;
@@ -13,8 +13,19 @@ uint8_t volatile spi_dma_not_ready = 0;
 void GC9A01_set_reset(uint8_t val)
 {
 
+	uint32_t count_iter = 0;
+
+
 #ifdef DMA_MODE
-	while(spi_dma_not_ready);
+	while(spi_dma_not_ready)
+	{
+
+		count_iter++;
+
+		if(count_iter >= MAX_ITERATIONS_NUM)
+			break;
+
+	}
 #endif
 
 	if(val==0)
@@ -27,8 +38,18 @@ void GC9A01_set_reset(uint8_t val)
 void GC9A01_set_data_command(uint8_t val)
 {
 
+	uint32_t count_iter = 0;
+
 #ifdef DMA_MODE
-	while(spi_dma_not_ready);
+	while(spi_dma_not_ready)
+	{
+
+		count_iter++;
+
+		if(count_iter >= MAX_ITERATIONS_NUM)
+			break;
+
+	}
 #endif
 
 	if(val==0)
@@ -41,8 +62,19 @@ void GC9A01_set_data_command(uint8_t val)
 void GC9A01_set_chip_select(uint8_t val)
 {
 
+	uint32_t count_iter = 0;
+
+
 #ifdef DMA_MODE
-	while(spi_dma_not_ready);
+	while(spi_dma_not_ready)
+	{
+
+		count_iter++;
+
+		if(count_iter >= MAX_ITERATIONS_NUM)
+			break;
+
+	}
 #endif
 
     if (val==0)
@@ -424,7 +456,7 @@ int GC9A01_spi_tx(uint8_t *data, uint16_t size, uint8_t join)
 {
 
 	HAL_StatusTypeDef ret;
-	static uint16_t count_iter = 0;
+	static uint32_t count_iter = 0;
 
 
 #ifdef DMA_MODE
