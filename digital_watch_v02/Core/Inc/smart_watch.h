@@ -138,8 +138,8 @@ typedef struct
 extern __IO uint32_t Jpeg_HWDecodingEnd;
 extern uint8_t *outputData;
 
-void smart_watch_init(void);
-void smart_watch_process(void);
+int smart_watch_init(void);
+int smart_watch_process(void);
 int lcd_draw(uint8_t *data);
 #ifdef OPT
 int lcd_draw_opt(uint8_t *data);

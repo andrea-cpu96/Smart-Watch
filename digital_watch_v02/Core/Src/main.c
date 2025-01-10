@@ -130,13 +130,16 @@ int main(void)
 
   HAL_Delay(500);
 
-  smart_watch_init();
+  while(smart_watch_init() != OK)
+	  HAL_Delay(500);
+
   HAL_Delay(500);
 
   if(TEST == 0)
   {
 
-	  smart_watch_process();
+	  if(smart_watch_process() != OK)
+		  Error_Handler();
 
   }
   else
@@ -568,10 +571,18 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
+
+#ifdef DEBUG_MODE
   __disable_irq();
   while (1)
   {
   }
+#else
+
+  HAL_NVIC_SystemReset();
+
+#endif
+
   /* USER CODE END Error_Handler_Debug */
 }
 

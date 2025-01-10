@@ -73,6 +73,14 @@ void SystemClock_Config(void);
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
+enum res
+{
+
+	NOT_OK = 0,
+	OK
+
+};
+
 typedef union
 {
 

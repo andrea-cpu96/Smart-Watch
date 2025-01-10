@@ -15,6 +15,10 @@
 #include <arm_math.h>
 #include <stdio.h>
 
+
+#define MAX_ITERATIONS_NUM				10000
+
+
 /************************** PRIVATE FUNCTIONS PROTOTPYES **************************/
 
 static void DMA2D_Init(uint16_t xsize, uint16_t ysize, uint32_t ChromaSampling);
@@ -24,16 +28,16 @@ static void SD_Initialize(void);
 
 static void parameters_reset(void);
 
-static void mjpeg_video_processing(void);
-static void file_handler(uint8_t openFile);
+static int mjpeg_video_processing(void);
+static int file_handler(uint8_t openFile);
 
-static void battery_management(void);
+static int battery_management(void);
 
-static void clock_setting(void);
-static void clock_normal(void);
+static int clock_setting(void);
+static int clock_normal(void);
 
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
-static void show_frame(uint32_t frame_num);
+static int show_frame(uint32_t frame_num);
 
 static void enable_btn_int(void);
 static void disable_btn_int(void);
@@ -67,7 +71,7 @@ block_t pixel_blocks[BLOCK_NUM];
 
 /************************** GLOBAL FUNCTIONS **************************/
 
-void smart_watch_init(void)
+int smart_watch_init(void)
 {
 
 	parameters_reset();
@@ -115,7 +119,7 @@ void smart_watch_init(void)
 	    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
 	    {
 
-	    	while(1);
+	    	return 0;
 
 	    }
 
@@ -123,13 +127,15 @@ void smart_watch_init(void)
 	else
 	{
 
-		while(1);
+		return 0;
 
 	}
 
+	return 1;
+
 }
 
-void smart_watch_process(void)
+int smart_watch_process(void)
 {
 
 #ifdef DEBUG_TIME
@@ -144,13 +150,16 @@ void smart_watch_process(void)
 #endif
 
 		// Check if new file needs to be open
-		file_handler(0);
+		if(file_handler(0) != 1)
+			return 0;
 
 		// Video processing unit
-		mjpeg_video_processing();
+		if(mjpeg_video_processing() != 1)
+			return 0;
 
 		// Battery management unit
-		battery_management();
+		if(battery_management() != 1)
+			return 0;
 
 #ifdef DEBUG_TIME
 		long unsigned int tempStop = HAL_GetTick();
@@ -165,6 +174,8 @@ void smart_watch_process(void)
 #endif
 
 	}
+
+	return 1;
 
 }
 
@@ -666,7 +677,7 @@ int smart_watch_test_mjpeg(void)
 
 /************************** PRIVATE FUNCTIONS **************************/
 
-static void mjpeg_video_processing(void)
+static int mjpeg_video_processing(void)
 {
 
 	switch(video.video_mode)
@@ -675,23 +686,31 @@ static void mjpeg_video_processing(void)
 		default:
 		case SETTING_MODE:
 
-			clock_setting();
+			if(clock_setting() != 1)
+				return 0;
 
 			break;
 
 		case NORMAL_MODE:
 
-			clock_normal();
+			if(clock_normal() != 1)
+				return 0;
+
 			clock_reset_check();
 
 			break;
 
 	}
 
+	return 1;
+
 }
 
-static void clock_normal(void)
+static int clock_normal(void)
 {
+
+	static uint16_t count_iter = 0;
+
 
 	// Save the frame into MJPEG_VideoBuffer
 	video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
@@ -714,9 +733,20 @@ static void clock_normal(void)
 		video.frameCount++;
 
 		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
-		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+		if(JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess) != 1)
+			return 0;
 
-		while(Jpeg_HWDecodingEnd == 0);
+		while(Jpeg_HWDecodingEnd == 0)
+		{
+
+			count_iter++;
+
+			if(count_iter >= MAX_ITERATIONS_NUM)
+				return 0;
+
+		}
+
+		count_iter = 0;
 
 		if(video.isfirstFrame == 1)
 		{
@@ -759,7 +789,17 @@ static void clock_normal(void)
 #elif defined(OPT3)
 		lcd_draw_opt3(&pOut);
 #else
-		lcd_draw(pOut.u8Arr);
+		while(lcd_draw(pOut.u8Arr) != 1)
+		{
+
+			count_iter++;
+
+			if(count_iter >= MAX_ITERATIONS_NUM)
+				return 0;
+
+		}
+
+		count_iter = 0;
 #endif
 
 		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
@@ -787,9 +827,11 @@ static void clock_normal(void)
 
 	}
 
+	return 1;
+
 }
 
-static void clock_setting(void)
+static int clock_setting(void)
 {
 
 	switch(video.set)
@@ -808,7 +850,8 @@ static void clock_setting(void)
 
 		case SET_HOURS:
 
-			show_frame(0);
+			if(show_frame(0) != 1)
+				return 0;
 
 			// If button plus
 			if(btn_status == BTN_PLUS)
@@ -824,7 +867,8 @@ static void clock_setting(void)
 
 				video.file_idx = ( video.time.Hours * 60 );
 
-				file_handler(1);
+				if(file_handler(1) != 1)
+					return 0;
 
 				video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
@@ -846,7 +890,8 @@ static void clock_setting(void)
 
 				video.file_idx = ( video.time.Hours * 60 );
 
-				file_handler(1);
+				if(file_handler(1) != 1)
+					return 0;
 
 				video.FrameType = AVI_GetFrame(&AVI_Handel, &MJPEG_File, 0);
 
@@ -869,7 +914,8 @@ static void clock_setting(void)
 
 		case SET_MINUTES:
 
-			show_frame(0);
+			if(show_frame(0) != 1)
+				return 0;
 
 			// If button plus
 			if(btn_status == BTN_PLUS)
@@ -885,7 +931,8 @@ static void clock_setting(void)
 
 				video.file_idx += video.time.Minutes;
 
-				file_handler(1);
+				if(file_handler(1) != 1)
+					return 0;
 
 				video.file_idx -= video.time.Minutes;
 
@@ -909,7 +956,8 @@ static void clock_setting(void)
 
 				video.file_idx += video.time.Minutes;
 
-				file_handler(1);
+				if(file_handler(1) != 1)
+					return 0;
 
 				video.file_idx -= video.time.Minutes;
 
@@ -938,7 +986,9 @@ static void clock_setting(void)
 
 		case SET_START:
 
-			file_handler(1);							// Start froma the first frame
+			// Start froma the first frame
+			if(file_handler(1) != 1)
+				return 0;
 
 			video.set = SET_IDLE;
 			video.video_mode = NORMAL_MODE;
@@ -949,9 +999,11 @@ static void clock_setting(void)
 
 	enable_btn_int();
 
+	return 1;
+
 }
 
-static void file_handler(uint8_t openFile)
+static int file_handler(uint8_t openFile)
 {
 
    // Each file takes 1m
@@ -979,13 +1031,13 @@ static void file_handler(uint8_t openFile)
 
   		 // parse the AVI file Header
   		 if(AVI_ParserInit(&AVI_Handel, &MJPEG_File, MJPEG_VideoBuffer, MJPEG_VID_BUFFER_SIZE, MJPEG_AudioBuffer, MJPEG_AUD_BUFFER_SIZE) != 0)
-  			 while(1);
+  			 return 0;
 
   	 }
   	 else
   	 {
 
-  		 while(1);
+  		 return 0;
 
   	 }
 
@@ -995,21 +1047,25 @@ static void file_handler(uint8_t openFile)
    if(AVI_Handel.CurrentImage  >=  AVI_Handel.aviInfo.TotalFrame)
    {
 
-  	 video.file_idx++;
+	   	 video.file_idx++;
 		 video.file_idx %= 720;	// Restart the index every 24 files ( 12h )
 
 		 //  wait for the Last DMA2D transfer to ends
-		 HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50);
+		 if(HAL_DMA2D_PollForTransfer(&DMA2D_Handle, 50) != HAL_OK)
+			 return 0;
 
-		 f_close(&MJPEG_File);
+		 if(f_close(&MJPEG_File) != FR_OK)
+			 return 0;
 
 		 new_file_flag = 1;
 
    }
 
+   return 1;
+
 }
 
-static void battery_management(void)
+static int battery_management(void)
 {
 
 
@@ -1021,7 +1077,9 @@ static void battery_management(void)
 
 			parameters_reset();
 
-			GC9A01_sleep_mode(ON);
+			if(GC9A01_sleep_mode(ON) != 1)
+				return 0;
+
 			video.display_status = DISPLAY_OFF;
 
 			// Stop mode
@@ -1041,24 +1099,30 @@ static void battery_management(void)
 			SystemClock_Config();
 
 			GC9A01_init();
+
 			video.display_status = DISPLAY_ON;
 
 			// Clock setting
 
 			RTC_DateTypeDef sDate = {0};
-			HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
-			HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+			if(HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN) != HAL_OK)
+				return 0;
+			if(HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN) != HAL_OK)
+				return 0;
 
 			video.file_idx = ( ( video.time.Hours % 12 ) * 60 );
 			video.file_idx += video.time.Minutes;
 
-			file_handler(1);
+			if(file_handler(1) != 1)
+				return 0;
 
 			video.display_ts = video.time.Seconds;
 
 		}
 
 	}
+
+	return 1;
 
 }
 
@@ -1086,8 +1150,11 @@ static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx)
 
 }
 
-static void show_frame(uint32_t frame_num)
+static int show_frame(uint32_t frame_num)
 {
+
+	static uint16_t count_iter = 0;
+
 
 	for(int i = 0 ; i < frame_num ; i++)
 	{
@@ -1106,9 +1173,20 @@ static void show_frame(uint32_t frame_num)
 		video.frameCount++;
 
 		// Decode the frame inside MJPEG_VideoBuffer and put it into jpegOutDataAdreess in the format YCrCb
-		JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess);
+		if(JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)MJPEG_VideoBuffer, AVI_Handel.FrameSize, video.jpegOutDataAdreess) != 1)
+			return 0;
 
-		while(Jpeg_HWDecodingEnd == 0);
+		while(Jpeg_HWDecodingEnd == 0)
+		{
+
+			count_iter++;
+
+			if(count_iter >= MAX_ITERATIONS_NUM)
+				return 0;
+
+		}
+
+		count_iter = 0;
 
 		if(video.isfirstFrame == 1)
 		{
@@ -1134,11 +1212,23 @@ static void show_frame(uint32_t frame_num)
 		pOut.u8Arr = (uint8_t *)outputData;
 		depth24To16(&pOut, ( video.width * video.height ), 3);
 
-		lcd_draw(pOut.u8Arr);
+		while(lcd_draw(pOut.u8Arr) != 1)
+		{
+
+			count_iter++;
+
+			if(count_iter >= MAX_ITERATIONS_NUM)
+				return 0;
+
+		}
+
+		count_iter = 0;
 
 		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
 
 	}
+
+	return 1;
 
 }
 
@@ -1355,26 +1445,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
-
-    // Controlla errori FIFO
-    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_FEIF0_4)) {
-       while(1);
-    }
-
-    // Controlla errori Direct Mode
-    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_DMEIF0_4)) {
-        while(1);
-    }
-
-    // Controlla errori di trasferimento
-    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_TEIF0_4)) {
-        while(1);
-    }
-
-    // Controlla completamento trasferimento
-    if (__HAL_DMA_GET_FLAG(&hdma_spi1_tx, DMA_FLAG_TCIF0_4)) {
-    	while(1);
-    }
 
 	spi_dma_not_ready = 0;
 

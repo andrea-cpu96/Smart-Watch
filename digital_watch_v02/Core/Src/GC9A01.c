@@ -1,6 +1,8 @@
 #include "main.h"
 #include "GC9A01.h"
 
+#define MAX_ITERATIONS_NUM				10000
+
 
 uint8_t volatile spi_dma_not_ready = 0;
 
@@ -8,65 +10,107 @@ uint8_t volatile spi_dma_not_ready = 0;
 //////////////////////////////////////////////// GLOBAL FUNCTIONS
 
 
-void GC9A01_set_reset(uint8_t val) {
+void GC9A01_set_reset(uint8_t val)
+{
+
 #ifdef DMA_MODE
 	while(spi_dma_not_ready);
 #endif
-    if (val==0) {
+
+	if(val==0)
     	HAL_GPIO_WritePin(GC9A01_RST_GPIO_Port, GC9A01_RST_Pin, RESET);
-    } else {
+    else
         HAL_GPIO_WritePin(GC9A01_RST_GPIO_Port, GC9A01_RST_Pin, SET);
-    }
+
 }
 
-void GC9A01_set_data_command(uint8_t val) {
+void GC9A01_set_data_command(uint8_t val)
+{
+
 #ifdef DMA_MODE
 	while(spi_dma_not_ready);
 #endif
-    if (val==0) {
+
+	if(val==0)
     	HAL_GPIO_WritePin(GC9A01_DC_GPIO_Port, GC9A01_DC_Pin, RESET);
-    } else {
+    else
         HAL_GPIO_WritePin(GC9A01_DC_GPIO_Port, GC9A01_DC_Pin, SET);
-    }
+
 }
 
-void GC9A01_set_chip_select(uint8_t val) {
+void GC9A01_set_chip_select(uint8_t val)
+{
+
 #ifdef DMA_MODE
 	while(spi_dma_not_ready);
 #endif
-    if (val==0) {
+
+    if (val==0)
     	HAL_GPIO_WritePin(GC9A01_CS_GPIO_Port, GC9A01_CS_Pin, RESET);
-    } else {
+    else
     	HAL_GPIO_WritePin(GC9A01_CS_GPIO_Port, GC9A01_CS_Pin, SET);
-    }
+
 }
 
-void GC9A01_write_command(uint8_t cmd) {
+int GC9A01_write_command(uint8_t cmd)
+{
+
+	int ret = 1;
+
+
     GC9A01_set_data_command(OFF);
     GC9A01_set_chip_select(OFF);
-    GC9A01_spi_tx(&cmd, sizeof(cmd), 0);
+    ret = GC9A01_spi_tx(&cmd, sizeof(cmd), 0);
     GC9A01_set_chip_select(ON);
+
+    return ret;
+
 }
 
-void GC9A01_write_data(uint8_t *data, size_t len) {
+int GC9A01_write_data(uint8_t *data, size_t len)
+{
+
+	int ret;
+
+
     GC9A01_set_data_command(ON);
     GC9A01_set_chip_select(OFF);
-    GC9A01_spi_tx(data, len, 0);
+    ret = GC9A01_spi_tx(data, len, 0);
     GC9A01_set_chip_select(ON);
+
+    return ret;
+
 }
 
-static inline void GC9A01_write_byte(uint8_t val) {
-    GC9A01_write_data(&val, sizeof(val));
+static inline int GC9A01_write_byte(uint8_t val)
+{
+
+    return GC9A01_write_data(&val, sizeof(val));
+
 }
 
-void GC9A01_write(uint8_t *data, size_t len) {
-    GC9A01_write_command(MEM_WR);
-    GC9A01_write_data(data, len);
+int GC9A01_write(uint8_t *data, size_t len)
+{
+
+	if(GC9A01_write_command(MEM_WR) != 1)
+		return -1;
+    if(GC9A01_write_data(data, len) != 1)
+    	return -1;
+
+    return 1;
+
 }
 
-void GC9A01_write_continue(uint8_t *data, size_t len) {
-    GC9A01_write_command(MEM_WR_CONT);
-    GC9A01_write_data(data, len);
+int GC9A01_write_continue(uint8_t *data, size_t len)
+{
+
+    if(GC9A01_write_command(MEM_WR_CONT) != 1)
+    	return -1;
+    if(GC9A01_write_data(data, len) != 1)
+    	return -1;
+
+    return 1;
+
 }
 
 void GC9A01_init(void) {
@@ -324,41 +368,55 @@ void GC9A01_init(void) {
     
 }
 
-void GC9A01_set_frame(struct GC9A01_frame frame) {
+int GC9A01_set_frame(struct GC9A01_frame frame)
+{
 
     uint8_t data[4];
     
-    GC9A01_write_command(COL_ADDR_SET);
+
+    if(GC9A01_write_command(COL_ADDR_SET) != 1)
+    	return -1;
+
     data[0] = (frame.start.X >> 8) & 0xFF;
     data[1] = frame.start.X & 0xFF;
     data[2] = (frame.end.X >> 8) & 0xFF;
     data[3] = frame.end.X & 0xFF;
-    GC9A01_write_data(data, sizeof(data));
 
-    GC9A01_write_command(ROW_ADDR_SET);
+    if(GC9A01_write_data(data, sizeof(data)) != 1)
+    	return -1;
+
+    if(GC9A01_write_command(ROW_ADDR_SET) != 1)
+    	return -1;
+
     data[0] = (frame.start.Y >> 8) & 0xFF;
     data[1] = frame.start.Y & 0xFF;
     data[2] = (frame.end.Y >> 8) & 0xFF;
     data[3] = frame.end.Y & 0xFF;
-    GC9A01_write_data(data, sizeof(data));
     
+    if(GC9A01_write_data(data, sizeof(data)) != 1)
+    	return -1;
+
+    return 1;
+
 }
 
 
-void GC9A01_sleep_mode(uint8_t command)
+int GC9A01_sleep_mode(uint8_t command)
 {
 
+	int ret;
+
+
 	if(command)
-		GC9A01_write_command(SLEEP_MODE_ON);
+		ret = GC9A01_write_command(SLEEP_MODE_ON);
 	else
-		GC9A01_write_command(SLEEP_MODE_OFF);
+		ret = GC9A01_write_command(SLEEP_MODE_OFF);
 
 	HAL_Delay(120);
 
+	return ret;
+
 }
-
-////////////////////////////////////////////////
-
 
 //////////////////////////////////////////////// PRIVATE FUNCTIONS
 
@@ -366,12 +424,25 @@ int GC9A01_spi_tx(uint8_t *data, uint16_t size, uint8_t join)
 {
 
 	HAL_StatusTypeDef ret;
+	static uint16_t count_iter = 0;
 
 
 #ifdef DMA_MODE
-	while(spi_dma_not_ready && !join);
+	while(spi_dma_not_ready && !join)
+	{
+
+		count_iter++;
+
+		if(count_iter >= MAX_ITERATIONS_NUM)
+			return -1;
+
+	}
+
+	count_iter = 0;
+
 	spi_dma_not_ready = 1;
 	ret = HAL_SPI_Transmit_DMA(&hspi1, data, size);
+
 #else
 	ret = HAL_SPI_Transmit(&hspi1, data, size, HAL_MAX_DELAY);
 #endif

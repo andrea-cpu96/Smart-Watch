@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#define DMA_MODE
+#define DMA_MODE // When defined, it enables the DMA mode for the SPI data communication
 
 #define ORIENTATION 0   // Set the display orientation 0,1,2,3
 
@@ -25,12 +25,6 @@
 
 extern uint8_t volatile spi_dma_not_ready;
 
-// Hardware abstraction layer
-// Should be defined by the user of the library
-void GC9A01_set_reset(uint8_t val);
-void GC9A01_set_data_command(uint8_t val);
-void GC9A01_set_chip_select(uint8_t val);
-
 struct GC9A01_point {
     uint16_t X, Y;
 };
@@ -40,14 +34,18 @@ struct GC9A01_frame {
 };
 
 void GC9A01_init(void);
-void GC9A01_set_frame(struct GC9A01_frame frame);
-void GC9A01_write(uint8_t *data, size_t len);
-void GC9A01_write_continue(uint8_t *data, size_t len);
+int GC9A01_set_frame(struct GC9A01_frame frame);
+int GC9A01_write(uint8_t *data, size_t len);
+int GC9A01_write_continue(uint8_t *data, size_t len);
 
-void GC9A01_write_data(uint8_t *data, size_t len);
-void GC9A01_write_command(uint8_t cmd);
+int GC9A01_write_data(uint8_t *data, size_t len);
+int GC9A01_write_command(uint8_t cmd);
 int GC9A01_spi_tx(uint8_t *data, uint16_t size, uint8_t join);
 
-void GC9A01_sleep_mode(uint8_t command);
+void GC9A01_set_reset(uint8_t val);
+void GC9A01_set_data_command(uint8_t val);
+void GC9A01_set_chip_select(uint8_t val);
+
+int GC9A01_sleep_mode(uint8_t command);
 
 #endif
