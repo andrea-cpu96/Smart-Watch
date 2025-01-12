@@ -1155,8 +1155,8 @@ typedef struct
 
 	I2C_HandleTypeDef *pI2C_instance;
 	uint16_t slaveAddress;
-    uint8_t (*pI2C_data_Tx)(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t timeOut);
-    uint8_t (*pI2C_data_Rx)(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t timeOut);
+    uint8_t (*pI2C_data_Tx)(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t opt);
+    uint8_t (*pI2C_data_Rx)(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t opt);
     uint8_t data_reg;
     axis_accel axis_data;
 
@@ -1174,7 +1174,7 @@ typedef struct
 
 // Global function prototypes
 
-int FXLS8974_I2C_Init(fxls8974_i2c_sensorhandle_t *pSensorHandle, void *instance, void *pI2C_funTx, void *pI2C_funRx, uint16_t sAddress, uint8_t *whoami);
+int FXLS8974_I2C_Init(fxls8974_i2c_sensorhandle_t *pSensorHandle, void *instance, void *pI2C_funTx, void *pI2C_funRx, uint16_t sAddress);
 int FXLS8974_I2C_Configure(fxls8974_i2c_sensorhandle_t *pSensorHandle);
 int FXLS8974_I2C_ReadData(fxls8974_i2c_sensorhandle_t *pSensorHandle);
 int FXLS8974_I2C_DeInit(fxls8974_i2c_sensorhandle_t *pSensorHandle);

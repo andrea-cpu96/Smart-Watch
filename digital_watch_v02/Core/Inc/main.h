@@ -36,12 +36,13 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-extern JPEG_HandleTypeDef    			JPEG_Handle;
-extern DMA2D_HandleTypeDef    			DMA2D_Handle;
-extern JPEG_ConfTypeDef  		     	JPEG_Info;
+extern JPEG_HandleTypeDef JPEG_Handle;
+extern DMA2D_HandleTypeDef DMA2D_Handle;
+extern JPEG_ConfTypeDef JPEG_Info;
 extern SPI_HandleTypeDef hspi1;
 extern DMA_HandleTypeDef hdma_spi1_tx;
 extern RTC_HandleTypeDef hrtc;
+extern I2C_HandleTypeDef hi2c1;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

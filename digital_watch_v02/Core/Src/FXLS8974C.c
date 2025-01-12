@@ -9,9 +9,14 @@
 
 // Definitions
 
+#define MAX_ITERATIONS_NUM				1000000
 #define REG_SET(val, shift)				( val << shift )
 
 // Global Variables
+
+volatile uint8_t i2c_tx_cplt = 0;
+volatile uint8_t i2c_rx_cplt = 0;
+volatile uint8_t i2c_repeated_start = 0;
 
 // Private Function prototypes
 
@@ -20,11 +25,11 @@ static int i2c_register_get(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
 
 // Global Functions
 
-int FXLS8974_I2C_Init(fxls8974_i2c_sensorhandle_t *pSensorHandle, void *instance, void *pI2C_funTx, void *pI2C_funRx, uint16_t sAddress, uint8_t *whoami)
+int FXLS8974_I2C_Init(fxls8974_i2c_sensorhandle_t *pSensorHandle, void *instance, void *pI2C_funTx, void *pI2C_funRx, uint16_t sAddress)
 {
 
     int32_t status;
-
+    uint8_t whoami;
 
     /*! Check the input parameters. */
     if(( pSensorHandle == NULL ) || ( instance == NULL ) || ( pI2C_funTx == NULL ) || ( pI2C_funRx == NULL ))
@@ -40,9 +45,8 @@ int FXLS8974_I2C_Init(fxls8974_i2c_sensorhandle_t *pSensorHandle, void *instance
     if(HAL_OK != status)
         return 0;
 
-    (*whoami) = pSensorHandle->data_reg;
-
-    if(FXLS8974_WHOAMI_VALUE != pSensorHandle->data_reg)
+    whoami = pSensorHandle->data_reg;
+    if(FXLS8974_WHOAMI_VALUE != whoami)
     	return 0;
 
     return 1;
@@ -190,6 +194,7 @@ static int i2c_register_set(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
 	uint8_t data_buff[2];
 	uint8_t reg_data;
 	uint8_t status;
+	uint32_t count_iter = 0;
 
 
 	reg_data = ( REG_SET(val, shift) & mask );
@@ -197,9 +202,20 @@ static int i2c_register_set(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
 	data_buff[0] = reg_addr;
 	data_buff[1] = reg_data;
 
-    status = pSensorHandle->pI2C_data_Tx(pSensorHandle->pI2C_instance, pSensorHandle->slaveAddress, data_buff, 2, HAL_MAX_DELAY);
+    status = pSensorHandle->pI2C_data_Tx(pSensorHandle->pI2C_instance, pSensorHandle->slaveAddress, data_buff, 2, I2C_LAST_FRAME);
     if(HAL_OK != status)
         return 0;
+
+    while(i2c_tx_cplt == 0)
+    {
+
+    	count_iter++;
+    	if(count_iter > MAX_ITERATIONS_NUM)
+    		return 0;
+
+    }
+
+    i2c_tx_cplt = 0;
 
     return 1;
 
@@ -209,13 +225,58 @@ static int i2c_register_get(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
 {
 
 	uint8_t status;
+	uint32_t count_iter = 0;
 
 
-    status = pSensorHandle->pI2C_data_Tx(pSensorHandle->pI2C_instance, pSensorHandle->slaveAddress, &reg_addr, 1, HAL_MAX_DELAY);
-    status &= pSensorHandle->pI2C_data_Rx(pSensorHandle->pI2C_instance, pSensorHandle->slaveAddress, reg_data, 1, HAL_MAX_DELAY);
+	i2c_repeated_start = 1;
+    status = pSensorHandle->pI2C_data_Tx(pSensorHandle->pI2C_instance, pSensorHandle->slaveAddress, &reg_addr, 1, I2C_FIRST_FRAME);
     if(HAL_OK != status)
         return 0;
 
+    while(i2c_repeated_start)
+    {
+
+    	count_iter++;
+    	if(count_iter > MAX_ITERATIONS_NUM)
+    		return 0;
+
+    }
+
+    status = pSensorHandle->pI2C_data_Rx(pSensorHandle->pI2C_instance, pSensorHandle->slaveAddress, reg_data, 1, I2C_LAST_FRAME);
+    if(HAL_OK != status)
+        return 0;
+
+    count_iter = 0;
+    while(i2c_rx_cplt == 0)
+    {
+
+    	count_iter++;
+    	if(count_iter > MAX_ITERATIONS_NUM)
+    		return 0;
+
+    }
+
+    i2c_rx_cplt = 0;
+
     return 1;
+
+}
+
+// CallBacks Functions
+
+void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+
+	i2c_tx_cplt = 1;
+
+	if(i2c_repeated_start == 1)
+		i2c_repeated_start = 0;
+
+}
+
+void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+
+	i2c_rx_cplt = 1;
 
 }

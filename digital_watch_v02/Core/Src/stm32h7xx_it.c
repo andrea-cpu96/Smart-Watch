@@ -229,6 +229,17 @@ void SPI1_IRQHandler(void)
   /* USER CODE END SPI1_IRQn 1 */
 }
 
+void I2C1_EV_IRQHandler(void)
+{
+  /* USER CODE BEGIN I2C1_EV_IRQn 0 */
+
+  /* USER CODE END I2C1_EV_IRQn 0 */
+  HAL_I2C_EV_IRQHandler(&hi2c1);
+  /* USER CODE BEGIN I2C1_EV_IRQn 1 */
+
+  /* USER CODE END I2C1_EV_IRQn 1 */
+}
+
 void EXTI0_IRQHandler(void)
 {
 
@@ -251,5 +262,4 @@ void EXTI2_IRQHandler(void)
     HAL_GPIO_EXTI_IRQHandler(PLUS_BTN_Pin);
 
 }
-
 /* USER CODE END 1 */
