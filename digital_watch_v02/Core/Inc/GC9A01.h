@@ -33,7 +33,7 @@ struct GC9A01_frame {
     struct GC9A01_point start, end;
 };
 
-void GC9A01_init(void);
+void GC9A01_Init(void);
 int GC9A01_set_frame(struct GC9A01_frame frame);
 int GC9A01_write(uint8_t *data, size_t len);
 int GC9A01_write_continue(uint8_t *data, size_t len);

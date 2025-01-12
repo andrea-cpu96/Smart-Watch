@@ -43,8 +43,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../Core/Inc/prj_conf.h ../Core/Inc/GC9A01.h ../Core/Inc/smart_watch.h \
- ../Core/Inc/GC9A01.h
+ ../Core/Inc/prj_conf.h ../Core/Inc/GC9A01.h ../Core/Inc/FXLS8974C.h \
+ ../Core/Inc/main.h ../Core/Inc/smart_watch.h ../Core/Inc/GC9A01.h \
+ ../Core/Inc/FXLS8974C.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -96,5 +97,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../FATFS/Target/sd_diskio.h:
 ../Core/Inc/prj_conf.h:
 ../Core/Inc/GC9A01.h:
+../Core/Inc/FXLS8974C.h:
+../Core/Inc/main.h:
 ../Core/Inc/smart_watch.h:
 ../Core/Inc/GC9A01.h:
+../Core/Inc/FXLS8974C.h:

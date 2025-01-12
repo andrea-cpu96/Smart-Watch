@@ -145,7 +145,7 @@ int GC9A01_write_continue(uint8_t *data, size_t len)
 
 }
 
-void GC9A01_init(void) {
+void GC9A01_Init(void) {
     
     GC9A01_set_chip_select(ON);
     HAL_Delay(5);

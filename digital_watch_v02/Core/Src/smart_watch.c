@@ -675,6 +675,26 @@ int smart_watch_test_mjpeg(void)
 
 }
 
+int smart_watch_test_accelerometer(fxls8974_i2c_sensorhandle_t *pSensorHandle)
+{
+
+	if(FXLS8974_I2C_Configure(pSensorHandle) != 1)
+		return -1;
+
+	HAL_Delay(500);
+
+	for(int i = 0 ; i < 10 ; i++)
+	{
+
+		if(FXLS8974_I2C_ReadData(pSensorHandle) != 1)
+			return -1;
+
+	}
+
+	return 1;
+
+}
+
 /************************** PRIVATE FUNCTIONS **************************/
 
 static int mjpeg_video_processing(void)
@@ -1098,7 +1118,7 @@ static int battery_management(void)
 
 			SystemClock_Config();
 
-			GC9A01_init();
+			GC9A01_Init();
 
 			video.display_status = DISPLAY_ON;
 

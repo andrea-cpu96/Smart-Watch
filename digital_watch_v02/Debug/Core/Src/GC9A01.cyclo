@@ -6,7 +6,7 @@
 ../Core/Src/GC9A01.c:102:5:GC9A01_write_data	10
 ../Core/Src/GC9A01.c:124:5:GC9A01_write	3
 ../Core/Src/GC9A01.c:136:5:GC9A01_write_continue	3
-../Core/Src/GC9A01.c:148:6:GC9A01_init	7
+../Core/Src/GC9A01.c:148:6:GC9A01_Init	7
 ../Core/Src/GC9A01.c:403:5:GC9A01_set_frame	5
 ../Core/Src/GC9A01.c:436:5:GC9A01_sleep_mode	2
 ../Core/Src/GC9A01.c:455:5:GC9A01_spi_tx	5

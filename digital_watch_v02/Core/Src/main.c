@@ -22,11 +22,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "prj_conf.h"
-#include "GC9A01.h"
-#include "smart_watch.h"
 #include <stdio.h>
 #include <string.h>
+#include "prj_conf.h"
+#include "GC9A01.h"
+#include "FXLS8974C.h"
+#include "smart_watch.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +55,7 @@ JPEG_HandleTypeDef JPEG_Handle;
 DMA2D_HandleTypeDef DMA2D_Handle;
 JPEG_ConfTypeDef JPEG_Info;
 RTC_HandleTypeDef hrtc;
+fxls8974_i2c_sensorhandle_t pSensorHandle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -123,12 +125,16 @@ int main(void)
 
   HAL_Delay(500);
 
-  GC9A01_init();
+  GC9A01_Init();
 
   // White screen after the init
   lcd_draw(outputData);
 
   HAL_Delay(500);
+
+  uint8_t whoami;
+  I2C_HandleTypeDef hi2c;
+  FXLS8974_I2C_Init(&pSensorHandle, &hi2c, HAL_I2C_Master_Transmit, HAL_I2C_Master_Receive, FXLS8974_DEVICE_ADDRESS_SA0_0, &whoami);
 
   while(smart_watch_init() != OK)
 	  HAL_Delay(500);
@@ -508,11 +514,15 @@ static int test_process(void)
 		 pass.sd_pass = NA;
 
 	 if(TEST_MJPEG)
-		 /* IN PROGRESS */
 		 pass.mjpeg_pass = (TEST_STATUS_t)smart_watch_test_mjpeg();
 	 else
 		 pass.mjpeg_pass = NA;
 
+	 if(TEST_ACCELEROMETER)
+		 /* IN PROGRESS */
+		 pass.mjpeg_pass = (TEST_STATUS_t)smart_watch_test_accelerometer(&pSensorHandle);
+	 else
+		 pass.mjpeg_pass = NA;
 
 	 if(f_open(&log, "log.txt", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
 		 return -1;

@@ -9,10 +9,11 @@
 #define EXAMPLE_USER_CM7_SMART_WATCH_H_
 
 #include "GC9A01.h"
+#include "FXLS8974C.h"
 
 /* DEBUG SETTINGS */
 
-#define DEBUG_TIME
+//#define DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 
@@ -154,6 +155,7 @@ void lcd_draw_opt3(doubleFormat *data);
 int smart_watch_test_sd(void);
 int smart_watch_test_display(void);
 int smart_watch_test_mjpeg(void);
+int smart_watch_test_accelerometer(fxls8974_i2c_sensorhandle_t *pSensorHandle);
 
 
 #endif /* EXAMPLE_USER_CM7_SMART_WATCH_H_ */

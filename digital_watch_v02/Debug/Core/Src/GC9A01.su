@@ -6,7 +6,7 @@
 ../Core/Src/GC9A01.c:102:5:GC9A01_write_data	24	static
 ../Core/Src/GC9A01.c:124:5:GC9A01_write	16	static
 ../Core/Src/GC9A01.c:136:5:GC9A01_write_continue	16	static
-../Core/Src/GC9A01.c:148:6:GC9A01_init	48	static
+../Core/Src/GC9A01.c:148:6:GC9A01_Init	48	static
 ../Core/Src/GC9A01.c:403:5:GC9A01_set_frame	40	static
 ../Core/Src/GC9A01.c:436:5:GC9A01_sleep_mode	8	static
 ../Core/Src/GC9A01.c:455:5:GC9A01_spi_tx	24	static
