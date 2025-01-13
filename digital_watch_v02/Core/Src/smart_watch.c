@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 
+#define OFFSET_FACTOR							0.5
 #define MAX_ATTEMPTS_NUM				10
 #define MAX_ITERATIONS_NUM				1000000
 
@@ -44,6 +45,9 @@ static void disable_btn_int(void);
 static void clear_btn_int(void);
 
 static void clock_reset_check(void);
+static void resume_time(void);
+
+const uint8_t num_of_days_per_month[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
 /************************** GLOBAL VARIABLES **************************/
 
@@ -64,6 +68,8 @@ uint8_t	preElab_data[300*1024];									// Pre elaborated data buffer
 uint8_t output_data1[LCD_SIDE_SIZE*LCD_SIDE_SIZE*3+100];		// Output data buffer (format RGB565)
 uint8_t output_data2[LCD_SIDE_SIZE*LCD_SIDE_SIZE*3+100];
 uint8_t *outputData = output_data1;
+
+volatile time_t time;
 
 #ifdef OPT3
 block_t pixel_blocks[BLOCK_NUM];
@@ -996,6 +1002,15 @@ static int clock_setting(void)
 
 				video.file_idx += video.time.Minutes;
 
+				HAL_RTC_SetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+
+				RTC_DateTypeDef sDate = {0};
+				HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+				time.first_day = sDate.Date;
+				time.first_month = sDate.Month;
+				time.minutes_offs = 0;
+
 				video.isfirstFrame = 1;
 
 				video.set = SET_START;
@@ -1123,15 +1138,7 @@ static int battery_management(void)
 			video.display_status = DISPLAY_ON;
 
 			// Clock setting
-
-			RTC_DateTypeDef sDate = {0};
-			if(HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN) != HAL_OK)
-				return 0;
-			if(HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN) != HAL_OK)
-				return 0;
-
-			video.file_idx = ( ( video.time.Hours % 12 ) * 60 );
-			video.file_idx += video.time.Minutes;
+			resume_time();
 
 			if(file_handler(1) != 1)
 				return 0;
@@ -1385,6 +1392,54 @@ static void SD_Initialize(void)
 {
 
 	BSP_SD_Init();
+
+}
+
+static void resume_time(void)
+{
+
+	RTC_DateTypeDef sDate = {0};
+	uint16_t day_diff = 0;
+
+
+	HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
+	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+	time.current_day = sDate.Date;
+	time.current_month = sDate.Month;
+
+	if(time.current_month > time.first_month)
+	{
+
+		for(int i = time.first_month ; i < ( time.current_month - 1 ); i++)
+			day_diff += num_of_days_per_month[i];
+
+		day_diff += ( time.current_day + num_of_days_per_month[time.first_month-1] - time.first_day );
+
+	}
+	else if(time.current_month < time.first_month)
+	{
+
+		for(int i = time.first_month ; i < 12 ; i++)
+			day_diff += num_of_days_per_month[i];
+
+		for(int i = 0 ; i < ( time.current_month - 1 ) ; i++)
+			day_diff += num_of_days_per_month[i];
+
+		day_diff += ( time.current_day + num_of_days_per_month[time.first_month-1] - time.first_day );
+
+	}
+	else
+	{
+
+		day_diff += abs(time.current_day - time.first_day);
+
+	}
+
+	time.minutes_offs = ( OFFSET_FACTOR * day_diff );
+
+	video.file_idx = ( ( video.time.Hours % 12 ) * 60 );
+	video.file_idx += ( video.time.Minutes + time.minutes_offs );
 
 }
 

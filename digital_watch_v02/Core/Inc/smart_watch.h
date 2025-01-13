@@ -124,6 +124,19 @@ typedef struct
 
 }video_t;
 
+typedef struct
+{
+
+	uint8_t first_day;
+	uint8_t first_month;
+
+	uint8_t current_day;
+	uint8_t current_month;
+
+	uint8_t minutes_offs;
+
+}time_t;
+
 #ifdef OPT3
 typedef struct
 {
