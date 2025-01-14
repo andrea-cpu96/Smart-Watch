@@ -57,6 +57,7 @@
 
 #define RESET_ITER_NUM				30
 
+#define BATTERY_THRESH				3.0
 
 enum mode
 {
@@ -94,6 +95,14 @@ enum button_status
 
 };
 
+enum battery_status
+{
+
+	BATTERY_LOW = 0,
+	BATTERY_HIGH
+
+};
+
 typedef struct
 {
 
@@ -104,8 +113,6 @@ typedef struct
 	uint8_t FrameType;
 	uint16_t width;
 	uint16_t height;
-	uint16_t xPos;
-	uint16_t yPos;
 	uint32_t frameCount;
 
 	int frameToSkip;							// Defines for each cycle how many frames time skip

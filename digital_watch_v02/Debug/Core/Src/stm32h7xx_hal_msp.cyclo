@@ -11,3 +11,5 @@
 ../Core/Src/stm32h7xx_hal_msp.c:441:6:HAL_RTC_MspDeInit	2
 ../Core/Src/stm32h7xx_hal_msp.c:452:6:HAL_I2C_MspInit	3
 ../Core/Src/stm32h7xx_hal_msp.c:496:6:HAL_I2C_MspDeInit	2
+../Core/Src/stm32h7xx_hal_msp.c:523:6:HAL_ADC_MspInit	3
+../Core/Src/stm32h7xx_hal_msp.c:570:6:HAL_ADC_MspDeInit	2

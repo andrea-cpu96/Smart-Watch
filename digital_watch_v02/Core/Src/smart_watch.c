@@ -47,6 +47,8 @@ static void clear_btn_int(void);
 static void clock_reset_check(void);
 static void resume_time(void);
 
+static int check_battery_status(void);
+
 const uint8_t num_of_days_per_month[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
 /************************** GLOBAL VARIABLES **************************/
@@ -625,8 +627,6 @@ int smart_watch_test_mjpeg(void)
 
 				video.width = JPEG_Info.ImageWidth;
 				video.height = JPEG_Info.ImageHeight;
-				video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
-				video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
 			}
 
@@ -785,8 +785,6 @@ static int clock_normal(void)
 
 			video.width = JPEG_Info.ImageWidth;
 			video.height = JPEG_Info.ImageHeight;
-			video.xPos =  ( ( LCD_Y_SIZE - video.width ) / 2 );					// Center the image in x
-			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
 			video.frame_time = ( AVI_Handel.aviInfo.SecPerFrame / 1000.0 );
 			video.tick_offset = HAL_GetTick();									// Tick offset from 0
@@ -1133,6 +1131,8 @@ static int battery_management(void)
 
 			SystemClock_Config();
 
+			check_battery_status();
+
 			GC9A01_Init();
 
 			video.display_status = DISPLAY_ON;
@@ -1150,6 +1150,24 @@ static int battery_management(void)
 	}
 
 	return 1;
+
+}
+
+static int check_battery_status(void)
+{
+
+	uint32_t battery_raw;
+	float battery_volt;
+
+	HAL_ADC_Start(&hadc1);
+
+	battery_raw = HAL_ADC_GetValue(&hadc1);
+	battery_volt = ( ( battery_raw / 4096 ) * 3.3 );
+
+	if(battery_volt < BATTERY_THRESH)
+		return BATTERY_LOW;
+	else
+		return BATTERY_HIGH;
 
 }
 
@@ -1226,8 +1244,6 @@ static int show_frame(uint32_t frame_num)
 
 			video.width = JPEG_Info.ImageWidth;
 			video.height = JPEG_Info.ImageHeight;
-			video.xPos = ( ( LCD_X_SIZE - video.width ) / 2 );					// Center the image in x
-			video.yPos = ( ( LCD_Y_SIZE - video.height ) / 2 );					// Center the image in y
 
 		}
 
@@ -1261,11 +1277,6 @@ static int show_frame(uint32_t frame_num)
 
 static void parameters_reset(void)
 {
-
-	video.width = 0;
-	video.height = 0;
-	video.xPos = 0;
-	video.yPos = 0;
 
 	video.time.Hours = 0;
 	video.time.Minutes = 0;
