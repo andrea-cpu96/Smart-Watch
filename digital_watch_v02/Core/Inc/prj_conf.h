@@ -15,6 +15,7 @@
 #define TEST_DISPLAY				0
 #define TEST_MJPEG					0
 #define TEST_ACCELEROMETER			0
+#define TEST_ADC					0
 
 
 typedef enum test_status

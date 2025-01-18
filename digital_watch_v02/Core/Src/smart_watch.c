@@ -701,6 +701,17 @@ int smart_watch_test_accelerometer(fxls8974_i2c_sensorhandle_t *pSensorHandle)
 
 }
 
+int smart_watch_test_adc(void)
+{
+
+
+	for(int i = 0 ; i < 20 ; i++)
+		check_battery_status();
+
+	return 1;
+
+}
+
 /************************** PRIVATE FUNCTIONS **************************/
 
 static int mjpeg_video_processing(void)
@@ -1118,23 +1129,30 @@ static int battery_management(void)
 
 			video.display_status = DISPLAY_OFF;
 
-			// Stop mode
+			do
+			{
 
-			HAL_SuspendTick();
+				// Stop mode
 
-			__disable_irq();
+				HAL_ADC_DeInit(&hadc1);
 
-			HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
+				HAL_SuspendTick();
 
-			// Wake up
+				__disable_irq();
 
-			__enable_irq();
+				HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
 
-			HAL_ResumeTick();
+				// Wake up
 
-			SystemClock_Config();
+				__enable_irq();
 
-			check_battery_status();
+				HAL_ResumeTick();
+
+				SystemClock_Config();
+
+				HAL_ADC_Init(&hadc1);
+
+			}while(check_battery_status() == BATTERY_LOW);
 
 			GC9A01_Init();
 
@@ -1162,13 +1180,25 @@ static int battery_management(void)
 static int check_battery_status(void)
 {
 
-	uint32_t battery_raw;
+	uint32_t battery_scaled_raw;
+	float battery_scaled_volt;
 	float battery_volt;
 
-	HAL_ADC_Start(&hadc1);
+	// After exiting the stop mode do some reads
+	// to be sure the ADC waked up
+	for(int i = 0 ; i < 10 ; i++)
+	{
 
-	battery_raw = HAL_ADC_GetValue(&hadc1);
-	battery_volt = ( ( battery_raw / 4096 ) * 3.3 );
+		HAL_ADC_Start(&hadc1);
+		battery_scaled_raw = HAL_ADC_GetValue(&hadc1);
+		HAL_ADC_Stop(&hadc1);
+
+		HAL_Delay(10);
+
+	}
+
+	battery_scaled_volt = ( ( battery_scaled_raw / 4096.0 ) * 3.3 );
+	battery_volt = REVERT_VOLTAGE_DIV(battery_scaled_volt);
 
 	if(battery_volt < BATTERY_THRESH)
 		return BATTERY_LOW;

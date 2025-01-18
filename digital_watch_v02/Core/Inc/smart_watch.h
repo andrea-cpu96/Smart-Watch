@@ -57,7 +57,10 @@
 
 #define RESET_ITER_NUM				30
 
-#define BATTERY_THRESH				3.0
+#define HIGH_SIDE_R					1000.0
+#define LOW_SIDE_R					8200.0
+#define REVERT_VOLTAGE_DIV(v_read)	( ( ( LOW_SIDE_R + HIGH_SIDE_R ) / LOW_SIDE_R ) * v_read )
+#define BATTERY_THRESH				3.5
 
 enum mode
 {
@@ -176,6 +179,7 @@ int smart_watch_test_sd(void);
 int smart_watch_test_display(void);
 int smart_watch_test_mjpeg(void);
 int smart_watch_test_accelerometer(fxls8974_i2c_sensorhandle_t *pSensorHandle);
+int smart_watch_test_adc(void);
 
 
 #endif /* EXAMPLE_USER_CM7_SMART_WATCH_H_ */
