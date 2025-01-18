@@ -65,8 +65,8 @@ all: main-build
 main-build: digital_watch_v02.elf secondary-outputs
 
 # Tool invocations
-digital_watch_v02.elf digital_watch_v02.map: $(OBJS) $(USER_OBJS) C:\Users\FatoAnd\OneDrive\ -\ Electrolux\Desktop\New\ folder\Smart-Watch\digital_watch_v02\STM32H7B0RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "digital_watch_v02.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\FatoAnd\OneDrive - Electrolux\Desktop\New folder\Smart-Watch\digital_watch_v02\STM32H7B0RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="digital_watch_v02.map" -Wl,--gc-sections -static -L"C:\Users\FatoAnd\OneDrive - Electrolux\Desktop\New folder\Smart-Watch\digital_watch_v02\Lib" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+digital_watch_v02.elf digital_watch_v02.map: $(OBJS) $(USER_OBJS) D:\Andrea\Embedded\repositories\Smart-Watch\digital_watch_v02\STM32H7B0RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "digital_watch_v02.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Andrea\Embedded\repositories\Smart-Watch\digital_watch_v02\STM32H7B0RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="digital_watch_v02.map" -Wl,--gc-sections -static -L"D:\Andrea\Embedded\repositories\Smart-Watch\digital_watch_v02\Lib" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

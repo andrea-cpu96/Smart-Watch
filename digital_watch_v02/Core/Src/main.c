@@ -87,27 +87,20 @@ static int print_log(FIL *log_file, TEST_STATUS_t status, char *test_name);
 int main(void)
 {
 
-  /* USER CODE BEGIN 1 */
+  // Enable instruction cache
   SCB_EnableICache();
-  /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
   /* Configure the system clock */
   SystemClock_Config();
   HAL_Delay(500);
-  /* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+  /* Initialize all the microcontroller peripherals */
 
-  /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA2D_Init();
   MX_SDMMC1_SD_Init();
@@ -116,20 +109,18 @@ int main(void)
   MX_RTC_Init();
   MX_I2C1_Init();
   MX_ADC1_Init();
-  /* USER CODE BEGIN 2 */
   JPEG_Handle.Instance = JPEG;
   MX_JPEG_Init();
 
   HAL_Delay(500);
 
+  /* Initialize all the external peripherals */
+
+  // outputData init to a default value (0xff->white)
   for(int i = 0 ; i < ( LCD_X_SIZE * LCD_Y_SIZE * 2 ) ; i++)
 	  outputData[i] = 0xff;
 
-  // White screen at the startup
-  lcd_draw(outputData);
-
-  HAL_Delay(500);
-
+  // Display init
   GC9A01_Init();
 
   // White screen after the init
@@ -137,10 +128,15 @@ int main(void)
 
   HAL_Delay(500);
 
+  // Turn on the backlight
+  HAL_GPIO_WritePin(GC9A01_BL_GPIO_Port, GC9A01_BL_Pin, RESET);
+
+  // Accelerometer init
   FXLS8974_I2C_Init(&pSensorHandle, &hi2c1, HAL_I2C_Master_Seq_Transmit_IT, HAL_I2C_Master_Seq_Receive_IT, FXLS8974_DEVICE_ADDRESS_SA0_0);
 
-  while(smart_watch_init() != OK)
-	  HAL_Delay(500);
+  // Digital watch initialization
+  if(smart_watch_init() != OK)
+	  Error_Handler();
 
   HAL_Delay(500);
 
@@ -158,17 +154,16 @@ int main(void)
 		  Error_Handler();
 
   }
-  /* USER CODE END 2 */
 
   /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+
   while (1)
   {
-    /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+	  // Should never enter here
+
   }
-  /* USER CODE END 3 */
+
 }
 
 /**
@@ -568,13 +563,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin Output Level */
+  // Pin startup status
   HAL_GPIO_WritePin(GPIOB, GC9A01_CS_Pin|GC9A01_DC_Pin, GPIO_PIN_RESET);
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GC9A01_RST_Pin|GC9A01_BL_Pin, GPIO_PIN_SET);
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, PLUS_BTN_Pin|SET_BTN_Pin|MINUS_BTN_Pin, GPIO_PIN_SET);
-
 
   /*Configure GPIO pins : GC9A01_CS_Pin GC9A01_DC_Pin GC9A01_RST_Pin GC9A01_BL_Pin */
   GPIO_InitStruct.Pin = GC9A01_CS_Pin|GC9A01_DC_Pin|GC9A01_RST_Pin|GC9A01_BL_Pin;

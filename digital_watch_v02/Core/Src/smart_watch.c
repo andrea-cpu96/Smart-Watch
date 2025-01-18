@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 
-#define OFFSET_FACTOR							0.5
+#define OFFSET_FACTOR					0.5
 #define MAX_ATTEMPTS_NUM				10
 #define MAX_ITERATIONS_NUM				1000000
 
@@ -1108,6 +1108,9 @@ static int battery_management(void)
 		if(video.time.Seconds >= DISPLAY_STANDBY_TIMER)
 		{
 
+			// Turn off the backlight
+			HAL_GPIO_WritePin(GC9A01_BL_GPIO_Port, GC9A01_BL_Pin, SET);
+
 			parameters_reset();
 
 			if(GC9A01_sleep_mode(ON) != 1)
@@ -1134,6 +1137,9 @@ static int battery_management(void)
 			check_battery_status();
 
 			GC9A01_Init();
+
+			// Turn on the backlight
+			HAL_GPIO_WritePin(GC9A01_BL_GPIO_Port, GC9A01_BL_Pin, RESET);
 
 			video.display_status = DISPLAY_ON;
 
