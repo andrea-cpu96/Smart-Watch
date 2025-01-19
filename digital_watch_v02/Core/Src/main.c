@@ -69,7 +69,6 @@ static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_RTC_Init(void);
 static void MX_I2C1_Init(void);
-static void MX_ADC1_Init(void);
 /* USER CODE BEGIN PFP */
 static int test_process(void);
 static int print_log(FIL *log_file, TEST_STATUS_t status, char *test_name);
@@ -108,7 +107,9 @@ int main(void)
   MX_SPI1_Init();
   MX_RTC_Init();
   MX_I2C1_Init();
+#ifdef ENABLE_BATTERY_MON
   MX_ADC1_Init();
+#endif
   JPEG_Handle.Instance = JPEG;
   MX_JPEG_Init();
 
@@ -476,7 +477,7 @@ static void MX_I2C1_Init(void)
 
 }
 
-static void MX_ADC1_Init(void)
+void MX_ADC1_Init(void)
 {
 
   /* USER CODE BEGIN ADC1_Init 0 */
@@ -493,7 +494,7 @@ static void MX_ADC1_Init(void)
   /** Common config
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV2;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
@@ -524,7 +525,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_16;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_810CYCLES_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
@@ -534,7 +535,10 @@ static void MX_ADC1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN ADC1_Init 2 */
-
+  if (HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED) != HAL_OK)
+  {
+	  Error_Handler();
+  }
   /* USER CODE END ADC1_Init 2 */
 
 }
@@ -625,10 +629,12 @@ static int test_process(void)
 	 else
 		 pass.mjpeg_pass = NA;
 
+#ifdef ENABLE_BATTERY_MON
 	 if(TEST_ADC)
 		 pass.mjpeg_pass = (TEST_STATUS_t)smart_watch_test_adc();
 	 else
 		 pass.mjpeg_pass = NA;
+#endif
 
 	 if(f_open(&log, "log.txt", ( FA_WRITE | FA_CREATE_ALWAYS )) != FR_OK)
 		 return -1;

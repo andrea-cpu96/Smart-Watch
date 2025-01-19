@@ -788,8 +788,6 @@ static int clock_normal(void)
 		if(video.isfirstFrame == 1)
 		{
 
-			video.isfirstFrame = 0;
-
 			HAL_JPEG_GetInfo(&JPEG_Handle, &JPEG_Info);
 
 			DMA2D_Init(JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, JPEG_Info.ChromaSubsampling);
@@ -835,6 +833,15 @@ static int clock_normal(void)
 		}
 
 		count_iter = 0;
+
+		if(video.isfirstFrame == 1)
+		{
+
+			video.isfirstFrame = 0;
+			// Turn on the backlight
+			HAL_GPIO_WritePin(GC9A01_BL_GPIO_Port, GC9A01_BL_Pin, RESET);
+
+		}
 #endif
 
 		outputData = ( outputData == output_data1 ) ? output_data2 : output_data1;
@@ -1133,9 +1140,9 @@ static int battery_management(void)
 			{
 
 				// Stop mode
-
+#ifdef ENABLE_BATTERY_MON
 				HAL_ADC_DeInit(&hadc1);
-
+#endif
 				HAL_SuspendTick();
 
 				__disable_irq();
@@ -1149,15 +1156,15 @@ static int battery_management(void)
 				HAL_ResumeTick();
 
 				SystemClock_Config();
-
-				HAL_ADC_Init(&hadc1);
+#ifdef ENABLE_BATTERY_MON
+				MX_ADC1_Init();
 
 			}while(check_battery_status() == BATTERY_LOW);
+#else
+			}while(0);
+#endif
 
 			GC9A01_Init();
-
-			// Turn on the backlight
-			HAL_GPIO_WritePin(GC9A01_BL_GPIO_Port, GC9A01_BL_Pin, RESET);
 
 			video.display_status = DISPLAY_ON;
 
@@ -1186,10 +1193,11 @@ static int check_battery_status(void)
 
 	// After exiting the stop mode do some reads
 	// to be sure the ADC waked up
-	for(int i = 0 ; i < 10 ; i++)
+	for(int i = 0 ; i < 30 ; i++)
 	{
 
 		HAL_ADC_Start(&hadc1);
+		HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
 		battery_scaled_raw = HAL_ADC_GetValue(&hadc1);
 		HAL_ADC_Stop(&hadc1);
 

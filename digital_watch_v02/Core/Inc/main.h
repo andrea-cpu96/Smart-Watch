@@ -72,6 +72,7 @@ extern ADC_HandleTypeDef hadc1;
 
 /* Exported functions prototypes ---------------------------------------------*/
 void SystemClock_Config(void);
+void MX_ADC1_Init(void);
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */

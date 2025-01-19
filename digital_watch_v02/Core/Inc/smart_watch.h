@@ -21,6 +21,10 @@
 //#define OPT2
 //#define OPT3
 
+/* POWER MANAGEMENT SETTINGS */
+
+#define ENABLE_BATTERY_MON
+
 /* MJPEG SETTINGS */
 
 #define MJPEG_VID_BUFFER_SIZE 		((uint32_t)(1024 *50))
@@ -57,7 +61,7 @@
 
 #define RESET_ITER_NUM				30
 
-#define HIGH_SIDE_R					1000.0
+#define HIGH_SIDE_R					4300.0
 #define LOW_SIDE_R					8200.0
 #define REVERT_VOLTAGE_DIV(v_read)	( ( ( LOW_SIDE_R + HIGH_SIDE_R ) / LOW_SIDE_R ) * v_read )
 #define BATTERY_THRESH				3.5
