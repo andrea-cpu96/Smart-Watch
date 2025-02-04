@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 
-#define OFFSET_FACTOR					0.5
+#define OFFSET_FACTOR					0.341 // ( 1 / 3 ): 1 min every 3 days
 #define MAX_ATTEMPTS_NUM				10
 #define MAX_ITERATIONS_NUM				1000000
 
@@ -1025,7 +1025,6 @@ static int clock_setting(void)
 
 				time.first_day = sDate.Date;
 				time.first_month = sDate.Month;
-				time.minutes_offs = 0;
 
 				video.isfirstFrame = 1;
 
@@ -1454,7 +1453,7 @@ static void resume_time(void)
 {
 
 	RTC_DateTypeDef sDate = {0};
-	uint16_t day_diff = 0;
+	uint16_t days_elapsed = 0;
 
 
 	HAL_RTC_GetTime(&hrtc, &video.time, RTC_FORMAT_BIN);
@@ -1467,34 +1466,36 @@ static void resume_time(void)
 	{
 
 		for(int i = time.first_month ; i < ( time.current_month - 1 ); i++)
-			day_diff += num_of_days_per_month[i];
+			days_elapsed += num_of_days_per_month[i];
 
-		day_diff += ( time.current_day + num_of_days_per_month[time.first_month-1] - time.first_day );
+		days_elapsed += ( time.current_day + num_of_days_per_month[time.first_month-1] - time.first_day );
 
 	}
 	else if(time.current_month < time.first_month)
 	{
 
 		for(int i = time.first_month ; i < 12 ; i++)
-			day_diff += num_of_days_per_month[i];
+			days_elapsed += num_of_days_per_month[i];
 
 		for(int i = 0 ; i < ( time.current_month - 1 ) ; i++)
-			day_diff += num_of_days_per_month[i];
+			days_elapsed += num_of_days_per_month[i];
 
-		day_diff += ( time.current_day + num_of_days_per_month[time.first_month-1] - time.first_day );
+		days_elapsed += ( time.current_day + num_of_days_per_month[time.first_month-1] - time.first_day );
 
 	}
 	else
 	{
 
-		day_diff += abs(time.current_day - time.first_day);
+		days_elapsed += abs(time.current_day - time.first_day);
 
 	}
 
-	time.minutes_offs = ( OFFSET_FACTOR * day_diff );
+	uint32_t time_delay_min = ( OFFSET_FACTOR * days_elapsed );
+	uint32_t hour_offs = ( time_delay_min / 60 );
+	uint32_t min_offs = ( time_delay_min % 60 );
 
-	video.file_idx = ( ( video.time.Hours % 12 ) * 60 );
-	video.file_idx += ( video.time.Minutes + time.minutes_offs );
+	video.file_idx = ( ( ( video.time.Hours + hour_offs ) % 12 ) * 60 );
+	video.file_idx += ( ( video.time.Minutes + min_offs ) % 60 );
 
 }
 

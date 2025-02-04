@@ -1,7 +1,7 @@
-../Core/Src/smart_watch.c:1057:12:file_handler	9
-../Core/Src/smart_watch.c:1349:13:DMA2D_Init.constprop	7
-../Core/Src/smart_watch.c:1057:12:file_handler.constprop	7
-../Core/Src/smart_watch.c:1242:12:show_frame.constprop	11
+../Core/Src/smart_watch.c:1056:12:file_handler	9
+../Core/Src/smart_watch.c:1348:13:DMA2D_Init.constprop	7
+../Core/Src/smart_watch.c:1056:12:file_handler.constprop	7
+../Core/Src/smart_watch.c:1241:12:show_frame.constprop	11
 ../Core/Src/smart_watch.c:82:5:smart_watch_init	2
 ../Core/Src/smart_watch.c:146:5:smart_watch_process	81
 ../Core/Src/smart_watch.c:190:5:lcd_draw	2
@@ -10,5 +10,5 @@
 ../Core/Src/smart_watch.c:579:5:smart_watch_test_mjpeg	13
 ../Core/Src/smart_watch.c:684:5:smart_watch_test_accelerometer	4
 ../Core/Src/smart_watch.c:704:5:smart_watch_test_adc	3
-../Core/Src/smart_watch.c:1557:6:HAL_GPIO_EXTI_Callback	5
-../Core/Src/smart_watch.c:1576:6:HAL_SPI_TxCpltCallback	1
+../Core/Src/smart_watch.c:1558:6:HAL_GPIO_EXTI_Callback	5
+../Core/Src/smart_watch.c:1577:6:HAL_SPI_TxCpltCallback	1
