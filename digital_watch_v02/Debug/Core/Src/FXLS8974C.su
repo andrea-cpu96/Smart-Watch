@@ -1,8 +1,9 @@
-../Core/Src/FXLS8974C.c:224:12:i2c_register_get	40	static
-../Core/Src/FXLS8974C.c:191:12:i2c_register_set.constprop	32	static
+../Core/Src/FXLS8974C.c:241:12:i2c_register_get	40	static
+../Core/Src/FXLS8974C.c:206:12:i2c_register_set.constprop	32	static
 ../Core/Src/FXLS8974C.c:28:5:FXLS8974_I2C_Init	8	static
-../Core/Src/FXLS8974C.c:56:5:FXLS8974_I2C_Configure	32	static
-../Core/Src/FXLS8974C.c:130:5:FXLS8974_I2C_ReadData	16	static
-../Core/Src/FXLS8974C.c:167:5:FXLS8974_I2C_DeInit	24	static
-../Core/Src/FXLS8974C.c:267:6:HAL_I2C_MasterTxCpltCallback	0	static
-../Core/Src/FXLS8974C.c:277:6:HAL_I2C_MasterRxCpltCallback	0	static
+../Core/Src/FXLS8974C.c:56:5:FXLS8974_I2C_Configure	40	static
+../Core/Src/FXLS8974C.c:136:5:FXLS8974_I2C_ReadData	16	static
+../Core/Src/FXLS8974C.c:173:6:FXLS8974_I2C_Read_Int_status	0	static
+../Core/Src/FXLS8974C.c:182:5:FXLS8974_I2C_DeInit	24	static
+../Core/Src/FXLS8974C.c:286:6:HAL_I2C_MasterTxCpltCallback	0	static
+../Core/Src/FXLS8974C.c:296:6:HAL_I2C_MasterRxCpltCallback	0	static

@@ -14,7 +14,7 @@
 
 // Device addresses definitions
 
-#define FXLS8974_DEVICE_ADDRESS_SA0_0 				(0x18) 			// Device Address Value
+#define FXLS8974_DEVICE_ADDRESS_SA0_0 				(0x30) 			// Device Address Value
 #define FXLS8974_DEVICE_ADDRESS_SA0_1 				(0x19)			// Device Address Value
 
 // Device known values definitions
@@ -1135,7 +1135,7 @@ typedef union
 	}b;
 
 	uint8_t arr[2];
-	uint16_t w;
+	int16_t w;
 
 }axis_u;
 
@@ -1178,5 +1178,7 @@ int FXLS8974_I2C_Init(fxls8974_i2c_sensorhandle_t *pSensorHandle, void *instance
 int FXLS8974_I2C_Configure(fxls8974_i2c_sensorhandle_t *pSensorHandle);
 int FXLS8974_I2C_ReadData(fxls8974_i2c_sensorhandle_t *pSensorHandle);
 int FXLS8974_I2C_DeInit(fxls8974_i2c_sensorhandle_t *pSensorHandle);
+
+void FXLS8974_I2C_Read_Int_status(fxls8974_i2c_sensorhandle_t *pSensorHandle);
 
 #endif /* INC_FXLS8974C_H_ */

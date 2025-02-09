@@ -40,14 +40,18 @@ static int clock_normal(void);
 static void depth24To16(doubleFormat *pxArr, uint16_t length, uint8_t bpx);
 static int show_frame(uint32_t frame_num);
 
+static void enable_accel_int(void);
+static void disable_accel_int(void);
+
 static void enable_btn_int(void);
 static void disable_btn_int(void);
 static void clear_btn_int(void);
 
 static void clock_reset_check(void);
-static void resume_time(void);
 
 static int check_battery_status(void);
+static void resume_time(void);
+static uint8_t check_accel_gesture(void);
 
 const uint8_t num_of_days_per_month[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
@@ -77,12 +81,24 @@ volatile time_t time;
 block_t pixel_blocks[BLOCK_NUM];
 #endif
 
+fxls8974_i2c_sensorhandle_t *pAcc_Handle;
+uint8_t acc_int = 0;
+
+uint8_t wake_up = 0;
+
 /************************** GLOBAL FUNCTIONS **************************/
 
 int smart_watch_init(void)
 {
 
 	parameters_reset();
+
+	disable_accel_int();
+
+	pAcc_Handle = (fxls8974_i2c_sensorhandle_t *)get_acc_addr();
+
+	if(FXLS8974_I2C_Configure(pAcc_Handle) != 1)
+		return 0;
 
 #ifdef OPT3
 	for(int i = 0 ; i < BLOCK_NUM ; i++)
@@ -684,15 +700,25 @@ int smart_watch_test_mjpeg(void)
 int smart_watch_test_accelerometer(fxls8974_i2c_sensorhandle_t *pSensorHandle)
 {
 
-	if(FXLS8974_I2C_Configure(pSensorHandle) != 1)
+	if(FXLS8974_I2C_Configure(pAcc_Handle) != 1)
 		return -1;
 
 	HAL_Delay(500);
 
-	for(int i = 0 ; i < 10 ; i++)
+	for(int i = 0 ; i < 100 ; i++)
 	{
 
-		if(FXLS8974_I2C_ReadData(pSensorHandle) != 1)
+		if(wake_up)
+		{
+
+			wake_up = 0;
+			FXLS8974_I2C_Read_Int_status(pAcc_Handle);
+
+		}
+
+		FXLS8974_I2C_Read_Int_status(pAcc_Handle);
+
+		if(FXLS8974_I2C_ReadData(pAcc_Handle) != 1)
 			return -1;
 
 	}
@@ -1142,6 +1168,12 @@ static int battery_management(void)
 #ifdef ENABLE_BATTERY_MON
 				HAL_ADC_DeInit(&hadc1);
 #endif
+				enable_accel_int();
+				enable_btn_int();
+
+				acc_int = 0;
+				wake_up = 0;
+
 				HAL_SuspendTick();
 
 				__disable_irq();
@@ -1158,10 +1190,16 @@ static int battery_management(void)
 #ifdef ENABLE_BATTERY_MON
 				MX_ADC1_Init();
 
-			}while(check_battery_status() == BATTERY_LOW);
+				if(acc_int)
+					wake_up = check_accel_gesture();
+
+			}while(( check_battery_status() == BATTERY_LOW ) || !wake_up);
 #else
 			}while(0);
 #endif
+
+			disable_accel_int();
+			disable_btn_int();
 
 			GC9A01_Init();
 
@@ -1449,6 +1487,21 @@ static void SD_Initialize(void)
 
 }
 
+static uint8_t check_accel_gesture(void)
+{
+
+	// Wait some time to filter spurious interrupts
+	HAL_Delay(1000);
+
+	// Check if still active
+	if(!HAL_GPIO_ReadPin(FXLS8974CF_INT_Port, FXLS8974CF_INT_Pin))
+		// Signal the accelerometer interrupt
+		return 1;
+	else
+		return 0;
+
+}
+
 static void resume_time(void)
 {
 
@@ -1515,6 +1568,8 @@ static void clock_reset_check(void)
 
 		count = 0;
 
+		disable_btn_int();
+
 		video.video_mode = SETTING_MODE;
 
 		HAL_Delay(300);
@@ -1523,6 +1578,20 @@ static void clock_reset_check(void)
 		file_handler(1);
 
 	}
+
+}
+
+static void enable_accel_int(void)
+{
+
+	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+}
+
+static void disable_accel_int(void)
+{
+
+	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 
 }
 
@@ -1558,15 +1627,31 @@ static void clear_btn_int(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 
-	if(video.video_mode == SETTING_MODE)
+	if(!HAL_GPIO_ReadPin(FXLS8974CF_INT_Port, FXLS8974CF_INT_Pin))
 	{
 
-		if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
-			btn_status = BTN_PLUS;
-		else if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
-			btn_status = BTN_SET;
-		else if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
-			btn_status = BTN_MINUS;
+		// Signal accelerometer interrupt
+
+		acc_int = 1;
+
+	}
+	else
+	{
+
+		if(video.video_mode == SETTING_MODE)
+		{
+
+			if(!HAL_GPIO_ReadPin(PLUS_BTN_GPIO_Port, PLUS_BTN_Pin))
+				btn_status = BTN_PLUS;
+			else if(!HAL_GPIO_ReadPin(SET_BTN_GPIO_Port, SET_BTN_Pin))
+				btn_status = BTN_SET;
+			else if(!HAL_GPIO_ReadPin(MINUS_BTN_GPIO_Port, MINUS_BTN_Pin))
+				btn_status = BTN_MINUS;
+
+		}
+
+		acc_int = 0;
+		wake_up = 1;
 
 		disable_btn_int();
 

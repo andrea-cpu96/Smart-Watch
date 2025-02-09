@@ -57,7 +57,7 @@ JPEG_ConfTypeDef JPEG_Info;
 RTC_HandleTypeDef hrtc;
 I2C_HandleTypeDef hi2c1;
 ADC_HandleTypeDef hadc1;
-fxls8974_i2c_sensorhandle_t pSensorHandle;
+fxls8974_i2c_sensorhandle_t acc_Handle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -133,7 +133,7 @@ int main(void)
   HAL_GPIO_WritePin(GC9A01_BL_GPIO_Port, GC9A01_BL_Pin, RESET);
 
   // Accelerometer init
-  FXLS8974_I2C_Init(&pSensorHandle, &hi2c1, HAL_I2C_Master_Seq_Transmit_IT, HAL_I2C_Master_Seq_Receive_IT, FXLS8974_DEVICE_ADDRESS_SA0_0);
+  FXLS8974_I2C_Init(&acc_Handle, &hi2c1, HAL_I2C_Master_Seq_Transmit_IT, HAL_I2C_Master_Seq_Receive_IT, FXLS8974_DEVICE_ADDRESS_SA0_0);
 
   // Digital watch initialization
   if(smart_watch_init() != OK)
@@ -543,6 +543,13 @@ void MX_ADC1_Init(void)
 
 }
 
+void *get_acc_addr(void)
+{
+
+	return &acc_Handle;
+
+}
+
 /**
   * @brief GPIO Initialization Function
   * @param None
@@ -579,12 +586,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-/* USER CODE BEGIN MX_GPIO_Init_2 */
+  /*Configure GPIO pins : PLUS_BTN_Pin SET_BTN_Pin MINUS_BTN_Pin */
   GPIO_InitStruct.Pin = PLUS_BTN_Pin|SET_BTN_Pin|MINUS_BTN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : FXLS8974CF_INT_Pin */
+  GPIO_InitStruct.Pin = FXLS8974CF_INT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(FXLS8974CF_INT_Port, &GPIO_InitStruct);
+
+  /* Enable interrupts on buttons */
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
@@ -594,7 +608,10 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI2_IRQn);
 
-/* USER CODE END MX_GPIO_Init_2 */
+  /* Enable interrupts from accelerometer */
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
@@ -625,7 +642,7 @@ static int test_process(void)
 
 	 if(TEST_ACCELEROMETER)
 		 /* IN PROGRESS */
-		 pass.mjpeg_pass = (TEST_STATUS_t)smart_watch_test_accelerometer(&pSensorHandle);
+		 pass.mjpeg_pass = (TEST_STATUS_t)smart_watch_test_accelerometer(&acc_Handle);
 	 else
 		 pass.mjpeg_pass = NA;
 

@@ -42,7 +42,7 @@ int FXLS8974_I2C_Init(fxls8974_i2c_sensorhandle_t *pSensorHandle, void *instance
 
     // Read and store the device's WHO_AM_I
     status = i2c_register_get(pSensorHandle, FXLS8974_WHO_AM_I, &pSensorHandle->data_reg);
-    if(HAL_OK != status)
+    if(1 != status)
         return 0;
 
     whoami = pSensorHandle->data_reg;
@@ -68,64 +68,70 @@ int FXLS8974_I2C_Configure(fxls8974_i2c_sensorhandle_t *pSensorHandle)
     if(1 != status)
         return 0;
 
-    // Set Full-scale range as 4G
-    status = i2c_register_set(pSensorHandle, FXLS8974_SENS_CONFIG1, FXLS8974_SENS_CONFIG1_FSR_4G, FXLS8974_SENS_CONFIG1_FSR_MASK, 0);
-    if(1 != status)
-        return 0;
-
     // Set Wake ODR as 100Hz & Sleep Mode ODR as 100Hz
     status = i2c_register_set(pSensorHandle, FXLS8974_SENS_CONFIG3, ( FXLS8974_SENS_CONFIG3_WAKE_ODR_100HZ | FXLS8974_SENS_CONFIG3_SLEEP_ODR_100HZ ), ( FXLS8974_SENS_CONFIG3_WAKE_ODR_MASK | FXLS8974_SENS_CONFIG3_SLEEP_ODR_MASK ), 0);
     if(1 != status)
         return 0;
 
     // Enable SDCD OT for only X axis and outside-thresholds event latch disabled
-	status = i2c_register_set(pSensorHandle, FXLS8974_SDCD_CONFIG1, FXLS8974_SDCD_CONFIG1_X_OT_EN_EN, FXLS8974_SDCD_CONFIG1_X_OT_EN_MASK, 0);
-	if(1 != status)
-		return 0;
+    status = i2c_register_set(pSensorHandle, FXLS8974_SDCD_CONFIG1, FXLS8974_SDCD_CONFIG1_Y_OT_EN_EN, FXLS8974_SDCD_CONFIG1_Y_OT_EN_MASK, 0);
+    if(1 != status)
+        return 0;
 
-	// Enable SDCD function, Enable Absolute Reference Mode and set OT debounce counter to clear immediately when threshold criteria is false
-	status = i2c_register_set(pSensorHandle, FXLS8974_SDCD_CONFIG2, ( FXLS8974_SDCD_CONFIG2_SDCD_EN_EN | FXLS8974_SDCD_CONFIG2_REF_UPDM_FIXED_VAL | FXLS8974_SDCD_CONFIG2_OT_DBCTM_CLEARED ), ( FXLS8974_SDCD_CONFIG2_SDCD_EN_MASK | FXLS8974_SDCD_CONFIG2_REF_UPDM_MASK | FXLS8974_SDCD_CONFIG2_OT_DBCTM_MASK ), 0);
-	if(1 != status)
-		return 0;
+    // Enable SDCD function, Enable Absolute Reference Mode and set OT debounce counter to clear immediately when threshold criteria is false
+    status = i2c_register_set(pSensorHandle, FXLS8974_SDCD_CONFIG2, ( FXLS8974_SDCD_CONFIG2_SDCD_EN_EN | FXLS8974_SDCD_CONFIG2_REF_UPDM_FIXED_VAL | FXLS8974_SDCD_CONFIG2_OT_DBCTM_CLEARED ), ( FXLS8974_SDCD_CONFIG2_SDCD_EN_MASK | FXLS8974_SDCD_CONFIG2_REF_UPDM_MASK | FXLS8974_SDCD_CONFIG2_OT_DBCTM_MASK ), 0);
+    if(1 != status)
+        return 0;
 
-	// Set the SDCD_OT debounce count to 6
-	status = i2c_register_set(pSensorHandle, FXLS8974_SDCD_OT_DBCNT, 0x06, 0xff, 0);
-	if(1 != status)
-		return 0;
+    // Set the SDCD_OT debounce count to 6
+    status = i2c_register_set(pSensorHandle, FXLS8974_SDCD_OT_DBCNT, 0x06, 0xff, 0);
+    if(1 != status)
+        return 0;
 
-	// Set the SDCD lower and upper thresholds to +/-2.5g
-	status = i2c_register_set(pSensorHandle, FXLS8974_SDCD_LTHS_LSB, 0xfe, 0xff, 0);
-	status &= i2c_register_set(pSensorHandle, FXLS8974_SDCD_LTHS_MSB, 0xfa, 0xff, 0);
-	status &= i2c_register_set(pSensorHandle, FXLS8974_SDCD_UTHS_LSB, 0x02, 0xff, 0);
-	status &= i2c_register_set(pSensorHandle, FXLS8974_SDCD_UTHS_MSB, 0x05, 0xff, 0);
-	if(1 != status)
-		return 0;
+    // Set the SDCD lower and upper thresholds to +/-1.2g
+    status = i2c_register_set(pSensorHandle, FXLS8974_SDCD_LTHS_LSB, 0x00, 0xff, 0);
+    status &= i2c_register_set(pSensorHandle, FXLS8974_SDCD_LTHS_MSB, 0x03, 0xff, 0);
+    status &= i2c_register_set(pSensorHandle, FXLS8974_SDCD_UTHS_LSB, 0x00, 0xff, 0);
+    status &= i2c_register_set(pSensorHandle, FXLS8974_SDCD_UTHS_MSB, 0x05, 0xff, 0);
+    if(1 != status)
+        return 0;
 
-	// Enable SDCD outside of thresholds event Auto-WAKE/SLEEP transition source enable
-	status = i2c_register_set(pSensorHandle, FXLS8974_SENS_CONFIG4, ( FXLS8974_SENS_CONFIG4_WK_SDCD_OT_EN | FXLS8974_SENS_CONFIG4_INT_POL_ACT_HIGH ), ( FXLS8974_SENS_CONFIG4_WK_SDCD_WT_MASK | FXLS8974_SENS_CONFIG4_INT_POL_MASK ), 0);
-	if(1 != status)
-		return 0;
+    // Enable SDCD outside of thresholds event Auto-WAKE/SLEEP transition source enable
+    status = i2c_register_set(pSensorHandle, FXLS8974_SENS_CONFIG4, ( FXLS8974_SENS_CONFIG4_INT_POL_ACT_HIGH ), ( FXLS8974_SENS_CONFIG4_INT_POL_MASK ), 0);
+    if(1 != status)
+        return 0;
 
-	// Set the ASLP count to 5sec
-	status = i2c_register_set(pSensorHandle, FXLS8974_ASLP_COUNT_LSB, 0x3f, 0xff, 0);
-	status &= i2c_register_set(pSensorHandle, FXLS8974_ASLP_COUNT_MSB, 0x02, 0xff, 0);
-	if(1 != status)
-		return 0;
+    // Set the ASLP count to 5sec
+    status = i2c_register_set(pSensorHandle, FXLS8974_ASLP_COUNT_LSB, 0x3f, 0xff, 0);
+    status &= i2c_register_set(pSensorHandle, FXLS8974_ASLP_COUNT_MSB, 0x02, 0xff, 0);
+    if(1 != status)
+        return 0;
 
     // Enable Interrupts for WAKE mode
-	status = i2c_register_set(pSensorHandle, FXLS8974_INT_EN, FXLS8974_INT_EN_WAKE_OUT_EN_EN, FXLS8974_INT_EN_WAKE_OUT_EN_MASK, 0);
-	status &= i2c_register_set(pSensorHandle, FXLS8974_INT_PIN_SEL, FXLS8974_INT_PIN_SEL_WK_OUT_INT2_DIS, FXLS8974_INT_PIN_SEL_WK_OUT_INT2_MASK, 0);
-	if(1 != status)
-		return 0;
+    //status = i2c_register_set(pSensorHandle, FXLS8974_INT_EN, FXLS8974_INT_EN_WAKE_OUT_EN_EN, FXLS8974_INT_EN_WAKE_OUT_EN_MASK, 0);
+    //status &= i2c_register_set(pSensorHandle, FXLS8974_INT_PIN_SEL, FXLS8974_INT_PIN_SEL_WK_OUT_INT2_DIS, FXLS8974_INT_PIN_SEL_WK_OUT_INT2_MASK, 0);
+    if(1 != status)
+        return 0;
+
+    // Configure INT1 pin to capture the SDCD out-of-threshold event
+    //status = i2c_register_set(pSensorHandle, FXLS8974_INT_PIN_SEL, FXLS8974_INT_PIN_SEL_WK_OUT_INT2_DIS, FXLS8974_INT_PIN_SEL_WK_OUT_INT2_MASK, 0);
+    if(1 != status)
+        return 0;
+
+    // Enable Interrupt for SDCD out-of-threshold event
+    status = i2c_register_set(pSensorHandle, FXLS8974_INT_EN, FXLS8974_INT_EN_SDCD_OT_EN_EN, FXLS8974_INT_EN_SDCD_OT_EN_MASK, 0);
+    if(1 != status)
+        return 0;
 
     // Put the device into active mode and ready for reading data
-	status = i2c_register_set(pSensorHandle, FXLS8974_SENS_CONFIG1, FXLS8974_SENS_CONFIG1_ACTIVE_ACTIVE, FXLS8974_SENS_CONFIG1_ACTIVE_MASK, 0);
-	if(1 != status)
-		return 0;
+    status = i2c_register_set(pSensorHandle, FXLS8974_SENS_CONFIG1, FXLS8974_SENS_CONFIG1_ACTIVE_ACTIVE, FXLS8974_SENS_CONFIG1_ACTIVE_MASK, 0);
+    if(1 != status)
+        return 0;
 
     return 1;
 
 }
+
 
 int FXLS8974_I2C_ReadData(fxls8974_i2c_sensorhandle_t *pSensorHandle)
 {
@@ -159,6 +165,15 @@ int FXLS8974_I2C_ReadData(fxls8974_i2c_sensorhandle_t *pSensorHandle)
     status &= i2c_register_get(pSensorHandle, FXLS8974_OUT_Z_MSB, &pSensorHandle->axis_data.z.arr[1]);
 	if(1 != status)
 		return 0;
+
+    return 1;
+
+}
+
+void FXLS8974_I2C_Read_Int_status(fxls8974_i2c_sensorhandle_t *pSensorHandle)
+{
+
+    i2c_register_get(pSensorHandle, FXLS8974_SDCD_INT_SRC1, &pSensorHandle->data_reg);
 
     return 1;
 
@@ -217,6 +232,8 @@ static int i2c_register_set(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
 
     i2c_tx_cplt = 0;
 
+    HAL_Delay(100);
+
     return 1;
 
 }
@@ -257,6 +274,8 @@ static int i2c_register_get(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
     }
 
     i2c_rx_cplt = 0;
+
+    HAL_Delay(100);
 
     return 1;
 

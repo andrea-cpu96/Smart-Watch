@@ -62,6 +62,9 @@ extern ADC_HandleTypeDef hadc1;
 #define GC9A01_BL_Pin GPIO_PIN_10
 #define GC9A01_BL_GPIO_Port GPIOB
 
+#define FXLS8974CF_INT_Pin GPIO_PIN_5
+#define FXLS8974CF_INT_Port GPIOB
+
 #define PLUS_BTN_Pin GPIO_PIN_2
 #define PLUS_BTN_GPIO_Port GPIOC
 #define SET_BTN_Pin GPIO_PIN_1
@@ -98,6 +101,8 @@ typedef union
 /* USER CODE BEGIN Private defines */
 #define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
 /* USER CODE END Private defines */
+
+void *get_acc_addr(void);
 
 #ifdef __cplusplus
 }
