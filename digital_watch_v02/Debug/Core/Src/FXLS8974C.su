@@ -5,5 +5,5 @@
 ../Core/Src/FXLS8974C.c:136:5:FXLS8974_I2C_ReadData	16	static
 ../Core/Src/FXLS8974C.c:173:6:FXLS8974_I2C_Read_Int_status	0	static
 ../Core/Src/FXLS8974C.c:182:5:FXLS8974_I2C_DeInit	24	static
-../Core/Src/FXLS8974C.c:286:6:HAL_I2C_MasterTxCpltCallback	0	static
-../Core/Src/FXLS8974C.c:296:6:HAL_I2C_MasterRxCpltCallback	0	static
+../Core/Src/FXLS8974C.c:287:6:HAL_I2C_MasterTxCpltCallback	0	static
+../Core/Src/FXLS8974C.c:297:6:HAL_I2C_MasterRxCpltCallback	0	static

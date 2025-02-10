@@ -220,7 +220,7 @@ static int i2c_register_set(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
     status = pSensorHandle->pI2C_data_Tx(pSensorHandle->pI2C_instance, pSensorHandle->slaveAddress, data_buff, 2, I2C_LAST_FRAME);
     if(HAL_OK != status)
         return 0;
-
+/*
     while(i2c_tx_cplt == 0)
     {
 
@@ -229,7 +229,7 @@ static int i2c_register_set(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
     		return 0;
 
     }
-
+*/
     i2c_tx_cplt = 0;
 
     HAL_Delay(100);
@@ -263,7 +263,8 @@ static int i2c_register_get(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
     if(HAL_OK != status)
         return 0;
 
-    count_iter = 0;
+    //count_iter = 0;
+    /*
     while(i2c_rx_cplt == 0)
     {
 
@@ -272,7 +273,7 @@ static int i2c_register_get(fxls8974_i2c_sensorhandle_t *pSensorHandle, uint8_t 
     		return 0;
 
     }
-
+     */
     i2c_rx_cplt = 0;
 
     HAL_Delay(100);
