@@ -1,0 +1,392 @@
+\doxysection{Core/\+Inc/\+AVI\+\_\+parser.h File Reference}
+\hypertarget{_a_v_i__parser_8h}{}\label{_a_v_i__parser_8h}\index{Core/Inc/AVI\_parser.h@{Core/Inc/AVI\_parser.h}}
+{\ttfamily \#include "{}ff.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_a_v_i___h_e_a_d_e_r}{AVI\+\_\+\+HEADER}}
+\item 
+struct \mbox{\hyperlink{struct_f_r_a_m_e___h_e_a_d_e_r}{FRAME\+\_\+\+HEADER}}
+\item 
+struct \mbox{\hyperlink{struct_l_i_s_t___h_e_a_d_e_r}{LIST\+\_\+\+HEADER}}
+\item 
+struct \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r}{AVIH\+\_\+\+HEADER}}
+\item 
+struct \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r}{STRH\+\_\+\+HEADER}}
+\item 
+struct \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r}{BMP\+\_\+\+HEADER}}
+\item 
+struct \mbox{\hyperlink{struct_a_v_i_r_g_b_q_u_a_d}{AVIRGBQUAD}}
+\item 
+struct \mbox{\hyperlink{struct_s_t_r_f___b_m_p_h_e_a_d_e_r}{STRF\+\_\+\+BMPHEADER}}
+\item 
+struct \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r}{STRF\+\_\+\+WAVHEADER}}
+\item 
+struct \mbox{\hyperlink{struct_a_v_i___i_n_f_o}{AVI\+\_\+\+INFO}}
+\item 
+struct \mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a03377237c4d57c9cb82cc54ac49c97ce}{AVI\+\_\+\+RIFF\+\_\+\+ID}}~0x46464952
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_ac8d57ae2af949561024c6fe11ca78652}{AVI\+\_\+\+AVI\+\_\+\+ID}}~0x20495641
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a9bebb2641290744fd9727680c8deb982}{AVI\+\_\+\+LIST\+\_\+\+ID}}~0x5453494C
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_aca2863190319f6384479f9d11c785e6f}{AVI\+\_\+\+HDRL\+\_\+\+ID}}~0x6\+C726468
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_ab3aeab58fbfd7b311dd03b05c7de0d43}{AVI\+\_\+\+MOVI\+\_\+\+ID}}~0x69766\+F6D
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_aeb199d3056da792070cefc8f90960ef7}{AVI\+\_\+\+STRL\+\_\+\+ID}}~0x6\+C727473
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a621ef391c6f5335f7aeb983ee25c5978}{AVI\+\_\+\+AVIH\+\_\+\+ID}}~0x68697661
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_ab996663de5ac6f1ce4148805a5574535}{AVI\+\_\+\+STRH\+\_\+\+ID}}~0x68727473
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_afb9f262e20bc4f8acce7e9b1dc156a0d}{AVI\+\_\+\+STRF\+\_\+\+ID}}~0x66727473
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a395800a45cbdcdb6cff12d21df2f6a04}{AVI\+\_\+\+STRD\+\_\+\+ID}}~0x64727473
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_acac014172ff77494de8996743f4f10a2}{AVI\+\_\+\+VIDS\+\_\+\+STREAM}}~0x73646976
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a707749dc990c3b7b7bdb691d630fea3d}{AVI\+\_\+\+AUDS\+\_\+\+STREAM}}~0x73647561
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a3ece9e152e3d837778a54203fb7477da}{AVI\+\_\+\+VIDS\+\_\+\+FLAG}}~0x6463
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a22a862f67b94bbd8914549bba40d291f}{AVI\+\_\+\+AUDS\+\_\+\+FLAG}}~0x7762
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a43a444b7146af139af25d342748bdd51}{AVI\+\_\+\+FORMAT\+\_\+\+MJPG}}~0x47504\+A4D
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_ac6bc353d517b59ab12bfaab555905b9e}{AVI\+\_\+\+END\+\_\+\+FILE}}~0
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_abbc66fad25a7c1282b10065ebcc1322c}{AVI\+\_\+\+VIDEO\+\_\+\+FRAME}}~1
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_af99852c4e46f35d99f8ed4115b50bd4e}{AVI\+\_\+\+AUDIO\+\_\+\+FRAME}}~2
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a2a2e8a28507368a17ffcca9669116ef4}{AVI\+\_\+\+ERROR}}~3
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a45de33db5041bd7eb9c554e0babca052}{AVI\+\_\+\+MAKEWORD}}(ptr)
+\item 
+\#define \mbox{\hyperlink{_a_v_i__parser_8h_a5eaa5195a9bf33a933e0a22aa4c25dc8}{AVI\+\_\+\+MAKEDWORD}}(ptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}} \{ \newline
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a55b5c2e0d0717e8a2ee2d4d83c04d74e}{AVI\+\_\+\+OK}} = 0
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7ab98ace18bf39ea529638552820d5f0a3}{AVI\+\_\+\+RIFF\+\_\+\+ERR}}
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7aef72920fc5a46998843b2bb6db98a950}{AVI\+\_\+\+AVI\+\_\+\+ERR}}
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a8cb95e4c0f7849c99391a3265366d380}{AVI\+\_\+\+LIST\+\_\+\+ERR}}
+, \newline
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a7f65ba87da71533d3ba92c01e614a68d}{AVI\+\_\+\+HDRL\+\_\+\+ERR}}
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a58c9bc48cd88d65ef12e52999894282a}{AVI\+\_\+\+AVIH\+\_\+\+ERR}}
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7aa32440838bbb44cabe1cb7929465deb9}{AVI\+\_\+\+STRL\+\_\+\+ERR}}
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a9902b5dbcd08b2e5e1d5f2b28e7bcc78}{AVI\+\_\+\+STRH\+\_\+\+ERR}}
+, \newline
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7af3ad92c668bf1f78d6e19c0bc1fc1a41}{AVI\+\_\+\+STRF\+\_\+\+ERR}}
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7ae7361a4b52200de3bc19d0e9a6e7e813}{AVI\+\_\+\+MOVI\+\_\+\+ERR}}
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a49344f7be05e2cc0a057dedc973db30e}{AVI\+\_\+\+FORMAT\+\_\+\+ERR}}
+, \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7abd8fea3fd943c00964f90b652d4a5bd8}{AVI\+\_\+\+STREAM\+\_\+\+ERR}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_a_v_i__parser_8h_abd26a4714ac88bce44d21404922c2ee8}{AVI\+\_\+\+Parser\+Init}} (\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}pavi, FIL \texorpdfstring{$\ast$}{*}file, uint8\+\_\+t \texorpdfstring{$\ast$}{*}p\+Video\+Buffer, uint32\+\_\+t Video\+Buffer\+Size, uint8\+\_\+t \texorpdfstring{$\ast$}{*}p\+Audio\+Buffer, uint32\+\_\+t Audio\+Buffer\+Size)
+\begin{DoxyCompactList}\small\item\em parse AVI file header \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{_a_v_i__parser_8h_a28ff6cd5d018c597613e0d2a61f33ef3}{AVI\+\_\+\+Get\+Frame}} (\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}pavi, FIL \texorpdfstring{$\ast$}{*}file, uint8\+\_\+t skip\+Flag)
+\begin{DoxyCompactList}\small\item\em Get AVI frame. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}} \mbox{\hyperlink{_a_v_i__parser_8h_a5bb7651423b20c3f2cca4b917316f0a8}{\+\_\+\+\_\+\+AVI\+\_\+\+Get\+Stream\+Info}} (\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}pavi, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf)
+\begin{DoxyCompactList}\small\item\em Get AVI file information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_a_v_i__parser_8h_aca42f7778287b9a79affe540ce98d0f5}{frame\+\_\+buffer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_a_v_i__parser_8h_af99852c4e46f35d99f8ed4115b50bd4e}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_AUDIO\_FRAME@{AVI\_AUDIO\_FRAME}}
+\index{AVI\_AUDIO\_FRAME@{AVI\_AUDIO\_FRAME}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_AUDIO\_FRAME}{AVI\_AUDIO\_FRAME}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_af99852c4e46f35d99f8ed4115b50bd4e} 
+\#define AVI\+\_\+\+AUDIO\+\_\+\+FRAME~2}
+
+\Hypertarget{_a_v_i__parser_8h_a22a862f67b94bbd8914549bba40d291f}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_AUDS\_FLAG@{AVI\_AUDS\_FLAG}}
+\index{AVI\_AUDS\_FLAG@{AVI\_AUDS\_FLAG}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_AUDS\_FLAG}{AVI\_AUDS\_FLAG}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a22a862f67b94bbd8914549bba40d291f} 
+\#define AVI\+\_\+\+AUDS\+\_\+\+FLAG~0x7762}
+
+\Hypertarget{_a_v_i__parser_8h_a707749dc990c3b7b7bdb691d630fea3d}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_AUDS\_STREAM@{AVI\_AUDS\_STREAM}}
+\index{AVI\_AUDS\_STREAM@{AVI\_AUDS\_STREAM}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_AUDS\_STREAM}{AVI\_AUDS\_STREAM}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a707749dc990c3b7b7bdb691d630fea3d} 
+\#define AVI\+\_\+\+AUDS\+\_\+\+STREAM~0x73647561}
+
+\Hypertarget{_a_v_i__parser_8h_ac8d57ae2af949561024c6fe11ca78652}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_AVI\_ID@{AVI\_AVI\_ID}}
+\index{AVI\_AVI\_ID@{AVI\_AVI\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_AVI\_ID}{AVI\_AVI\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_ac8d57ae2af949561024c6fe11ca78652} 
+\#define AVI\+\_\+\+AVI\+\_\+\+ID~0x20495641}
+
+\Hypertarget{_a_v_i__parser_8h_a621ef391c6f5335f7aeb983ee25c5978}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_AVIH\_ID@{AVI\_AVIH\_ID}}
+\index{AVI\_AVIH\_ID@{AVI\_AVIH\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_AVIH\_ID}{AVI\_AVIH\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a621ef391c6f5335f7aeb983ee25c5978} 
+\#define AVI\+\_\+\+AVIH\+\_\+\+ID~0x68697661}
+
+\Hypertarget{_a_v_i__parser_8h_ac6bc353d517b59ab12bfaab555905b9e}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_END\_FILE@{AVI\_END\_FILE}}
+\index{AVI\_END\_FILE@{AVI\_END\_FILE}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_END\_FILE}{AVI\_END\_FILE}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_ac6bc353d517b59ab12bfaab555905b9e} 
+\#define AVI\+\_\+\+END\+\_\+\+FILE~0}
+
+\Hypertarget{_a_v_i__parser_8h_a2a2e8a28507368a17ffcca9669116ef4}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_ERROR@{AVI\_ERROR}}
+\index{AVI\_ERROR@{AVI\_ERROR}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_ERROR}{AVI\_ERROR}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a2a2e8a28507368a17ffcca9669116ef4} 
+\#define AVI\+\_\+\+ERROR~3}
+
+\Hypertarget{_a_v_i__parser_8h_a43a444b7146af139af25d342748bdd51}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_FORMAT\_MJPG@{AVI\_FORMAT\_MJPG}}
+\index{AVI\_FORMAT\_MJPG@{AVI\_FORMAT\_MJPG}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_FORMAT\_MJPG}{AVI\_FORMAT\_MJPG}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a43a444b7146af139af25d342748bdd51} 
+\#define AVI\+\_\+\+FORMAT\+\_\+\+MJPG~0x47504\+A4D}
+
+\Hypertarget{_a_v_i__parser_8h_aca2863190319f6384479f9d11c785e6f}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_HDRL\_ID@{AVI\_HDRL\_ID}}
+\index{AVI\_HDRL\_ID@{AVI\_HDRL\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_HDRL\_ID}{AVI\_HDRL\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_aca2863190319f6384479f9d11c785e6f} 
+\#define AVI\+\_\+\+HDRL\+\_\+\+ID~0x6\+C726468}
+
+\Hypertarget{_a_v_i__parser_8h_a9bebb2641290744fd9727680c8deb982}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_LIST\_ID@{AVI\_LIST\_ID}}
+\index{AVI\_LIST\_ID@{AVI\_LIST\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_LIST\_ID}{AVI\_LIST\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a9bebb2641290744fd9727680c8deb982} 
+\#define AVI\+\_\+\+LIST\+\_\+\+ID~0x5453494C}
+
+\Hypertarget{_a_v_i__parser_8h_a5eaa5195a9bf33a933e0a22aa4c25dc8}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_MAKEDWORD@{AVI\_MAKEDWORD}}
+\index{AVI\_MAKEDWORD@{AVI\_MAKEDWORD}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_MAKEDWORD}{AVI\_MAKEDWORD}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a5eaa5195a9bf33a933e0a22aa4c25dc8} 
+\#define AVI\+\_\+\+MAKEDWORD(\begin{DoxyParamCaption}\item[{}]{ptr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (uint32\_t)(((uint16\_t)*(uint8\_t\ *)(ptr)\ |\ (((uint16\_t)*(uint8\_t\ *)(ptr\ +\ 1))\ <<\ 8)\ |\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint16\_t)*(uint8\_t\ *)(ptr\ +\ 2))\ <<\ 16)\ |\ (((uint16\_t)*(uint8\_t\ *)(ptr\ +\ 3))\ <<\ 24)))}
+
+\end{DoxyCode}
+\Hypertarget{_a_v_i__parser_8h_a45de33db5041bd7eb9c554e0babca052}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_MAKEWORD@{AVI\_MAKEWORD}}
+\index{AVI\_MAKEWORD@{AVI\_MAKEWORD}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_MAKEWORD}{AVI\_MAKEWORD}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a45de33db5041bd7eb9c554e0babca052} 
+\#define AVI\+\_\+\+MAKEWORD(\begin{DoxyParamCaption}\item[{}]{ptr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(uint16\_t)(((uint16\_t)*((uint8\_t\ *)(ptr))\ <<\ 8)\ |\ (uint16\_t)*(uint8\_t\ *)((ptr)\ +\ 1))}
+
+\end{DoxyCode}
+\Hypertarget{_a_v_i__parser_8h_ab3aeab58fbfd7b311dd03b05c7de0d43}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_MOVI\_ID@{AVI\_MOVI\_ID}}
+\index{AVI\_MOVI\_ID@{AVI\_MOVI\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_MOVI\_ID}{AVI\_MOVI\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_ab3aeab58fbfd7b311dd03b05c7de0d43} 
+\#define AVI\+\_\+\+MOVI\+\_\+\+ID~0x69766\+F6D}
+
+\Hypertarget{_a_v_i__parser_8h_a03377237c4d57c9cb82cc54ac49c97ce}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_RIFF\_ID@{AVI\_RIFF\_ID}}
+\index{AVI\_RIFF\_ID@{AVI\_RIFF\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_RIFF\_ID}{AVI\_RIFF\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a03377237c4d57c9cb82cc54ac49c97ce} 
+\#define AVI\+\_\+\+RIFF\+\_\+\+ID~0x46464952}
+
+\Hypertarget{_a_v_i__parser_8h_a395800a45cbdcdb6cff12d21df2f6a04}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_STRD\_ID@{AVI\_STRD\_ID}}
+\index{AVI\_STRD\_ID@{AVI\_STRD\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_STRD\_ID}{AVI\_STRD\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a395800a45cbdcdb6cff12d21df2f6a04} 
+\#define AVI\+\_\+\+STRD\+\_\+\+ID~0x64727473}
+
+\Hypertarget{_a_v_i__parser_8h_afb9f262e20bc4f8acce7e9b1dc156a0d}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_STRF\_ID@{AVI\_STRF\_ID}}
+\index{AVI\_STRF\_ID@{AVI\_STRF\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_STRF\_ID}{AVI\_STRF\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_afb9f262e20bc4f8acce7e9b1dc156a0d} 
+\#define AVI\+\_\+\+STRF\+\_\+\+ID~0x66727473}
+
+\Hypertarget{_a_v_i__parser_8h_ab996663de5ac6f1ce4148805a5574535}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_STRH\_ID@{AVI\_STRH\_ID}}
+\index{AVI\_STRH\_ID@{AVI\_STRH\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_STRH\_ID}{AVI\_STRH\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_ab996663de5ac6f1ce4148805a5574535} 
+\#define AVI\+\_\+\+STRH\+\_\+\+ID~0x68727473}
+
+\Hypertarget{_a_v_i__parser_8h_aeb199d3056da792070cefc8f90960ef7}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_STRL\_ID@{AVI\_STRL\_ID}}
+\index{AVI\_STRL\_ID@{AVI\_STRL\_ID}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_STRL\_ID}{AVI\_STRL\_ID}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_aeb199d3056da792070cefc8f90960ef7} 
+\#define AVI\+\_\+\+STRL\+\_\+\+ID~0x6\+C727473}
+
+\Hypertarget{_a_v_i__parser_8h_abbc66fad25a7c1282b10065ebcc1322c}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_VIDEO\_FRAME@{AVI\_VIDEO\_FRAME}}
+\index{AVI\_VIDEO\_FRAME@{AVI\_VIDEO\_FRAME}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_VIDEO\_FRAME}{AVI\_VIDEO\_FRAME}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_abbc66fad25a7c1282b10065ebcc1322c} 
+\#define AVI\+\_\+\+VIDEO\+\_\+\+FRAME~1}
+
+\Hypertarget{_a_v_i__parser_8h_a3ece9e152e3d837778a54203fb7477da}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_VIDS\_FLAG@{AVI\_VIDS\_FLAG}}
+\index{AVI\_VIDS\_FLAG@{AVI\_VIDS\_FLAG}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_VIDS\_FLAG}{AVI\_VIDS\_FLAG}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a3ece9e152e3d837778a54203fb7477da} 
+\#define AVI\+\_\+\+VIDS\+\_\+\+FLAG~0x6463}
+
+\Hypertarget{_a_v_i__parser_8h_acac014172ff77494de8996743f4f10a2}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_VIDS\_STREAM@{AVI\_VIDS\_STREAM}}
+\index{AVI\_VIDS\_STREAM@{AVI\_VIDS\_STREAM}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_VIDS\_STREAM}{AVI\_VIDS\_STREAM}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_acac014172ff77494de8996743f4f10a2} 
+\#define AVI\+\_\+\+VIDS\+\_\+\+STREAM~0x73646976}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}\index{AVI\_parser.h@{AVI\_parser.h}!AVISTATUS@{AVISTATUS}}
+\index{AVISTATUS@{AVISTATUS}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVISTATUS}{AVISTATUS}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7} 
+enum \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_OK@{AVI\_OK}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_OK@{AVI\_OK}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a55b5c2e0d0717e8a2ee2d4d83c04d74e}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a55b5c2e0d0717e8a2ee2d4d83c04d74e} 
+AVI\+\_\+\+OK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_RIFF\_ERR@{AVI\_RIFF\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_RIFF\_ERR@{AVI\_RIFF\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7ab98ace18bf39ea529638552820d5f0a3}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7ab98ace18bf39ea529638552820d5f0a3} 
+AVI\+\_\+\+RIFF\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_AVI\_ERR@{AVI\_AVI\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_AVI\_ERR@{AVI\_AVI\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7aef72920fc5a46998843b2bb6db98a950}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7aef72920fc5a46998843b2bb6db98a950} 
+AVI\+\_\+\+AVI\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_LIST\_ERR@{AVI\_LIST\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_LIST\_ERR@{AVI\_LIST\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a8cb95e4c0f7849c99391a3265366d380}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a8cb95e4c0f7849c99391a3265366d380} 
+AVI\+\_\+\+LIST\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_HDRL\_ERR@{AVI\_HDRL\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_HDRL\_ERR@{AVI\_HDRL\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a7f65ba87da71533d3ba92c01e614a68d}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a7f65ba87da71533d3ba92c01e614a68d} 
+AVI\+\_\+\+HDRL\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_AVIH\_ERR@{AVI\_AVIH\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_AVIH\_ERR@{AVI\_AVIH\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a58c9bc48cd88d65ef12e52999894282a}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a58c9bc48cd88d65ef12e52999894282a} 
+AVI\+\_\+\+AVIH\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_STRL\_ERR@{AVI\_STRL\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_STRL\_ERR@{AVI\_STRL\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7aa32440838bbb44cabe1cb7929465deb9}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7aa32440838bbb44cabe1cb7929465deb9} 
+AVI\+\_\+\+STRL\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_STRH\_ERR@{AVI\_STRH\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_STRH\_ERR@{AVI\_STRH\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a9902b5dbcd08b2e5e1d5f2b28e7bcc78}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a9902b5dbcd08b2e5e1d5f2b28e7bcc78} 
+AVI\+\_\+\+STRH\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_STRF\_ERR@{AVI\_STRF\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_STRF\_ERR@{AVI\_STRF\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7af3ad92c668bf1f78d6e19c0bc1fc1a41}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7af3ad92c668bf1f78d6e19c0bc1fc1a41} 
+AVI\+\_\+\+STRF\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_MOVI\_ERR@{AVI\_MOVI\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_MOVI\_ERR@{AVI\_MOVI\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7ae7361a4b52200de3bc19d0e9a6e7e813}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7ae7361a4b52200de3bc19d0e9a6e7e813} 
+AVI\+\_\+\+MOVI\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_FORMAT\_ERR@{AVI\_FORMAT\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_FORMAT\_ERR@{AVI\_FORMAT\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a49344f7be05e2cc0a057dedc973db30e}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a49344f7be05e2cc0a057dedc973db30e} 
+AVI\+\_\+\+FORMAT\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVI\_STREAM\_ERR@{AVI\_STREAM\_ERR}!AVI\_parser.h@{AVI\_parser.h}}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_STREAM\_ERR@{AVI\_STREAM\_ERR}}}\Hypertarget{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7abd8fea3fd943c00964f90b652d4a5bd8}\label{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7abd8fea3fd943c00964f90b652d4a5bd8} 
+AVI\+\_\+\+STREAM\+\_\+\+ERR&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_a_v_i__parser_8h_a5bb7651423b20c3f2cca4b917316f0a8}\index{AVI\_parser.h@{AVI\_parser.h}!\_\_AVI\_GetStreamInfo@{\_\_AVI\_GetStreamInfo}}
+\index{\_\_AVI\_GetStreamInfo@{\_\_AVI\_GetStreamInfo}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{\_\_AVI\_GetStreamInfo()}{\_\_AVI\_GetStreamInfo()}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a5bb7651423b20c3f2cca4b917316f0a8} 
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}} \+\_\+\+\_\+\+AVI\+\_\+\+Get\+Stream\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}}]{pavi}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{}\end{DoxyParamCaption})}
+
+
+
+Get AVI file information. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em havi} & AVI handle \\
+\hline
+{\em buf} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em AVI} & status \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{_a_v_i__parser_8h_a28ff6cd5d018c597613e0d2a61f33ef3}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_GetFrame@{AVI\_GetFrame}}
+\index{AVI\_GetFrame@{AVI\_GetFrame}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_GetFrame()}{AVI\_GetFrame()}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_a28ff6cd5d018c597613e0d2a61f33ef3} 
+uint32\+\_\+t AVI\+\_\+\+Get\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}}]{pavi}{, }\item[{FIL \texorpdfstring{$\ast$}{*}}]{file}{, }\item[{uint8\+\_\+t}]{skip\+Flag}{}\end{DoxyParamCaption})}
+
+
+
+Get AVI frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pavi} & AVI context \\
+\hline
+{\em file} & AVI file \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em type} & of frame (audio frame or video frame ) \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{_a_v_i__parser_8h_abd26a4714ac88bce44d21404922c2ee8}\index{AVI\_parser.h@{AVI\_parser.h}!AVI\_ParserInit@{AVI\_ParserInit}}
+\index{AVI\_ParserInit@{AVI\_ParserInit}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{AVI\_ParserInit()}{AVI\_ParserInit()}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_abd26a4714ac88bce44d21404922c2ee8} 
+uint32\+\_\+t AVI\+\_\+\+Parser\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}}]{pavi}{, }\item[{FIL \texorpdfstring{$\ast$}{*}}]{file}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+Video\+Buffer}{, }\item[{uint32\+\_\+t}]{Video\+Buffer\+Size}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+Audio\+Buffer}{, }\item[{uint32\+\_\+t}]{Audio\+Buffer\+Size}{}\end{DoxyParamCaption})}
+
+
+
+parse AVI file header 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pavi} & AVI context \\
+\hline
+{\em file} & AVI file \\
+\hline
+{\em p\+Video\+Buffer} & \+: video buffer \\
+\hline
+{\em Video\+Buffer\+Size} & video buffer size \\
+\hline
+{\em p\+Audio\+Buffer} & \+: audio buffer \\
+\hline
+{\em Audio\+Buffer\+Size} & audio buffer size \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em AVI} & status (0 \+: no Error, 1\+: Error occurred) \\
+\hline
+\end{DoxyRetVals}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_a_v_i__parser_8h_aca42f7778287b9a79affe540ce98d0f5}\index{AVI\_parser.h@{AVI\_parser.h}!frame\_buffer@{frame\_buffer}}
+\index{frame\_buffer@{frame\_buffer}!AVI\_parser.h@{AVI\_parser.h}}
+\doxysubsubsection{\texorpdfstring{frame\_buffer}{frame\_buffer}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8h_aca42f7778287b9a79affe540ce98d0f5} 
+uint8\+\_\+t\texorpdfstring{$\ast$}{*} frame\+\_\+buffer\hspace{0.3cm}{\ttfamily [extern]}}
+

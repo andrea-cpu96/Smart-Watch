@@ -1,0 +1,57 @@
+\doxysection{arm\+\_\+fir\+\_\+decimate\+\_\+instance\+\_\+q15 Struct Reference}
+\hypertarget{structarm__fir__decimate__instance__q15}{}\label{structarm__fir__decimate__instance__q15}\index{arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}}
+
+
+Instance structure for the Q15 FIR decimator.  
+
+
+
+
+{\ttfamily \#include $<$arm\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structarm__fir__decimate__instance__q15_aad9320284218b3aa378527ea518cf093}{M}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structarm__fir__decimate__instance__q15_ac1e9844488ec717da334fbd4c4f41990}{num\+Taps}}
+\item 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__fir__decimate__instance__q15_a01cacab67e73945e8289075598ede14d}{p\+Coeffs}}
+\item 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__fir__decimate__instance__q15_a3f7b5184bb28853ef401b001df121047}{p\+State}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the Q15 FIR decimator. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structarm__fir__decimate__instance__q15_aad9320284218b3aa378527ea518cf093}\index{arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}!M@{M}}
+\index{M@{M}!arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily \label{structarm__fir__decimate__instance__q15_aad9320284218b3aa378527ea518cf093} 
+uint8\+\_\+t arm\+\_\+fir\+\_\+decimate\+\_\+instance\+\_\+q15\+::M}
+
+decimation factor. \Hypertarget{structarm__fir__decimate__instance__q15_ac1e9844488ec717da334fbd4c4f41990}\index{arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}!numTaps@{numTaps}}
+\index{numTaps@{numTaps}!arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{numTaps}{numTaps}}
+{\footnotesize\ttfamily \label{structarm__fir__decimate__instance__q15_ac1e9844488ec717da334fbd4c4f41990} 
+uint16\+\_\+t arm\+\_\+fir\+\_\+decimate\+\_\+instance\+\_\+q15\+::num\+Taps}
+
+number of coefficients in the filter. \Hypertarget{structarm__fir__decimate__instance__q15_a01cacab67e73945e8289075598ede14d}\index{arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}!pCoeffs@{pCoeffs}}
+\index{pCoeffs@{pCoeffs}!arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pCoeffs}{pCoeffs}}
+{\footnotesize\ttfamily \label{structarm__fir__decimate__instance__q15_a01cacab67e73945e8289075598ede14d} 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+fir\+\_\+decimate\+\_\+instance\+\_\+q15\+::p\+Coeffs}
+
+points to the coefficient array. The array is of length num\+Taps. \Hypertarget{structarm__fir__decimate__instance__q15_a3f7b5184bb28853ef401b001df121047}\index{arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}!pState@{pState}}
+\index{pState@{pState}!arm\_fir\_decimate\_instance\_q15@{arm\_fir\_decimate\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pState}{pState}}
+{\footnotesize\ttfamily \label{structarm__fir__decimate__instance__q15_a3f7b5184bb28853ef401b001df121047} 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+fir\+\_\+decimate\+\_\+instance\+\_\+q15\+::p\+State}
+
+points to the state variable array. The array is of length num\+Taps+block\+Size-\/1. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{arm__math_8h}{arm\+\_\+math.\+h}}\end{DoxyCompactItemize}

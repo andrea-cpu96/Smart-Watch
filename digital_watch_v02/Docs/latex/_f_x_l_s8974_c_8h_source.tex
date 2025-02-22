@@ -1,0 +1,1190 @@
+\doxysection{FXLS8974\+C.\+h}
+\hypertarget{_f_x_l_s8974_c_8h_source}{}\label{_f_x_l_s8974_c_8h_source}\index{Core/Inc/FXLS8974C.h@{Core/Inc/FXLS8974C.h}}
+\mbox{\hyperlink{_f_x_l_s8974_c_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ FXLS8974C.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ \ Created\ on:\ Jan\ 11,\ 2025}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ \ \ \ Author:\ Fato}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ INC\_FXLS8974C\_H\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ INC\_FXLS8974C\_H\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{main_8h}{main.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}stm32h7xx\_hal\_i2c.h"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Device\ addresses\ definitions}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ FXLS8974\_DEVICE\_ADDRESS\_SA0\_0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x30)\ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ Device\ Address\ Value}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ FXLS8974\_DEVICE\_ADDRESS\_SA0\_1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x19)\ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ Device\ Address\ Value}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ Device\ known\ values\ definitions}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ FXLS8974\_WHOAMI\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x86)\ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ Who\ AM\ I\ Value\ of\ FXLS8974CF}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_BUF\_GARE\_ERROR\_NO\ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SYS\_MODE\ -\/\ Not\ Detected}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_BUF\_GARE\_ERROR\_YES\ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ SYS\_MODE\ -\/\ Detected}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_SYS\_MODE\_STANDBY\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SYS\_MODE\ -\/\ Standby\ Mode}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_SYS\_MODE\_WAKE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ SYS\_MODE\ -\/\ Wake\ Mode}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_SYS\_MODE\_SLEEP\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SYS\_MODE\ -\/\ Sleep\ Mode}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_SYS\_MODE\_EXT\_TRIG\ \ \ \ \ \ \ \ \ ((uint8\_t)0x03)\ }\textcolor{comment}{//\ SYS\_MODE\ -\/\ External\ Trigger\ Mode}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_RST\_RST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Trigger\ Reset}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_AXIS\_SEL\_DISABLED\ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Self-\/Test\ function\ is\ disabled}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_AXIS\_SEL\_EN\_X\ \ \ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Self-\/Test\ function\ is\ enabled\ for\ X-\/axis}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_AXIS\_SEL\_EN\_Y\ \ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Self-\/Test\ function\ is\ enabled\ for\ Y-\/axis}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_AXIS\_SEL\_EN\_Z\ \ \ \ \ \ ((uint8\_t)0x60)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Self-\/Test\ function\ is\ enabled\ for\ Z-\/axis}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_POL\_POSITIVE\ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Proof\ mass\ displacement\ for\ the\ selected\ axis\ is\ in\ the\ positive\ direction}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_POL\_NEGATIVE\ \ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Proof\ mass\ displacement\ for\ the\ selected\ axis\ is\ in\ the\ negative\ direction}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_SPI\_M\_FOUR\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ 4-\/wire\ interface\ mode\ is\ selected}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_SPI\_M\_THREE\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ 3-\/wire\ interface\ mode\ is\ selected}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_FSR\_2G\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ ±2g;\ 0.98\ mg/LSB\ (1024\ LSB/g)\ nominal\ sensitivity}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_FSR\_4G\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ ±4g;\ 1.95\ mg/LSB\ (512\ LSB/g)\ nominal\ sensitivity}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_FSR\_8G\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ ±8g;\ 3.91\ mg/LSB\ (256\ LSB/g)\ nominal\ sensitivity}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_FSR\_16G\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x06)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ ±16g;\ 7.81\ mg/LSB\ (128\ LSB/g)\ nominal\ sensitivity}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ACTIVE\_STANDBY\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Standby\ mode}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ACTIVE\_ACTIVE\ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Active\ mode}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_WAKE\_PM\_LOW\_POWER\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Low\ Power\ mode\ is\ selected}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_WAKE\_PM\_HIGH\_PERF\ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ High\ Performance\ Mode\ is\ selected}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_WAKE\_PM\_FLEX\_PERF\ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Flexible\ Performance\ Mode\ is\ selected}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_SLEEP\_PM\_LOW\_POWER\ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Low\ Power\ mode\ is\ selected}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_SLEEP\_PM\_HIGH\_PERF\ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ High\ Performance\ Mode\ is\ selected}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_SLEEP\_PM\_FLEX\_PERF\ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Flexible\ Performance\ Mode\ is\ selected}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_LE\_BE\_LE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Little-\/endian\ output\ mode\ is\ selected}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_LE\_BE\_BE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Big-\/endian\ output\ mode\ is\ selected}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_ANIC\_TEMP\_DIS\ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ TEMP\_OUT\ register\ content\ is\ not\ included\ in\ auto-\/increment\ address\ range}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_ANIC\_TEMP\_EN\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ TEMP\_OUT\ register\ content\ is\ included\ in\ auto-\/increment\ address\ range}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_F\_READ\_NORMAL\ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Normal\ read\ mode}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_F\_READ\_FAST\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Fast\ read\ mode}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_3200HZ\ \ \ \ \ \ \ ((uint8\_t)0x00)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_1600HZ\ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_800HZ\ \ \ \ \ \ \ \ ((uint8\_t)0x20)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_400HZ\ \ \ \ \ \ \ \ ((uint8\_t)0x30)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_200HZ\ \ \ \ \ \ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_100HZ\ \ \ \ \ \ \ \ ((uint8\_t)0x50)}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_50HZ\ \ \ \ \ \ \ \ \ ((uint8\_t)0x60)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_25HZ\ \ \ \ \ \ \ \ \ ((uint8\_t)0x70)}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_12\_5HZ\ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_6\_25HZ\ \ \ \ \ \ \ ((uint8\_t)0x90)\ }\textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ 6.25\ HZ}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_3\_125HZ\ \ \ \ \ \ ((uint8\_t)0xa0)\ }\textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ 3.125\ HZ}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_1\_563HZ\ \ \ \ \ \ ((uint8\_t)0xb0)\ }\textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ 1.563\ HZ}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_0\_781HZ\ \ \ \ \ \ ((uint8\_t)0xc0)\ }\textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ 0.781\ HZ}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_3200HZ\ \ \ \ \ \ ((uint8\_t)0x00)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_1600HZ\ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_800HZ\ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_400HZ\ \ \ \ \ \ \ ((uint8\_t)0x03)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_200HZ\ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_100HZ\ \ \ \ \ \ \ ((uint8\_t)0x05)}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_50HZ\ \ \ \ \ \ \ \ ((uint8\_t)0x06)}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_25HZ\ \ \ \ \ \ \ \ ((uint8\_t)0x07)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_12\_5HZ\ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_6\_25HZ\ \ \ \ \ \ ((uint8\_t)0x09)\ }\textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ 6.25\ HZ}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_3\_125HZ\ \ \ \ \ ((uint8\_t)0x0a)\ }\textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ 3.125\ HZ}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_1\_563HZ\ \ \ \ \ ((uint8\_t)0x0b)\ }\textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ 1.563\ HZ}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_0\_781HZ\ \ \ \ \ ((uint8\_t)0x0c)\ }\textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ 0.781\ HZ}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_EXT\_TRIG\_M\_SINGLE\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ Each\ positive\ going\ trigger\ edge\ causes\ a\ single\ ADC\ acquisition\ to\ be\ made}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_EXT\_TRIG\_M\_MULTIPLE\ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ Each\ positive\ going\ trigger\ edge\ causes\ the\ number\ of\ acquisitions}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_SDCD\_WT\_DIS\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ SDCD\ within\ thresholds\ event\ is\ not\ used\ to\ prevent\ entry\ into/trigger}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_SDCD\_WT\_EN\ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ SDCD\ within\ thresholds\ event\ is\ used\ to\ prevent\ entry\ into/trigger\ an\ exit\ from\ SLEEP\ mode}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_SDCD\_OT\_DIS\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ SDCD\ outside\ thresholds\ event\ is\ not\ used\ to\ prevent\ entry\ into/trigger}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_SDCD\_OT\_EN\ \ \ \ \ \ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ SDCD\ outside\ thresholds\ event\ is\ used\ to\ prevent\ entry\ into/trigger\ an\ exit\ from\ SLEEP\ mode}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_ORIENT\_DIS\ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ Orientation\ change\ condition\ is\ not\ used\ as\ an\ event\ to\ prevent\ entry\ into\ /trigger\ an\ exit\ from\ SLEEP\ mode}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_ORIENT\_EN\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ Orientation\ change\ condition\ is\ used\ as\ an\ event\ to\ prevent\ entry\ into/trigger\ an\ exit\ from\ SLEEP\ mode}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_DRDY\_PUL\_DIS\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ A\ SRC\_DRDY\ event\ is\ output\ on\ the\ INTx\ pin\ as\ an\ active\ high\ or\ active\ low\ signal}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_DRDY\_PUL\_EN\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ A\ 32\ μs\ (nominal)\ duration\ pulse\ is\ output\ on\ the\ configured\ INTx\ pin\ once\ per\ ODR\ cycle}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT2\_FUNC\_INT2\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ INT2/EXT\_TRIG\ pin\ is\ configured\ for\ the\ INT2\ output\ function}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT2\_FUNC\_EXT\_TRIG\ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ INT2/EXT\_TRIG\ pin\ is\ configured\ as\ the\ EXT\_TRIG\ input\ function}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT\_PP\_OD\_PUSH\_PULL\ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ INTx\ output\ pin\ driver\ is\ push-\/pull\ type}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT\_PP\_OD\_OPEN\_DRAIN\ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ INTx\ output\ pin\ driver\ is\ open-\/drain/open-\/source\ type}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT\_POL\_ACT\_LOW\ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ Active\ low:Interrupt\ events\ are\ signaled\ with\ a\ logical\ 0\ level}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT\_POL\_ACT\_HIGH\ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ Active\ high:\ interrupt\ events\ are\ signaled\ with\ a\ logical\ 1\ level}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_VECM\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ 12-\/bit\ vector\ magnitude\ result\ is\ not\ calculated\ on\ every\ ODR\ cycle}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_VECM\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ 12-\/bit\ vector\ magnitude\ result\ is\ calculated\ on\ every\ ODR\ cycle}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_X\_DIS\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ X-\/axis\ measurement\ is\ included\ in\ the\ auto-\/increment\ address\ range}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_X\_DIS\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ X-\/axis\ measurement\ is\ excluded\ from\ the\ auto-\/increment\ address\ range}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_Y\_DIS\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ Y-\/axis\ measurement\ is\ included\ in\ the\ auto-\/increment\ address\ range}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_Y\_DIS\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ Y-\/axis\ measurement\ is\ excluded\ from\ the\ auto-\/increment\ address\ range}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_Z\_DIS\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ Z-\/axis\ measurement\ is\ included\ in\ the\ auto-\/increment\ address\ range}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_Z\_DIS\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ Z-\/axis\ measurement\ is\ excluded\ from\ the\ auto-\/increment\ address\ range}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_HIBERNATE\_EN\_DIS\ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ Hibernate\ mode\ not\ enabled}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_HIBERNATE\_EN\_EN\ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ Commands\ device\ to\ enter\ Hibernate\ mode}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ INT\_EN\ -\/\ Bit\ field\ value\ definitions}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_DRDY\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ disabled}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_DRDY\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ enabled}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_BUF\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ disabled}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_BUF\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ enabled}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_SDCD\_OT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ disabled}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_SDCD\_OT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ routed\ to\ either\ the\ INT1\ or\ INT2}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_SDCD\_WT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ disabled}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_SDCD\_WT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ routed\ to\ either\ the\ INT1\ or\ INT2}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_ORIENT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ disabled}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_ORIENT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ enabled\ and\ signaled\ on\ either\ the\ INT1\ or\ INT2}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_ASLP\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ disabled}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_ASLP\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ enabled\ and\ signaled\ on\ either\ the\ INT1\ or\ INT2}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_BOOT\_DIS\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Boot\ interrupt\ is\ enabled\ and\ routed\ to\ either\ the\ INT1\ or\ INT2}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_BOOT\_DIS\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ Interrupt\ is\ disabled\ and\ not\ routed\ to\ the\ INTx\ output\ pins}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_WAKE\_OUT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ The\ device\ does\ not\ signal\ the\ WAKE\ operating\ mode\ on\ the\ INTx\ output\ pin}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_WAKE\_OUT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ INT\_EN\ -\/\ The\ device\ signals\ that\ it\ is\ currently\ in\ WAKE\ mode\ via\ the\ INT1\ or\ INT2\ pin}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_DRDY\_INT2\_DIS\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT1\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_DRDY\_INT2\_EN\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT2\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_BUF\_INT2\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT1\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_BUF\_INT2\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT2\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_SDCD\_OT\_INT2\_DIS\ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT1\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_SDCD\_OT\_INT2\_EN\ \ \ \ \ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT2\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_SDCD\_WT\_INT2\_DIS\ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT1\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_SDCD\_WT\_INT2\_EN\ \ \ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT2\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_ORIENT\_INT2\_DIS\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT1\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_ORIENT\_INT2\_EN\ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT2\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_ASLP\_INT2\_DIS\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT1\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_ASLP\_INT2\_EN\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT2\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_BOOT\_INT2\_DIS\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT1\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_BOOT\_INT2\_EN\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT2\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_WK\_OUT\_INT2\_DIS\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT1\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_WK\_OUT\_INT2\_EN\ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Interrupt\ signal\ is\ routed\ to\ INT2\ pin\ if\ it\ is\ enabled}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_TYPE\_FIFO\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ In\ FIFO\ mode}}
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_TYPE\_FILO\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ First\ In\ Last\ Out\ (FILO)}}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_MODE\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Buffer\ is\ disabled}}
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_MODE\_STREAM\_MODE\ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Stream\ Mode}}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_MODE\_STOP\_MODE\ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Stop\ mode}}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_MODE\_TRIGGER\_MODE\ \ ((uint8\_t)0x60)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Trigger\ Mode}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_GATE\_BY\_PASSED\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Buffer\ gate\ is\ bypassed}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_GATE\_ENABLED\ \ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ The\ Buffer\ gate\ input\ is\ enabled}}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_SDCD\_WT\_DIS\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Trigger\ source\ is\ disabled}}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_SDCD\_WT\_EN\ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Trigger\ source\ is\ enabled}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_SDCD\_OT\_DIS\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Trigger\ source\ is\ disabled}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_SDCD\_OT\_EN\ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Trigger\ source\ is\ enabled}}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_ORIENT\_DIS\ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Trigger\ source\ is\ disabled}}
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_ORIENT\_EN\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Trigger\ source\ is\ enabled}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_BUF\_FLUSH\_COMPLETED\ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ BUF\_CONFIG2\ -\/\ Buffer\ flush\ operation\ not\ pending/completed}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_BUF\_FLUSH\_EN\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ BUF\_CONFIG2\ -\/\ Buffer\ flush\ enable}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_WAKE\_SRC\_BUF\_IGNORED\ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ BUF\_CONFIG2\ -\/\ BUF\_WMRK\ and\ BUF\_OVF\ and\ event\ flags\ are\ ignored\ by\ the\ auto-\/WAKE/SLEEP\ function}}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_WAKE\_SRC\_BUF\_EN\ \ \ \ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ BUF\_CONFIG2\ -\/\ BUF\_WMRK\ and\ BUF\_OVF\ event\ flags\ are\ used\ by\ the\ auto-\/WAKE/SLEEP\ function}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_NEW\_ORIENT\_NO\_CHANGE\ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ No\ change\ in\ orientation\ detected}}
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_NEW\_ORIENT\_CHANGED\ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ BAFRO\ and/or\ LAPO\ and/or\ Z-\/tilt\ lockout\ value\ has\ changed}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LO\_NOT\_DETECTED\ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ Lockout\ condition\ has\ not\ been\ detected}}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LO\_DETECTED\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ Z-\/tilt\ lockout\ trip\ angle\ has\ been\ exceeded.\ Lockout\ condition\ has\ been\ detected}}
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LAPO\_UP\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ Portrait\ up}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LAPO\_DOWN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ Portrait\ down}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LAPO\_RIGHT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ Landscape\ right}}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LAPO\_LEFT\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x06)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ Landscape\ left}}
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_BAFRO\_FRONT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ The\ device\ is\ in\ the\ front-\/facing\ orientation}}
+\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_BAFRO\_BACK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ The\ device\ is\ in\ the\ back-\/facing\ orientation}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_CONFIG\_ORIENT\_DBCNTM\_DEC\ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_CONFIG\ -\/\ Orientation\ debounce\ counter\ is\ decremented\ whenever\ the\ current\ orientation\ is\ different\ thanthe\ previous\ one}}
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_CONFIG\_ORIENT\_DBCNTM\_CLR\ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ ORIENT\_CONFIG\ -\/\ Orientation\ debounce\ counter\ is\ cleared\ whenever\ the\ current\ orientation\ is\ different\ than\ the\ previous\ one}}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_CONFIG\_ORIENT\_ENABLE\_DIS\ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_CONFIG\ -\/\ Orientation\ detection\ function\ is\ disabled}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_CONFIG\_ORIENT\_ENABLE\_EN\ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ ORIENT\_CONFIG\ -\/\ Orientation\ detection\ function\ is\ enabled}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_BKFR\_BF\_80\_280\_FB\_100\_260\ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Back\ to\ front\ Z\ <\ 80°\ or\ Z\ >\ 280°\ and\ Front\ to\ back\ Z\ >\ 100°\ and\ Z\ <\ 260°}}
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_BKFR\_BF\_75\_285\_FB\_105\_255\ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Back\ to\ front\ Z\ <\ 75°\ or\ Z\ >\ 285°\ and\ Front\ to\ back\ Z\ >\ 105°\ and\ Z\ <\ 255°}}
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_BKFR\_BF\_70\_290\_FB\_110\_250\ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Back\ to\ front\ Z\ <\ 70°\ or\ Z\ >\ 290°\ and\ Front\ to\ back\ Z\ >\ 110°\ and\ Z\ <\ 250°}}
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_BKFR\_BF\_65\_295\_FB\_115\_245\ ((uint8\_t)0xc0)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Back\ to\ front\ Z\ <\ 65°\ or\ Z\ >\ 295°\ and\ Front\ to\ back\ Z\ >\ 115°\ and\ Z\ <\ 250°}}
+\DoxyCodeLine{00191\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_13\_6\ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Resultant\ angle\ 13.6}}
+\DoxyCodeLine{00192\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_17\_1\ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Resultant\ angle\ 17.1}}
+\DoxyCodeLine{00193\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_20\_7\ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Resultant\ angle\ 20.7}}
+\DoxyCodeLine{00194\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_24\_4\ \ ((uint8\_t)0x03)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Resultant\ angle\ 24.4}}
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_28\_1\ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Resultant\ angle\ 28.1}}
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_32\_0\ \ ((uint8\_t)0x05)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Resultant\ angle\ 32.0}}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_36\_1\ \ ((uint8\_t)0x06)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Resultant\ angle\ 36.1}}
+\DoxyCodeLine{00198\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_40\_4\ \ ((uint8\_t)0x07)\ }\textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Resultant\ angle\ 40.4}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_0\_0\ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 0.0°}}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_1\_8\ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 1.8°}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_3\_8\ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ \ 3.8°}}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_5\_9\ \ \ \ \ \ ((uint8\_t)0x18)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 5.9°}}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_8\_1\ \ \ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 8.1°}}
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_10\_5\ \ \ \ \ ((uint8\_t)0x28)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 10.5°}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_13\_0\ \ \ \ \ ((uint8\_t)0x30)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 13.0°}}
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_15\_6\ \ \ \ \ ((uint8\_t)0x38)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 15.6°}}
+\DoxyCodeLine{00208\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_18\_4\ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 18.4°}}
+\DoxyCodeLine{00209\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_21\_4\ \ \ \ \ ((uint8\_t)0x48)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 21.4°}}
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_24\_4\ \ \ \ \ ((uint8\_t)0x50)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 24.4°}}
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_27\_6\ \ \ \ \ ((uint8\_t)0x58)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 27.6°}}
+\DoxyCodeLine{00212\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_31\_0\ \ \ \ \ ((uint8\_t)0x60)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 31.0°}}
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_34\_4\ \ \ \ \ ((uint8\_t)0x68)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 34.4°}}
+\DoxyCodeLine{00214\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_37\_9\ \ \ \ \ ((uint8\_t)0x70)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 37.9°}}
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_41\_4\ \ \ \ \ ((uint8\_t)0x78)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 41.4°}}
+\DoxyCodeLine{00216\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_45\_0\ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 45.0°}}
+\DoxyCodeLine{00217\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_48\_6\ \ \ \ \ ((uint8\_t)0x88)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 48.6°}}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_52\_1\ \ \ \ \ ((uint8\_t)0x90)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 52.1°}}
+\DoxyCodeLine{00219\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_55\_6\ \ \ \ \ ((uint8\_t)0x98)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 55.6°}}
+\DoxyCodeLine{00220\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_59\_0\ \ \ \ \ ((uint8\_t)0xa0)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 59.0°}}
+\DoxyCodeLine{00221\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_62\_4\ \ \ \ \ ((uint8\_t)0xa8)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 62.4°}}
+\DoxyCodeLine{00222\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_65\_6\ \ \ \ \ ((uint8\_t)0xb0)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 65.6°}}
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_68\_6\ \ \ \ \ ((uint8\_t)0xb8)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 68.6°}}
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_71\_6\ \ \ \ \ ((uint8\_t)0xc0)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 71.6°}}
+\DoxyCodeLine{00225\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_74\_4\ \ \ \ \ ((uint8\_t)0xc8)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 74.4°}}
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_77\_0\ \ \ \ \ ((uint8\_t)0xd0)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 77.0°}}
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_79\_5\ \ \ \ \ ((uint8\_t)0xd8)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 79.5°}}
+\DoxyCodeLine{00228\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_81\_9\ \ \ \ \ ((uint8\_t)0xe0)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 81.9°}}
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_84\_1\ \ \ \ \ ((uint8\_t)0xe8)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 84.1°}}
+\DoxyCodeLine{00230\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_86\_2\ \ \ \ \ ((uint8\_t)0xf0)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 86.2°}}
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_88\_2\ \ \ \ \ ((uint8\_t)0xf8)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ 88.2°}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_45\_45\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ L-\/to-\/P\ 45°\ P-\/to-\/L\ 45°}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_49\_41\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ L-\/to-\/P\ 49°\ P-\/to-\/L\ 41°}}
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_52\_38\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ L-\/to-\/P\ 52°\ P-\/to-\/L\ 38°}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_56\_34\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x03)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ L-\/to-\/P\ 56°\ P-\/to-\/L\ 34°}}
+\DoxyCodeLine{00236\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_59\_31\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ L-\/to-\/P\ 59°\ P-\/to-\/L\ 31°}}
+\DoxyCodeLine{00237\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_62\_28\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x05)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ L-\/to-\/P\ 62°\ P-\/to-\/L\ 28°}}
+\DoxyCodeLine{00238\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_66\_24\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x06)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ L-\/to-\/P\ 66°\ P-\/to-\/L\ 24°}}
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_69\_21\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x07)\ }\textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ L-\/to-\/P\ 69°\ P-\/to-\/L\ 21°}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_OT\_EA\_INSIDE\ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Event\ flag\ has\ not\ been\ asserted}}
+\DoxyCodeLine{00242\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_OT\_EA\_OUTSIDE\ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Event\ flag\ has\ been\ asserted}}
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_X\_OT\_EF\_EVENT\_NO\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Event\ has\ not\ occured}}
+\DoxyCodeLine{00244\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_X\_OT\_EF\_EVENT\_YES\ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Event\ has\ occured}}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_X\_OT\_POL\_LT\_THS\ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Less\ than\ lower\ Threshold}}
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_X\_OT\_POL\_GT\_THS\ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Greater\ than\ upper\ threshold}}
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Y\_OT\_EF\_EVENT\_NO\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Event\ has\ not\ occured}}
+\DoxyCodeLine{00248\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Y\_OT\_EF\_EVENT\_YES\ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Event\ has\ occured}}
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Y\_OT\_POL\_LT\_THS\ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Less\ than\ lower\ Threshold}}
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Y\_OT\_POL\_GT\_THS\ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Greater\ than\ upper\ threshold}}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Z\_OT\_EF\_EVENT\_NO\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Event\ has\ not\ occured}}
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Z\_OT\_EF\_EVENT\_YES\ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Event\ has\ occured}}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Z\_OT\_POL\_LT\_THS\ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Less\ than\ lower\ Threshold}}
+\DoxyCodeLine{00254\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Z\_OT\_POL\_GT\_THS\ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Greater\ than\ upper\ threshold}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_WT\_EA\_EVENT\_NO\ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ Event\ has\ not\ occured}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_WT\_EA\_EVENT\_YES\ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ Event\ has\ occured}}
+\DoxyCodeLine{00258\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_X\_WT\_EF\_IN\_RANGE\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ X-\/axis\ data\ or\ delta\ is\ >=\ SDCD\_UTHS\ or\ =<\ SDCD\_LTHS\ values}}
+\DoxyCodeLine{00259\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_X\_WT\_EF\_OUT\_RANGE\ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ X-\/axis\ data\ or\ delta\ is\ <\ SDCD\_UTHS\ and\ >\ SDCD\_LTHS\ value}}
+\DoxyCodeLine{00260\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_Y\_WT\_EF\_IN\_RANGE\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ Y-\/axis\ data\ or\ delta\ is\ >=\ SDCD\_UTHS\ or\ =<\ SDCD\_LTHS\ values}}
+\DoxyCodeLine{00261\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_Y\_WT\_EF\_OUT\_RANGE\ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ Y-\/axis\ data\ or\ delta\ is\ <\ SDCD\_UTHS\ and\ >\ SDCD\_LTHS\ value}}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_Z\_WT\_EF\_IN\_RANGE\ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ Z-\/axis\ data\ or\ delta\ is\ >=\ SDCD\_UTHS\ or\ =<\ SDCD\_LTHS\ values}}
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_Z\_WT\_EF\_OUT\_RANGE\ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ Z-\/axis\ data\ or\ delta\ is\ <\ SDCD\_UTHS\ and\ >\ SDCD\_LTHS\ value}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_OT\_ELE\_DIS\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Outside\ of\ thresholds\ event\ flag\ latching\ is\ disabled}}
+\DoxyCodeLine{00266\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_OT\_ELE\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Outside\ of\ thresholds\ event\ flag\ latching\ is\ enabled}}
+\DoxyCodeLine{00267\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_WT\_ELE\_DIS\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Within\ thresholds\ event\ flag\ latching\ is\ disabled}}
+\DoxyCodeLine{00268\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_WT\_ELE\_EN\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Within\ thresholds\ event\ flag\ latching\ is\ enabled}}
+\DoxyCodeLine{00269\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_X\_OT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ X-\/axis\ data\ or\ delta\ is\ not\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00270\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_X\_OT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ X-\/axis\ data\ or\ delta\ is\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00271\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Y\_OT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Y-\/axis\ data\ or\ delta\ is\ not\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00272\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Y\_OT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Y-\/axis\ data\ or\ delta\ is\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00273\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Z\_OT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Z-\/axis\ data\ or\ delta\ is\ not\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00274\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Z\_OT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Z-\/axis\ data\ or\ delta\ is\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00275\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_X\_WT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ X-\/axis\ data\ or\ delta\ is\ not\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00276\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_X\_WT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ X-\/axis\ data\ or\ delta\ is\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Y\_WT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Y-\/axis\ data\ or\ delta\ is\ not\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00278\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Y\_WT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Y-\/axis\ data\ or\ delta\ is\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00279\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Z\_WT\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Z-\/axis\ data\ or\ delta\ is\ not\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00280\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Z\_WT\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Z-\/axis\ data\ or\ delta\ is\ used\ in\ the\ outside\ of\ thresholds\ condition\ evaluation}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_SDCD\_EN\_DIS\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ SDCD\ function\ is\ disabled}}
+\DoxyCodeLine{00283\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_SDCD\_EN\_EN\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ SDCD\ function\ is\ Enabled}}
+\DoxyCodeLine{00284\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPDM\_12\_BIT\ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ The\ function\ stores\ the\ first\ 12-\/bit\ X/Y/Z\ decimated\ and\ trimmed\ input\ data}}
+\DoxyCodeLine{00285\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPDM\_FIRST\ \ \ \ \ \ \ \ ((uint8\_t)0x20)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ The\ function\ stores\ the\ first\ decimated\ and\ trimmed\ X/Y/Z\ acceleration\ input\ data}}
+\DoxyCodeLine{00286\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPDM\_SDCD\_REF\ \ \ \ \ ((uint8\_t)0x40)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ The\ function\ updates\ the\ SDCD\_REF\_X/Y/Z\ values\ with\ the\ current\ decimated\ and\ trimmed\ X/Y/Z\ acceleration\ input\ data\ after\ the\ function\ evaluation}}
+\DoxyCodeLine{00287\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPDM\_FIXED\_VAL\ \ \ \ ((uint8\_t)0x60)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ The\ function\ uses\ a\ fixed\ value\ of\ 0\ for\ each\ of\ the\ SDCD\_REF\_X/Y/Z\ registers}}
+\DoxyCodeLine{00288\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_OT\_DBCTM\_DECREMENT\ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ Debounce\ counter\ is\ decremented\ by\ 1\ when\ the\ current\ outside\ of\ thresholds\ result\ for\ the\ enabled\ axes\ is\ false}}
+\DoxyCodeLine{00289\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_OT\_DBCTM\_CLEARED\ \ \ \ \ \ ((uint8\_t)0x10)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ Debounce\ counter\ is\ cleared\ whenever\ the\ current\ outside\ of\ thresholds\ result\ for\ the\ enabled\ axes\ is\ false}}
+\DoxyCodeLine{00290\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_WT\_DBCTM\_DECREMENT\ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ Debounce\ counter\ is\ decremented\ by\ 1\ when\ the\ current\ outside\ of\ thresholds\ result\ for\ the\ enabled\ axes\ is\ false}}
+\DoxyCodeLine{00291\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_WT\_DBCTM\_CLEARED\ \ \ \ \ \ ((uint8\_t)0x08)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ Debounce\ counter\ is\ cleared\ whenever\ the\ current\ outside\ of\ thresholds\ result\ for\ the\ enabled\ axes\ is\ false}}
+\DoxyCodeLine{00292\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_WT\_LOG\_SEL\_AND\ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ Function\ uses\ the\ logical\ AND\ of\ the\ enabled\ axes}}
+\DoxyCodeLine{00293\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_WT\_LOG\_SEL\_OR\ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ Function\ uses\ the\ logical\ OR\ of\ the\ enabled\ axes}}
+\DoxyCodeLine{00294\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_MODE\_XYZ\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ \ Function\ uses\ X,\ Y,\ Z\ acceleration\ data\ for\ the\ window\ comparison}}
+\DoxyCodeLine{00295\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_MODE\_VECM\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ Function\ uses\ Vector\ magnitude\ data\ for\ the\ window\ comparison\ on\ the\ X-\/axis\ channel\ only}}
+\DoxyCodeLine{00296\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPD\_NO\_PENDING\ \ \ \ ((uint8\_t)0x00)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ No\ reference\ update\ pending\ or\ reference\ update\ has\ completed}}
+\DoxyCodeLine{00297\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPD\_SYNC\_UPDATE\ \ \ ((uint8\_t)0x01)\ }\textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ \ Triggers\ a\ synchronous\ update\ of\ the\ internal\ X/Y/Z\ reference\ registers}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_1\ \ \ \ \ \ \ \ \ ((uint8\_t)0x00)}}
+\DoxyCodeLine{00300\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_2\ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00301\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_4\ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00302\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_8\ \ \ \ \ \ \ \ \ ((uint8\_t)0x03)}}
+\DoxyCodeLine{00303\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_16\ \ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00304\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_32\ \ \ \ \ \ \ \ ((uint8\_t)0x05)}}
+\DoxyCodeLine{00305\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_64\ \ \ \ \ \ \ \ ((uint8\_t)0x06)}}
+\DoxyCodeLine{00306\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_128\ \ \ \ \ \ \ ((uint8\_t)0x07)}}
+\DoxyCodeLine{00307\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_256\ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00308\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_512\ \ \ \ \ \ \ ((uint8\_t)0x09)}}
+\DoxyCodeLine{00309\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_1024\ \ \ \ \ \ ((uint8\_t)0x0a)}}
+\DoxyCodeLine{00310\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_2048\ \ \ \ \ \ ((uint8\_t)0x0b)}}
+\DoxyCodeLine{00311\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_4096\ \ \ \ \ \ ((uint8\_t)0x0c)}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \textcolor{preprocessor}{\#define\ FXLS8974\_TBOOT\_MAX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 20\ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ Maximum\ safe\ value\ for\ TBOOT1/2\ in\ ms\ (1ms,\ 17.7ms)=\string~20ms}}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \textcolor{comment}{//\ SYS\_MODE\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_BUF\_GATE\_ERROR\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x03)}}
+\DoxyCodeLine{00318\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_BUF\_GATE\_ERROR\_SHIFT\ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_BUF\_GATE\_CNT\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x7C)}}
+\DoxyCodeLine{00321\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_BUF\_GATE\_CNT\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_SYS\_MODE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00324\ \textcolor{preprocessor}{\#define\ FXLS8974\_SYS\_MODE\_SYS\_MODE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \textcolor{comment}{//\ INT\_STATUS\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_BOOT\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00329\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_BOOT\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_ASLP\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00332\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_ASLP\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_ORIENT\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00335\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_ORIENT\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_SDCD\_WT\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00338\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_SDCD\_WT\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_SDCD\_OT\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00341\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_SDCD\_OT\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_BUF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x20)}}
+\DoxyCodeLine{00344\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_BUF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00346\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_OVF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00347\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_OVF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_DRDY\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00350\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_STATUS\_SRC\_DRDY\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \textcolor{comment}{//\ SENS\_CONFIG1\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ACTIVE\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00355\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ACTIVE\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_FSR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x06)}}
+\DoxyCodeLine{00358\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_FSR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_SPI\_M\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00361\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_SPI\_M\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00363\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_POL\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00364\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_POL\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_AXIS\_SEL\_MASK\ \ \ \ \ \ ((uint8\_t)0x60)}}
+\DoxyCodeLine{00367\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_ST\_AXIS\_SEL\_SHIFT\ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_RST\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00370\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG1\_RST\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00372\ \textcolor{comment}{//\ SENS\_CONFIG2\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_F\_READ\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00375\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_F\_READ\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_ANIC\_TEMP\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00378\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_ANIC\_TEMP\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_LE\_BE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00381\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_LE\_BE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_SLEEP\_PM\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x30)}}
+\DoxyCodeLine{00384\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_SLEEP\_PM\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_WAKE\_PM\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0xC0)}}
+\DoxyCodeLine{00387\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG2\_WAKE\_PM\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \textcolor{comment}{//\ SENS\_CONFIG3\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x0F)}}
+\DoxyCodeLine{00392\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_SLEEP\_ODR\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0xF0)}}
+\DoxyCodeLine{00395\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG3\_WAKE\_ODR\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \textcolor{comment}{//\ SENS\_CONFIG4\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT\_POL\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00400\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT\_POL\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT\_PP\_OD\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00403\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT\_PP\_OD\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT2\_FUNC\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00406\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_INT2\_FUNC\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_DRDY\_PUL\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00409\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_DRDY\_PUL\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_ORIENT\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00412\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_ORIENT\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_SDCD\_OT\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x20)}}
+\DoxyCodeLine{00415\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_SDCD\_OT\_SHIFT\ \ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00417\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_SDCD\_WT\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00418\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_WK\_SDCD\_WT\_SHIFT\ \ \ \ \ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_EXT\_TRIG\_M\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00421\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG4\_EXT\_TRIG\_M\_SHIFT\ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00422\ }
+\DoxyCodeLine{00423\ \textcolor{comment}{//\ SENS\_CONFIG5\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_HIBERNATE\_EN\_MASK\ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00426\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_HIBERNATE\_EN\_SHIFT\ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_Z\_DIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00429\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_Z\_DIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_Y\_DIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00432\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_Y\_DIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_X\_DIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00435\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_X\_DIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00437\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_VECM\_EN\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00438\ \textcolor{preprocessor}{\#define\ FXLS8974\_SENS\_CONFIG5\_VECM\_EN\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \textcolor{comment}{//\ INT\_EN\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00441\ }
+\DoxyCodeLine{00442\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_WAKE\_OUT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00443\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_WAKE\_OUT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_BOOT\_DIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00446\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_BOOT\_DIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_ASLP\_EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00449\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_ASLP\_EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00451\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_ORIENT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00452\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_ORIENT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_SDCD\_WT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00455\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_SDCD\_WT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00457\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_SDCD\_OT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x20)}}
+\DoxyCodeLine{00458\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_SDCD\_OT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00460\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_BUF\_EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00461\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_BUF\_EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00462\ }
+\DoxyCodeLine{00463\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_DRDY\_EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00464\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_EN\_DRDY\_EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00466\ \textcolor{comment}{//\ INT\_PIN\_SEL\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00467\ }
+\DoxyCodeLine{00468\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_WK\_OUT\_INT2\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00469\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_WK\_OUT\_INT2\_SHIFT\ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00471\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_BOOT\_INT2\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00472\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_BOOT\_INT2\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00473\ }
+\DoxyCodeLine{00474\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_ASLP\_INT2\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00475\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_ASLP\_INT2\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00476\ }
+\DoxyCodeLine{00477\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_ORIENT\_INT2\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00478\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_ORIENT\_INT2\_SHIFT\ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00479\ }
+\DoxyCodeLine{00480\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_SDCD\_WT\_INT2\_MASK\ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00481\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_SDCD\_WT\_INT2\_SHIFT\ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00482\ }
+\DoxyCodeLine{00483\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_SDCD\_OT\_INT2\_MASK\ \ \ \ \ \ ((uint8\_t)0x20)}}
+\DoxyCodeLine{00484\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_SDCD\_OT\_INT2\_SHIFT\ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00485\ }
+\DoxyCodeLine{00486\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_BUF\_INT2\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00487\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_BUF\_INT2\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00489\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_DRDY\_INT2\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00490\ \textcolor{preprocessor}{\#define\ FXLS8974\_INT\_PIN\_SEL\_DRDY\_INT2\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00491\ }
+\DoxyCodeLine{00492\ \textcolor{comment}{//\ BUF\_CONFIG1\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00493\ }
+\DoxyCodeLine{00494\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_ORIENT\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00495\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_ORIENT\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00496\ }
+\DoxyCodeLine{00497\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_SDCD\_OT\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00498\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_SDCD\_OT\_SHIFT\ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00499\ }
+\DoxyCodeLine{00500\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_SDCD\_WT\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00501\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_TRG\_SDCD\_WT\_SHIFT\ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00502\ }
+\DoxyCodeLine{00503\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_GATE\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00504\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_GATE\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00505\ }
+\DoxyCodeLine{00506\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_MODE\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x60)}}
+\DoxyCodeLine{00507\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_MODE\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00508\ }
+\DoxyCodeLine{00509\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_TYPE\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00510\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG1\_BUF\_TYPE\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00511\ }
+\DoxyCodeLine{00512\ \textcolor{comment}{//\ BUF\_CONFIG2\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00513\ }
+\DoxyCodeLine{00514\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_BUF\_WMRK\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x3F)}}
+\DoxyCodeLine{00515\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_BUF\_WMRK\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00516\ }
+\DoxyCodeLine{00517\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_WAKE\_SRC\_BUF\_MASK\ \ \ \ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00518\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_WAKE\_SRC\_BUF\_SHIFT\ \ \ \ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00519\ }
+\DoxyCodeLine{00520\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_BUF\_FLUSH\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00521\ \textcolor{preprocessor}{\#define\ FXLS8974\_BUF\_CONFIG2\_BUF\_FLUSH\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00522\ }
+\DoxyCodeLine{00523\ \textcolor{comment}{//\ ORIENT\_STATUS\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00524\ }
+\DoxyCodeLine{00525\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_BAFRO\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00526\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_BAFRO\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00527\ }
+\DoxyCodeLine{00528\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LAPO\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x06)}}
+\DoxyCodeLine{00529\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LAPO\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LO\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00532\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_LO\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00533\ }
+\DoxyCodeLine{00534\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_NEW\_ORIENT\_MASK\ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00535\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_STATUS\_NEW\_ORIENT\_SHIFT\ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00536\ }
+\DoxyCodeLine{00537\ \textcolor{comment}{//\ ORIENT\_CONFIG\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00539\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_CONFIG\_ORIENT\_ENABLE\_MASK\ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00540\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_CONFIG\_ORIENT\_ENABLE\_SHIFT\ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_CONFIG\_ORIENT\_DBCNTM\_MASK\ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00543\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_CONFIG\_ORIENT\_DBCNTM\_SHIFT\ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00544\ }
+\DoxyCodeLine{00545\ \textcolor{comment}{//\ ORIENT\_BF\_ZCOMP\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00546\ }
+\DoxyCodeLine{00547\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_MASK\ \ ((uint8\_t)0x07)}}
+\DoxyCodeLine{00548\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_ZLOCK\_SHIFT\ ((uint8\_t)0)}}
+\DoxyCodeLine{00549\ }
+\DoxyCodeLine{00550\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_BKFR\_MASK\ \ \ ((uint8\_t)0xC0)}}
+\DoxyCodeLine{00551\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_BF\_ZCOMP\_ORIENT\_BKFR\_SHIFT\ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00552\ }
+\DoxyCodeLine{00553\ \textcolor{comment}{//\ ORIENT\_THS\_REG\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00554\ }
+\DoxyCodeLine{00555\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x07)}}
+\DoxyCodeLine{00556\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_HYS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00557\ }
+\DoxyCodeLine{00558\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_MASK\ \ \ \ \ ((uint8\_t)0xF8)}}
+\DoxyCodeLine{00559\ \textcolor{preprocessor}{\#define\ FXLS8974\_ORIENT\_THS\_REG\_ORIENT\_THS\_SHIFT\ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00560\ }
+\DoxyCodeLine{00561\ \textcolor{comment}{//\ SDCD\_INT\_SRC1\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00562\ }
+\DoxyCodeLine{00563\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Z\_OT\_POL\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00564\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Z\_OT\_POL\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00566\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Z\_OT\_EF\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00567\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Z\_OT\_EF\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00568\ }
+\DoxyCodeLine{00569\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Y\_OT\_POL\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00570\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Y\_OT\_POL\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Y\_OT\_EF\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00573\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_Y\_OT\_EF\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00574\ }
+\DoxyCodeLine{00575\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_X\_OT\_POL\_MASK\ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00576\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_X\_OT\_POL\_SHIFT\ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00577\ }
+\DoxyCodeLine{00578\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_X\_OT\_EF\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x20)}}
+\DoxyCodeLine{00579\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_X\_OT\_EF\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00580\ }
+\DoxyCodeLine{00581\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_OT\_EA\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00582\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC1\_OT\_EA\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \textcolor{comment}{//\ SDCD\_INT\_SRC2\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00585\ }
+\DoxyCodeLine{00586\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_Z\_WT\_EF\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00587\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_Z\_WT\_EF\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00588\ }
+\DoxyCodeLine{00589\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_Y\_WT\_EF\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00590\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_Y\_WT\_EF\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00591\ }
+\DoxyCodeLine{00592\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_X\_WT\_EF\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x20)}}
+\DoxyCodeLine{00593\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_X\_WT\_EF\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00594\ }
+\DoxyCodeLine{00595\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_WT\_EA\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00596\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_INT\_SRC2\_WT\_EA\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00597\ }
+\DoxyCodeLine{00598\ \textcolor{comment}{//\ SDCD\_CONFIG1\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00599\ }
+\DoxyCodeLine{00600\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Z\_WT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00601\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Z\_WT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00602\ }
+\DoxyCodeLine{00603\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Y\_WT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00604\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Y\_WT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00606\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_X\_WT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00607\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_X\_WT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00608\ }
+\DoxyCodeLine{00609\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Z\_OT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00610\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Z\_OT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00611\ }
+\DoxyCodeLine{00612\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Y\_OT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00613\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_Y\_OT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00614\ }
+\DoxyCodeLine{00615\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_X\_OT\_EN\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x20)}}
+\DoxyCodeLine{00616\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_X\_OT\_EN\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00618\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_WT\_ELE\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x40)}}
+\DoxyCodeLine{00619\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_WT\_ELE\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)6)}}
+\DoxyCodeLine{00620\ }
+\DoxyCodeLine{00621\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_OT\_ELE\_MASK\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00622\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG1\_OT\_ELE\_SHIFT\ \ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00623\ }
+\DoxyCodeLine{00624\ \textcolor{comment}{//\ SDCD\_CONFIG2\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00625\ }
+\DoxyCodeLine{00626\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPD\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x01)}}
+\DoxyCodeLine{00627\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPD\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00628\ }
+\DoxyCodeLine{00629\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_MODE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x02)}}
+\DoxyCodeLine{00630\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_MODE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)1)}}
+\DoxyCodeLine{00631\ }
+\DoxyCodeLine{00632\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_WT\_LOG\_SEL\_MASK\ \ \ \ \ \ \ ((uint8\_t)0x04)}}
+\DoxyCodeLine{00633\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_WT\_LOG\_SEL\_SHIFT\ \ \ \ \ \ ((uint8\_t)2)}}
+\DoxyCodeLine{00634\ }
+\DoxyCodeLine{00635\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_WT\_DBCTM\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x08)}}
+\DoxyCodeLine{00636\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_WT\_DBCTM\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)3)}}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_OT\_DBCTM\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x10)}}
+\DoxyCodeLine{00639\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_OT\_DBCTM\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)4)}}
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00641\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPDM\_MASK\ \ \ \ \ \ \ \ \ ((uint8\_t)0x60)}}
+\DoxyCodeLine{00642\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_REF\_UPDM\_SHIFT\ \ \ \ \ \ \ \ ((uint8\_t)5)}}
+\DoxyCodeLine{00643\ }
+\DoxyCodeLine{00644\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_SDCD\_EN\_MASK\ \ \ \ \ \ \ \ \ \ ((uint8\_t)0x80)}}
+\DoxyCodeLine{00645\ \textcolor{preprocessor}{\#define\ FXLS8974\_SDCD\_CONFIG2\_SDCD\_EN\_SHIFT\ \ \ \ \ \ \ \ \ ((uint8\_t)7)}}
+\DoxyCodeLine{00646\ }
+\DoxyCodeLine{00647\ \textcolor{comment}{//\ SELF\_TEST\_CONFIG1\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00648\ }
+\DoxyCodeLine{00649\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG1\_ST\_IDLE\_MASK\ \ \ \ \ ((uint8\_t)0x1f)}}
+\DoxyCodeLine{00650\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG1\_ST\_IDLE\_SHIFT\ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00651\ }
+\DoxyCodeLine{00652\ \textcolor{comment}{//\ SELF\_TEST\_CONFIG2\ -\/\ Bit\ field\ mask\ definitions}}
+\DoxyCodeLine{00653\ }
+\DoxyCodeLine{00654\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_MASK\ \ \ \ \ \ ((uint8\_t)0x0f)}}
+\DoxyCodeLine{00655\ \textcolor{preprocessor}{\#define\ FXLS8974\_SELF\_TEST\_CONFIG2\_ST\_DEC\_SHIFT\ \ \ \ \ ((uint8\_t)0)}}
+\DoxyCodeLine{00656\ }
+\DoxyCodeLine{00657\ \textcolor{comment}{//\ FXLS8974C\ registers\ map}}
+\DoxyCodeLine{00658\ }
+\DoxyCodeLine{00659\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00660\ \{}
+\DoxyCodeLine{00661\ }
+\DoxyCodeLine{00662\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8daa0e2ed79795f42f17da9b29eaecd2ba7}{FXLS8974\_INT\_STATUS}}\ =\ 0x00,}
+\DoxyCodeLine{00663\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da348f2188a901c4ca4c32c89a5f8a7a92}{FXLS8974\_TEMP\_OUT}}\ =\ 0x01,}
+\DoxyCodeLine{00664\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da44e3b3714b0aead2c8dd34fc9a2a278e}{FXLS8974\_VECM\_LSB}}\ =\ 0x02,}
+\DoxyCodeLine{00665\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da844f9bd7d8c9f668288055c1a48fef77}{FXLS8974\_VECM\_MSB}}\ =\ 0x03,}
+\DoxyCodeLine{00666\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dac0e631ea3b405843446cd35f63ce4743}{FXLS8974\_OUT\_X\_LSB}}\ =\ 0x04,}
+\DoxyCodeLine{00667\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da22a032c3cd6d3b5e5d8f016fefb00044}{FXLS8974\_OUT\_X\_MSB}}\ =\ 0x05,}
+\DoxyCodeLine{00668\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da62ff98ea41facfe377c6bb98db74087f}{FXLS8974\_OUT\_Y\_LSB}}\ =\ 0x06,}
+\DoxyCodeLine{00669\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dad2a2993a6fee186074796e60c3aebad5}{FXLS8974\_OUT\_Y\_MSB}}\ =\ 0x07,}
+\DoxyCodeLine{00670\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dab2f30b6dd41655ca9442e3f2fae3bdb6}{FXLS8974\_OUT\_Z\_LSB}}\ =\ 0x08,}
+\DoxyCodeLine{00671\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8daea1a891bfe016865423ba4d53dc15a8f}{FXLS8974\_OUT\_Z\_MSB}}\ =\ 0x09,}
+\DoxyCodeLine{00672\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dabc4fa64e7d7d318cc770291e5afc4fda}{FXLS8974\_BUF\_STATUS}}\ =\ 0x0B,}
+\DoxyCodeLine{00673\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da79f7aaff4bfa73511af6aff575216c3f}{FXLS8974\_BUF\_X\_LSB}}\ =\ 0x0C,}
+\DoxyCodeLine{00674\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da5b8c28020e180bad94646e30475e8e2d}{FXLS8974\_BUF\_X\_MSB}}\ =\ 0x0D,}
+\DoxyCodeLine{00675\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da208a7a285e0e532f9e77e7f951d705e4}{FXLS8974\_BUF\_Y\_LSB}}\ =\ 0x0E,}
+\DoxyCodeLine{00676\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da919b5ebca8ae2d4f70e93232ea5990b7}{FXLS8974\_BUF\_Y\_MSB}}\ =\ 0x0F,}
+\DoxyCodeLine{00677\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da45998bd84768509860a4ed93ccef91ab}{FXLS8974\_BUF\_Z\_LSB}}\ =\ 0x10,}
+\DoxyCodeLine{00678\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da969f03cd51ea4b9ad1e1bc5748982a9f}{FXLS8974\_BUF\_Z\_MSB}}\ =\ 0x11,}
+\DoxyCodeLine{00679\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8daa85d71e90bbdb62441cfa7f69baba78e}{FXLS8974\_PROD\_REV}}\ =\ 0x12,}
+\DoxyCodeLine{00680\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da871b285eb7df52ac42f3946545100a24}{FXLS8974\_WHO\_AM\_I}}\ =\ 0x13,}
+\DoxyCodeLine{00681\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dafa62381d5ca751e491a58d410813c7a4}{FXLS8974\_SYS\_MODE}}\ =\ 0x14,}
+\DoxyCodeLine{00682\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da9b74a09f34693908c54e939ec5515709}{FXLS8974\_SENS\_CONFIG1}}\ =\ 0x15,}
+\DoxyCodeLine{00683\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da7c304cf35796548679cab22f768f2440}{FXLS8974\_SENS\_CONFIG2}}\ =\ 0x16,}
+\DoxyCodeLine{00684\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da7efbd7a8b13a41599ee6461d2ccd797c}{FXLS8974\_SENS\_CONFIG3}}\ =\ 0x17,}
+\DoxyCodeLine{00685\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da8e6322542b1c0d49b3481d13e42615fc}{FXLS8974\_SENS\_CONFIG4}}\ =\ 0x18,}
+\DoxyCodeLine{00686\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da60fcbc6dff86965070b9eae6c3636588}{FXLS8974\_SENS\_CONFIG5}}\ =\ 0x19,}
+\DoxyCodeLine{00687\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da8aca2f251bc1ba8a11c17c6385b7bd16}{FXLS8974\_WAKE\_IDLE\_LSB}}\ =\ 0x1A,}
+\DoxyCodeLine{00688\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da6bb3072c471eefd4c7d2a7dcaa61b9ea}{FXLS8974\_WAKE\_IDLE\_MSB}}\ =\ 0x1B,}
+\DoxyCodeLine{00689\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8daaf9277c5e9493b9e141593f913b954fa}{FXLS8974\_SLEEP\_IDLE\_LSB}}\ =\ 0x1C,}
+\DoxyCodeLine{00690\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da64fea92ec02b5967d3c3f811b21d7749}{FXLS8974\_SLEEP\_IDLE\_MSB}}\ =\ 0x1D,}
+\DoxyCodeLine{00691\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da5692b47a35615b944d36ce0a9e97a372}{FXLS8974\_ASLP\_COUNT\_LSB}}\ =\ 0x1E,}
+\DoxyCodeLine{00692\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da609e82449c15b500a69310e39ff81d9f}{FXLS8974\_ASLP\_COUNT\_MSB}}\ =\ 0x1F,}
+\DoxyCodeLine{00693\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dad8bc6c5cd22879c24da31dbc01b78e11}{FXLS8974\_INT\_EN}}\ =\ 0x20,}
+\DoxyCodeLine{00694\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da759fd2d02f9bf38f6405c36281656014}{FXLS8974\_INT\_PIN\_SEL}}\ =\ 0x21,}
+\DoxyCodeLine{00695\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da0681c83643a9e1c560333c9b2f071610}{FXLS8974\_OFF\_X}}\ =\ 0x22,}
+\DoxyCodeLine{00696\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dadf9d59d10954366027f5ee5fc37daa88}{FXLS8974\_OFF\_Y}}\ =\ 0x23,}
+\DoxyCodeLine{00697\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da8365e20d84a8f8ddf814d08e7ba7fb3e}{FXLS8974\_OFF\_Z}}\ =\ 0x24,}
+\DoxyCodeLine{00698\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da59fa6d5bf1c9df2720f701337f656a70}{FXLS8974\_BUF\_CONFIG1}}\ =\ 0x26,}
+\DoxyCodeLine{00699\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da21585ac1caae3d2688a593202ace8b01}{FXLS8974\_BUF\_CONFIG2}}\ =\ 0x27,}
+\DoxyCodeLine{00700\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da93e36d7eb7d53e20b09fc291bab4b02f}{FXLS8974\_ORIENT\_STATUS}}\ =\ 0x28,}
+\DoxyCodeLine{00701\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da592ca3687e25823bc2e45c23a639d92d}{FXLS8974\_ORIENT\_CONFIG}}\ =\ 0x29,}
+\DoxyCodeLine{00702\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dafc086138c9538f39d51cebf65b40723c}{FXLS8974\_ORIENT\_DBCOUNT}}\ =\ 0x2A,}
+\DoxyCodeLine{00703\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da924487b807e9e639fe644b11346eceff}{FXLS8974\_ORIENT\_BF\_ZCOMP}}\ =\ 0x2B,}
+\DoxyCodeLine{00704\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da2c83a473bff9634bdbbf6e6f83f4eeb9}{FXLS8974\_ORIENT\_THS\_REG}}\ =\ 0x2C,}
+\DoxyCodeLine{00705\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da49564770074e9e7a70d7b4094ebf6928}{FXLS8974\_SDCD\_INT\_SRC1}}\ =\ 0x2D,}
+\DoxyCodeLine{00706\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8dab0c21f03cdcab1d724e4d49614984681}{FXLS8974\_SDCD\_INT\_SRC2}}\ =\ 0x2E,}
+\DoxyCodeLine{00707\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da5ba1bfafa9b17c1ae7ae7d2bf4a6756f}{FXLS8974\_SDCD\_CONFIG1}}\ =\ 0x2F,}
+\DoxyCodeLine{00708\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da2882a0d3a939a6771603611a016312d8}{FXLS8974\_SDCD\_CONFIG2}}\ =\ 0x30,}
+\DoxyCodeLine{00709\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da032450b5596efd45ce0ce05d478b2f5f}{FXLS8974\_SDCD\_OT\_DBCNT}}\ =\ 0x31,}
+\DoxyCodeLine{00710\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da631bbe3f4b8ca0f05ca45e15415692c0}{FXLS8974\_SDCD\_WT\_DBCNT}}\ =\ 0x32,}
+\DoxyCodeLine{00711\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da330f3a6f99837e5057458cac7f8b3aa4}{FXLS8974\_SDCD\_LTHS\_LSB}}\ =\ 0x33,}
+\DoxyCodeLine{00712\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8daf8f71f0f326b7da634bda843562ae764}{FXLS8974\_SDCD\_LTHS\_MSB}}\ =\ 0x34,}
+\DoxyCodeLine{00713\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da33c7a63ca538d73a85eaef276eefad64}{FXLS8974\_SDCD\_UTHS\_LSB}}\ =\ 0x35,}
+\DoxyCodeLine{00714\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da68eed7594ab799f6a8bc1dc03e8345ba}{FXLS8974\_SDCD\_UTHS\_MSB}}\ =\ 0x36,}
+\DoxyCodeLine{00715\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da8ac07cf5115c1434c973f5b0f4dabb72}{FXLS8974\_SELF\_TEST\_CONFIG1}}\ =\ 0x37,}
+\DoxyCodeLine{00716\ \ \ \ \ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a528a8c39f3d808eb02a3967096748b8da0882fd9abd722fcbfdaf15bef412ee9c}{FXLS8974\_SELF\_TEST\_CONFIG2}}\ =\ 0x38,}
+\DoxyCodeLine{00717\ }
+\DoxyCodeLine{00718\ \};}
+\DoxyCodeLine{00719\ }
+\DoxyCodeLine{00720\ \textcolor{comment}{//\ Interrupt\ \&\ System\ status\ bit\ fields}}
+\DoxyCodeLine{00721\ }
+\DoxyCodeLine{00722\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00723\ \{}
+\DoxyCodeLine{00724\ }
+\DoxyCodeLine{00725\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00726\ \ \ \ \ \{}
+\DoxyCodeLine{00727\ }
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_aae5633b0ce3e22931ae5c032bcaeec84}{src\_boot}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ System\ boot\ complete\ event\ flag}}
+\DoxyCodeLine{00729\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_a9aed5d2fade6214d486fc541c0b125a3}{src\_aslp}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Auto-\/Wake/Sleep\ event\ status\ flag}}
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_a1e1e6c28884f39b71a41b415e82e5701}{src\_orient}}\ :\ 1;\ \ \ \textcolor{comment}{//\ Orientation\ change\ event\ flag}}
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_a6d39f19901bf118166684d00c64e38b1}{src\_sdcd\_wt}}\ :\ 1;\ \textcolor{comment}{//\ SDCD\ within\ thresholds\ condition\ event\ flag}}
+\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_a10d17180d6640cf49a92b28f50a411b2}{src\_sdcd\_ot}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ SDCD\ outside\ of\ threshold\ condition\ event\ flag}}
+\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_a5a7ba410b83ddf6caf6ef78ee5911520}{src\_buf}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ Output\ data\ buffer\ status\ event\ flag}}
+\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_a759f0b8726e05b3205bc20422de0618c}{src\_ovf}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ data\ overflow\ event\ flag}}
+\DoxyCodeLine{00735\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_aa0bb1fc849682edb127288d281ad7602}{src\_drdy}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ data\ ready\ event\ flag}}
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00737\ \ \ \ \ \}b;}
+\DoxyCodeLine{00738\ }
+\DoxyCodeLine{00739\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t_a108f1938971712a0adef27364566a1cc}{w}};}
+\DoxyCodeLine{00740\ }
+\DoxyCodeLine{00741\ \}\mbox{\hyperlink{union_f_x_l_s8974___i_n_t___s_t_a_t_u_s__t}{FXLS8974\_INT\_STATUS\_t}};}
+\DoxyCodeLine{00742\ }
+\DoxyCodeLine{00743\ \textcolor{comment}{//\ Sensor\ configuration\ reg1\ bit\ fields}}
+\DoxyCodeLine{00744\ }
+\DoxyCodeLine{00745\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00746\ \{}
+\DoxyCodeLine{00747\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00748\ \ \ \ \ \{}
+\DoxyCodeLine{00749\ }
+\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t_afd116f4cd6ae54beea073b358f287cba}{active}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Standby/Active\ mode\ selection}}
+\DoxyCodeLine{00751\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t_a65831cfc315dc6b69b1261377ff57a1f}{fsr}}\ :\ 2;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Full-\/scale\ measurement\ range\ (FSR)\ selection}}
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t_a1f5213de22ddb54897b4f92bfa9d57c1}{spi\_m}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SPI\ interface\ mode\ selection;\ selects\ between\ 3-\/\ and\ 4-\/wire\ operating}}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ modes\ for\ the\ SPI\ interface}}
+\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t_ac8f3ba7dd100d97fb5396a93cbf3f763}{st\_pol}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Self-\/Test\ Displacement\ Polarity}}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t_adddcacf035c9cb3f194d23f81e9b2f82}{st\_axis\_sel}}\ :\ 2;\ \ \ \ \ \textcolor{comment}{//\ Self-\/Test\ Axis\ Selection}}
+\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t_a50ec1b8be2f1b7c5e0bc25c04e5f6253}{rst}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ RST\ bit\ may\ be\ used\ to\ initiate\ a\ software\ reset}}
+\DoxyCodeLine{00757\ }
+\DoxyCodeLine{00758\ \ \ \ \ \}b;}
+\DoxyCodeLine{00759\ }
+\DoxyCodeLine{00760\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t_a7b440e81b7f0cf43d43d5ab9ff2e302c}{w}};}
+\DoxyCodeLine{00761\ }
+\DoxyCodeLine{00762\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t}{FXLS8974\_SENS\_CONFIG1\_t}};}
+\DoxyCodeLine{00763\ }
+\DoxyCodeLine{00764\ \textcolor{comment}{//\ Sensor\ configuration\ reg2\ bit\ fields}}
+\DoxyCodeLine{00765\ }
+\DoxyCodeLine{00766\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00767\ \{}
+\DoxyCodeLine{00768\ }
+\DoxyCodeLine{00769\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00770\ \ \ \ \ \{}
+\DoxyCodeLine{00771\ }
+\DoxyCodeLine{00772\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t_ad1a49a0a2bc87b766c0cda521ab768d2}{f\_read}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Fast-\/read\ mode\ selection}}
+\DoxyCodeLine{00773\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t_a1953e275ae217e89946dac719c8c131c}{anic\_temp}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Temperature\ output\ data\ auto-\/increment\ control}}
+\DoxyCodeLine{00774\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t_aee1ce2d0a6056d0ee1a214e0c0d07bba}{\_reserved\_}}\ :\ 1;}
+\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t_ae5ef5a22e6f9ccd0cc4dd4515134f23f}{le\_be}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Little/Big-\/endian\ output\ mode\ selection.}}
+\DoxyCodeLine{00776\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t_a9a5bc499e6ff88a137a07ce1642c3b7c}{sleep\_pm}}\ :\ 2;\ \ \ \ \ \ \ \textcolor{comment}{//\ SLEEP\ power\ mode\ selection}}
+\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t_a47f9e7d12917ddcc5227acbc00d622c9}{wake\_pm}}\ :\ 2;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WAKE\ power\ mode\ selection}}
+\DoxyCodeLine{00778\ }
+\DoxyCodeLine{00779\ \ \ \ \ \}b;}
+\DoxyCodeLine{00780\ }
+\DoxyCodeLine{00781\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t_a5f932fea6ccf285b65360cad84cd2b4f}{w}};}
+\DoxyCodeLine{00782\ }
+\DoxyCodeLine{00783\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t}{FXLS8974\_SENS\_CONFIG2\_t}};}
+\DoxyCodeLine{00784\ }
+\DoxyCodeLine{00785\ \textcolor{comment}{//\ Sensor\ configuration\ reg3\ bit\ fields}}
+\DoxyCodeLine{00786\ }
+\DoxyCodeLine{00787\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00788\ \{}
+\DoxyCodeLine{00789\ }
+\DoxyCodeLine{00790\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00791\ \ \ \ \ \{}
+\DoxyCodeLine{00792\ }
+\DoxyCodeLine{00793\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g3__t_a9b35172c9a8ea161fcec5157664b1d59}{sleep\_odr}}\ :\ 4;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Sleep\ ODR}}
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g3__t_aae61092bc34fdc94b8837a6b89455136}{wake\_odr}}\ :\ 4;\ \ \ \ \ \ \ \textcolor{comment}{//Wake\ ODR}}
+\DoxyCodeLine{00795\ }
+\DoxyCodeLine{00796\ \ \ \ \ \}b;}
+\DoxyCodeLine{00797\ }
+\DoxyCodeLine{00798\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g3__t_a2fc6d5c6620be5fbb786a84cd4ef1761}{w}};}
+\DoxyCodeLine{00799\ }
+\DoxyCodeLine{00800\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g3__t}{FXLS8974\_SENS\_CONFIG3\_t}};}
+\DoxyCodeLine{00801\ }
+\DoxyCodeLine{00802\ \textcolor{comment}{//\ Sensor\ configuration\ reg4\ bit\ fields}}
+\DoxyCodeLine{00803\ }
+\DoxyCodeLine{00804\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00805\ \{}
+\DoxyCodeLine{00806\ }
+\DoxyCodeLine{00807\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00808\ \ \ \ \ \{}
+\DoxyCodeLine{00809\ }
+\DoxyCodeLine{00810\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_a48078538142bcc4442e3b01a62b782ea}{int\_pol}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Interrupt\ logic\ polarity\ on\ INT1\ and\ INT2\ pins}}
+\DoxyCodeLine{00811\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_a780cf3302f8846661d569e5403890636}{int\_pp\_od}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ INT1\ and\ INT2\ pins\ output\ driver\ selection}}
+\DoxyCodeLine{00812\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_ab44067b5dcd395843d7783f8a0d1bbaf}{int2\_func}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ INT2\ output\ /\ EXT\_TRIG\ input\ pin\ selection}}
+\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_aeb115804068cf6578ea6166bb061552c}{drdy\_pul}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Pulse\ generation\ option\ for\ DRDY\ event}}
+\DoxyCodeLine{00814\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_a7e0a69ab0722b06f12e3ad8031604ede}{wk\_orient}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Orientation\ change\ event\ Auto-\/WAKE/SLEEP\ transition\ source\ enable}}
+\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_ab72fc183da9c78af84adf9e9594e7e34}{wk\_sdcd\_ot}}\ :\ 1;\ \ \ \textcolor{comment}{//\ SDCD\ outside\ of\ thresholds\ event\ Auto-\/WAKE/SLEEP\ transition\ source\ enable}}
+\DoxyCodeLine{00816\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_ac5f6ba67ddb14e0537bf16a448358aba}{wk\_sdcd\_wt}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ within\ thresholds\ event\ Auto-\/WAKE/SLEEP\ transition\ source\ enable}}
+\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_affc404cd44e67d513ce8e54c38d23327}{ext\_trig\_m}}\ :\ 1;\ \ \ \textcolor{comment}{//\ External\ trigger\ function\ acquisition\ mode}}
+\DoxyCodeLine{00818\ }
+\DoxyCodeLine{00819\ \ \ \ \ \}b;}
+\DoxyCodeLine{00820\ }
+\DoxyCodeLine{00821\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t_a6e308d335dd0fe8b1fa85da6cd1f181a}{w}};}
+\DoxyCodeLine{00822\ }
+\DoxyCodeLine{00823\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g4__t}{FXLS8974\_SENS\_CONFIG4\_t}};}
+\DoxyCodeLine{00824\ }
+\DoxyCodeLine{00825\ \textcolor{comment}{//\ Sensor\ configuration\ reg5\ bit\ fields}}
+\DoxyCodeLine{00826\ }
+\DoxyCodeLine{00827\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00828\ \{}
+\DoxyCodeLine{00829\ }
+\DoxyCodeLine{00830\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00831\ \ \ \ \ \{}
+\DoxyCodeLine{00832\ }
+\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g5__t_ad41816d427f261c9536b20c4337ef5e6}{hibernate\_en}}\ :\ 1;\ \ \ \textcolor{comment}{//\ Hibernate\ mode\ enable}}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g5__t_a4c531bc15602fe4c3092959326c35224}{z\_dis}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Z-\/axis\ auto-\/increment\ disable}}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g5__t_ac8a4ead6e6e939bcb4df79734e7af473}{y\_dis}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Y-\/axis\ auto-\/increment\ disable}}
+\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g5__t_ab05bfd79302918574aeca7fa7715cd8f}{x\_dis}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ X-\/axis\ auto-\/increment\ disable}}
+\DoxyCodeLine{00837\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g5__t_ac152f5d1beb682efbee496017141a91e}{vecm\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Vector\ Magnitude\ calculation\ enable}}
+\DoxyCodeLine{00838\ }
+\DoxyCodeLine{00839\ \ \ \ \ \}b;}
+\DoxyCodeLine{00840\ }
+\DoxyCodeLine{00841\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g5__t_a7d506c8fa5dd53a0fde1182aa741af34}{w}};}
+\DoxyCodeLine{00842\ }
+\DoxyCodeLine{00843\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g5__t}{FXLS8974\_SENS\_CONFIG5\_t}};}
+\DoxyCodeLine{00844\ }
+\DoxyCodeLine{00845\ \textcolor{comment}{//\ Interrupt\ enable\ register\ bit\ fields}}
+\DoxyCodeLine{00846\ }
+\DoxyCodeLine{00847\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00848\ \{}
+\DoxyCodeLine{00849\ }
+\DoxyCodeLine{00850\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00851\ \ \ \ \ \{}
+\DoxyCodeLine{00852\ }
+\DoxyCodeLine{00853\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_ac2c943d663b20dd2a4638670b0717b59}{wake\_out\_en}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ \ WAKE\ power\ state\ output\ enable}}
+\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_a718c3e11aa08d47becd6887f7c959ed4}{boot\_dis}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ \ Boot\ interrupt\ output\ disable}}
+\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_a71a5fd7519c0b7964cb1cf05df5dd905}{aslp\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Auto-\/WAKE/SLEEP\ interrupt\ output\ enable}}
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_a83d60b2b1366d00db8f8888e2fb65edd}{orient\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Orientation\ interrupt\ output\ enable}}
+\DoxyCodeLine{00857\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_a54e449316efc9da6d35fdddb5c61b759}{sdcd\_wt\_en}}\ :\ 1;\ \ \ \textcolor{comment}{//\ \ SDCD\ within\ thresholds\ interrupt\ output\ enable}}
+\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_a90f4625d6b5b66f59f6e9b6feea8c72d}{sdcd\_ot\_en}}\ :\ 1;\ \ \ \textcolor{comment}{//\ SDCD\ outside\ of\ thresholds\ interrupt\ output\ enable}}
+\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_a576df2cc509bee98fddc2b9734bcc1eb}{buf\_en}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ data\ buffer\ interrupt\ output\ enable}}
+\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_a233b3e8580a608debc2a5c14c7df4cde}{drdy\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Data\ Ready\ interrupt\ output\ enable}}
+\DoxyCodeLine{00861\ }
+\DoxyCodeLine{00862\ \ \ \ \ \}b;}
+\DoxyCodeLine{00863\ }
+\DoxyCodeLine{00864\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t_ad4b2cee8028538392d0cccfa73cfe66b}{w}};}
+\DoxyCodeLine{00865\ }
+\DoxyCodeLine{00866\ \}\mbox{\hyperlink{union_f_x_l_s8974___i_n_t___e_n__t}{FXLS8974\_INT\_EN\_t}};}
+\DoxyCodeLine{00867\ }
+\DoxyCodeLine{00868\ \textcolor{comment}{//\ Interrupt\ pin\ select\ register\ bit\ fields}}
+\DoxyCodeLine{00869\ }
+\DoxyCodeLine{00870\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00871\ \{}
+\DoxyCodeLine{00872\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00873\ \ \ \ \ \{}
+\DoxyCodeLine{00874\ }
+\DoxyCodeLine{00875\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_a0054338f5692b5daa6359b478168bd22}{wk\_out\_int2}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ WAKE\ power\ state\ interrupt\ routing}}
+\DoxyCodeLine{00876\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_a90fc87e2ad2f172ef2fb2ef9d7e40db5}{boot\_int2}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ BOOT\ event\ interrupt\ routing}}
+\DoxyCodeLine{00877\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_a5ffc4d5c6c0d86d40582b221738046c5}{aslp\_int2}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Auto-\/WAKE/SLEEP\ event\ interrupt\ routing}}
+\DoxyCodeLine{00878\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_ac74c4351a5118e5c420bb05b8615eec2}{orient\_int2}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ ORIENT\ event\ interrupt\ routing}}
+\DoxyCodeLine{00879\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_a8951c71b6ef0a553b29b0a722532b99e}{sdcd\_wt\_int2}}\ :\ 1;\ \ \ \textcolor{comment}{//\ SDCD\ within\ thresholds\ event\ interrupt\ routing}}
+\DoxyCodeLine{00880\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_a2a0e3bb02e9e4034e732f815c2abaaad}{sdcd\_ot\_int2}}\ :\ 1;\ \ \ \textcolor{comment}{//\ SDCD\ outside\ of\ thresholds\ event\ interrupt\ routing}}
+\DoxyCodeLine{00881\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_a5fd6236336c8c50050197043cf877b3b}{buf\_int2}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ buffer\ interrupt\ routing}}
+\DoxyCodeLine{00882\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_ab9ada1a34b0e804efb321b49960db30b}{drdy\_int2}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Data\ Ready\ interrupt\ routing}}
+\DoxyCodeLine{00883\ }
+\DoxyCodeLine{00884\ \ \ \ \ \}b;}
+\DoxyCodeLine{00885\ }
+\DoxyCodeLine{00886\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t_ae052a506edb9cddfbf351785182c6318}{w}};}
+\DoxyCodeLine{00887\ }
+\DoxyCodeLine{00888\ \}\mbox{\hyperlink{union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t}{FXLS8974\_INT\_PIN\_SEL\_t}};}
+\DoxyCodeLine{00889\ }
+\DoxyCodeLine{00890\ \textcolor{comment}{//\ Buffer\ configuration\ reg1\ bit\ fields}}
+\DoxyCodeLine{00891\ }
+\DoxyCodeLine{00892\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00893\ \{}
+\DoxyCodeLine{00894\ }
+\DoxyCodeLine{00895\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00896\ \ \ \ \ \{}
+\DoxyCodeLine{00897\ }
+\DoxyCodeLine{00898\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t_a4d4fd3618b0ec52d85bb6cd0c7bb539c}{trg\_orient}}\ :\ 1;\ \ \ \textcolor{comment}{//\ Orientation\ change\ event\ trigger\ enable}}
+\DoxyCodeLine{00899\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t_ac86ff4fb26d928287a37c270f7abb64c}{\_reserved\_}}\ :\ 1;}
+\DoxyCodeLine{00900\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t_a879965177f915993ed6eb2c9965020cc}{trg\_sdcd\_ot}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ SDCD\ outside-\/of-\/thresholds\ event\ buffer\ trigger\ enable}}
+\DoxyCodeLine{00901\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t_a9d7b34393352012ee42cea00a126cece}{trg\_sdcd\_wt}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ SDCD\ within-\/thresholds\ event\ trigger\ enable}}
+\DoxyCodeLine{00902\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t_ad9a31542986285c93e95012236b0e64d}{buf\_gate}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ data\ buffer\ gate\ enable}}
+\DoxyCodeLine{00903\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t_a8d78250627892d9dd0829ff5135b20a6}{buf\_mode}}\ :\ 2;\ \ \ \ \ \ \ \textcolor{comment}{//\ Buffer\ data\ collection\ mode}}
+\DoxyCodeLine{00904\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t_ad4a68736f3c1832c65780ebca07c11e3}{buf\_type}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Buffer\ data\ read\ out\ order}}
+\DoxyCodeLine{00905\ }
+\DoxyCodeLine{00906\ \ \ \ \ \}b;}
+\DoxyCodeLine{00907\ }
+\DoxyCodeLine{00908\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t_a49716cfc9d59ff4f6f4d3f58f03da359}{w}};}
+\DoxyCodeLine{00909\ }
+\DoxyCodeLine{00910\ \}\mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g1__t}{FXLS8974\_BUF\_CONFIG1\_t}};}
+\DoxyCodeLine{00911\ }
+\DoxyCodeLine{00912\ \textcolor{comment}{//\ Buffer\ configuration\ reg2\ bit\ fields}}
+\DoxyCodeLine{00913\ }
+\DoxyCodeLine{00914\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00915\ \{}
+\DoxyCodeLine{00916\ }
+\DoxyCodeLine{00917\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00918\ \ \ \ \ \{}
+\DoxyCodeLine{00919\ }
+\DoxyCodeLine{00920\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g2__t_a37556f566f42680ced2d3d41b2cfac54}{buf\_wmrk}}\ :\ 6;\ \ \ \ \ \ \ \textcolor{comment}{//\ Buffer\ sample\ count\ watermark}}
+\DoxyCodeLine{00921\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g2__t_a5488758316225a587e6bff387918bfea}{wake\_src\_buf}}\ :\ 1;\ \ \ \textcolor{comment}{//\ Buffer\ WAKE-\/to-\/SLEEP\ transition\ source\ enable}}
+\DoxyCodeLine{00922\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g2__t_a8669dfdbb6d699dc115c35afcc92ef3d}{buf\_flush}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Buffer\ flush\ enable}}
+\DoxyCodeLine{00923\ }
+\DoxyCodeLine{00924\ \ \ \ \ \}b;}
+\DoxyCodeLine{00925\ }
+\DoxyCodeLine{00926\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g2__t_a78c9c96f9b7e9176ba2524c6fa3a4504}{w}};}
+\DoxyCodeLine{00927\ }
+\DoxyCodeLine{00928\ \}\mbox{\hyperlink{union_f_x_l_s8974___b_u_f___c_o_n_f_i_g2__t}{FXLS8974\_BUF\_CONFIG2\_t}};}
+\DoxyCodeLine{00929\ }
+\DoxyCodeLine{00930\ \textcolor{comment}{//\ Orientation\ status\ register\ bit\ fields}}
+\DoxyCodeLine{00931\ }
+\DoxyCodeLine{00932\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00933\ \{}
+\DoxyCodeLine{00934\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00935\ \ \ \ \ \{}
+\DoxyCodeLine{00936\ }
+\DoxyCodeLine{00937\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___s_t_a_t_u_s__t_a8a860e3946a69e8ef33520c0fcd0f8b3}{bafro}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Back\ or\ front\ orientation}}
+\DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___s_t_a_t_u_s__t_a2a1d23b5c4d1490cf7a84a0d912a4291}{lapo}}\ :\ 2;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Landscape/Portrait\ orientation}}
+\DoxyCodeLine{00939\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___s_t_a_t_u_s__t_a65e6465df21c4f118bedf184cfdc5a3b}{\_reserved\_}}\ :\ 3;}
+\DoxyCodeLine{00940\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___s_t_a_t_u_s__t_a0b2116983bd5da4e7143e00306575e71}{lo}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Z-\/tilt\ angle\ lockout}}
+\DoxyCodeLine{00941\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___s_t_a_t_u_s__t_a64759c122796b2db3f742f989c602451}{new\_orient}}\ :\ 1;\ \ \ \textcolor{comment}{//\ Orientation\ status\ change\ flag}}
+\DoxyCodeLine{00942\ }
+\DoxyCodeLine{00943\ \ \ \ \ \}b;}
+\DoxyCodeLine{00944\ }
+\DoxyCodeLine{00945\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___s_t_a_t_u_s__t_ad729bb1d4eeada95bc8a530648a02ff0}{w}};}
+\DoxyCodeLine{00946\ }
+\DoxyCodeLine{00947\ \}\mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___s_t_a_t_u_s__t}{FXLS8974\_ORIENT\_STATUS\_t}};}
+\DoxyCodeLine{00948\ }
+\DoxyCodeLine{00949\ \textcolor{comment}{//\ Orientation\ configuration\ register\ bit\ fields}}
+\DoxyCodeLine{00950\ }
+\DoxyCodeLine{00951\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00952\ \{}
+\DoxyCodeLine{00953\ }
+\DoxyCodeLine{00954\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00955\ \ \ \ \ \{}
+\DoxyCodeLine{00956\ }
+\DoxyCodeLine{00957\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___c_o_n_f_i_g__t_a4b7fc2e6cc2d812c81acd9533ff584f3}{\_reserved\_}}\ :\ 6;}
+\DoxyCodeLine{00958\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___c_o_n_f_i_g__t_a1ccdb38504c9ea0d85b84e9bd07da172}{orient\_enable}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ Orientation\ detection\ function\ enable}}
+\DoxyCodeLine{00959\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___c_o_n_f_i_g__t_a14b8e34350e56bfebfe17c312a4dc26c}{orient\_dbcntm}}\ :\ 1;\ \ \ \ \ \textcolor{comment}{//\ \ Orientation\ debounce\ counter\ mode\ selection}}
+\DoxyCodeLine{00960\ }
+\DoxyCodeLine{00961\ \ \ \ \ \}b;}
+\DoxyCodeLine{00962\ }
+\DoxyCodeLine{00963\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___c_o_n_f_i_g__t_a6f5ba8c1f023168937ed77fd845d3662}{w}};}
+\DoxyCodeLine{00964\ }
+\DoxyCodeLine{00965\ \}\mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___c_o_n_f_i_g__t}{FXLS8974\_ORIENT\_CONFIG\_t}};}
+\DoxyCodeLine{00966\ }
+\DoxyCodeLine{00967\ \textcolor{comment}{//\ Orientation\ BF\ z\ component\ register\ bit\ fields}}
+\DoxyCodeLine{00968\ }
+\DoxyCodeLine{00969\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00970\ \{}
+\DoxyCodeLine{00971\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00972\ \ \ \ \ \{}
+\DoxyCodeLine{00973\ }
+\DoxyCodeLine{00974\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___b_f___z_c_o_m_p__t_ab316f67769e5745517239755e20eb21d}{orient\_zlock}}\ :\ 3;\ \ \ \textcolor{comment}{//\ Z-\/lock\ out\ angle\ threshold}}
+\DoxyCodeLine{00975\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___b_f___z_c_o_m_p__t_ad0546cff9bead0dcffeb762426b1b39c}{\_reserved\_}}\ :\ 3;}
+\DoxyCodeLine{00976\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___b_f___z_c_o_m_p__t_a77ed1920c7a875d13622aa55994583c7}{orient\_bkfr}}\ :\ 2;\ \ \ \ \ \textcolor{comment}{//\ Back-\/Up\ /\ Front-\/Up\ trip\ angle\ threshold}}
+\DoxyCodeLine{00977\ }
+\DoxyCodeLine{00978\ \ \ \ \ \}b;}
+\DoxyCodeLine{00979\ }
+\DoxyCodeLine{00980\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___b_f___z_c_o_m_p__t_a0001f03a8dc618ea6efe82db5abb83be}{w}};}
+\DoxyCodeLine{00981\ }
+\DoxyCodeLine{00982\ \}\mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___b_f___z_c_o_m_p__t}{FXLS8974\_ORIENT\_BF\_ZCOMP\_t}};}
+\DoxyCodeLine{00983\ }
+\DoxyCodeLine{00984\ \textcolor{comment}{//\ Orientation\ threshold\ register\ bit\ fields}}
+\DoxyCodeLine{00985\ }
+\DoxyCodeLine{00986\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00987\ \{}
+\DoxyCodeLine{00988\ }
+\DoxyCodeLine{00989\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00990\ \ \ \ \ \{}
+\DoxyCodeLine{00991\ }
+\DoxyCodeLine{00992\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___t_h_s___r_e_g__t_a7cdf37ffa5ccc5eb10910467ecab0068}{hys}}\ :\ 3;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ORIENT\_HYS[2:0]}}
+\DoxyCodeLine{00993\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___t_h_s___r_e_g__t_ab245bfa22d864946d581b5bfc78df57f}{orient\_ths}}\ :\ 5;\ \ \ \textcolor{comment}{//\ ORIENT\_THS[4:0]\ value}}
+\DoxyCodeLine{00994\ }
+\DoxyCodeLine{00995\ \ \ \ \ \}b;}
+\DoxyCodeLine{00996\ }
+\DoxyCodeLine{00997\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___t_h_s___r_e_g__t_a93c00c43b24bbd876f3df401bb3df396}{w}};}
+\DoxyCodeLine{00998\ }
+\DoxyCodeLine{00999\ \}\mbox{\hyperlink{union_f_x_l_s8974___o_r_i_e_n_t___t_h_s___r_e_g__t}{FXLS8974\_ORIENT\_THS\_REG\_t}};}
+\DoxyCodeLine{01000\ }
+\DoxyCodeLine{01001\ \textcolor{comment}{//\ Sensor\ data\ change\ detection\ function\ 1\ register\ bit\ fields}}
+\DoxyCodeLine{01002\ }
+\DoxyCodeLine{01003\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{01004\ \{}
+\DoxyCodeLine{01005\ }
+\DoxyCodeLine{01006\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01007\ \ \ \ \ \{}
+\DoxyCodeLine{01008\ }
+\DoxyCodeLine{01009\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_a8c5db3922bd851eaaeeb3fc552f9b185}{z\_ot\_pol}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Z-\/axis\ outside\ of\ thresholds\ polarity\ flag}}
+\DoxyCodeLine{01010\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_af8f713b8edc7420102a9f3f497cc0627}{z\_ot\_ef}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Z-\/axis\ data\ or\ delta\ outside\ of\ upper\ and\ lower\ thresholds\ event\ flag}}
+\DoxyCodeLine{01011\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_ad138ecab59a5440ac1dfd091d9474d76}{y\_ot\_pol}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ Y-\/axis\ outside\ of\ thresholds\ polarity\ flag}}
+\DoxyCodeLine{01012\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_a0f7de17ebd4eedcf72293714a5ff1e9f}{y\_ot\_ef}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Y-\/axis\ data\ or\ delta\ outside\ of\ upper\ and\ lower\ thresholds\ event\ flag}}
+\DoxyCodeLine{01013\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_a8dda3b9daa3d22ad15c989e0b27edc02}{x\_ot\_pol}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ X-\/axis\ outside\ of\ thresholds\ polarity\ flag}}
+\DoxyCodeLine{01014\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_a027d7cade6e166015be523b6e7870da3}{x\_ot\_ef}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ X-\/axis\ data\ or\ delta\ outside\ of\ upper\ and\ lower\ thresholds\ event\ flag}}
+\DoxyCodeLine{01015\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_a397e45c89c5e239f0f3e7da1093f33dc}{\_reserved\_}}\ :\ 1;}
+\DoxyCodeLine{01016\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_a84c6acbae55619fa53a1b2029c16e62b}{ot\_ea}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ outside\ of\ thresholds\ event\ active\ flag}}
+\DoxyCodeLine{01017\ }
+\DoxyCodeLine{01018\ \ \ \ \ \}b;}
+\DoxyCodeLine{01019\ }
+\DoxyCodeLine{01020\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t_a77c254358a9a498b14ebca51f174e88a}{w}};}
+\DoxyCodeLine{01021\ }
+\DoxyCodeLine{01022\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c1__t}{FXLS8974\_SDCD\_INT\_SRC1\_t}};}
+\DoxyCodeLine{01023\ }
+\DoxyCodeLine{01024\ \textcolor{comment}{//\ Sensor\ data\ change\ detection\ function\ 2\ register\ bit\ fields}}
+\DoxyCodeLine{01025\ }
+\DoxyCodeLine{01026\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{01027\ \{}
+\DoxyCodeLine{01028\ }
+\DoxyCodeLine{01029\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01030\ \ \ \ \ \{}
+\DoxyCodeLine{01031\ }
+\DoxyCodeLine{01032\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_a3b1c5fedbb7135d102f2e3e6d25baea8}{\_reserved\_}}\ :\ 1;}
+\DoxyCodeLine{01033\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_ab30af1e22dd1006bc0fb65a5fd6cc077}{z\_wt\_ef}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Z-\/axis\ data\ or\ delta\ inside\ of\ upper\ and\ lower\ thresholds\ event\ flag}}
+\DoxyCodeLine{01034\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_acbd0610063ace67ff32b3ef005e36ee4}{\_reserved\_1}}\ :\ 1;}
+\DoxyCodeLine{01035\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_a2d6a52be43e44d06250bef21fc54ada8}{y\_wt\_ef}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Y-\/axis\ data\ or\ delta\ inside\ of\ upper\ and\ lower\ thresholds\ event\ flag}}
+\DoxyCodeLine{01036\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_a533d1f50971c365207780766627b968a}{\_reserved\_2}}\ :\ 1;}
+\DoxyCodeLine{01037\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_a26849e67d8e2257144c6783ce86c6271}{x\_wt\_ef}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ X-\/axis\ data\ or\ delta\ inside\ of\ upper\ and\ lower\ thresholds\ event\ flag}}
+\DoxyCodeLine{01038\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_a7c1819e9f6901ee2983dbea3a78e7d4c}{\_reserved\_3}}\ :\ 1;}
+\DoxyCodeLine{01039\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_ad7c834244bab11fc5f861b87f53fe2d3}{wt\_ea}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ within-\/thresholds\ event\ active\ flag}}
+\DoxyCodeLine{01040\ }
+\DoxyCodeLine{01041\ \ \ \ \ \}b;}
+\DoxyCodeLine{01042\ }
+\DoxyCodeLine{01043\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t_a1594caf2f5d4ea8d2385d38bcf11a800}{w}};}
+\DoxyCodeLine{01044\ }
+\DoxyCodeLine{01045\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___i_n_t___s_r_c2__t}{FXLS8974\_SDCD\_INT\_SRC2\_t}};}
+\DoxyCodeLine{01046\ }
+\DoxyCodeLine{01047\ \textcolor{comment}{//\ Sensor\ data\ change\ detection\ function\ 1\ register\ bit\ fields}}
+\DoxyCodeLine{01048\ }
+\DoxyCodeLine{01049\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{01050\ \{}
+\DoxyCodeLine{01051\ }
+\DoxyCodeLine{01052\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01053\ \ \ \ \ \{}
+\DoxyCodeLine{01054\ }
+\DoxyCodeLine{01055\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_ab8c44b500aa7a40f7008e76599d703fc}{z\_wt\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ function\ Z-\/axis\ within\ thresholds\ condition\ enable}}
+\DoxyCodeLine{01056\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_ac1aa020e5dfdc68aafddf858c0ff4f8e}{y\_wt\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ function\ Y-\/axis\ within\ thresholds\ condition\ enable}}
+\DoxyCodeLine{01057\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_a78dbbfbaa85d7d43af1b9d9ac26d6c53}{x\_wt\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ function\ X-\/axis\ within\ thresholds\ condition\ enable}}
+\DoxyCodeLine{01058\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_ac50e1de18955a9d99dc190f46213bedb}{z\_ot\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ function\ Z-\/axis\ outside\ of\ thresholds\ condition\ enable}}
+\DoxyCodeLine{01059\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_a563c893b18c45252d299f7255cc38656}{y\_ot\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ function\ Y-\/axis\ outside\ of\ thresholds\ condition\ enable}}
+\DoxyCodeLine{01060\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_ae1e69c902d07423cd98b49787269e19c}{x\_ot\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ function\ X-\/axis\ outside\ of\ thresholds\ condition\ enable}}
+\DoxyCodeLine{01061\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_af87c0eaf6a09a5649f93b39a1832c716}{wt\_ele}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ within\ thresholds\ event\ latch\ enable}}
+\DoxyCodeLine{01062\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_a47a3a9ca91ad0e58034ef0d51041f080}{ot\_ele}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ outside\ of\ thresholds\ event\ latch\ enable}}
+\DoxyCodeLine{01063\ }
+\DoxyCodeLine{01064\ \ \ \ \ \}b;}
+\DoxyCodeLine{01065\ }
+\DoxyCodeLine{01066\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t_a87aa3f7be0047a00fd4cc8d54d81d982}{w}};}
+\DoxyCodeLine{01067\ }
+\DoxyCodeLine{01068\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g1__t}{FXLS8974\_SDCD\_CONFIG1\_t}};}
+\DoxyCodeLine{01069\ }
+\DoxyCodeLine{01070\ \textcolor{comment}{//\ Sensor\ data\ change\ detection\ function\ 2\ register\ bit\ fields}}
+\DoxyCodeLine{01071\ }
+\DoxyCodeLine{01072\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{01073\ \{}
+\DoxyCodeLine{01074\ }
+\DoxyCodeLine{01075\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01076\ \ \ \ \ \{}
+\DoxyCodeLine{01077\ }
+\DoxyCodeLine{01078\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t_aa8d29cf71dedc72ecb9fe79d25047527}{ref\_upd}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ synchronous\ X/Y/Z\ reference\ values\ update\ bit}}
+\DoxyCodeLine{01079\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t_abeff4598683c89529bf26c254b5d10d7}{mode}}\ :\ 1;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ input\ data\ mode}}
+\DoxyCodeLine{01080\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t_a378b0034e70ecff2f6a88a7b754ccb3a}{wt\_log\_sel}}\ :\ 1;\ \ \ \textcolor{comment}{//\ SDCD\ within\ thresholds\ event\ logic\ selection}}
+\DoxyCodeLine{01081\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t_a2042a62e7f2e967a9189fdab72d3d253}{wt\_dbctm}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ within\ thresholds\ event\ debounce\ counter\ behavior}}
+\DoxyCodeLine{01082\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t_a77d135709e9e4d83a73d033d79ae4310}{ot\_dbctm}}\ :\ 1;\ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ outside\ of\ threshold\ event\ debounce\ counter\ behavior}}
+\DoxyCodeLine{01083\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t_a6429f9f258a36c2d8af9959e732c105b}{ref\_updm}}\ :\ 2;\ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ internal\ reference\ values\ update\ mode}}
+\DoxyCodeLine{01084\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t_a1f520ee73d67b77ffe84dbc23d9023be}{sdcd\_en}}\ :\ 1;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SDCD\ function}}
+\DoxyCodeLine{01085\ }
+\DoxyCodeLine{01086\ \ \ \ \ \}b;}
+\DoxyCodeLine{01087\ }
+\DoxyCodeLine{01088\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t_a326a11695de7fbf90fc1365afef1346d}{w}};}
+\DoxyCodeLine{01089\ }
+\DoxyCodeLine{01090\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t}{FXLS8974\_SDCD\_CONFIG2\_t}};}
+\DoxyCodeLine{01091\ }
+\DoxyCodeLine{01092\ \textcolor{comment}{//\ Self\ Test\ Configuration\ function\ 1\ register\ bit\ fields}}
+\DoxyCodeLine{01093\ }
+\DoxyCodeLine{01094\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{01095\ \{}
+\DoxyCodeLine{01096\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01097\ \ \ \ \ \{}
+\DoxyCodeLine{01098\ }
+\DoxyCodeLine{01099\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_l_f___t_e_s_t___c_o_n_f_i_g1__t_a15005f0b5e7783ab2970939de8af1087}{st\_idle}}\ :\ 5;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Self-\/Test\ Idle\ phase\ duration}}
+\DoxyCodeLine{01100\ }
+\DoxyCodeLine{01101\ \ \ \ \ \}b;}
+\DoxyCodeLine{01102\ }
+\DoxyCodeLine{01103\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_l_f___t_e_s_t___c_o_n_f_i_g1__t_adf6d15075062604b5470ad57c280deb4}{w}};}
+\DoxyCodeLine{01104\ }
+\DoxyCodeLine{01105\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_e_l_f___t_e_s_t___c_o_n_f_i_g1__t}{FXLS8974\_SELF\_TEST\_CONFIG1\_t}};}
+\DoxyCodeLine{01106\ }
+\DoxyCodeLine{01107\ \textcolor{comment}{//\ Self\ Test\ Configuration\ function\ 2\ register\ bit\ fields}}
+\DoxyCodeLine{01108\ }
+\DoxyCodeLine{01109\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{01110\ \{}
+\DoxyCodeLine{01111\ }
+\DoxyCodeLine{01112\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01113\ \ \ \ \ \{}
+\DoxyCodeLine{01114\ }
+\DoxyCodeLine{01115\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_l_f___t_e_s_t___c_o_n_f_i_g2__t_ab2ec74b66d5c81cb4edd91cb0954b3f4}{st\_dec}}\ :\ 4;\ \ \ \ \ \ \ \textcolor{comment}{//\ Self-\/Test\ measurement\ phase\ decimation\ factor}}
+\DoxyCodeLine{01116\ }
+\DoxyCodeLine{01117\ \ \ \ \ \}b;}
+\DoxyCodeLine{01118\ }
+\DoxyCodeLine{01119\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{union_f_x_l_s8974___s_e_l_f___t_e_s_t___c_o_n_f_i_g2__t_aee2b9f3500337e317a8fff1721618e36}{w}};}
+\DoxyCodeLine{01120\ }
+\DoxyCodeLine{01121\ \}\mbox{\hyperlink{union_f_x_l_s8974___s_e_l_f___t_e_s_t___c_o_n_f_i_g2__t}{FXLS8974\_SELF\_TEST\_CONFIG2\_t}};}
+\DoxyCodeLine{01122\ }
+\DoxyCodeLine{01123\ \textcolor{comment}{//\ Axis\ acceleration\ data\ structure}}
+\DoxyCodeLine{01124\ }
+\DoxyCodeLine{01125\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{01126\ \{}
+\DoxyCodeLine{01127\ }
+\DoxyCodeLine{01128\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01129\ \ \ \ \ \{}
+\DoxyCodeLine{01130\ }
+\DoxyCodeLine{01131\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{unionaxis__u_a20bce0b86c936bc36b682266fb95e4c6}{lsb}}\ :\ 8;}
+\DoxyCodeLine{01132\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{unionaxis__u_ac75e73ffbec69cf6cf1cc019ac5ec396}{msb}}\ :\ 4;}
+\DoxyCodeLine{01133\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{unionaxis__u_a8a2c582b68df827b23d6de52524f8f74}{reserved}}\ :\ 4;}
+\DoxyCodeLine{01134\ }
+\DoxyCodeLine{01135\ \ \ \ \ \}b;}
+\DoxyCodeLine{01136\ }
+\DoxyCodeLine{01137\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{unionaxis__u_aa0972d5060428e1ee3754ec7bd38de36}{arr}}[2];}
+\DoxyCodeLine{01138\ \ \ \ \ int16\_t\ \mbox{\hyperlink{unionaxis__u_ac6cfa026bb926bd0b18972e119761959}{w}};}
+\DoxyCodeLine{01139\ }
+\DoxyCodeLine{01140\ \}\mbox{\hyperlink{unionaxis__u}{axis\_u}};}
+\DoxyCodeLine{01141\ }
+\DoxyCodeLine{01142\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01143\ \{}
+\DoxyCodeLine{01144\ }
+\DoxyCodeLine{01145\ \ \ \ \ \mbox{\hyperlink{unionaxis__u}{axis\_u}}\ \mbox{\hyperlink{structaxis__accel_aa5b65ecfe655eb3aca56a0189d047378}{x}};}
+\DoxyCodeLine{01146\ \ \ \ \ \mbox{\hyperlink{unionaxis__u}{axis\_u}}\ \mbox{\hyperlink{structaxis__accel_a6add784a854fcb5c446918424e8b90df}{y}};}
+\DoxyCodeLine{01147\ \ \ \ \ \mbox{\hyperlink{unionaxis__u}{axis\_u}}\ \mbox{\hyperlink{structaxis__accel_aea68f85b38873783830d7792bc504036}{z}};}
+\DoxyCodeLine{01148\ }
+\DoxyCodeLine{01149\ \}\mbox{\hyperlink{structaxis__accel}{axis\_accel}};}
+\DoxyCodeLine{01150\ }
+\DoxyCodeLine{01151\ \textcolor{comment}{//\ I2C\ communication\ data\ structure}}
+\DoxyCodeLine{01152\ }
+\DoxyCodeLine{01153\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01154\ \{}
+\DoxyCodeLine{01155\ }
+\DoxyCodeLine{01156\ \ \ \ \ I2C\_HandleTypeDef\ *\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t_adc95d1b6b8f18f75fdc397d508ca774d}{pI2C\_instance}};}
+\DoxyCodeLine{01157\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t_a13e3dc0e146f167024eabf18464b5a86}{slaveAddress}};}
+\DoxyCodeLine{01158\ \ \ \ \ uint8\_t\ (*\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t_a51027c7151975c1bfe2e358229a5046d}{pI2C\_data\_Tx}})(I2C\_HandleTypeDef\ *hi2c,\ uint16\_t\ DevAddress,\ uint8\_t\ *pData,\ uint16\_t\ Size,\ uint32\_t\ opt);}
+\DoxyCodeLine{01159\ \ \ \ \ uint8\_t\ (*\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t_aa242900ad55ecad55a1dc4643a9fb082}{pI2C\_data\_Rx}})(I2C\_HandleTypeDef\ *hi2c,\ uint16\_t\ DevAddress,\ uint8\_t\ *pData,\ uint16\_t\ Size,\ uint32\_t\ opt);}
+\DoxyCodeLine{01160\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t_a04878e503666a9739c3de5f9c04380be}{data\_reg}};}
+\DoxyCodeLine{01161\ \ \ \ \ \mbox{\hyperlink{structaxis__accel}{axis\_accel}}\ \mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t_a761516c8da62e2af12459380784703ce}{axis\_data}};}
+\DoxyCodeLine{01162\ }
+\DoxyCodeLine{01163\ \}\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\_i2c\_sensorhandle\_t}};}
+\DoxyCodeLine{01164\ }
+\DoxyCodeLine{01165\ \textcolor{comment}{//\ Raw\ data\ structure}}
+\DoxyCodeLine{01166\ }
+\DoxyCodeLine{01167\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{01168\ \{}
+\DoxyCodeLine{01169\ }
+\DoxyCodeLine{01170\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structfxls8974__acceldata__t_a1b6013b5b7b536e090e9d2c1b790d910}{timestamp}};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ time,\ this\ sample\ was\ recorded}}
+\DoxyCodeLine{01171\ \ \ \ \ int16\_t\ \mbox{\hyperlink{structfxls8974__acceldata__t_aa7152f3a024c3a67dda40487bbcddba7}{accel}}[3];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ accel\ data}}
+\DoxyCodeLine{01172\ }
+\DoxyCodeLine{01173\ \}\mbox{\hyperlink{structfxls8974__acceldata__t}{fxls8974\_acceldata\_t}};}
+\DoxyCodeLine{01174\ }
+\DoxyCodeLine{01175\ \textcolor{comment}{//\ Global\ function\ prototypes}}
+\DoxyCodeLine{01176\ }
+\DoxyCodeLine{01177\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a5423888d2aadb1739f6d4fc5a8c10784}{FXLS8974\_I2C\_Init}}(\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\_i2c\_sensorhandle\_t}}\ *pSensorHandle,\ \textcolor{keywordtype}{void}\ *instance,\ \textcolor{keywordtype}{void}\ *pI2C\_funTx,\ \textcolor{keywordtype}{void}\ *pI2C\_funRx,\ uint16\_t\ sAddress);}
+\DoxyCodeLine{01178\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a3298ec17f6c11dfe0dc27eb67be4c87e}{FXLS8974\_I2C\_Configure}}(\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\_i2c\_sensorhandle\_t}}\ *pSensorHandle);}
+\DoxyCodeLine{01179\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a53f59beedaac696165a232583a767eba}{FXLS8974\_I2C\_ReadData}}(\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\_i2c\_sensorhandle\_t}}\ *pSensorHandle);}
+\DoxyCodeLine{01180\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_f_x_l_s8974_c_8h_ad8ad9f0be78f480a83fdb450fc06e4c6}{FXLS8974\_I2C\_DeInit}}(\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\_i2c\_sensorhandle\_t}}\ *pSensorHandle);}
+\DoxyCodeLine{01181\ }
+\DoxyCodeLine{01182\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_f_x_l_s8974_c_8h_a2c087ad06f66c538a6201aa16af53e6b}{FXLS8974\_I2C\_Read\_Int\_status}}(\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\_i2c\_sensorhandle\_t}}\ *pSensorHandle);}
+\DoxyCodeLine{01183\ }
+\DoxyCodeLine{01184\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_FXLS8974C\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

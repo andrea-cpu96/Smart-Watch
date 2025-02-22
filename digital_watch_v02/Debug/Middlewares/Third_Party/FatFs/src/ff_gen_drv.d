@@ -45,7 +45,6 @@ Middlewares/Third_Party/FatFs/src/ff_gen_drv.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h \
  ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h
 ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
 ../Middlewares/Third_Party/FatFs/src/diskio.h:
@@ -94,6 +93,5 @@ Middlewares/Third_Party/FatFs/src/ff_gen_drv.o: \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/bsp_driver_sd.h:
 ../FATFS/Target/fatfs_platform.h:

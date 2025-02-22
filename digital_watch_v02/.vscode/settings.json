@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "fxls8974c.h": "c",
+        "fatfs.h": "c",
+        "arm_math.h": "c",
+        "main.h": "c",
+        "avi_parser.h": "c"
+    }
+}

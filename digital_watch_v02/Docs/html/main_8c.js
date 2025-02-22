@@ -1,0 +1,28 @@
+var main_8c =
+[
+    [ "Error_Handler", "group___global___functions___def.html#ga1730ffe1e560465665eb47d9264826f9", null ],
+    [ "get_acc_addr", "group___global___functions___def.html#ga0b9693342408ca6428bb64c48aa8d853", null ],
+    [ "main", "group___global___functions___def.html#ga840291bc02cba5474a4cb46a9b9566fe", null ],
+    [ "MX_ADC1_Init", "group___global___functions___def.html#gacccd58aa70215a6b184ad242312ffd0c", null ],
+    [ "MX_DMA2D_Init", "group___private___functions___proto.html#ga7d9c3a9121d5b51430d011fe8b154cb9", null ],
+    [ "MX_DMA_Init", "group___private___functions___proto.html#ga608dc9e9bcaf978f1611f3ec57670f64", null ],
+    [ "MX_GPIO_Init", "group___private___functions___proto.html#gae89fdd15729ad41a66911190fcbab23a", null ],
+    [ "MX_I2C1_Init", "group___private___functions___proto.html#ga4230d11f81d0b16e112f1cc3f40cb42f", null ],
+    [ "MX_JPEG_Init", "group___private___functions___proto.html#gafe3a78aec141d26fd5b0f30ddf25d57f", null ],
+    [ "MX_RTC_Init", "group___private___functions___proto.html#ga54909c9e8ca1af96208ae7a8cf1e9468", null ],
+    [ "MX_SDMMC1_SD_Init", "group___private___functions___proto.html#gacf574beec452648ff8d5744093e87f56", null ],
+    [ "MX_SPI1_Init", "group___private___functions___proto.html#ga28dbf2494083ac5f39daa87bf09e4eb3", null ],
+    [ "print_log", "group___private___functions___proto.html#ga175216d102c6b720e2465b40300aa0b6", null ],
+    [ "SystemClock_Config", "group___global___functions___def.html#ga70af21c671abfcc773614a9a4f63d920", null ],
+    [ "test_process", "group___private___functions___proto.html#gada2153669f502a41f77c2e51ef659a86", null ],
+    [ "acc_Handle", "group___global___variables.html#ga70dd12a542eba81dff3c93d3d031eb3d", null ],
+    [ "DMA2D_Handle", "group___global___variables.html#ga0eb77858345f8c20c4be148635925c01", null ],
+    [ "hadc1", "group___global___variables.html#ga22b804736f5648d52f639b2647d4ed13", null ],
+    [ "hdma_spi1_tx", "group___global___variables.html#gac8cdcfbb7adfcccc5717da58e1e10ae4", null ],
+    [ "hi2c1", "group___global___variables.html#gaf7b2c26e44dadaaa798a5c3d82914ba7", null ],
+    [ "hrtc", "group___global___variables.html#gaa0c7fca836406ade332e1e3f1039d8ab", null ],
+    [ "hsd1", "group___global___variables.html#gad0b867cf724e111d6329c1eb91f3b30b", null ],
+    [ "hspi1", "group___global___variables.html#ga9c6222bae4d0328dd843ae099623b40b", null ],
+    [ "JPEG_Handle", "group___global___variables.html#gaf494da9e67b938daeb411c7cd1ceefc8", null ],
+    [ "JPEG_Info", "group___global___variables.html#ga3dce51a08c86d3235a9741ada2cd6111", null ]
+];

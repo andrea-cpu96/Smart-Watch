@@ -1,0 +1,269 @@
+\doxysection{Core/\+Src/\+FXLS8974C.c File Reference}
+\hypertarget{_f_x_l_s8974_c_8c}{}\label{_f_x_l_s8974_c_8c}\index{Core/Src/FXLS8974C.c@{Core/Src/FXLS8974C.c}}
+{\ttfamily \#include "{}FXLS8974\+C.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_f_x_l_s8974_c_8c_adeeffd0faed93b1b5f62b4ca50668948}{MAX\+\_\+\+ITERATIONS\+\_\+\+NUM}}~1000000
+\item 
+\#define \mbox{\hyperlink{_f_x_l_s8974_c_8c_a8989b0a82b3a1da6c0fac6b18c2af94a}{REG\+\_\+\+SET}}(val,  shift)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{_f_x_l_s8974_c_8c_a946abac61b9d8132aa06523b9b646cc7}{i2c\+\_\+register\+\_\+set}} (\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sensor\+Handle, uint8\+\_\+t reg\+\_\+addr, uint8\+\_\+t val, uint8\+\_\+t mask, uint8\+\_\+t shift)
+\begin{DoxyCompactList}\small\item\em i2c\+\_\+register\+\_\+set \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{_f_x_l_s8974_c_8c_a82e62af24baf036d644ac9df466af349}{i2c\+\_\+register\+\_\+get}} (\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sensor\+Handle, uint8\+\_\+t reg\+\_\+addr, uint8\+\_\+t \texorpdfstring{$\ast$}{*}reg\+\_\+data)
+\begin{DoxyCompactList}\small\item\em i2c\+\_\+register\+\_\+get \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_f_x_l_s8974_c_8c_a5423888d2aadb1739f6d4fc5a8c10784}{FXLS8974\+\_\+\+I2\+C\+\_\+\+Init}} (\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sensor\+Handle, void \texorpdfstring{$\ast$}{*}instance, void \texorpdfstring{$\ast$}{*}p\+I2\+C\+\_\+fun\+Tx, void \texorpdfstring{$\ast$}{*}p\+I2\+C\+\_\+fun\+Rx, uint16\+\_\+t s\+Address)
+\begin{DoxyCompactList}\small\item\em FXLS8974\+\_\+\+I2\+C\+\_\+\+Init. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_f_x_l_s8974_c_8c_a3298ec17f6c11dfe0dc27eb67be4c87e}{FXLS8974\+\_\+\+I2\+C\+\_\+\+Configure}} (\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sensor\+Handle)
+\begin{DoxyCompactList}\small\item\em FXLS8974\+\_\+\+I2\+C\+\_\+\+Configure. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_f_x_l_s8974_c_8c_a53f59beedaac696165a232583a767eba}{FXLS8974\+\_\+\+I2\+C\+\_\+\+Read\+Data}} (\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sensor\+Handle)
+\begin{DoxyCompactList}\small\item\em FXLS8974\+\_\+\+I2\+C\+\_\+\+Read\+Data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_f_x_l_s8974_c_8c_a2c087ad06f66c538a6201aa16af53e6b}{FXLS8974\+\_\+\+I2\+C\+\_\+\+Read\+\_\+\+Int\+\_\+status}} (\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sensor\+Handle)
+\begin{DoxyCompactList}\small\item\em FXLS8974\+\_\+\+I2\+C\+\_\+\+Read\+\_\+\+Int\+\_\+status. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_f_x_l_s8974_c_8c_ad8ad9f0be78f480a83fdb450fc06e4c6}{FXLS8974\+\_\+\+I2\+C\+\_\+\+De\+Init}} (\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sensor\+Handle)
+\begin{DoxyCompactList}\small\item\em FXLS8974\+\_\+\+I2\+C\+\_\+\+De\+Init. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_f_x_l_s8974_c_8c_aa258e0eb52bbc34002a46dc2db89a84b}{HAL\+\_\+\+I2\+C\+\_\+\+Master\+Tx\+Cplt\+Callback}} (I2\+C\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hi2c)
+\begin{DoxyCompactList}\small\item\em HAL\+\_\+\+I2\+C\+\_\+\+Master\+Tx\+Cplt\+Callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_f_x_l_s8974_c_8c_a5782358f977ddf450b203fc075833a1d}{HAL\+\_\+\+I2\+C\+\_\+\+Master\+Rx\+Cplt\+Callback}} (I2\+C\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hi2c)
+\begin{DoxyCompactList}\small\item\em HAL\+\_\+\+I2\+C\+\_\+\+Master\+Rx\+Cplt\+Callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile uint8\+\_\+t \mbox{\hyperlink{_f_x_l_s8974_c_8c_af473bdc1357489ab67b856553a0ac757}{i2c\+\_\+tx\+\_\+cplt}} = 0
+\begin{DoxyCompactList}\small\item\em I2C transmission complete flag. \end{DoxyCompactList}\item 
+volatile uint8\+\_\+t \mbox{\hyperlink{_f_x_l_s8974_c_8c_aac8cd7ae584ca47af833eeaf91e88d54}{i2c\+\_\+rx\+\_\+cplt}} = 0
+\begin{DoxyCompactList}\small\item\em I2C receive complete flag. \end{DoxyCompactList}\item 
+volatile uint8\+\_\+t \mbox{\hyperlink{_f_x_l_s8974_c_8c_af6bce1def63a0aba91769a93f578e934}{i2c\+\_\+repeated\+\_\+start}} = 0
+\begin{DoxyCompactList}\small\item\em I2C repeated start flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_f_x_l_s8974_c_8c_adeeffd0faed93b1b5f62b4ca50668948}\index{FXLS8974C.c@{FXLS8974C.c}!MAX\_ITERATIONS\_NUM@{MAX\_ITERATIONS\_NUM}}
+\index{MAX\_ITERATIONS\_NUM@{MAX\_ITERATIONS\_NUM}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_ITERATIONS\_NUM}{MAX\_ITERATIONS\_NUM}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_adeeffd0faed93b1b5f62b4ca50668948} 
+\#define MAX\+\_\+\+ITERATIONS\+\_\+\+NUM~1000000}
+
+\Hypertarget{_f_x_l_s8974_c_8c_a8989b0a82b3a1da6c0fac6b18c2af94a}\index{FXLS8974C.c@{FXLS8974C.c}!REG\_SET@{REG\_SET}}
+\index{REG\_SET@{REG\_SET}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{REG\_SET}{REG\_SET}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_a8989b0a82b3a1da6c0fac6b18c2af94a} 
+\#define REG\+\_\+\+SET(\begin{DoxyParamCaption}\item[{}]{val}{, }\item[{}]{shift}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(val\ <<\ shift)}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_f_x_l_s8974_c_8c_a3298ec17f6c11dfe0dc27eb67be4c87e}\index{FXLS8974C.c@{FXLS8974C.c}!FXLS8974\_I2C\_Configure@{FXLS8974\_I2C\_Configure}}
+\index{FXLS8974\_I2C\_Configure@{FXLS8974\_I2C\_Configure}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{FXLS8974\_I2C\_Configure()}{FXLS8974\_I2C\_Configure()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_a3298ec17f6c11dfe0dc27eb67be4c87e} 
+int FXLS8974\+\_\+\+I2\+C\+\_\+\+Configure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sensor\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+FXLS8974\+\_\+\+I2\+C\+\_\+\+Configure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sensor\+Handle} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_f_x_l_s8974_c_8c_ad8ad9f0be78f480a83fdb450fc06e4c6}\index{FXLS8974C.c@{FXLS8974C.c}!FXLS8974\_I2C\_DeInit@{FXLS8974\_I2C\_DeInit}}
+\index{FXLS8974\_I2C\_DeInit@{FXLS8974\_I2C\_DeInit}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{FXLS8974\_I2C\_DeInit()}{FXLS8974\_I2C\_DeInit()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_ad8ad9f0be78f480a83fdb450fc06e4c6} 
+int FXLS8974\+\_\+\+I2\+C\+\_\+\+De\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sensor\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+FXLS8974\+\_\+\+I2\+C\+\_\+\+De\+Init. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sensor\+Handle} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_f_x_l_s8974_c_8c_a5423888d2aadb1739f6d4fc5a8c10784}\index{FXLS8974C.c@{FXLS8974C.c}!FXLS8974\_I2C\_Init@{FXLS8974\_I2C\_Init}}
+\index{FXLS8974\_I2C\_Init@{FXLS8974\_I2C\_Init}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{FXLS8974\_I2C\_Init()}{FXLS8974\_I2C\_Init()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_a5423888d2aadb1739f6d4fc5a8c10784} 
+int FXLS8974\+\_\+\+I2\+C\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sensor\+Handle}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{instance}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{p\+I2\+C\+\_\+fun\+Tx}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{p\+I2\+C\+\_\+fun\+Rx}{, }\item[{uint16\+\_\+t}]{s\+Address}{}\end{DoxyParamCaption})}
+
+
+
+FXLS8974\+\_\+\+I2\+C\+\_\+\+Init. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sensor\+Handle} & \\
+\hline
+{\em instance} & \\
+\hline
+{\em p\+I2\+C\+\_\+fun\+Tx} & \\
+\hline
+{\em p\+I2\+C\+\_\+fun\+Rx} & \\
+\hline
+{\em s\+Address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_f_x_l_s8974_c_8c_a2c087ad06f66c538a6201aa16af53e6b}\index{FXLS8974C.c@{FXLS8974C.c}!FXLS8974\_I2C\_Read\_Int\_status@{FXLS8974\_I2C\_Read\_Int\_status}}
+\index{FXLS8974\_I2C\_Read\_Int\_status@{FXLS8974\_I2C\_Read\_Int\_status}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{FXLS8974\_I2C\_Read\_Int\_status()}{FXLS8974\_I2C\_Read\_Int\_status()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_a2c087ad06f66c538a6201aa16af53e6b} 
+void FXLS8974\+\_\+\+I2\+C\+\_\+\+Read\+\_\+\+Int\+\_\+status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sensor\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+FXLS8974\+\_\+\+I2\+C\+\_\+\+Read\+\_\+\+Int\+\_\+status. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sensor\+Handle} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_f_x_l_s8974_c_8c_a53f59beedaac696165a232583a767eba}\index{FXLS8974C.c@{FXLS8974C.c}!FXLS8974\_I2C\_ReadData@{FXLS8974\_I2C\_ReadData}}
+\index{FXLS8974\_I2C\_ReadData@{FXLS8974\_I2C\_ReadData}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{FXLS8974\_I2C\_ReadData()}{FXLS8974\_I2C\_ReadData()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_a53f59beedaac696165a232583a767eba} 
+int FXLS8974\+\_\+\+I2\+C\+\_\+\+Read\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sensor\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+FXLS8974\+\_\+\+I2\+C\+\_\+\+Read\+Data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sensor\+Handle} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_f_x_l_s8974_c_8c_a5782358f977ddf450b203fc075833a1d}\index{FXLS8974C.c@{FXLS8974C.c}!HAL\_I2C\_MasterRxCpltCallback@{HAL\_I2C\_MasterRxCpltCallback}}
+\index{HAL\_I2C\_MasterRxCpltCallback@{HAL\_I2C\_MasterRxCpltCallback}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_I2C\_MasterRxCpltCallback()}{HAL\_I2C\_MasterRxCpltCallback()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_a5782358f977ddf450b203fc075833a1d} 
+void HAL\+\_\+\+I2\+C\+\_\+\+Master\+Rx\+Cplt\+Callback (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hi2c}{}\end{DoxyParamCaption})}
+
+
+
+HAL\+\_\+\+I2\+C\+\_\+\+Master\+Rx\+Cplt\+Callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hi2c} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_f_x_l_s8974_c_8c_aa258e0eb52bbc34002a46dc2db89a84b}\index{FXLS8974C.c@{FXLS8974C.c}!HAL\_I2C\_MasterTxCpltCallback@{HAL\_I2C\_MasterTxCpltCallback}}
+\index{HAL\_I2C\_MasterTxCpltCallback@{HAL\_I2C\_MasterTxCpltCallback}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_I2C\_MasterTxCpltCallback()}{HAL\_I2C\_MasterTxCpltCallback()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_aa258e0eb52bbc34002a46dc2db89a84b} 
+void HAL\+\_\+\+I2\+C\+\_\+\+Master\+Tx\+Cplt\+Callback (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hi2c}{}\end{DoxyParamCaption})}
+
+
+
+HAL\+\_\+\+I2\+C\+\_\+\+Master\+Tx\+Cplt\+Callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hi2c} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_f_x_l_s8974_c_8c_a82e62af24baf036d644ac9df466af349}\index{FXLS8974C.c@{FXLS8974C.c}!i2c\_register\_get@{i2c\_register\_get}}
+\index{i2c\_register\_get@{i2c\_register\_get}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{i2c\_register\_get()}{i2c\_register\_get()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_a82e62af24baf036d644ac9df466af349} 
+static int i2c\+\_\+register\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sensor\+Handle}{, }\item[{uint8\+\_\+t}]{reg\+\_\+addr}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{reg\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+i2c\+\_\+register\+\_\+get 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sensor\+Handle} & \\
+\hline
+{\em reg\+\_\+addr} & \\
+\hline
+{\em reg\+\_\+data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_f_x_l_s8974_c_8c_a946abac61b9d8132aa06523b9b646cc7}\index{FXLS8974C.c@{FXLS8974C.c}!i2c\_register\_set@{i2c\_register\_set}}
+\index{i2c\_register\_set@{i2c\_register\_set}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{i2c\_register\_set()}{i2c\_register\_set()}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_a946abac61b9d8132aa06523b9b646cc7} 
+static int i2c\+\_\+register\+\_\+set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sensor\+Handle}{, }\item[{uint8\+\_\+t}]{reg\+\_\+addr}{, }\item[{uint8\+\_\+t}]{val}{, }\item[{uint8\+\_\+t}]{mask}{, }\item[{uint8\+\_\+t}]{shift}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+i2c\+\_\+register\+\_\+set 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sensor\+Handle} & \\
+\hline
+{\em reg\+\_\+addr} & \\
+\hline
+{\em val} & \\
+\hline
+{\em mask} & \\
+\hline
+{\em shift} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_f_x_l_s8974_c_8c_af6bce1def63a0aba91769a93f578e934}\index{FXLS8974C.c@{FXLS8974C.c}!i2c\_repeated\_start@{i2c\_repeated\_start}}
+\index{i2c\_repeated\_start@{i2c\_repeated\_start}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{i2c\_repeated\_start}{i2c\_repeated\_start}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_af6bce1def63a0aba91769a93f578e934} 
+volatile uint8\+\_\+t i2c\+\_\+repeated\+\_\+start = 0}
+
+
+
+I2C repeated start flag. 
+
+\Hypertarget{_f_x_l_s8974_c_8c_aac8cd7ae584ca47af833eeaf91e88d54}\index{FXLS8974C.c@{FXLS8974C.c}!i2c\_rx\_cplt@{i2c\_rx\_cplt}}
+\index{i2c\_rx\_cplt@{i2c\_rx\_cplt}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{i2c\_rx\_cplt}{i2c\_rx\_cplt}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_aac8cd7ae584ca47af833eeaf91e88d54} 
+volatile uint8\+\_\+t i2c\+\_\+rx\+\_\+cplt = 0}
+
+
+
+I2C receive complete flag. 
+
+\Hypertarget{_f_x_l_s8974_c_8c_af473bdc1357489ab67b856553a0ac757}\index{FXLS8974C.c@{FXLS8974C.c}!i2c\_tx\_cplt@{i2c\_tx\_cplt}}
+\index{i2c\_tx\_cplt@{i2c\_tx\_cplt}!FXLS8974C.c@{FXLS8974C.c}}
+\doxysubsubsection{\texorpdfstring{i2c\_tx\_cplt}{i2c\_tx\_cplt}}
+{\footnotesize\ttfamily \label{_f_x_l_s8974_c_8c_af473bdc1357489ab67b856553a0ac757} 
+volatile uint8\+\_\+t i2c\+\_\+tx\+\_\+cplt = 0}
+
+
+
+I2C transmission complete flag. 
+

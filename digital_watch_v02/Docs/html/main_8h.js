@@ -1,0 +1,37 @@
+var main_8h =
+[
+    [ "doubleFormat", "uniondouble_format.html", "uniondouble_format" ],
+    [ "color565", "main_8h.html#a8923437652621091f642ed424d08e297", null ],
+    [ "FXLS8974CF_INT_Pin", "main_8h.html#af4861013915f8d8e5402639488a4fd07", null ],
+    [ "FXLS8974CF_INT_Port", "main_8h.html#aff6392667789ebce1f37dd1a0e95bb09", null ],
+    [ "GC9A01_BL_GPIO_Port", "main_8h.html#a269de1ab4ef58602a90b7a82fbfb8696", null ],
+    [ "GC9A01_BL_Pin", "main_8h.html#a5108c61c071b9f4ad12b95bb89930e61", null ],
+    [ "GC9A01_CS_GPIO_Port", "main_8h.html#ad9ad87c8d3de619bbcd2463ec77a611b", null ],
+    [ "GC9A01_CS_Pin", "main_8h.html#a01f5ea0eabc05e1bf9df359ec4725bc2", null ],
+    [ "GC9A01_DC_GPIO_Port", "main_8h.html#a72b8ae16f4a894e5b8550e3d4bb482a4", null ],
+    [ "GC9A01_DC_Pin", "main_8h.html#a66c9281138e2416ffff6b888d1fd5a89", null ],
+    [ "GC9A01_RST_GPIO_Port", "main_8h.html#aa98f3eae4d81640c7ff2edd868eb8688", null ],
+    [ "GC9A01_RST_Pin", "main_8h.html#a80527ec4397c7a06ce86e9f67aa6331b", null ],
+    [ "MINUS_BTN_GPIO_Port", "main_8h.html#acac237635ad15710cd4b4f096127ae87", null ],
+    [ "MINUS_BTN_Pin", "main_8h.html#a7b837bf55c17f904ae2cfa11fdbd4b87", null ],
+    [ "PLUS_BTN_GPIO_Port", "main_8h.html#aad81297a10351f8d85713ad8aba3ef14", null ],
+    [ "PLUS_BTN_Pin", "main_8h.html#a83d63d87dc04e90280baaa097f75c9e6", null ],
+    [ "SET_BTN_GPIO_Port", "main_8h.html#aa6f91b392a8c8c447fe0ff02726a3e43", null ],
+    [ "SET_BTN_Pin", "main_8h.html#a0e4e0718db8a4c594ec085175773caad", null ],
+    [ "res", "main_8h.html#ab0bd7560790c13b656fd58e17e35143e", [
+      [ "NOT_OK", "main_8h.html#ab0bd7560790c13b656fd58e17e35143ead1ed6238e81cc264553d7e9f0cb9a618", null ],
+      [ "OK", "main_8h.html#ab0bd7560790c13b656fd58e17e35143ea2bc49ec37d6a5715dd23e85f1ff5bb59", null ]
+    ] ],
+    [ "Error_Handler", "group___global___functions___def.html#ga1730ffe1e560465665eb47d9264826f9", null ],
+    [ "get_acc_addr", "group___global___functions___def.html#ga0b9693342408ca6428bb64c48aa8d853", null ],
+    [ "MX_ADC1_Init", "group___global___functions___def.html#gacccd58aa70215a6b184ad242312ffd0c", null ],
+    [ "SystemClock_Config", "group___global___functions___def.html#ga70af21c671abfcc773614a9a4f63d920", null ],
+    [ "DMA2D_Handle", "group___global___variables.html#ga0eb77858345f8c20c4be148635925c01", null ],
+    [ "hadc1", "group___global___variables.html#ga22b804736f5648d52f639b2647d4ed13", null ],
+    [ "hdma_spi1_tx", "group___global___variables.html#gac8cdcfbb7adfcccc5717da58e1e10ae4", null ],
+    [ "hi2c1", "group___global___variables.html#gaf7b2c26e44dadaaa798a5c3d82914ba7", null ],
+    [ "hrtc", "group___global___variables.html#gaa0c7fca836406ade332e1e3f1039d8ab", null ],
+    [ "hspi1", "group___global___variables.html#ga9c6222bae4d0328dd843ae099623b40b", null ],
+    [ "JPEG_Handle", "group___global___variables.html#gaf494da9e67b938daeb411c7cd1ceefc8", null ],
+    [ "JPEG_Info", "group___global___variables.html#ga3dce51a08c86d3235a9741ada2cd6111", null ]
+];

@@ -1,0 +1,784 @@
+\doxysection{Core/\+Inc/stm32h7xx\+\_\+hal\+\_\+conf.h File Reference}
+\hypertarget{stm32h7xx__hal__conf_8h}{}\label{stm32h7xx__hal__conf_8h}\index{Core/Inc/stm32h7xx\_hal\_conf.h@{Core/Inc/stm32h7xx\_hal\_conf.h}}
+
+
+HAL configuration file.  
+
+
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+rcc.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+gpio.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+dma.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+mdma.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+dma2d.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+exti.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+cortex.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+adc.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+flash.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+hsem.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+i2c.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+jpeg.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+pwr.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+rtc.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+sd.\+h"{}}\newline
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal\+\_\+spi.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a877ae99e8c47a609ea97c888912bf75f}{HAL\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\begin{DoxyCompactList}\small\item\em This is the list of modules to be used in the HAL driver. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a476f1655c969ae57e89a74d98c75f43f}{HAL\+\_\+\+ADC\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_afc1fae3114937dae71e06e0c898ea583}{HAL\+\_\+\+DMA2\+D\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a4e01ae3f095b1d9949707d4c4748504e}{HAL\+\_\+\+JPEG\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a5b1d544516151cd8a18af91e3e1f336b}{HAL\+\_\+\+RTC\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a76205fe6419c395659ba3c31954bc2a9}{HAL\+\_\+\+SD\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a8ad4712bf4add56892d057778e826e0c}{HAL\+\_\+\+SPI\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a4e01ae3f095b1d9949707d4c4748504e}{HAL\+\_\+\+JPEG\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a86165f80d6078719ee0715afe13febf5}{HAL\+\_\+\+GPIO\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a6552186102a1131b2849ac55a582945d}{HAL\+\_\+\+DMA\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ab49f3c68a0418e0e8add6cbac6a6f020}{HAL\+\_\+\+MDMA\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ac3dd74314ed62ac8575e2f9f48b3ac48}{HAL\+\_\+\+RCC\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a7112575efe3740911f19a13e6b170fee}{HAL\+\_\+\+FLASH\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_aeb359e861d8a92c233c3229657dbcd74}{HAL\+\_\+\+EXTI\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ab51923c3716977d7923f49cc9d081aa8}{HAL\+\_\+\+PWR\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a19999766418b0224871f732d800841c6}{HAL\+\_\+\+I2\+C\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_aa9b5a3a425901e097de70092dbe31e0f}{HAL\+\_\+\+CORTEX\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_af8fbdda4c3cc74166e1cd7b9e65a36a4}{HAL\+\_\+\+HSEM\+\_\+\+MODULE\+\_\+\+ENABLED}}
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_aeafcff4f57440c60e64812dddd13e7cb}{HSE\+\_\+\+VALUE}}~(25000000\+UL)
+\begin{DoxyCompactList}\small\item\em Adjust the value of External High Speed oscillator (HSE) used in your application. This value is used by the RCC HAL module to compute the system frequency (when HSE is used as system clock source, directly or through the PLL). \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a68ecbc9b0a1a40a1ec9d18d5e9747c4f}{HSE\+\_\+\+STARTUP\+\_\+\+TIMEOUT}}~(100\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a4dcbff36a4b1cfd045c01d59084255d0}{CSI\+\_\+\+VALUE}}~(4000000\+UL)
+\begin{DoxyCompactList}\small\item\em Internal oscillator (CSI) default value. This value is the default CSI value after Reset. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_aaa8c76e274d0f6dd2cefb5d0b17fbc37}{HSI\+\_\+\+VALUE}}~(64000000\+UL)
+\begin{DoxyCompactList}\small\item\em Internal High Speed oscillator (HSI) value. This value is used by the RCC HAL module to compute the system frequency (when HSI is used as system clock source, directly or through the PLL). \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a7bbb9d19e5189a6ccd0fb6fa6177d20d}{LSE\+\_\+\+VALUE}}~(32768UL)
+\begin{DoxyCompactList}\small\item\em External Low Speed oscillator (LSE) value. This value is used by the UART, RTC HAL module to compute the system frequency. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a85e6fc812dc26f7161a04be2568a5462}{LSE\+\_\+\+STARTUP\+\_\+\+TIMEOUT}}~(5000\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a4872023e65449c0506aac3ea6bec99e9}{LSI\+\_\+\+VALUE}}~(32000\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a8c47c935e91e70569098b41718558648}{EXTERNAL\+\_\+\+CLOCK\+\_\+\+VALUE}}~12288000\+UL
+\begin{DoxyCompactList}\small\item\em External clock source for I2S peripheral This value is used by the I2S HAL module to compute the I2S clock source frequency, this source is inserted directly through I2\+S\+\_\+\+CKIN pad. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_aae550dad9f96d52cfce5e539adadbbb4}{VDD\+\_\+\+VALUE}}~(3300\+UL)
+\begin{DoxyCompactList}\small\item\em This is the HAL system configuration section. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ae27809d4959b9fd5b5d974e3e1c77d2e}{TICK\+\_\+\+INT\+\_\+\+PRIORITY}}~(15UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ad048ac737242c2c2cb9f4a72953d10ce}{USE\+\_\+\+RTOS}}~0
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a1f536ac7d8e274d77d384455b0bb994f}{USE\+\_\+\+SD\+\_\+\+TRANSCEIVER}}~0U
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a4c6fab687afc7ba4469b1b2d34472358}{USE\+\_\+\+SPI\+\_\+\+CRC}}~0U
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_acc33abd5393affd16cc4a1397839dfe4}{USE\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} ADC register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a4b1a233981ef5d96551ea1f08d1a7ea8}{USE\+\_\+\+HAL\+\_\+\+CEC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} CEC register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a94f0f5f870b8e45eab42cfe77e4210ed}{USE\+\_\+\+HAL\+\_\+\+COMP\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} COMP register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a382744674caee964d227d41574fe2b73}{USE\+\_\+\+HAL\+\_\+\+CORDIC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} CORDIC register callback disabled  \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_aab15bfcb9198618bda3d7e914193b466}{USE\+\_\+\+HAL\+\_\+\+CRYP\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} CRYP register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_af9580ae862dcc02cee7822030c48d6b8}{USE\+\_\+\+HAL\+\_\+\+DAC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} DAC register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a64a4d06cebee4009f08652637fbf161d}{USE\+\_\+\+HAL\+\_\+\+DCMI\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} DCMI register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a86882c5f53554e458434c836812093db}{USE\+\_\+\+HAL\+\_\+\+DFSDM\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} DFSDM register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ad3fd64734f71ef9c872f38dd0d0b8cb0}{USE\+\_\+\+HAL\+\_\+\+DMA2\+D\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} DMA2D register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a6c2182c3202253ba1a70c7d25122013c}{USE\+\_\+\+HAL\+\_\+\+DSI\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} DSI register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ac38f5d91c277dad9a16f7aebb2ed0661}{USE\+\_\+\+HAL\+\_\+\+DTS\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} DTS register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_aa24a8d7886d3a497a868d5bf2417bfdf}{USE\+\_\+\+HAL\+\_\+\+ETH\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} ETH register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a5d191a50c40ac4b4e38f9f614e37e48c}{USE\+\_\+\+HAL\+\_\+\+FDCAN\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} FDCAN register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a34a796bea8a48187716b99c6f14b14f2}{USE\+\_\+\+HAL\+\_\+\+FMAC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} FMAC register callback disabled  \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a80498b459859528918535b88fed54b28}{USE\+\_\+\+HAL\+\_\+\+NAND\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} NAND register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a7b38c01bd6621f3da5993d71eb5ff42e}{USE\+\_\+\+HAL\+\_\+\+NOR\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} NOR register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a0732f81973e1744fe9eec6d2f451faff}{USE\+\_\+\+HAL\+\_\+\+SDRAM\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SDRAM register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a5c7c04d57c22f5301f1ea589abc6f35f}{USE\+\_\+\+HAL\+\_\+\+SRAM\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SRAM register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a0390418ff6315463b6ef161c63a69d43}{USE\+\_\+\+HAL\+\_\+\+HASH\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} HASH register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a560b53001fb58138f7da15dbda8f58a6}{USE\+\_\+\+HAL\+\_\+\+HCD\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} HCD register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_acd6c6cdc7837c5de5c53d74f04dba1c2}{USE\+\_\+\+HAL\+\_\+\+GFXMMU\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} GFXMMU register callback disabled  \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a0c281b7bdebecbe9715d556f0f374fea}{USE\+\_\+\+HAL\+\_\+\+HRTIM\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} HRTIM register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a99be773f7f62b6277d1c87658e085725}{USE\+\_\+\+HAL\+\_\+\+I2\+C\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} I2C register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a1bdc791c35b20c7188b3d74fd6c30ebf}{USE\+\_\+\+HAL\+\_\+\+I2\+S\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} I2S register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a4a459bcaa046998e6939fc66b0831e96}{USE\+\_\+\+HAL\+\_\+\+IRDA\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} IRDA register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a044aaa922ca4462e5b6bd50524b889f0}{USE\+\_\+\+HAL\+\_\+\+JPEG\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} JPEG register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a5b148dcae2bf8f576fc69a349794df4c}{USE\+\_\+\+HAL\+\_\+\+LPTIM\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} LPTIM register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a2297103b8900168640d1225072361808}{USE\+\_\+\+HAL\+\_\+\+LTDC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} LTDC register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_afe84d3bf110ff2075d328cfcca268901}{USE\+\_\+\+HAL\+\_\+\+MDIOS\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} MDIO register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ae595e885d73a91a83fbdc20f7affcd42}{USE\+\_\+\+HAL\+\_\+\+MMC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} MMC register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a2c51d4e89cd75f4629092d46ca26a750}{USE\+\_\+\+HAL\+\_\+\+OPAMP\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} MDIO register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ae00e6e294a508210a4b970aaadfdf0c3}{USE\+\_\+\+HAL\+\_\+\+OSPI\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} OSPI register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_aaaf022ff0feeecbe5f69b613fb3efed5}{USE\+\_\+\+HAL\+\_\+\+OTFDEC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} OTFDEC register callback disabled  \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_afd18c04aa4a4a54446df8083be875a00}{USE\+\_\+\+HAL\+\_\+\+PCD\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} PCD register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a95cbcf73c2ae3aea55fb62502ed224a2}{USE\+\_\+\+HAL\+\_\+\+QSPI\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} QSPI register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a9b01c64d19f0d4839b7da08bd61c7ff7}{USE\+\_\+\+HAL\+\_\+\+RNG\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} RNG register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a54badbcdb096ce802d2eed981cbbc31a}{USE\+\_\+\+HAL\+\_\+\+RTC\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} RTC register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a0e2ac47c259fc72ef188c0406a2af803}{USE\+\_\+\+HAL\+\_\+\+SAI\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SAI register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_acccbc010792c242ce6aae30b7c6f40df}{USE\+\_\+\+HAL\+\_\+\+SD\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SD register callback disabled      \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a43bb2335641440326db0f05526c1bff9}{USE\+\_\+\+HAL\+\_\+\+SMARTCARD\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SMARTCARD register callback disabled \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a91d326d554db420a247bd4eec1951961}{USE\+\_\+\+HAL\+\_\+\+SPDIFRX\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SPDIFRX register callback disabled \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a74cae3ff25398b4a06a579a7164a8518}{USE\+\_\+\+HAL\+\_\+\+SMBUS\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SMBUS register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a8d8be2d7e4ed5bfc7b64f60ba604c749}{USE\+\_\+\+HAL\+\_\+\+SPI\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SPI register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a48fef0bec993bbeeaec5f6a3dd40c7cc}{USE\+\_\+\+HAL\+\_\+\+SWPMI\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} SWPMI register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a5ef4d67cd7630f6e2e67d17370fbffdb}{USE\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} TIM register callback disabled     \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a68c6c7c633e6cb378824020ef00a5701}{USE\+\_\+\+HAL\+\_\+\+UART\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} UART register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ac79983d623c7f760c5077618a453561b}{USE\+\_\+\+HAL\+\_\+\+USART\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} USART register callback disabled   \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a6879802837c27d8761d8a8fdab626891}{USE\+\_\+\+HAL\+\_\+\+WWDG\+\_\+\+REGISTER\+\_\+\+CALLBACKS}}~0U /\texorpdfstring{$\ast$}{*} WWDG register callback disabled    \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a5e866f31df5199c37b4b308d1217438f}{ETH\+\_\+\+TX\+\_\+\+DESC\+\_\+\+CNT}}~4U  /\texorpdfstring{$\ast$}{*} number of Ethernet Tx DMA descriptors \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a0b99b9470bf6c94292daa07be1cc19cb}{ETH\+\_\+\+RX\+\_\+\+DESC\+\_\+\+CNT}}~4U  /\texorpdfstring{$\ast$}{*} number of Ethernet Rx DMA descriptors \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a8f14073c39307808d97c6111fce0c47e}{ETH\+\_\+\+MAC\+\_\+\+ADDR0}}~(0x02\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ac011896a4a0f1d07b81239a6f79e60d4}{ETH\+\_\+\+MAC\+\_\+\+ADDR1}}~(0x00\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a500c83fdcd1b99dd1aae943a9e1e0b26}{ETH\+\_\+\+MAC\+\_\+\+ADDR2}}~(0x00\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a4b2e9a9c2ab5d797e0133a872a069801}{ETH\+\_\+\+MAC\+\_\+\+ADDR3}}~(0x00\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_acbd4f065064eea67aba012112bfc555b}{ETH\+\_\+\+MAC\+\_\+\+ADDR4}}~(0x00\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_ac4b54c34ee3d1b39ea7681c5c7ce4e75}{ETH\+\_\+\+MAC\+\_\+\+ADDR5}}~(0x00\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32h7xx__hal__conf_8h_a631dea7b230e600555f979c62af1de21}{assert\+\_\+param}}(expr)
+\begin{DoxyCompactList}\small\item\em Uncomment the line below to expanse the "{}assert\+\_\+param"{} macro in the HAL drivers code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+HAL configuration file. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2017 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{stm32h7xx__hal__conf_8h_a631dea7b230e600555f979c62af1de21}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!assert\_param@{assert\_param}}
+\index{assert\_param@{assert\_param}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{assert\_param}{assert\_param}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a631dea7b230e600555f979c62af1de21} 
+\#define assert\+\_\+param(\begin{DoxyParamCaption}\item[{}]{expr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((void)0U)}
+
+\end{DoxyCode}
+
+
+Uncomment the line below to expanse the "{}assert\+\_\+param"{} macro in the HAL drivers code. 
+
+Include module\textquotesingle{}s header file \Hypertarget{stm32h7xx__hal__conf_8h_a4dcbff36a4b1cfd045c01d59084255d0}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!CSI\_VALUE@{CSI\_VALUE}}
+\index{CSI\_VALUE@{CSI\_VALUE}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{CSI\_VALUE}{CSI\_VALUE}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a4dcbff36a4b1cfd045c01d59084255d0} 
+\#define CSI\+\_\+\+VALUE~(4000000\+UL)}
+
+
+
+Internal oscillator (CSI) default value. This value is the default CSI value after Reset. 
+
+Value of the Internal oscillator in Hz \Hypertarget{stm32h7xx__hal__conf_8h_a8f14073c39307808d97c6111fce0c47e}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!ETH\_MAC\_ADDR0@{ETH\_MAC\_ADDR0}}
+\index{ETH\_MAC\_ADDR0@{ETH\_MAC\_ADDR0}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{ETH\_MAC\_ADDR0}{ETH\_MAC\_ADDR0}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a8f14073c39307808d97c6111fce0c47e} 
+\#define ETH\+\_\+\+MAC\+\_\+\+ADDR0~(0x02\+UL)}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ac011896a4a0f1d07b81239a6f79e60d4}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!ETH\_MAC\_ADDR1@{ETH\_MAC\_ADDR1}}
+\index{ETH\_MAC\_ADDR1@{ETH\_MAC\_ADDR1}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{ETH\_MAC\_ADDR1}{ETH\_MAC\_ADDR1}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ac011896a4a0f1d07b81239a6f79e60d4} 
+\#define ETH\+\_\+\+MAC\+\_\+\+ADDR1~(0x00\+UL)}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a500c83fdcd1b99dd1aae943a9e1e0b26}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!ETH\_MAC\_ADDR2@{ETH\_MAC\_ADDR2}}
+\index{ETH\_MAC\_ADDR2@{ETH\_MAC\_ADDR2}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{ETH\_MAC\_ADDR2}{ETH\_MAC\_ADDR2}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a500c83fdcd1b99dd1aae943a9e1e0b26} 
+\#define ETH\+\_\+\+MAC\+\_\+\+ADDR2~(0x00\+UL)}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a4b2e9a9c2ab5d797e0133a872a069801}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!ETH\_MAC\_ADDR3@{ETH\_MAC\_ADDR3}}
+\index{ETH\_MAC\_ADDR3@{ETH\_MAC\_ADDR3}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{ETH\_MAC\_ADDR3}{ETH\_MAC\_ADDR3}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a4b2e9a9c2ab5d797e0133a872a069801} 
+\#define ETH\+\_\+\+MAC\+\_\+\+ADDR3~(0x00\+UL)}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_acbd4f065064eea67aba012112bfc555b}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!ETH\_MAC\_ADDR4@{ETH\_MAC\_ADDR4}}
+\index{ETH\_MAC\_ADDR4@{ETH\_MAC\_ADDR4}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{ETH\_MAC\_ADDR4}{ETH\_MAC\_ADDR4}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_acbd4f065064eea67aba012112bfc555b} 
+\#define ETH\+\_\+\+MAC\+\_\+\+ADDR4~(0x00\+UL)}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ac4b54c34ee3d1b39ea7681c5c7ce4e75}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!ETH\_MAC\_ADDR5@{ETH\_MAC\_ADDR5}}
+\index{ETH\_MAC\_ADDR5@{ETH\_MAC\_ADDR5}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{ETH\_MAC\_ADDR5}{ETH\_MAC\_ADDR5}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ac4b54c34ee3d1b39ea7681c5c7ce4e75} 
+\#define ETH\+\_\+\+MAC\+\_\+\+ADDR5~(0x00\+UL)}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a0b99b9470bf6c94292daa07be1cc19cb}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!ETH\_RX\_DESC\_CNT@{ETH\_RX\_DESC\_CNT}}
+\index{ETH\_RX\_DESC\_CNT@{ETH\_RX\_DESC\_CNT}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{ETH\_RX\_DESC\_CNT}{ETH\_RX\_DESC\_CNT}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a0b99b9470bf6c94292daa07be1cc19cb} 
+\#define ETH\+\_\+\+RX\+\_\+\+DESC\+\_\+\+CNT~4U  /\texorpdfstring{$\ast$}{*} number of Ethernet Rx DMA descriptors \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a5e866f31df5199c37b4b308d1217438f}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!ETH\_TX\_DESC\_CNT@{ETH\_TX\_DESC\_CNT}}
+\index{ETH\_TX\_DESC\_CNT@{ETH\_TX\_DESC\_CNT}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{ETH\_TX\_DESC\_CNT}{ETH\_TX\_DESC\_CNT}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a5e866f31df5199c37b4b308d1217438f} 
+\#define ETH\+\_\+\+TX\+\_\+\+DESC\+\_\+\+CNT~4U  /\texorpdfstring{$\ast$}{*} number of Ethernet Tx DMA descriptors \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a8c47c935e91e70569098b41718558648}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!EXTERNAL\_CLOCK\_VALUE@{EXTERNAL\_CLOCK\_VALUE}}
+\index{EXTERNAL\_CLOCK\_VALUE@{EXTERNAL\_CLOCK\_VALUE}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{EXTERNAL\_CLOCK\_VALUE}{EXTERNAL\_CLOCK\_VALUE}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a8c47c935e91e70569098b41718558648} 
+\#define EXTERNAL\+\_\+\+CLOCK\+\_\+\+VALUE~12288000\+UL}
+
+
+
+External clock source for I2S peripheral This value is used by the I2S HAL module to compute the I2S clock source frequency, this source is inserted directly through I2\+S\+\_\+\+CKIN pad. 
+
+\texorpdfstring{$<$}{<} Value of the Internal Low Speed oscillator in Hz The real value may vary depending on the variations in voltage and temperature. Value of the External clock in Hz \Hypertarget{stm32h7xx__hal__conf_8h_a476f1655c969ae57e89a74d98c75f43f}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_ADC\_MODULE\_ENABLED@{HAL\_ADC\_MODULE\_ENABLED}}
+\index{HAL\_ADC\_MODULE\_ENABLED@{HAL\_ADC\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_ADC\_MODULE\_ENABLED}{HAL\_ADC\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a476f1655c969ae57e89a74d98c75f43f} 
+\#define HAL\+\_\+\+ADC\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_aa9b5a3a425901e097de70092dbe31e0f}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_CORTEX\_MODULE\_ENABLED@{HAL\_CORTEX\_MODULE\_ENABLED}}
+\index{HAL\_CORTEX\_MODULE\_ENABLED@{HAL\_CORTEX\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_CORTEX\_MODULE\_ENABLED}{HAL\_CORTEX\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_aa9b5a3a425901e097de70092dbe31e0f} 
+\#define HAL\+\_\+\+CORTEX\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_afc1fae3114937dae71e06e0c898ea583}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_DMA2D\_MODULE\_ENABLED@{HAL\_DMA2D\_MODULE\_ENABLED}}
+\index{HAL\_DMA2D\_MODULE\_ENABLED@{HAL\_DMA2D\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_DMA2D\_MODULE\_ENABLED}{HAL\_DMA2D\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_afc1fae3114937dae71e06e0c898ea583} 
+\#define HAL\+\_\+\+DMA2\+D\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a6552186102a1131b2849ac55a582945d}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_DMA\_MODULE\_ENABLED@{HAL\_DMA\_MODULE\_ENABLED}}
+\index{HAL\_DMA\_MODULE\_ENABLED@{HAL\_DMA\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_DMA\_MODULE\_ENABLED}{HAL\_DMA\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a6552186102a1131b2849ac55a582945d} 
+\#define HAL\+\_\+\+DMA\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_aeb359e861d8a92c233c3229657dbcd74}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_EXTI\_MODULE\_ENABLED@{HAL\_EXTI\_MODULE\_ENABLED}}
+\index{HAL\_EXTI\_MODULE\_ENABLED@{HAL\_EXTI\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_EXTI\_MODULE\_ENABLED}{HAL\_EXTI\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_aeb359e861d8a92c233c3229657dbcd74} 
+\#define HAL\+\_\+\+EXTI\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a7112575efe3740911f19a13e6b170fee}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_FLASH\_MODULE\_ENABLED@{HAL\_FLASH\_MODULE\_ENABLED}}
+\index{HAL\_FLASH\_MODULE\_ENABLED@{HAL\_FLASH\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_FLASH\_MODULE\_ENABLED}{HAL\_FLASH\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a7112575efe3740911f19a13e6b170fee} 
+\#define HAL\+\_\+\+FLASH\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a86165f80d6078719ee0715afe13febf5}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_GPIO\_MODULE\_ENABLED@{HAL\_GPIO\_MODULE\_ENABLED}}
+\index{HAL\_GPIO\_MODULE\_ENABLED@{HAL\_GPIO\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_GPIO\_MODULE\_ENABLED}{HAL\_GPIO\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a86165f80d6078719ee0715afe13febf5} 
+\#define HAL\+\_\+\+GPIO\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_af8fbdda4c3cc74166e1cd7b9e65a36a4}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_HSEM\_MODULE\_ENABLED@{HAL\_HSEM\_MODULE\_ENABLED}}
+\index{HAL\_HSEM\_MODULE\_ENABLED@{HAL\_HSEM\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_HSEM\_MODULE\_ENABLED}{HAL\_HSEM\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_af8fbdda4c3cc74166e1cd7b9e65a36a4} 
+\#define HAL\+\_\+\+HSEM\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a19999766418b0224871f732d800841c6}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_I2C\_MODULE\_ENABLED@{HAL\_I2C\_MODULE\_ENABLED}}
+\index{HAL\_I2C\_MODULE\_ENABLED@{HAL\_I2C\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_I2C\_MODULE\_ENABLED}{HAL\_I2C\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a19999766418b0224871f732d800841c6} 
+\#define HAL\+\_\+\+I2\+C\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a4e01ae3f095b1d9949707d4c4748504e}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_JPEG\_MODULE\_ENABLED@{HAL\_JPEG\_MODULE\_ENABLED}}
+\index{HAL\_JPEG\_MODULE\_ENABLED@{HAL\_JPEG\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_JPEG\_MODULE\_ENABLED}{HAL\_JPEG\_MODULE\_ENABLED}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a4e01ae3f095b1d9949707d4c4748504e} 
+\#define HAL\+\_\+\+JPEG\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a4e01ae3f095b1d9949707d4c4748504e}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_JPEG\_MODULE\_ENABLED@{HAL\_JPEG\_MODULE\_ENABLED}}
+\index{HAL\_JPEG\_MODULE\_ENABLED@{HAL\_JPEG\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_JPEG\_MODULE\_ENABLED}{HAL\_JPEG\_MODULE\_ENABLED}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a4e01ae3f095b1d9949707d4c4748504e} 
+\#define HAL\+\_\+\+JPEG\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ab49f3c68a0418e0e8add6cbac6a6f020}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_MDMA\_MODULE\_ENABLED@{HAL\_MDMA\_MODULE\_ENABLED}}
+\index{HAL\_MDMA\_MODULE\_ENABLED@{HAL\_MDMA\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_MDMA\_MODULE\_ENABLED}{HAL\_MDMA\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ab49f3c68a0418e0e8add6cbac6a6f020} 
+\#define HAL\+\_\+\+MDMA\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a877ae99e8c47a609ea97c888912bf75f}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_MODULE\_ENABLED@{HAL\_MODULE\_ENABLED}}
+\index{HAL\_MODULE\_ENABLED@{HAL\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_MODULE\_ENABLED}{HAL\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a877ae99e8c47a609ea97c888912bf75f} 
+\#define HAL\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+
+
+This is the list of modules to be used in the HAL driver. 
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ab51923c3716977d7923f49cc9d081aa8}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_PWR\_MODULE\_ENABLED@{HAL\_PWR\_MODULE\_ENABLED}}
+\index{HAL\_PWR\_MODULE\_ENABLED@{HAL\_PWR\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_PWR\_MODULE\_ENABLED}{HAL\_PWR\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ab51923c3716977d7923f49cc9d081aa8} 
+\#define HAL\+\_\+\+PWR\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ac3dd74314ed62ac8575e2f9f48b3ac48}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_RCC\_MODULE\_ENABLED@{HAL\_RCC\_MODULE\_ENABLED}}
+\index{HAL\_RCC\_MODULE\_ENABLED@{HAL\_RCC\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_RCC\_MODULE\_ENABLED}{HAL\_RCC\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ac3dd74314ed62ac8575e2f9f48b3ac48} 
+\#define HAL\+\_\+\+RCC\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a5b1d544516151cd8a18af91e3e1f336b}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_RTC\_MODULE\_ENABLED@{HAL\_RTC\_MODULE\_ENABLED}}
+\index{HAL\_RTC\_MODULE\_ENABLED@{HAL\_RTC\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_RTC\_MODULE\_ENABLED}{HAL\_RTC\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a5b1d544516151cd8a18af91e3e1f336b} 
+\#define HAL\+\_\+\+RTC\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a76205fe6419c395659ba3c31954bc2a9}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_SD\_MODULE\_ENABLED@{HAL\_SD\_MODULE\_ENABLED}}
+\index{HAL\_SD\_MODULE\_ENABLED@{HAL\_SD\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_SD\_MODULE\_ENABLED}{HAL\_SD\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a76205fe6419c395659ba3c31954bc2a9} 
+\#define HAL\+\_\+\+SD\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a8ad4712bf4add56892d057778e826e0c}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HAL\_SPI\_MODULE\_ENABLED@{HAL\_SPI\_MODULE\_ENABLED}}
+\index{HAL\_SPI\_MODULE\_ENABLED@{HAL\_SPI\_MODULE\_ENABLED}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HAL\_SPI\_MODULE\_ENABLED}{HAL\_SPI\_MODULE\_ENABLED}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a8ad4712bf4add56892d057778e826e0c} 
+\#define HAL\+\_\+\+SPI\+\_\+\+MODULE\+\_\+\+ENABLED}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a68ecbc9b0a1a40a1ec9d18d5e9747c4f}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HSE\_STARTUP\_TIMEOUT@{HSE\_STARTUP\_TIMEOUT}}
+\index{HSE\_STARTUP\_TIMEOUT@{HSE\_STARTUP\_TIMEOUT}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HSE\_STARTUP\_TIMEOUT}{HSE\_STARTUP\_TIMEOUT}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a68ecbc9b0a1a40a1ec9d18d5e9747c4f} 
+\#define HSE\+\_\+\+STARTUP\+\_\+\+TIMEOUT~(100\+UL)}
+
+Time out for HSE start up, in ms \Hypertarget{stm32h7xx__hal__conf_8h_aeafcff4f57440c60e64812dddd13e7cb}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HSE\_VALUE@{HSE\_VALUE}}
+\index{HSE\_VALUE@{HSE\_VALUE}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HSE\_VALUE}{HSE\_VALUE}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_aeafcff4f57440c60e64812dddd13e7cb} 
+\#define HSE\+\_\+\+VALUE~(25000000\+UL)}
+
+
+
+Adjust the value of External High Speed oscillator (HSE) used in your application. This value is used by the RCC HAL module to compute the system frequency (when HSE is used as system clock source, directly or through the PLL). 
+
+Value of the External oscillator in Hz \+: FPGA case fixed to 60MHZ \Hypertarget{stm32h7xx__hal__conf_8h_aaa8c76e274d0f6dd2cefb5d0b17fbc37}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!HSI\_VALUE@{HSI\_VALUE}}
+\index{HSI\_VALUE@{HSI\_VALUE}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{HSI\_VALUE}{HSI\_VALUE}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_aaa8c76e274d0f6dd2cefb5d0b17fbc37} 
+\#define HSI\+\_\+\+VALUE~(64000000\+UL)}
+
+
+
+Internal High Speed oscillator (HSI) value. This value is used by the RCC HAL module to compute the system frequency (when HSI is used as system clock source, directly or through the PLL). 
+
+Value of the Internal oscillator in Hz \Hypertarget{stm32h7xx__hal__conf_8h_a85e6fc812dc26f7161a04be2568a5462}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!LSE\_STARTUP\_TIMEOUT@{LSE\_STARTUP\_TIMEOUT}}
+\index{LSE\_STARTUP\_TIMEOUT@{LSE\_STARTUP\_TIMEOUT}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LSE\_STARTUP\_TIMEOUT}{LSE\_STARTUP\_TIMEOUT}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a85e6fc812dc26f7161a04be2568a5462} 
+\#define LSE\+\_\+\+STARTUP\+\_\+\+TIMEOUT~(5000\+UL)}
+
+Time out for LSE start up, in ms \Hypertarget{stm32h7xx__hal__conf_8h_a7bbb9d19e5189a6ccd0fb6fa6177d20d}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!LSE\_VALUE@{LSE\_VALUE}}
+\index{LSE\_VALUE@{LSE\_VALUE}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LSE\_VALUE}{LSE\_VALUE}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a7bbb9d19e5189a6ccd0fb6fa6177d20d} 
+\#define LSE\+\_\+\+VALUE~(32768UL)}
+
+
+
+External Low Speed oscillator (LSE) value. This value is used by the UART, RTC HAL module to compute the system frequency. 
+
+Value of the External oscillator in Hz \Hypertarget{stm32h7xx__hal__conf_8h_a4872023e65449c0506aac3ea6bec99e9}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!LSI\_VALUE@{LSI\_VALUE}}
+\index{LSI\_VALUE@{LSI\_VALUE}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LSI\_VALUE}{LSI\_VALUE}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a4872023e65449c0506aac3ea6bec99e9} 
+\#define LSI\+\_\+\+VALUE~(32000\+UL)}
+
+LSI Typical Value in Hz \Hypertarget{stm32h7xx__hal__conf_8h_ae27809d4959b9fd5b5d974e3e1c77d2e}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!TICK\_INT\_PRIORITY@{TICK\_INT\_PRIORITY}}
+\index{TICK\_INT\_PRIORITY@{TICK\_INT\_PRIORITY}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{TICK\_INT\_PRIORITY}{TICK\_INT\_PRIORITY}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ae27809d4959b9fd5b5d974e3e1c77d2e} 
+\#define TICK\+\_\+\+INT\+\_\+\+PRIORITY~(15UL)}
+
+tick interrupt priority \Hypertarget{stm32h7xx__hal__conf_8h_acc33abd5393affd16cc4a1397839dfe4}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_ADC\_REGISTER\_CALLBACKS@{USE\_HAL\_ADC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_ADC\_REGISTER\_CALLBACKS@{USE\_HAL\_ADC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_ADC\_REGISTER\_CALLBACKS}{USE\_HAL\_ADC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_acc33abd5393affd16cc4a1397839dfe4} 
+\#define USE\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} ADC register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a4b1a233981ef5d96551ea1f08d1a7ea8}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_CEC\_REGISTER\_CALLBACKS@{USE\_HAL\_CEC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_CEC\_REGISTER\_CALLBACKS@{USE\_HAL\_CEC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_CEC\_REGISTER\_CALLBACKS}{USE\_HAL\_CEC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a4b1a233981ef5d96551ea1f08d1a7ea8} 
+\#define USE\+\_\+\+HAL\+\_\+\+CEC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} CEC register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a94f0f5f870b8e45eab42cfe77e4210ed}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_COMP\_REGISTER\_CALLBACKS@{USE\_HAL\_COMP\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_COMP\_REGISTER\_CALLBACKS@{USE\_HAL\_COMP\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_COMP\_REGISTER\_CALLBACKS}{USE\_HAL\_COMP\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a94f0f5f870b8e45eab42cfe77e4210ed} 
+\#define USE\+\_\+\+HAL\+\_\+\+COMP\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} COMP register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a382744674caee964d227d41574fe2b73}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_CORDIC\_REGISTER\_CALLBACKS@{USE\_HAL\_CORDIC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_CORDIC\_REGISTER\_CALLBACKS@{USE\_HAL\_CORDIC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_CORDIC\_REGISTER\_CALLBACKS}{USE\_HAL\_CORDIC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a382744674caee964d227d41574fe2b73} 
+\#define USE\+\_\+\+HAL\+\_\+\+CORDIC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} CORDIC register callback disabled  \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_aab15bfcb9198618bda3d7e914193b466}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_CRYP\_REGISTER\_CALLBACKS@{USE\_HAL\_CRYP\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_CRYP\_REGISTER\_CALLBACKS@{USE\_HAL\_CRYP\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_CRYP\_REGISTER\_CALLBACKS}{USE\_HAL\_CRYP\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_aab15bfcb9198618bda3d7e914193b466} 
+\#define USE\+\_\+\+HAL\+\_\+\+CRYP\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} CRYP register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_af9580ae862dcc02cee7822030c48d6b8}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_DAC\_REGISTER\_CALLBACKS@{USE\_HAL\_DAC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_DAC\_REGISTER\_CALLBACKS@{USE\_HAL\_DAC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_DAC\_REGISTER\_CALLBACKS}{USE\_HAL\_DAC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_af9580ae862dcc02cee7822030c48d6b8} 
+\#define USE\+\_\+\+HAL\+\_\+\+DAC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} DAC register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a64a4d06cebee4009f08652637fbf161d}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_DCMI\_REGISTER\_CALLBACKS@{USE\_HAL\_DCMI\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_DCMI\_REGISTER\_CALLBACKS@{USE\_HAL\_DCMI\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_DCMI\_REGISTER\_CALLBACKS}{USE\_HAL\_DCMI\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a64a4d06cebee4009f08652637fbf161d} 
+\#define USE\+\_\+\+HAL\+\_\+\+DCMI\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} DCMI register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a86882c5f53554e458434c836812093db}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_DFSDM\_REGISTER\_CALLBACKS@{USE\_HAL\_DFSDM\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_DFSDM\_REGISTER\_CALLBACKS@{USE\_HAL\_DFSDM\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_DFSDM\_REGISTER\_CALLBACKS}{USE\_HAL\_DFSDM\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a86882c5f53554e458434c836812093db} 
+\#define USE\+\_\+\+HAL\+\_\+\+DFSDM\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} DFSDM register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ad3fd64734f71ef9c872f38dd0d0b8cb0}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_DMA2D\_REGISTER\_CALLBACKS@{USE\_HAL\_DMA2D\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_DMA2D\_REGISTER\_CALLBACKS@{USE\_HAL\_DMA2D\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_DMA2D\_REGISTER\_CALLBACKS}{USE\_HAL\_DMA2D\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ad3fd64734f71ef9c872f38dd0d0b8cb0} 
+\#define USE\+\_\+\+HAL\+\_\+\+DMA2\+D\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} DMA2D register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a6c2182c3202253ba1a70c7d25122013c}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_DSI\_REGISTER\_CALLBACKS@{USE\_HAL\_DSI\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_DSI\_REGISTER\_CALLBACKS@{USE\_HAL\_DSI\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_DSI\_REGISTER\_CALLBACKS}{USE\_HAL\_DSI\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a6c2182c3202253ba1a70c7d25122013c} 
+\#define USE\+\_\+\+HAL\+\_\+\+DSI\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} DSI register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ac38f5d91c277dad9a16f7aebb2ed0661}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_DTS\_REGISTER\_CALLBACKS@{USE\_HAL\_DTS\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_DTS\_REGISTER\_CALLBACKS@{USE\_HAL\_DTS\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_DTS\_REGISTER\_CALLBACKS}{USE\_HAL\_DTS\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ac38f5d91c277dad9a16f7aebb2ed0661} 
+\#define USE\+\_\+\+HAL\+\_\+\+DTS\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} DTS register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_aa24a8d7886d3a497a868d5bf2417bfdf}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_ETH\_REGISTER\_CALLBACKS@{USE\_HAL\_ETH\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_ETH\_REGISTER\_CALLBACKS@{USE\_HAL\_ETH\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_ETH\_REGISTER\_CALLBACKS}{USE\_HAL\_ETH\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_aa24a8d7886d3a497a868d5bf2417bfdf} 
+\#define USE\+\_\+\+HAL\+\_\+\+ETH\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} ETH register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a5d191a50c40ac4b4e38f9f614e37e48c}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_FDCAN\_REGISTER\_CALLBACKS@{USE\_HAL\_FDCAN\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_FDCAN\_REGISTER\_CALLBACKS@{USE\_HAL\_FDCAN\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_FDCAN\_REGISTER\_CALLBACKS}{USE\_HAL\_FDCAN\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a5d191a50c40ac4b4e38f9f614e37e48c} 
+\#define USE\+\_\+\+HAL\+\_\+\+FDCAN\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} FDCAN register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a34a796bea8a48187716b99c6f14b14f2}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_FMAC\_REGISTER\_CALLBACKS@{USE\_HAL\_FMAC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_FMAC\_REGISTER\_CALLBACKS@{USE\_HAL\_FMAC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_FMAC\_REGISTER\_CALLBACKS}{USE\_HAL\_FMAC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a34a796bea8a48187716b99c6f14b14f2} 
+\#define USE\+\_\+\+HAL\+\_\+\+FMAC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} FMAC register callback disabled  \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_acd6c6cdc7837c5de5c53d74f04dba1c2}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_GFXMMU\_REGISTER\_CALLBACKS@{USE\_HAL\_GFXMMU\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_GFXMMU\_REGISTER\_CALLBACKS@{USE\_HAL\_GFXMMU\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_GFXMMU\_REGISTER\_CALLBACKS}{USE\_HAL\_GFXMMU\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_acd6c6cdc7837c5de5c53d74f04dba1c2} 
+\#define USE\+\_\+\+HAL\+\_\+\+GFXMMU\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} GFXMMU register callback disabled  \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a0390418ff6315463b6ef161c63a69d43}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_HASH\_REGISTER\_CALLBACKS@{USE\_HAL\_HASH\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_HASH\_REGISTER\_CALLBACKS@{USE\_HAL\_HASH\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_HASH\_REGISTER\_CALLBACKS}{USE\_HAL\_HASH\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a0390418ff6315463b6ef161c63a69d43} 
+\#define USE\+\_\+\+HAL\+\_\+\+HASH\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} HASH register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a560b53001fb58138f7da15dbda8f58a6}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_HCD\_REGISTER\_CALLBACKS@{USE\_HAL\_HCD\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_HCD\_REGISTER\_CALLBACKS@{USE\_HAL\_HCD\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_HCD\_REGISTER\_CALLBACKS}{USE\_HAL\_HCD\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a560b53001fb58138f7da15dbda8f58a6} 
+\#define USE\+\_\+\+HAL\+\_\+\+HCD\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} HCD register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a0c281b7bdebecbe9715d556f0f374fea}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_HRTIM\_REGISTER\_CALLBACKS@{USE\_HAL\_HRTIM\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_HRTIM\_REGISTER\_CALLBACKS@{USE\_HAL\_HRTIM\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_HRTIM\_REGISTER\_CALLBACKS}{USE\_HAL\_HRTIM\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a0c281b7bdebecbe9715d556f0f374fea} 
+\#define USE\+\_\+\+HAL\+\_\+\+HRTIM\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} HRTIM register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a99be773f7f62b6277d1c87658e085725}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_I2C\_REGISTER\_CALLBACKS@{USE\_HAL\_I2C\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_I2C\_REGISTER\_CALLBACKS@{USE\_HAL\_I2C\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_I2C\_REGISTER\_CALLBACKS}{USE\_HAL\_I2C\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a99be773f7f62b6277d1c87658e085725} 
+\#define USE\+\_\+\+HAL\+\_\+\+I2\+C\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} I2C register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a1bdc791c35b20c7188b3d74fd6c30ebf}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_I2S\_REGISTER\_CALLBACKS@{USE\_HAL\_I2S\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_I2S\_REGISTER\_CALLBACKS@{USE\_HAL\_I2S\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_I2S\_REGISTER\_CALLBACKS}{USE\_HAL\_I2S\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a1bdc791c35b20c7188b3d74fd6c30ebf} 
+\#define USE\+\_\+\+HAL\+\_\+\+I2\+S\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} I2S register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a4a459bcaa046998e6939fc66b0831e96}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_IRDA\_REGISTER\_CALLBACKS@{USE\_HAL\_IRDA\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_IRDA\_REGISTER\_CALLBACKS@{USE\_HAL\_IRDA\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_IRDA\_REGISTER\_CALLBACKS}{USE\_HAL\_IRDA\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a4a459bcaa046998e6939fc66b0831e96} 
+\#define USE\+\_\+\+HAL\+\_\+\+IRDA\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} IRDA register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a044aaa922ca4462e5b6bd50524b889f0}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_JPEG\_REGISTER\_CALLBACKS@{USE\_HAL\_JPEG\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_JPEG\_REGISTER\_CALLBACKS@{USE\_HAL\_JPEG\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_JPEG\_REGISTER\_CALLBACKS}{USE\_HAL\_JPEG\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a044aaa922ca4462e5b6bd50524b889f0} 
+\#define USE\+\_\+\+HAL\+\_\+\+JPEG\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} JPEG register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a5b148dcae2bf8f576fc69a349794df4c}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_LPTIM\_REGISTER\_CALLBACKS@{USE\_HAL\_LPTIM\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_LPTIM\_REGISTER\_CALLBACKS@{USE\_HAL\_LPTIM\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_LPTIM\_REGISTER\_CALLBACKS}{USE\_HAL\_LPTIM\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a5b148dcae2bf8f576fc69a349794df4c} 
+\#define USE\+\_\+\+HAL\+\_\+\+LPTIM\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} LPTIM register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a2297103b8900168640d1225072361808}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_LTDC\_REGISTER\_CALLBACKS@{USE\_HAL\_LTDC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_LTDC\_REGISTER\_CALLBACKS@{USE\_HAL\_LTDC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_LTDC\_REGISTER\_CALLBACKS}{USE\_HAL\_LTDC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a2297103b8900168640d1225072361808} 
+\#define USE\+\_\+\+HAL\+\_\+\+LTDC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} LTDC register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_afe84d3bf110ff2075d328cfcca268901}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_MDIOS\_REGISTER\_CALLBACKS@{USE\_HAL\_MDIOS\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_MDIOS\_REGISTER\_CALLBACKS@{USE\_HAL\_MDIOS\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_MDIOS\_REGISTER\_CALLBACKS}{USE\_HAL\_MDIOS\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_afe84d3bf110ff2075d328cfcca268901} 
+\#define USE\+\_\+\+HAL\+\_\+\+MDIOS\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} MDIO register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ae595e885d73a91a83fbdc20f7affcd42}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_MMC\_REGISTER\_CALLBACKS@{USE\_HAL\_MMC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_MMC\_REGISTER\_CALLBACKS@{USE\_HAL\_MMC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_MMC\_REGISTER\_CALLBACKS}{USE\_HAL\_MMC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ae595e885d73a91a83fbdc20f7affcd42} 
+\#define USE\+\_\+\+HAL\+\_\+\+MMC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} MMC register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a80498b459859528918535b88fed54b28}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_NAND\_REGISTER\_CALLBACKS@{USE\_HAL\_NAND\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_NAND\_REGISTER\_CALLBACKS@{USE\_HAL\_NAND\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_NAND\_REGISTER\_CALLBACKS}{USE\_HAL\_NAND\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a80498b459859528918535b88fed54b28} 
+\#define USE\+\_\+\+HAL\+\_\+\+NAND\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} NAND register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a7b38c01bd6621f3da5993d71eb5ff42e}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_NOR\_REGISTER\_CALLBACKS@{USE\_HAL\_NOR\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_NOR\_REGISTER\_CALLBACKS@{USE\_HAL\_NOR\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_NOR\_REGISTER\_CALLBACKS}{USE\_HAL\_NOR\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a7b38c01bd6621f3da5993d71eb5ff42e} 
+\#define USE\+\_\+\+HAL\+\_\+\+NOR\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} NOR register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a2c51d4e89cd75f4629092d46ca26a750}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_OPAMP\_REGISTER\_CALLBACKS@{USE\_HAL\_OPAMP\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_OPAMP\_REGISTER\_CALLBACKS@{USE\_HAL\_OPAMP\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_OPAMP\_REGISTER\_CALLBACKS}{USE\_HAL\_OPAMP\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a2c51d4e89cd75f4629092d46ca26a750} 
+\#define USE\+\_\+\+HAL\+\_\+\+OPAMP\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} MDIO register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ae00e6e294a508210a4b970aaadfdf0c3}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_OSPI\_REGISTER\_CALLBACKS@{USE\_HAL\_OSPI\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_OSPI\_REGISTER\_CALLBACKS@{USE\_HAL\_OSPI\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_OSPI\_REGISTER\_CALLBACKS}{USE\_HAL\_OSPI\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ae00e6e294a508210a4b970aaadfdf0c3} 
+\#define USE\+\_\+\+HAL\+\_\+\+OSPI\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} OSPI register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_aaaf022ff0feeecbe5f69b613fb3efed5}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_OTFDEC\_REGISTER\_CALLBACKS@{USE\_HAL\_OTFDEC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_OTFDEC\_REGISTER\_CALLBACKS@{USE\_HAL\_OTFDEC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_OTFDEC\_REGISTER\_CALLBACKS}{USE\_HAL\_OTFDEC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_aaaf022ff0feeecbe5f69b613fb3efed5} 
+\#define USE\+\_\+\+HAL\+\_\+\+OTFDEC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} OTFDEC register callback disabled  \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_afd18c04aa4a4a54446df8083be875a00}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_PCD\_REGISTER\_CALLBACKS@{USE\_HAL\_PCD\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_PCD\_REGISTER\_CALLBACKS@{USE\_HAL\_PCD\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_PCD\_REGISTER\_CALLBACKS}{USE\_HAL\_PCD\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_afd18c04aa4a4a54446df8083be875a00} 
+\#define USE\+\_\+\+HAL\+\_\+\+PCD\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} PCD register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a95cbcf73c2ae3aea55fb62502ed224a2}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_QSPI\_REGISTER\_CALLBACKS@{USE\_HAL\_QSPI\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_QSPI\_REGISTER\_CALLBACKS@{USE\_HAL\_QSPI\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_QSPI\_REGISTER\_CALLBACKS}{USE\_HAL\_QSPI\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a95cbcf73c2ae3aea55fb62502ed224a2} 
+\#define USE\+\_\+\+HAL\+\_\+\+QSPI\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} QSPI register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a9b01c64d19f0d4839b7da08bd61c7ff7}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_RNG\_REGISTER\_CALLBACKS@{USE\_HAL\_RNG\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_RNG\_REGISTER\_CALLBACKS@{USE\_HAL\_RNG\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_RNG\_REGISTER\_CALLBACKS}{USE\_HAL\_RNG\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a9b01c64d19f0d4839b7da08bd61c7ff7} 
+\#define USE\+\_\+\+HAL\+\_\+\+RNG\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} RNG register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a54badbcdb096ce802d2eed981cbbc31a}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_RTC\_REGISTER\_CALLBACKS@{USE\_HAL\_RTC\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_RTC\_REGISTER\_CALLBACKS@{USE\_HAL\_RTC\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_RTC\_REGISTER\_CALLBACKS}{USE\_HAL\_RTC\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a54badbcdb096ce802d2eed981cbbc31a} 
+\#define USE\+\_\+\+HAL\+\_\+\+RTC\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} RTC register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a0e2ac47c259fc72ef188c0406a2af803}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SAI\_REGISTER\_CALLBACKS@{USE\_HAL\_SAI\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SAI\_REGISTER\_CALLBACKS@{USE\_HAL\_SAI\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SAI\_REGISTER\_CALLBACKS}{USE\_HAL\_SAI\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a0e2ac47c259fc72ef188c0406a2af803} 
+\#define USE\+\_\+\+HAL\+\_\+\+SAI\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SAI register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_acccbc010792c242ce6aae30b7c6f40df}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SD\_REGISTER\_CALLBACKS@{USE\_HAL\_SD\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SD\_REGISTER\_CALLBACKS@{USE\_HAL\_SD\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SD\_REGISTER\_CALLBACKS}{USE\_HAL\_SD\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_acccbc010792c242ce6aae30b7c6f40df} 
+\#define USE\+\_\+\+HAL\+\_\+\+SD\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SD register callback disabled      \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a0732f81973e1744fe9eec6d2f451faff}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SDRAM\_REGISTER\_CALLBACKS@{USE\_HAL\_SDRAM\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SDRAM\_REGISTER\_CALLBACKS@{USE\_HAL\_SDRAM\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SDRAM\_REGISTER\_CALLBACKS}{USE\_HAL\_SDRAM\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a0732f81973e1744fe9eec6d2f451faff} 
+\#define USE\+\_\+\+HAL\+\_\+\+SDRAM\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SDRAM register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a43bb2335641440326db0f05526c1bff9}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SMARTCARD\_REGISTER\_CALLBACKS@{USE\_HAL\_SMARTCARD\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SMARTCARD\_REGISTER\_CALLBACKS@{USE\_HAL\_SMARTCARD\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SMARTCARD\_REGISTER\_CALLBACKS}{USE\_HAL\_SMARTCARD\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a43bb2335641440326db0f05526c1bff9} 
+\#define USE\+\_\+\+HAL\+\_\+\+SMARTCARD\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SMARTCARD register callback disabled \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a74cae3ff25398b4a06a579a7164a8518}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SMBUS\_REGISTER\_CALLBACKS@{USE\_HAL\_SMBUS\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SMBUS\_REGISTER\_CALLBACKS@{USE\_HAL\_SMBUS\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SMBUS\_REGISTER\_CALLBACKS}{USE\_HAL\_SMBUS\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a74cae3ff25398b4a06a579a7164a8518} 
+\#define USE\+\_\+\+HAL\+\_\+\+SMBUS\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SMBUS register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a91d326d554db420a247bd4eec1951961}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SPDIFRX\_REGISTER\_CALLBACKS@{USE\_HAL\_SPDIFRX\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SPDIFRX\_REGISTER\_CALLBACKS@{USE\_HAL\_SPDIFRX\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SPDIFRX\_REGISTER\_CALLBACKS}{USE\_HAL\_SPDIFRX\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a91d326d554db420a247bd4eec1951961} 
+\#define USE\+\_\+\+HAL\+\_\+\+SPDIFRX\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SPDIFRX register callback disabled \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a8d8be2d7e4ed5bfc7b64f60ba604c749}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SPI\_REGISTER\_CALLBACKS@{USE\_HAL\_SPI\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SPI\_REGISTER\_CALLBACKS@{USE\_HAL\_SPI\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SPI\_REGISTER\_CALLBACKS}{USE\_HAL\_SPI\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a8d8be2d7e4ed5bfc7b64f60ba604c749} 
+\#define USE\+\_\+\+HAL\+\_\+\+SPI\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SPI register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a5c7c04d57c22f5301f1ea589abc6f35f}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SRAM\_REGISTER\_CALLBACKS@{USE\_HAL\_SRAM\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SRAM\_REGISTER\_CALLBACKS@{USE\_HAL\_SRAM\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SRAM\_REGISTER\_CALLBACKS}{USE\_HAL\_SRAM\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a5c7c04d57c22f5301f1ea589abc6f35f} 
+\#define USE\+\_\+\+HAL\+\_\+\+SRAM\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SRAM register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a48fef0bec993bbeeaec5f6a3dd40c7cc}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_SWPMI\_REGISTER\_CALLBACKS@{USE\_HAL\_SWPMI\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_SWPMI\_REGISTER\_CALLBACKS@{USE\_HAL\_SWPMI\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_SWPMI\_REGISTER\_CALLBACKS}{USE\_HAL\_SWPMI\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a48fef0bec993bbeeaec5f6a3dd40c7cc} 
+\#define USE\+\_\+\+HAL\+\_\+\+SWPMI\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} SWPMI register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a5ef4d67cd7630f6e2e67d17370fbffdb}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_TIM\_REGISTER\_CALLBACKS@{USE\_HAL\_TIM\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_TIM\_REGISTER\_CALLBACKS@{USE\_HAL\_TIM\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_TIM\_REGISTER\_CALLBACKS}{USE\_HAL\_TIM\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a5ef4d67cd7630f6e2e67d17370fbffdb} 
+\#define USE\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} TIM register callback disabled     \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a68c6c7c633e6cb378824020ef00a5701}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_UART\_REGISTER\_CALLBACKS@{USE\_HAL\_UART\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_UART\_REGISTER\_CALLBACKS@{USE\_HAL\_UART\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_UART\_REGISTER\_CALLBACKS}{USE\_HAL\_UART\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a68c6c7c633e6cb378824020ef00a5701} 
+\#define USE\+\_\+\+HAL\+\_\+\+UART\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} UART register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ac79983d623c7f760c5077618a453561b}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_USART\_REGISTER\_CALLBACKS@{USE\_HAL\_USART\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_USART\_REGISTER\_CALLBACKS@{USE\_HAL\_USART\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_USART\_REGISTER\_CALLBACKS}{USE\_HAL\_USART\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ac79983d623c7f760c5077618a453561b} 
+\#define USE\+\_\+\+HAL\+\_\+\+USART\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} USART register callback disabled   \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a6879802837c27d8761d8a8fdab626891}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_HAL\_WWDG\_REGISTER\_CALLBACKS@{USE\_HAL\_WWDG\_REGISTER\_CALLBACKS}}
+\index{USE\_HAL\_WWDG\_REGISTER\_CALLBACKS@{USE\_HAL\_WWDG\_REGISTER\_CALLBACKS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_HAL\_WWDG\_REGISTER\_CALLBACKS}{USE\_HAL\_WWDG\_REGISTER\_CALLBACKS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a6879802837c27d8761d8a8fdab626891} 
+\#define USE\+\_\+\+HAL\+\_\+\+WWDG\+\_\+\+REGISTER\+\_\+\+CALLBACKS~0U /\texorpdfstring{$\ast$}{*} WWDG register callback disabled    \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_ad048ac737242c2c2cb9f4a72953d10ce}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_RTOS@{USE\_RTOS}}
+\index{USE\_RTOS@{USE\_RTOS}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_RTOS}{USE\_RTOS}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_ad048ac737242c2c2cb9f4a72953d10ce} 
+\#define USE\+\_\+\+RTOS~0}
+
+\Hypertarget{stm32h7xx__hal__conf_8h_a1f536ac7d8e274d77d384455b0bb994f}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_SD\_TRANSCEIVER@{USE\_SD\_TRANSCEIVER}}
+\index{USE\_SD\_TRANSCEIVER@{USE\_SD\_TRANSCEIVER}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_SD\_TRANSCEIVER}{USE\_SD\_TRANSCEIVER}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a1f536ac7d8e274d77d384455b0bb994f} 
+\#define USE\+\_\+\+SD\+\_\+\+TRANSCEIVER~0U}
+
+use u\+SD Transceiver \Hypertarget{stm32h7xx__hal__conf_8h_a4c6fab687afc7ba4469b1b2d34472358}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!USE\_SPI\_CRC@{USE\_SPI\_CRC}}
+\index{USE\_SPI\_CRC@{USE\_SPI\_CRC}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{USE\_SPI\_CRC}{USE\_SPI\_CRC}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_a4c6fab687afc7ba4469b1b2d34472358} 
+\#define USE\+\_\+\+SPI\+\_\+\+CRC~0U}
+
+use CRC in SPI \Hypertarget{stm32h7xx__hal__conf_8h_aae550dad9f96d52cfce5e539adadbbb4}\index{stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}!VDD\_VALUE@{VDD\_VALUE}}
+\index{VDD\_VALUE@{VDD\_VALUE}!stm32h7xx\_hal\_conf.h@{stm32h7xx\_hal\_conf.h}}
+\doxysubsubsection{\texorpdfstring{VDD\_VALUE}{VDD\_VALUE}}
+{\footnotesize\ttfamily \label{stm32h7xx__hal__conf_8h_aae550dad9f96d52cfce5e539adadbbb4} 
+\#define VDD\+\_\+\+VALUE~(3300\+UL)}
+
+
+
+This is the HAL system configuration section. 
+
+Value of VDD in mv 

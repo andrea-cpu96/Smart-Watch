@@ -13,13 +13,13 @@
 
 /* DEBUG SETTINGS */
 
-//#define DEBUG_TIME
+// #define DEBUG_TIME
 
 /* OPTIMIZZATION SETTINGS */
 
-//#define OPT
-//#define OPT2
-//#define OPT3
+// #define OPT
+// #define OPT2
+// #define OPT3
 
 /* POWER MANAGEMENT SETTINGS */
 
@@ -27,44 +27,44 @@
 
 /* MJPEG SETTINGS */
 
-#define MJPEG_VID_BUFFER_SIZE 		((uint32_t)(1024 *50))
-#define MJPEG_AUD_BUFFER_SIZE 		((uint32_t)(1024 *0))
+#define MJPEG_VID_BUFFER_SIZE ((uint32_t)(1024 * 50))
+#define MJPEG_AUD_BUFFER_SIZE ((uint32_t)(1024 * 0))
 
 /* DISPLAY SETTINGS */
 
-#define LCD_SIDE_SIZE				240
-#define DISPLAY_STANDBY_TIMER		59
-#define LCD_X_SIZE					LCD_SIDE_SIZE
-#define LCD_Y_SIZE					LCD_SIDE_SIZE
+#define LCD_SIDE_SIZE 240
+#define DISPLAY_STANDBY_TIMER 59
+#define LCD_X_SIZE LCD_SIDE_SIZE
+#define LCD_Y_SIZE LCD_SIDE_SIZE
 
 /* BLOCKS SETTINGS */
 
 #ifdef OPT3
-#define BLOCK_SIDE_SIZE				12
-#define BLOCKS_PER_RAW				( LCD_SIDE_SIZE / BLOCK_SIDE_SIZE )
-#define BLOCK_TOT_PIXELS			( BLOCK_SIDE_SIZE * BLOCK_SIDE_SIZE )
-#define BLOCK_NUM					( ( LCD_SIDE_SIZE * LCD_SIDE_SIZE ) / BLOCK_TOT_PIXELS )
+#define BLOCK_SIDE_SIZE 12
+#define BLOCKS_PER_RAW (LCD_SIDE_SIZE / BLOCK_SIDE_SIZE)
+#define BLOCK_TOT_PIXELS (BLOCK_SIDE_SIZE * BLOCK_SIDE_SIZE)
+#define BLOCK_NUM ((LCD_SIDE_SIZE * LCD_SIDE_SIZE) / BLOCK_TOT_PIXELS)
 #endif
 
 /* CIRCULAR MASK */
 
-#define R							( ( LCD_SIDE_SIZE / 2 ) - 1 ) // Ray of the round display
-#define SQUARE(x)					( (x) * (x) )
-#define PIX_TO_CIRC_COORD(p)		( ( p >= R) ? ( p - R ) : ( R - p ) ) // Put the pixel position in a circle reference (where the center is the 0 position)
-#define CIRCLE_MASK(px, py)			( ( SQUARE(PIX_TO_CIRC_COORD(px)) + SQUARE(PIX_TO_CIRC_COORD(py)) ) >= SQUARE(R) )
+#define R ((LCD_SIDE_SIZE / 2) - 1) // Ray of the round display
+#define SQUARE(x) ((x) * (x))
+#define PIX_TO_CIRC_COORD(p) ((p >= R) ? (p - R) : (R - p)) // Put the pixel position in a circle reference (where the center is the 0 position)
+#define CIRCLE_MASK(px, py) ((SQUARE(PIX_TO_CIRC_COORD(px)) + SQUARE(PIX_TO_CIRC_COORD(py))) >= SQUARE(R))
 
 /* OTHERS DEFINITIONS */
 
-#define DIFF_THRESHOLD				5
-#define PIXELS_DIFF(pix1, pix2)		( ( pix1 > pix2 ) ? ( pix1 - pix2 ) : ( pix2 - pix1 ) )
-#define PIXELS_COMP(pix1, pix2)		( PIXELS_DIFF(pix1, pix2) < DIFF_THRESHOLD )
+#define DIFF_THRESHOLD 5
+#define PIXELS_DIFF(pix1, pix2) ((pix1 > pix2) ? (pix1 - pix2) : (pix2 - pix1))
+#define PIXELS_COMP(pix1, pix2) (PIXELS_DIFF(pix1, pix2) < DIFF_THRESHOLD)
 
-#define RESET_ITER_NUM				30
+#define RESET_ITER_NUM 30
 
-#define HIGH_SIDE_R					4300.0
-#define LOW_SIDE_R					8200.0
-#define REVERT_VOLTAGE_DIV(v_read)	( ( ( LOW_SIDE_R + HIGH_SIDE_R ) / LOW_SIDE_R ) * v_read )
-#define BATTERY_THRESH				3.5
+#define HIGH_SIDE_R 4300.0
+#define LOW_SIDE_R 8200.0
+#define REVERT_VOLTAGE_DIV(v_read) (((LOW_SIDE_R + HIGH_SIDE_R) / LOW_SIDE_R) * v_read)
+#define BATTERY_THRESH 3.5
 
 enum mode
 {
@@ -77,7 +77,7 @@ enum mode
 enum display_status
 {
 
-	DISPLAY_OFF	= 0,
+	DISPLAY_OFF = 0,
 	DISPLAY_ON
 
 };
@@ -122,12 +122,12 @@ typedef struct
 	uint16_t height;
 	uint32_t frameCount;
 
-	int frameToSkip;							// Defines for each cycle how many frames time skip
-	float frame_time;	  						// Holds the time duration of the single frame
-	uint32_t actual_time; 						// Takes trace of the actual time
+	int frameToSkip;	  // Defines for each cycle how many frames time skip
+	float frame_time;	  // Holds the time duration of the single frame
+	uint32_t actual_time; // Takes trace of the actual time
 	uint32_t tick_offset;
 
-	uint32_t jpegOutDataAdreess; 				// Buffer for the decoded data
+	uint32_t jpegOutDataAdreess; // Buffer for the decoded data
 
 	enum mode video_mode;
 	enum settings set;
@@ -136,7 +136,7 @@ typedef struct
 
 	uint8_t display_status;
 
-}video_t;
+} video_t;
 
 typedef struct
 {
@@ -149,7 +149,7 @@ typedef struct
 
 	uint8_t minutes_offs;
 
-}time_t;
+} time_t;
 
 #ifdef OPT3
 typedef struct
@@ -159,9 +159,8 @@ typedef struct
 	uint8_t *buffer_frame1[BLOCK_SIDE_SIZE];
 	uint8_t *buffer_frame2[BLOCK_SIDE_SIZE];
 
-}block_t;
+} block_t;
 #endif
-
 
 extern __IO uint32_t Jpeg_HWDecodingEnd;
 extern uint8_t *outputData;
@@ -184,6 +183,5 @@ int smart_watch_test_display(void);
 int smart_watch_test_mjpeg(void);
 int smart_watch_test_accelerometer(fxls8974_i2c_sensorhandle_t *pSensorHandle);
 int smart_watch_test_adc(void);
-
 
 #endif /* EXAMPLE_USER_CM7_SMART_WATCH_H_ */

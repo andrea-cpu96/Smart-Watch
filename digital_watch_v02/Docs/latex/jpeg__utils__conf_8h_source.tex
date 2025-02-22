@@ -1,0 +1,59 @@
+\doxysection{jpeg\+\_\+utils\+\_\+conf.\+h}
+\hypertarget{jpeg__utils__conf_8h_source}{}\label{jpeg__utils__conf_8h_source}\index{Core/Inc/jpeg\_utils\_conf.h@{Core/Inc/jpeg\_utils\_conf.h}}
+\mbox{\hyperlink{jpeg__utils__conf_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ jpeg\_utils\_conf.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Copyright\ (C)\ 1991-\/1997,\ Thomas\ G.\ Lane.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Modified\ 1997-\/2011\ by\ Guido\ Vollbeding.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ the\ Independent\ JPEG\ Group's\ software.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ For\ conditions\ of\ distribution\ and\ use,\ see\ the\ accompanying\ README\ file.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ file\ contains\ additional\ configuration\ options\ that\ customize\ the}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ JPEG\ HW\ configuration.\ \ Most\ users\ will\ not\ need\ to\ touch\ this\ file.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \textcolor{comment}{/*\ Define\ to\ prevent\ recursive\ inclusion\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ \ \_\_JPEG\_UTILS\_CONF\_H\_\_}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ \ \_\_JPEG\_UTILS\_CONF\_H\_\_}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ Includes\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}stm32h7xx\_hal.h"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}stm32h7xx\_hal\_jpeg.h"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ Private\ define\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00027\ \textcolor{comment}{/*\ RGB\ Color\ format\ definition\ for\ JPEG\ encoding/Decoding\ :\ Should\ not\ be\ modified*/}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ JPEG\_ARGB8888\ \ \ \ \ \ \ \ \ \ \ \ 0\ \ }\textcolor{comment}{/*\ ARGB8888\ Color\ Format\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ JPEG\_RGB888\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\ \ }\textcolor{comment}{/*\ RGB888\ Color\ Format\ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ JPEG\_RGB565\ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\ \ }\textcolor{comment}{/*\ RGB565\ Color\ Format\ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ *\ Define\ USE\_JPEG\_DECODER}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ USE\_JPEG\_DECODER\ 1\ }\textcolor{comment}{/*\ 1\ or\ 0\ *********\ Value\ different\ from\ default\ value\ :\ 1\ **********\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00037\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ *\ Define\ USE\_JPEG\_ENCODER}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ USE\_JPEG\_ENCODER\ 1\ }\textcolor{comment}{/*\ 1\ or\ 0\ *********\ Value\ different\ from\ default\ value\ :\ 1\ **********\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ *\ Define\ JPEG\_RGB\_FORMAT}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ JPEG\_RGB\_FORMAT\ JPEG\_ARGB8888\ }\textcolor{comment}{/*\ JPEG\_ARGB8888,\ JPEG\_RGB888,\ JPEG\_RGB565\ *********\ Value\ different\ from\ default\ value\ :\ 0\ **********\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ *\ Define\ JPEG\_SWAP\_RG}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ JPEG\_SWAP\_RG\ 0\ }\textcolor{comment}{/*\ 0\ or\ 1\ *********\ Value\ different\ from\ default\ value\ :\ 0\ **********\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{/*\ Exported\ macro\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00054\ \textcolor{comment}{/*\ Exported\ functions\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_JPEG\_UTILS\_CONF\_H\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

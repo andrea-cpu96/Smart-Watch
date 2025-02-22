@@ -1,0 +1,84 @@
+\doxysection{main.\+h}
+\hypertarget{main_8h_source}{}\label{main_8h_source}\index{Core/Inc/main.h@{Core/Inc/main.h}}
+\mbox{\hyperlink{main_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ \_\_MAIN\_H}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ \_\_MAIN\_H}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}stm32h7xx\_hal.h"{}}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ GC9A01\_CS\_Pin\ GPIO\_PIN\_0}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ GC9A01\_CS\_GPIO\_Port\ GPIOB}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ GC9A01\_DC\_Pin\ GPIO\_PIN\_1}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ GC9A01\_DC\_GPIO\_Port\ GPIOB}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ GC9A01\_RST\_Pin\ GPIO\_PIN\_2}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ GC9A01\_RST\_GPIO\_Port\ GPIOB}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ GC9A01\_BL\_Pin\ GPIO\_PIN\_10}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ GC9A01\_BL\_GPIO\_Port\ GPIOB}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ FXLS8974CF\_INT\_Pin\ GPIO\_PIN\_5}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ FXLS8974CF\_INT\_Port\ GPIOB}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ PLUS\_BTN\_Pin\ GPIO\_PIN\_2}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ PLUS\_BTN\_GPIO\_Port\ GPIOC}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ SET\_BTN\_Pin\ GPIO\_PIN\_1}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ SET\_BTN\_GPIO\_Port\ GPIOC}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ MINUS\_BTN\_Pin\ GPIO\_PIN\_0}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ MINUS\_BTN\_GPIO\_Port\ GPIOC}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ color565(r,\ g,\ b)\ (((r\ \&\ 0xF8)\ <<\ 8)\ |\ ((g\ \&\ 0xFC)\ <<\ 3)\ |\ ((b\ \&\ 0xF8)\ >>\ 3))}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{main_8h_ab0bd7560790c13b656fd58e17e35143e}{res}}}
+\DoxyCodeLine{00070\ \ \ \{}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{main_8h_ab0bd7560790c13b656fd58e17e35143ead1ed6238e81cc264553d7e9f0cb9a618}{NOT\_OK}}\ =\ 0,}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{main_8h_ab0bd7560790c13b656fd58e17e35143ea2bc49ec37d6a5715dd23e85f1ff5bb59}{OK}}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00081\ \ \ \{}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ uint16\_t\ *\mbox{\hyperlink{uniondouble_format_aaf7e9fef47e18d1dfa5f9714b230f3cf}{u16Arr}};}
+\DoxyCodeLine{00084\ \ \ \ \ uint8\_t\ *\mbox{\hyperlink{uniondouble_format_a5773d7baae0a23f24fbd4608ea7aff73}{u8Arr}};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \}\ \mbox{\hyperlink{uniondouble_format}{doubleFormat}};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{keyword}{extern}\ JPEG\_HandleTypeDef\ \mbox{\hyperlink{group___global___variables_gaf494da9e67b938daeb411c7cd1ceefc8}{JPEG\_Handle}};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{extern}\ DMA2D\_HandleTypeDef\ \mbox{\hyperlink{group___global___variables_ga0eb77858345f8c20c4be148635925c01}{DMA2D\_Handle}};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{extern}\ JPEG\_ConfTypeDef\ \mbox{\hyperlink{group___global___variables_ga3dce51a08c86d3235a9741ada2cd6111}{JPEG\_Info}};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{extern}\ SPI\_HandleTypeDef\ \mbox{\hyperlink{group___global___variables_ga9c6222bae4d0328dd843ae099623b40b}{hspi1}};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keyword}{extern}\ DMA\_HandleTypeDef\ \mbox{\hyperlink{group___global___variables_gac8cdcfbb7adfcccc5717da58e1e10ae4}{hdma\_spi1\_tx}};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{extern}\ RTC\_HandleTypeDef\ \mbox{\hyperlink{group___global___variables_gaa0c7fca836406ade332e1e3f1039d8ab}{hrtc}};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{extern}\ I2C\_HandleTypeDef\ \mbox{\hyperlink{group___global___variables_gaf7b2c26e44dadaaa798a5c3d82914ba7}{hi2c1}};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{extern}\ ADC\_HandleTypeDef\ \mbox{\hyperlink{group___global___variables_ga22b804736f5648d52f639b2647d4ed13}{hadc1}};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___global___functions___def_ga70af21c671abfcc773614a9a4f63d920}{SystemClock\_Config}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00136\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___global___functions___def_gacccd58aa70215a6b184ad242312ffd0c}{MX\_ADC1\_Init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___global___functions___def_ga1730ffe1e560465665eb47d9264826f9}{Error\_Handler}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{group___global___functions___def_ga0b9693342408ca6428bb64c48aa8d853}{get\_acc\_addr}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00149\ \}}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_MAIN\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

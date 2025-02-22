@@ -1,0 +1,76 @@
+\doxysubsection{Vector Park Transform}
+\hypertarget{group__park}{}\label{group__park}\index{Vector Park Transform@{Vector Park Transform}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+CMSIS\+\_\+\+INLINE \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \mbox{\hyperlink{group__park_gae24bf07174d3b8dddcf30d8c8d8e7fbb}{arm\+\_\+park\+\_\+f32}} (\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} Ialpha, \mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} Ibeta, \mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Id, \mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Iq, \mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} sin\+Val, \mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} cos\+Val)
+\begin{DoxyCompactList}\small\item\em Floating-\/point Park transform. \end{DoxyCompactList}\item 
+CMSIS\+\_\+\+INLINE \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \mbox{\hyperlink{group__park_ga5630ed3715091f2795ee10df34672523}{arm\+\_\+park\+\_\+q31}} (\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} Ialpha, \mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} Ibeta, \mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Id, \mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Iq, \mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} sin\+Val, \mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} cos\+Val)
+\begin{DoxyCompactList}\small\item\em Park transform for Q31 version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Forward Park transform converts the input two-\/coordinate vector to flux and torque components. The Park transform can be used to realize the transformation of the {\ttfamily Ialpha} and the {\ttfamily Ibeta} currents from the stationary to the moving reference frame and control the spatial relationship between the stator vector current and rotor flux vector. If we consider the d axis aligned with the rotor flux, the diagram below shows the current vector and the relationship from the two reference frames\+: 
+
+The function operates on a single sample of data and each call to the function returns the processed output. The library provides separate functions for Q31 and floating-\/point data types. \begin{DoxyParagraph}{Algorithm}
+ where {\ttfamily Ialpha} and {\ttfamily Ibeta} are the stator vector components, {\ttfamily p\+Id} and {\ttfamily p\+Iq} are rotor vector components and {\ttfamily cos\+Val} and {\ttfamily sin\+Val} are the cosine and sine values of theta (rotor flux position). 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Fixed-\/\+Point Behavior}
+Care must be taken when using the Q31 version of the Park transform. In particular, the overflow and saturation behavior of the accumulator used must be considered. Refer to the function specific documentation below for usage guidelines.
+\end{DoxyParagraph}
+
+
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__park_gae24bf07174d3b8dddcf30d8c8d8e7fbb}\index{Vector Park Transform@{Vector Park Transform}!arm\_park\_f32@{arm\_park\_f32}}
+\index{arm\_park\_f32@{arm\_park\_f32}!Vector Park Transform@{Vector Park Transform}}
+\doxysubsubsubsection{\texorpdfstring{arm\_park\_f32()}{arm\_park\_f32()}}
+{\footnotesize\ttfamily \label{group__park_gae24bf07174d3b8dddcf30d8c8d8e7fbb} 
+CMSIS\+\_\+\+INLINE \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void arm\+\_\+park\+\_\+f32 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{Ialpha}{, }\item[{\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{Ibeta}{, }\item[{\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Id}{, }\item[{\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Iq}{, }\item[{\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{sin\+Val}{, }\item[{\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{cos\+Val}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point Park transform. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Ialpha} & input two-\/phase vector coordinate alpha \\
+\hline
+\mbox{\texttt{ in}}  & {\em Ibeta} & input two-\/phase vector coordinate beta \\
+\hline
+\mbox{\texttt{ out}}  & {\em p\+Id} & points to output rotor reference frame d \\
+\hline
+\mbox{\texttt{ out}}  & {\em p\+Iq} & points to output rotor reference frame q \\
+\hline
+\mbox{\texttt{ in}}  & {\em sin\+Val} & sine value of rotation angle theta \\
+\hline
+\mbox{\texttt{ in}}  & {\em cos\+Val} & cosine value of rotation angle theta\\
+\hline
+\end{DoxyParams}
+The function implements the forward Park transform. \Hypertarget{group__park_ga5630ed3715091f2795ee10df34672523}\index{Vector Park Transform@{Vector Park Transform}!arm\_park\_q31@{arm\_park\_q31}}
+\index{arm\_park\_q31@{arm\_park\_q31}!Vector Park Transform@{Vector Park Transform}}
+\doxysubsubsubsection{\texorpdfstring{arm\_park\_q31()}{arm\_park\_q31()}}
+{\footnotesize\ttfamily \label{group__park_ga5630ed3715091f2795ee10df34672523} 
+CMSIS\+\_\+\+INLINE \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void arm\+\_\+park\+\_\+q31 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{Ialpha}{, }\item[{\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{Ibeta}{, }\item[{\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Id}{, }\item[{\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Iq}{, }\item[{\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{sin\+Val}{, }\item[{\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{cos\+Val}{}\end{DoxyParamCaption})}
+
+
+
+Park transform for Q31 version. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Ialpha} & input two-\/phase vector coordinate alpha \\
+\hline
+\mbox{\texttt{ in}}  & {\em Ibeta} & input two-\/phase vector coordinate beta \\
+\hline
+\mbox{\texttt{ out}}  & {\em p\+Id} & points to output rotor reference frame d \\
+\hline
+\mbox{\texttt{ out}}  & {\em p\+Iq} & points to output rotor reference frame q \\
+\hline
+\mbox{\texttt{ in}}  & {\em sin\+Val} & sine value of rotation angle theta \\
+\hline
+\mbox{\texttt{ in}}  & {\em cos\+Val} & cosine value of rotation angle theta\\
+\hline
+\end{DoxyParams}
+{\bfseries{Scaling and Overflow Behavior\+:}} \begin{DoxyParagraph}{}
+The function is implemented using an internal 32-\/bit accumulator. The accumulator maintains 1.\+31 format by truncating lower 31 bits of the intermediate multiplication in 2.\+62 format. There is saturation on the addition and subtraction, hence there is no risk of overflow. 
+\end{DoxyParagraph}

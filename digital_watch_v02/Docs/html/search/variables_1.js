@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['a0_0',['A0',['../structarm__pid__instance__q15.html#ad77f3a2823c7f96de42c92a3fbf3246b',1,'arm_pid_instance_q15::A0'],['../structarm__pid__instance__q31.html#aa5332635ce9c7078cdb4c1ecf442eadd',1,'arm_pid_instance_q31::A0'],['../structarm__pid__instance__f32.html#ad7b0bed64915d0a25a3409fa2dc45556',1,'arm_pid_instance_f32::A0']]],
+  ['a1_1',['A1',['../structarm__pid__instance__q15.html#a1b8412c517071962a9acfdc6778906ec',1,'arm_pid_instance_q15::A1'],['../structarm__pid__instance__q31.html#a2f7492bd6fb92fae5e2de7fbbec39b0e',1,'arm_pid_instance_q31::A1'],['../structarm__pid__instance__f32.html#a7def89571c50f7137a213326a396e560',1,'arm_pid_instance_f32::A1']]],
+  ['a2_2',['A2',['../structarm__pid__instance__q31.html#a3e34537c53af4f9ad7bfffa4dff27c82',1,'arm_pid_instance_q31::A2'],['../structarm__pid__instance__f32.html#a155acf642ba2f521869f19d694cd7fa0',1,'arm_pid_instance_f32::A2']]],
+  ['acc_5fhandle_3',['acc_Handle',['../group___global___variables.html#ga70dd12a542eba81dff3c93d3d031eb3d',1,'main.c']]],
+  ['acc_5fint_4',['acc_int',['../smart__watch_8c.html#ae5ed44bf54bd27002b940a30ab146d69',1,'smart_watch.c']]],
+  ['accel_5',['accel',['../structfxls8974__acceldata__t.html#aa7152f3a024c3a67dda40487bbcddba7',1,'fxls8974_acceldata_t']]],
+  ['active_6',['active',['../union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t.html#afd116f4cd6ae54beea073b358f287cba',1,'FXLS8974_SENS_CONFIG1_t']]],
+  ['actual_5ftime_7',['actual_time',['../structvideo__t.html#a5922548c0165418a3dd552b44a63893c',1,'video_t']]],
+  ['anic_5ftemp_8',['anic_temp',['../union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g2__t.html#a1953e275ae217e89946dac719c8c131c',1,'FXLS8974_SENS_CONFIG2_t']]],
+  ['arr_9',['arr',['../unionaxis__u.html#aa0972d5060428e1ee3754ec7bd38de36',1,'axis_u']]],
+  ['aslp_5fen_10',['aslp_en',['../union_f_x_l_s8974___i_n_t___e_n__t.html#a71a5fd7519c0b7964cb1cf05df5dd905',1,'FXLS8974_INT_EN_t']]],
+  ['aslp_5fint2_11',['aslp_int2',['../union_f_x_l_s8974___i_n_t___p_i_n___s_e_l__t.html#a5ffc4d5c6c0d86d40582b221738046c5',1,'FXLS8974_INT_PIN_SEL_t']]],
+  ['audiobuffersize_12',['AudioBufferSize',['../struct_a_v_i___c_o_n_t_e_x_t.html#a7de56259926cd746ea6abb5531dac0c1',1,'AVI_CONTEXT']]],
+  ['audiobufsize_13',['AudioBufSize',['../struct_a_v_i___i_n_f_o.html#ad1d4a040c2539e13fa97aa468838b0a0',1,'AVI_INFO']]],
+  ['audioflag_14',['AudioFLAG',['../struct_a_v_i___i_n_f_o.html#ad4d4f7bf412d873d9d49015e4edfae39',1,'AVI_INFO']]],
+  ['audiotype_15',['AudioType',['../struct_a_v_i___i_n_f_o.html#addd19ce5ba65d359bdfa3433a6f91c92',1,'AVI_INFO']]],
+  ['avi_5fauds_5fflag_5ftbl_16',['AVI_AUDS_FLAG_TBL',['../_a_v_i__parser_8c.html#ae7143ea7a64719a572dcc50c611725ac',1,'AVI_parser.c']]],
+  ['avi_5fhandel_17',['AVI_Handel',['../smart__watch_8c.html#a5ad5deeb9a322b1f9b925d1273e6ac75',1,'smart_watch.c']]],
+  ['avi_5fvids_5fflag_5ftbl_18',['AVI_VIDS_FLAG_TBL',['../_a_v_i__parser_8c.html#a2a39944ba949a69b91557ca5cb3abdd5',1,'AVI_parser.c']]],
+  ['aviid_19',['AviID',['../struct_a_v_i___h_e_a_d_e_r.html#a8823f3332aef0bc9e965ccfc7c12f91a',1,'AVI_HEADER']]],
+  ['aviinfo_20',['aviInfo',['../struct_a_v_i___c_o_n_t_e_x_t.html#a1b2d8c92ca39121b4f862ae1c44a48a9',1,'AVI_CONTEXT']]],
+  ['axis_5fdata_21',['axis_data',['../structfxls8974__i2c__sensorhandle__t.html#a761516c8da62e2af12459380784703ce',1,'fxls8974_i2c_sensorhandle_t']]]
+];

@@ -1,0 +1,82 @@
+\doxysection{Core/\+Src/main.c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{Core/Src/main.c@{Core/Src/main.c}}
+
+
+\+: Main program body  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}main.\+h"{}}\newline
+{\ttfamily \#include "{}fatfs.\+h"{}}\newline
+{\ttfamily \#include "{}prj\+\_\+conf.\+h"{}}\newline
+{\ttfamily \#include "{}GC9\+A01.\+h"{}}\newline
+{\ttfamily \#include "{}FXLS8974\+C.\+h"{}}\newline
+{\ttfamily \#include "{}smart\+\_\+watch.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{group___private___functions___proto_gae89fdd15729ad41a66911190fcbab23a}{MX\+\_\+\+GPIO\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize GPIO. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{group___private___functions___proto_ga7d9c3a9121d5b51430d011fe8b154cb9}{MX\+\_\+\+DMA2\+D\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize DMA2D. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{group___private___functions___proto_gafe3a78aec141d26fd5b0f30ddf25d57f}{MX\+\_\+\+JPEG\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize JPEG. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{group___private___functions___proto_gacf574beec452648ff8d5744093e87f56}{MX\+\_\+\+SDMMC1\+\_\+\+SD\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize SDMMC1 SD. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{group___private___functions___proto_ga608dc9e9bcaf978f1611f3ec57670f64}{MX\+\_\+\+DMA\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize DMA. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{group___private___functions___proto_ga28dbf2494083ac5f39daa87bf09e4eb3}{MX\+\_\+\+SPI1\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize SPI1. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{group___private___functions___proto_ga54909c9e8ca1af96208ae7a8cf1e9468}{MX\+\_\+\+RTC\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize RTC. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{group___private___functions___proto_ga4230d11f81d0b16e112f1cc3f40cb42f}{MX\+\_\+\+I2\+C1\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize I2\+C1. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{group___private___functions___proto_gada2153669f502a41f77c2e51ef659a86}{test\+\_\+process}} (void)
+\begin{DoxyCompactList}\small\item\em Test process. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{group___private___functions___proto_ga175216d102c6b720e2465b40300aa0b6}{print\+\_\+log}} (FIL \texorpdfstring{$\ast$}{*}log\+\_\+file, \mbox{\hyperlink{prj__conf_8h_a8fd5c06a75b591f6b27c57872e27c5af}{TEST\+\_\+\+STATUS\+\_\+t}} status, char \texorpdfstring{$\ast$}{*}test\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Print the log. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group___global___functions___def_ga840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em Main program entry point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___global___functions___def_ga70af21c671abfcc773614a9a4f63d920}{System\+Clock\+\_\+\+Config}} (void)
+\begin{DoxyCompactList}\small\item\em System Clock Configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___global___functions___def_gacccd58aa70215a6b184ad242312ffd0c}{MX\+\_\+\+ADC1\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize ADC1. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group___global___functions___def_ga0b9693342408ca6428bb64c48aa8d853}{get\+\_\+acc\+\_\+addr}} (void)
+\begin{DoxyCompactList}\small\item\em Get the acc addr object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___global___functions___def_ga1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Error Handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+SD\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gad0b867cf724e111d6329c1eb91f3b30b}{hsd1}}
+\item 
+SPI\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_ga9c6222bae4d0328dd843ae099623b40b}{hspi1}}
+\begin{DoxyCompactList}\small\item\em SPI1 handle. \end{DoxyCompactList}\item 
+DMA\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gac8cdcfbb7adfcccc5717da58e1e10ae4}{hdma\+\_\+spi1\+\_\+tx}}
+\begin{DoxyCompactList}\small\item\em DMA handle for SPI1 TX. \end{DoxyCompactList}\item 
+JPEG\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gaf494da9e67b938daeb411c7cd1ceefc8}{JPEG\+\_\+\+Handle}}
+\begin{DoxyCompactList}\small\item\em JPEG handle. \end{DoxyCompactList}\item 
+DMA2\+D\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_ga0eb77858345f8c20c4be148635925c01}{DMA2\+D\+\_\+\+Handle}}
+\begin{DoxyCompactList}\small\item\em DMA2D handle. \end{DoxyCompactList}\item 
+JPEG\+\_\+\+Conf\+Type\+Def \mbox{\hyperlink{group___global___variables_ga3dce51a08c86d3235a9741ada2cd6111}{JPEG\+\_\+\+Info}}
+\begin{DoxyCompactList}\small\item\em JPEG configuration info. \end{DoxyCompactList}\item 
+RTC\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gaa0c7fca836406ade332e1e3f1039d8ab}{hrtc}}
+\begin{DoxyCompactList}\small\item\em RTC handle. \end{DoxyCompactList}\item 
+I2\+C\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gaf7b2c26e44dadaaa798a5c3d82914ba7}{hi2c1}}
+\begin{DoxyCompactList}\small\item\em I2\+C1 handle. \end{DoxyCompactList}\item 
+ADC\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_ga22b804736f5648d52f639b2647d4ed13}{hadc1}}
+\begin{DoxyCompactList}\small\item\em ADC1 handle. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \mbox{\hyperlink{group___global___variables_ga70dd12a542eba81dff3c93d3d031eb3d}{acc\+\_\+\+Handle}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Main program body 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2024 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 

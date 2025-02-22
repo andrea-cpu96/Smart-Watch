@@ -1,0 +1,55 @@
+\doxysection{Core/\+Src/system\+\_\+stm32h7xx.c File Reference}
+\hypertarget{system__stm32h7xx_8c}{}\label{system__stm32h7xx_8c}\index{Core/Src/system\_stm32h7xx.c@{Core/Src/system\_stm32h7xx.c}}
+
+
+CMSIS Cortex-\/\+Mx Device Peripheral Access Layer System Source File.  
+
+
+{\ttfamily \#include "{}stm32h7xx.\+h"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___s_t_m32_h7xx___system___private___includes_gaeafcff4f57440c60e64812dddd13e7cb}{HSE\+\_\+\+VALUE}}~((uint32\+\_\+t)25000000)
+\item 
+\#define \mbox{\hyperlink{group___s_t_m32_h7xx___system___private___includes_ga4dcbff36a4b1cfd045c01d59084255d0}{CSI\+\_\+\+VALUE}}~((uint32\+\_\+t)4000000)
+\item 
+\#define \mbox{\hyperlink{group___s_t_m32_h7xx___system___private___includes_gaaa8c76e274d0f6dd2cefb5d0b17fbc37}{HSI\+\_\+\+VALUE}}~((uint32\+\_\+t)64000000)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group___s_t_m32_h7xx___system___private___functions_ga93f514700ccf00d08dbdcff7f1224eb2}{System\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Setup the microcontroller system Initialize the FPU setting and vector table location configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___s_t_m32_h7xx___system___private___functions_gae0c36a9591fe6e9c45ecb21a794f0f0f}{System\+Core\+Clock\+Update}} (void)
+\begin{DoxyCompactList}\small\item\em Update System\+Core\+Clock variable according to Clock Register Values. The System\+Core\+Clock variable contains the core clock , it can be used by the user application to setup the Sys\+Tick timer or configure other parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group___s_t_m32_h7xx___system___private___variables_gaa3cd3e43291e81e795d642b79b6088e6}{System\+Core\+Clock}} = 64000000
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group___s_t_m32_h7xx___system___private___variables_gaa3016e42a01e5655e438fcf76e4ba5b0}{System\+D2\+Clock}} = 64000000
+\item 
+const uint8\+\_\+t \mbox{\hyperlink{group___s_t_m32_h7xx___system___private___variables_gac0142b24f5548d68accaf0d9b795c9e1}{D1\+Core\+Presc\+Table}} \mbox{[}16\mbox{]} = \{0, 0, 0, 0, 1, 2, 3, 4, 1, 2, 3, 4, 6, 7, 8, 9\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+CMSIS Cortex-\/\+Mx Device Peripheral Access Layer System Source File. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+This file provides two functions and one global variable to be called from user application\+:
+\begin{DoxyItemize}
+\item \doxylink{group___s_t_m32_h7xx___system___private___functions_ga93f514700ccf00d08dbdcff7f1224eb2}{System\+Init()}\+: This function is called at startup just after reset and before branch to main program. This call is made inside the "{}startup\+\_\+stm32h7xx.\+s"{} file.
+\item System\+Core\+Clock variable\+: Contains the core clock, it can be used by the user application to setup the Sys\+Tick timer or configure other parameters.
+\item \doxylink{group___s_t_m32_h7xx___system___private___functions_gae0c36a9591fe6e9c45ecb21a794f0f0f}{System\+Core\+Clock\+Update()}\+: Updates the variable System\+Core\+Clock and must be called whenever the core clock is changed during program execution.
+\end{DoxyItemize}
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2017 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 

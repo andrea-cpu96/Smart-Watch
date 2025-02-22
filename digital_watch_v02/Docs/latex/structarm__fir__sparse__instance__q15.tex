@@ -1,0 +1,73 @@
+\doxysection{arm\+\_\+fir\+\_\+sparse\+\_\+instance\+\_\+q15 Struct Reference}
+\hypertarget{structarm__fir__sparse__instance__q15}{}\label{structarm__fir__sparse__instance__q15}\index{arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}}
+
+
+Instance structure for the Q15 sparse FIR filter.  
+
+
+
+
+{\ttfamily \#include $<$arm\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structarm__fir__sparse__instance__q15_a0f66b126dd8b85f7467cfb01b7bc4d77}{num\+Taps}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structarm__fir__sparse__instance__q15_a89487f28cab52637426024005e478985}{state\+Index}}
+\item 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__fir__sparse__instance__q15_a98b92b0f5208110129b9a67b1db90408}{p\+State}}
+\item 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__fir__sparse__instance__q15_a78a6565473b5f0b8c77c3f0f58a76069}{p\+Coeffs}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structarm__fir__sparse__instance__q15_ad14cc1070eecf7e1926d8f67a8273182}{max\+Delay}}
+\item 
+int32\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__fir__sparse__instance__q15_aeab2855176c6efdb231a73a3672837d5}{p\+Tap\+Delay}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the Q15 sparse FIR filter. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structarm__fir__sparse__instance__q15_ad14cc1070eecf7e1926d8f67a8273182}\index{arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}!maxDelay@{maxDelay}}
+\index{maxDelay@{maxDelay}!arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{maxDelay}{maxDelay}}
+{\footnotesize\ttfamily \label{structarm__fir__sparse__instance__q15_ad14cc1070eecf7e1926d8f67a8273182} 
+uint16\+\_\+t arm\+\_\+fir\+\_\+sparse\+\_\+instance\+\_\+q15\+::max\+Delay}
+
+maximum offset specified by the p\+Tap\+Delay array. \Hypertarget{structarm__fir__sparse__instance__q15_a0f66b126dd8b85f7467cfb01b7bc4d77}\index{arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}!numTaps@{numTaps}}
+\index{numTaps@{numTaps}!arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{numTaps}{numTaps}}
+{\footnotesize\ttfamily \label{structarm__fir__sparse__instance__q15_a0f66b126dd8b85f7467cfb01b7bc4d77} 
+uint16\+\_\+t arm\+\_\+fir\+\_\+sparse\+\_\+instance\+\_\+q15\+::num\+Taps}
+
+number of coefficients in the filter. \Hypertarget{structarm__fir__sparse__instance__q15_a78a6565473b5f0b8c77c3f0f58a76069}\index{arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}!pCoeffs@{pCoeffs}}
+\index{pCoeffs@{pCoeffs}!arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pCoeffs}{pCoeffs}}
+{\footnotesize\ttfamily \label{structarm__fir__sparse__instance__q15_a78a6565473b5f0b8c77c3f0f58a76069} 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+fir\+\_\+sparse\+\_\+instance\+\_\+q15\+::p\+Coeffs}
+
+points to the coefficient array. The array is of length num\+Taps. \Hypertarget{structarm__fir__sparse__instance__q15_a98b92b0f5208110129b9a67b1db90408}\index{arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}!pState@{pState}}
+\index{pState@{pState}!arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pState}{pState}}
+{\footnotesize\ttfamily \label{structarm__fir__sparse__instance__q15_a98b92b0f5208110129b9a67b1db90408} 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+fir\+\_\+sparse\+\_\+instance\+\_\+q15\+::p\+State}
+
+points to the state buffer array. The array is of length max\+Delay+block\+Size-\/1. \Hypertarget{structarm__fir__sparse__instance__q15_aeab2855176c6efdb231a73a3672837d5}\index{arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}!pTapDelay@{pTapDelay}}
+\index{pTapDelay@{pTapDelay}!arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pTapDelay}{pTapDelay}}
+{\footnotesize\ttfamily \label{structarm__fir__sparse__instance__q15_aeab2855176c6efdb231a73a3672837d5} 
+int32\+\_\+t\texorpdfstring{$\ast$}{*} arm\+\_\+fir\+\_\+sparse\+\_\+instance\+\_\+q15\+::p\+Tap\+Delay}
+
+points to the array of delay values. The array is of length num\+Taps. \Hypertarget{structarm__fir__sparse__instance__q15_a89487f28cab52637426024005e478985}\index{arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}!stateIndex@{stateIndex}}
+\index{stateIndex@{stateIndex}!arm\_fir\_sparse\_instance\_q15@{arm\_fir\_sparse\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{stateIndex}{stateIndex}}
+{\footnotesize\ttfamily \label{structarm__fir__sparse__instance__q15_a89487f28cab52637426024005e478985} 
+uint16\+\_\+t arm\+\_\+fir\+\_\+sparse\+\_\+instance\+\_\+q15\+::state\+Index}
+
+state buffer index. Points to the oldest sample in the state buffer. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{arm__math_8h}{arm\+\_\+math.\+h}}\end{DoxyCompactItemize}

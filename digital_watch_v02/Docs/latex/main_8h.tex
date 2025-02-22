@@ -1,0 +1,246 @@
+\doxysection{Core/\+Inc/main.h File Reference}
+\hypertarget{main_8h}{}\label{main_8h}\index{Core/Inc/main.h@{Core/Inc/main.h}}
+
+
+\+: Header for \doxylink{main_8c}{main.\+c} file. This file contains the common defines of the application.  
+
+
+{\ttfamily \#include "{}stm32h7xx\+\_\+hal.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+union \mbox{\hyperlink{uniondouble_format}{double\+Format}}
+\begin{DoxyCompactList}\small\item\em Union for double format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8h_a01f5ea0eabc05e1bf9df359ec4725bc2}{GC9\+A01\+\_\+\+CS\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+0
+\begin{DoxyCompactList}\small\item\em GC9\+A01 pin and port macros. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8h_ad9ad87c8d3de619bbcd2463ec77a611b}{GC9\+A01\+\_\+\+CS\+\_\+\+GPIO\+\_\+\+Port}}~GPIOB
+\item 
+\#define \mbox{\hyperlink{main_8h_a66c9281138e2416ffff6b888d1fd5a89}{GC9\+A01\+\_\+\+DC\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+1
+\item 
+\#define \mbox{\hyperlink{main_8h_a72b8ae16f4a894e5b8550e3d4bb482a4}{GC9\+A01\+\_\+\+DC\+\_\+\+GPIO\+\_\+\+Port}}~GPIOB
+\item 
+\#define \mbox{\hyperlink{main_8h_a80527ec4397c7a06ce86e9f67aa6331b}{GC9\+A01\+\_\+\+RST\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+2
+\item 
+\#define \mbox{\hyperlink{main_8h_aa98f3eae4d81640c7ff2edd868eb8688}{GC9\+A01\+\_\+\+RST\+\_\+\+GPIO\+\_\+\+Port}}~GPIOB
+\item 
+\#define \mbox{\hyperlink{main_8h_a5108c61c071b9f4ad12b95bb89930e61}{GC9\+A01\+\_\+\+BL\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+10
+\item 
+\#define \mbox{\hyperlink{main_8h_a269de1ab4ef58602a90b7a82fbfb8696}{GC9\+A01\+\_\+\+BL\+\_\+\+GPIO\+\_\+\+Port}}~GPIOB
+\item 
+\#define \mbox{\hyperlink{main_8h_af4861013915f8d8e5402639488a4fd07}{FXLS8974\+CF\+\_\+\+INT\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+5
+\begin{DoxyCompactList}\small\item\em FXLS8974\+CF pin and port macros. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8h_aff6392667789ebce1f37dd1a0e95bb09}{FXLS8974\+CF\+\_\+\+INT\+\_\+\+Port}}~GPIOB
+\item 
+\#define \mbox{\hyperlink{main_8h_a83d63d87dc04e90280baaa097f75c9e6}{PLUS\+\_\+\+BTN\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+2
+\begin{DoxyCompactList}\small\item\em Buttons pin and port macros. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8h_aad81297a10351f8d85713ad8aba3ef14}{PLUS\+\_\+\+BTN\+\_\+\+GPIO\+\_\+\+Port}}~GPIOC
+\item 
+\#define \mbox{\hyperlink{main_8h_a0e4e0718db8a4c594ec085175773caad}{SET\+\_\+\+BTN\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+1
+\item 
+\#define \mbox{\hyperlink{main_8h_aa6f91b392a8c8c447fe0ff02726a3e43}{SET\+\_\+\+BTN\+\_\+\+GPIO\+\_\+\+Port}}~GPIOC
+\item 
+\#define \mbox{\hyperlink{main_8h_a7b837bf55c17f904ae2cfa11fdbd4b87}{MINUS\+\_\+\+BTN\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+0
+\item 
+\#define \mbox{\hyperlink{main_8h_acac237635ad15710cd4b4f096127ae87}{MINUS\+\_\+\+BTN\+\_\+\+GPIO\+\_\+\+Port}}~GPIOC
+\item 
+\#define \mbox{\hyperlink{main_8h_a8923437652621091f642ed424d08e297}{color565}}(r,  g,  b)
+\begin{DoxyCompactList}\small\item\em Converts 24 depth into 16 (565) depth. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{main_8h_ab0bd7560790c13b656fd58e17e35143e}{res}} \{ \mbox{\hyperlink{main_8h_ab0bd7560790c13b656fd58e17e35143ead1ed6238e81cc264553d7e9f0cb9a618}{NOT\+\_\+\+OK}} = 0
+, \mbox{\hyperlink{main_8h_ab0bd7560790c13b656fd58e17e35143ea2bc49ec37d6a5715dd23e85f1ff5bb59}{OK}}
+ \}
+\begin{DoxyCompactList}\small\item\em Result enumeration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group___global___functions___def_ga70af21c671abfcc773614a9a4f63d920}{System\+Clock\+\_\+\+Config}} (void)
+\begin{DoxyCompactList}\small\item\em Configures the system clock. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___global___functions___def_gacccd58aa70215a6b184ad242312ffd0c}{MX\+\_\+\+ADC1\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes ADC1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___global___functions___def_ga1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Handles errors. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group___global___functions___def_ga0b9693342408ca6428bb64c48aa8d853}{get\+\_\+acc\+\_\+addr}} (void)
+\begin{DoxyCompactList}\small\item\em Get the acc addr object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+JPEG\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gaf494da9e67b938daeb411c7cd1ceefc8}{JPEG\+\_\+\+Handle}}
+\begin{DoxyCompactList}\small\item\em JPEG handle. \end{DoxyCompactList}\item 
+DMA2\+D\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_ga0eb77858345f8c20c4be148635925c01}{DMA2\+D\+\_\+\+Handle}}
+\begin{DoxyCompactList}\small\item\em DMA2D handle. \end{DoxyCompactList}\item 
+JPEG\+\_\+\+Conf\+Type\+Def \mbox{\hyperlink{group___global___variables_ga3dce51a08c86d3235a9741ada2cd6111}{JPEG\+\_\+\+Info}}
+\begin{DoxyCompactList}\small\item\em JPEG configuration info. \end{DoxyCompactList}\item 
+SPI\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_ga9c6222bae4d0328dd843ae099623b40b}{hspi1}}
+\begin{DoxyCompactList}\small\item\em SPI1 handle. \end{DoxyCompactList}\item 
+DMA\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gac8cdcfbb7adfcccc5717da58e1e10ae4}{hdma\+\_\+spi1\+\_\+tx}}
+\begin{DoxyCompactList}\small\item\em DMA handle for SPI1 TX. \end{DoxyCompactList}\item 
+RTC\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gaa0c7fca836406ade332e1e3f1039d8ab}{hrtc}}
+\begin{DoxyCompactList}\small\item\em RTC handle. \end{DoxyCompactList}\item 
+I2\+C\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_gaf7b2c26e44dadaaa798a5c3d82914ba7}{hi2c1}}
+\begin{DoxyCompactList}\small\item\em I2\+C1 handle. \end{DoxyCompactList}\item 
+ADC\+\_\+\+Handle\+Type\+Def \mbox{\hyperlink{group___global___variables_ga22b804736f5648d52f639b2647d4ed13}{hadc1}}
+\begin{DoxyCompactList}\small\item\em ADC1 handle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Header for \doxylink{main_8c}{main.\+c} file. This file contains the common defines of the application. 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2024 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main_8h_a8923437652621091f642ed424d08e297}\index{main.h@{main.h}!color565@{color565}}
+\index{color565@{color565}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{color565}{color565}}
+{\footnotesize\ttfamily \label{main_8h_a8923437652621091f642ed424d08e297} 
+\#define color565(\begin{DoxyParamCaption}\item[{}]{r}{, }\item[{}]{g}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(((r\ \&\ 0xF8)\ <<\ 8)\ |\ ((g\ \&\ 0xFC)\ <<\ 3)\ |\ ((b\ \&\ 0xF8)\ >>\ 3))}
+
+\end{DoxyCode}
+
+
+Converts 24 depth into 16 (565) depth. 
+
+\Hypertarget{main_8h_af4861013915f8d8e5402639488a4fd07}\index{main.h@{main.h}!FXLS8974CF\_INT\_Pin@{FXLS8974CF\_INT\_Pin}}
+\index{FXLS8974CF\_INT\_Pin@{FXLS8974CF\_INT\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{FXLS8974CF\_INT\_Pin}{FXLS8974CF\_INT\_Pin}}
+{\footnotesize\ttfamily \label{main_8h_af4861013915f8d8e5402639488a4fd07} 
+\#define FXLS8974\+CF\+\_\+\+INT\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+5}
+
+
+
+FXLS8974\+CF pin and port macros. 
+
+\Hypertarget{main_8h_aff6392667789ebce1f37dd1a0e95bb09}\index{main.h@{main.h}!FXLS8974CF\_INT\_Port@{FXLS8974CF\_INT\_Port}}
+\index{FXLS8974CF\_INT\_Port@{FXLS8974CF\_INT\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{FXLS8974CF\_INT\_Port}{FXLS8974CF\_INT\_Port}}
+{\footnotesize\ttfamily \label{main_8h_aff6392667789ebce1f37dd1a0e95bb09} 
+\#define FXLS8974\+CF\+\_\+\+INT\+\_\+\+Port~GPIOB}
+
+\Hypertarget{main_8h_a269de1ab4ef58602a90b7a82fbfb8696}\index{main.h@{main.h}!GC9A01\_BL\_GPIO\_Port@{GC9A01\_BL\_GPIO\_Port}}
+\index{GC9A01\_BL\_GPIO\_Port@{GC9A01\_BL\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_BL\_GPIO\_Port}{GC9A01\_BL\_GPIO\_Port}}
+{\footnotesize\ttfamily \label{main_8h_a269de1ab4ef58602a90b7a82fbfb8696} 
+\#define GC9\+A01\+\_\+\+BL\+\_\+\+GPIO\+\_\+\+Port~GPIOB}
+
+\Hypertarget{main_8h_a5108c61c071b9f4ad12b95bb89930e61}\index{main.h@{main.h}!GC9A01\_BL\_Pin@{GC9A01\_BL\_Pin}}
+\index{GC9A01\_BL\_Pin@{GC9A01\_BL\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_BL\_Pin}{GC9A01\_BL\_Pin}}
+{\footnotesize\ttfamily \label{main_8h_a5108c61c071b9f4ad12b95bb89930e61} 
+\#define GC9\+A01\+\_\+\+BL\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+10}
+
+\Hypertarget{main_8h_ad9ad87c8d3de619bbcd2463ec77a611b}\index{main.h@{main.h}!GC9A01\_CS\_GPIO\_Port@{GC9A01\_CS\_GPIO\_Port}}
+\index{GC9A01\_CS\_GPIO\_Port@{GC9A01\_CS\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_CS\_GPIO\_Port}{GC9A01\_CS\_GPIO\_Port}}
+{\footnotesize\ttfamily \label{main_8h_ad9ad87c8d3de619bbcd2463ec77a611b} 
+\#define GC9\+A01\+\_\+\+CS\+\_\+\+GPIO\+\_\+\+Port~GPIOB}
+
+\Hypertarget{main_8h_a01f5ea0eabc05e1bf9df359ec4725bc2}\index{main.h@{main.h}!GC9A01\_CS\_Pin@{GC9A01\_CS\_Pin}}
+\index{GC9A01\_CS\_Pin@{GC9A01\_CS\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_CS\_Pin}{GC9A01\_CS\_Pin}}
+{\footnotesize\ttfamily \label{main_8h_a01f5ea0eabc05e1bf9df359ec4725bc2} 
+\#define GC9\+A01\+\_\+\+CS\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+0}
+
+
+
+GC9\+A01 pin and port macros. 
+
+\Hypertarget{main_8h_a72b8ae16f4a894e5b8550e3d4bb482a4}\index{main.h@{main.h}!GC9A01\_DC\_GPIO\_Port@{GC9A01\_DC\_GPIO\_Port}}
+\index{GC9A01\_DC\_GPIO\_Port@{GC9A01\_DC\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_DC\_GPIO\_Port}{GC9A01\_DC\_GPIO\_Port}}
+{\footnotesize\ttfamily \label{main_8h_a72b8ae16f4a894e5b8550e3d4bb482a4} 
+\#define GC9\+A01\+\_\+\+DC\+\_\+\+GPIO\+\_\+\+Port~GPIOB}
+
+\Hypertarget{main_8h_a66c9281138e2416ffff6b888d1fd5a89}\index{main.h@{main.h}!GC9A01\_DC\_Pin@{GC9A01\_DC\_Pin}}
+\index{GC9A01\_DC\_Pin@{GC9A01\_DC\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_DC\_Pin}{GC9A01\_DC\_Pin}}
+{\footnotesize\ttfamily \label{main_8h_a66c9281138e2416ffff6b888d1fd5a89} 
+\#define GC9\+A01\+\_\+\+DC\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+1}
+
+\Hypertarget{main_8h_aa98f3eae4d81640c7ff2edd868eb8688}\index{main.h@{main.h}!GC9A01\_RST\_GPIO\_Port@{GC9A01\_RST\_GPIO\_Port}}
+\index{GC9A01\_RST\_GPIO\_Port@{GC9A01\_RST\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_RST\_GPIO\_Port}{GC9A01\_RST\_GPIO\_Port}}
+{\footnotesize\ttfamily \label{main_8h_aa98f3eae4d81640c7ff2edd868eb8688} 
+\#define GC9\+A01\+\_\+\+RST\+\_\+\+GPIO\+\_\+\+Port~GPIOB}
+
+\Hypertarget{main_8h_a80527ec4397c7a06ce86e9f67aa6331b}\index{main.h@{main.h}!GC9A01\_RST\_Pin@{GC9A01\_RST\_Pin}}
+\index{GC9A01\_RST\_Pin@{GC9A01\_RST\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_RST\_Pin}{GC9A01\_RST\_Pin}}
+{\footnotesize\ttfamily \label{main_8h_a80527ec4397c7a06ce86e9f67aa6331b} 
+\#define GC9\+A01\+\_\+\+RST\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+2}
+
+\Hypertarget{main_8h_acac237635ad15710cd4b4f096127ae87}\index{main.h@{main.h}!MINUS\_BTN\_GPIO\_Port@{MINUS\_BTN\_GPIO\_Port}}
+\index{MINUS\_BTN\_GPIO\_Port@{MINUS\_BTN\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{MINUS\_BTN\_GPIO\_Port}{MINUS\_BTN\_GPIO\_Port}}
+{\footnotesize\ttfamily \label{main_8h_acac237635ad15710cd4b4f096127ae87} 
+\#define MINUS\+\_\+\+BTN\+\_\+\+GPIO\+\_\+\+Port~GPIOC}
+
+\Hypertarget{main_8h_a7b837bf55c17f904ae2cfa11fdbd4b87}\index{main.h@{main.h}!MINUS\_BTN\_Pin@{MINUS\_BTN\_Pin}}
+\index{MINUS\_BTN\_Pin@{MINUS\_BTN\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{MINUS\_BTN\_Pin}{MINUS\_BTN\_Pin}}
+{\footnotesize\ttfamily \label{main_8h_a7b837bf55c17f904ae2cfa11fdbd4b87} 
+\#define MINUS\+\_\+\+BTN\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+0}
+
+\Hypertarget{main_8h_aad81297a10351f8d85713ad8aba3ef14}\index{main.h@{main.h}!PLUS\_BTN\_GPIO\_Port@{PLUS\_BTN\_GPIO\_Port}}
+\index{PLUS\_BTN\_GPIO\_Port@{PLUS\_BTN\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{PLUS\_BTN\_GPIO\_Port}{PLUS\_BTN\_GPIO\_Port}}
+{\footnotesize\ttfamily \label{main_8h_aad81297a10351f8d85713ad8aba3ef14} 
+\#define PLUS\+\_\+\+BTN\+\_\+\+GPIO\+\_\+\+Port~GPIOC}
+
+\Hypertarget{main_8h_a83d63d87dc04e90280baaa097f75c9e6}\index{main.h@{main.h}!PLUS\_BTN\_Pin@{PLUS\_BTN\_Pin}}
+\index{PLUS\_BTN\_Pin@{PLUS\_BTN\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{PLUS\_BTN\_Pin}{PLUS\_BTN\_Pin}}
+{\footnotesize\ttfamily \label{main_8h_a83d63d87dc04e90280baaa097f75c9e6} 
+\#define PLUS\+\_\+\+BTN\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+2}
+
+
+
+Buttons pin and port macros. 
+
+\Hypertarget{main_8h_aa6f91b392a8c8c447fe0ff02726a3e43}\index{main.h@{main.h}!SET\_BTN\_GPIO\_Port@{SET\_BTN\_GPIO\_Port}}
+\index{SET\_BTN\_GPIO\_Port@{SET\_BTN\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{SET\_BTN\_GPIO\_Port}{SET\_BTN\_GPIO\_Port}}
+{\footnotesize\ttfamily \label{main_8h_aa6f91b392a8c8c447fe0ff02726a3e43} 
+\#define SET\+\_\+\+BTN\+\_\+\+GPIO\+\_\+\+Port~GPIOC}
+
+\Hypertarget{main_8h_a0e4e0718db8a4c594ec085175773caad}\index{main.h@{main.h}!SET\_BTN\_Pin@{SET\_BTN\_Pin}}
+\index{SET\_BTN\_Pin@{SET\_BTN\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{SET\_BTN\_Pin}{SET\_BTN\_Pin}}
+{\footnotesize\ttfamily \label{main_8h_a0e4e0718db8a4c594ec085175773caad} 
+\#define SET\+\_\+\+BTN\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+1}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{main_8h_ab0bd7560790c13b656fd58e17e35143e}\index{main.h@{main.h}!res@{res}}
+\index{res@{res}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{res}{res}}
+{\footnotesize\ttfamily \label{main_8h_ab0bd7560790c13b656fd58e17e35143e} 
+enum \mbox{\hyperlink{main_8h_ab0bd7560790c13b656fd58e17e35143e}{res}}}
+
+
+
+Result enumeration. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_OK@{NOT\_OK}!main.h@{main.h}}\index{main.h@{main.h}!NOT\_OK@{NOT\_OK}}}\Hypertarget{main_8h_ab0bd7560790c13b656fd58e17e35143ead1ed6238e81cc264553d7e9f0cb9a618}\label{main_8h_ab0bd7560790c13b656fd58e17e35143ead1ed6238e81cc264553d7e9f0cb9a618} 
+NOT\+\_\+\+OK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OK@{OK}!main.h@{main.h}}\index{main.h@{main.h}!OK@{OK}}}\Hypertarget{main_8h_ab0bd7560790c13b656fd58e17e35143ea2bc49ec37d6a5715dd23e85f1ff5bb59}\label{main_8h_ab0bd7560790c13b656fd58e17e35143ea2bc49ec37d6a5715dd23e85f1ff5bb59} 
+OK&\\
+\hline
+
+\end{DoxyEnumFields}

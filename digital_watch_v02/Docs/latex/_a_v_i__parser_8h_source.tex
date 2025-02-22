@@ -1,0 +1,217 @@
+\doxysection{AVI\+\_\+parser.\+h}
+\hypertarget{_a_v_i__parser_8h_source}{}\label{_a_v_i__parser_8h_source}\index{Core/Inc/AVI\_parser.h@{Core/Inc/AVI\_parser.h}}
+\mbox{\hyperlink{_a_v_i__parser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ Define\ to\ prevent\ recursive\ inclusion\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ \_\_UTIL\_LCD\_AVI\_H}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ \_\_UTIL\_LCD\_AVI\_H}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}ff.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{00028\ \{\ \textcolor{comment}{/*\ Make\ sure\ we\ have\ C-\/declarations\ in\ C++\ programs\ */}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{/*\ Exported\ variables\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00032\ \textcolor{comment}{/*\ Exported\ constants\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ AVI\_RIFF\_ID\ 0x46464952}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ AVI\_AVI\_ID\ 0x20495641}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ AVI\_LIST\_ID\ 0x5453494C}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ AVI\_HDRL\_ID\ 0x6C726468}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ AVI\_MOVI\_ID\ 0x69766F6D}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ AVI\_STRL\_ID\ 0x6C727473}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ AVI\_AVIH\_ID\ 0x68697661}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ AVI\_STRH\_ID\ 0x68727473}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ AVI\_STRF\_ID\ 0x66727473}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ AVI\_STRD\_ID\ 0x64727473}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ AVI\_VIDS\_STREAM\ 0x73646976}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ AVI\_AUDS\_STREAM\ 0x73647561}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ AVI\_VIDS\_FLAG\ 0x6463}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ AVI\_AUDS\_FLAG\ 0x7762}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ AVI\_FORMAT\_MJPG\ 0x47504A4D}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ AVI\_END\_FILE\ 0}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ AVI\_VIDEO\_FRAME\ 1}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ AVI\_AUDIO\_FRAME\ 2}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ AVI\_ERROR\ 3}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{/*\ Exported\ macro\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ AVI\_MAKEWORD(ptr)\ (uint16\_t)(((uint16\_t)*((uint8\_t\ *)(ptr))\ <<\ 8)\ |\ (uint16\_t)*(uint8\_t\ *)((ptr)\ +\ 1))}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ AVI\_MAKEDWORD(ptr)\ (uint32\_t)(((uint16\_t)*(uint8\_t\ *)(ptr)\ |\ (((uint16\_t)*(uint8\_t\ *)(ptr\ +\ 1))\ <<\ 8)\ |\ \(\backslash\)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint16\_t)*(uint8\_t\ *)(ptr\ +\ 2))\ <<\ 16)\ |\ (((uint16\_t)*(uint8\_t\ *)(ptr\ +\ 3))\ <<\ 24)))}}
+\DoxyCodeLine{00062\ \ \ \textcolor{comment}{/*\ Exported\ types\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00064\ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a55b5c2e0d0717e8a2ee2d4d83c04d74e}{AVI\_OK}}\ =\ 0,}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7ab98ace18bf39ea529638552820d5f0a3}{AVI\_RIFF\_ERR}},}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7aef72920fc5a46998843b2bb6db98a950}{AVI\_AVI\_ERR}},}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a8cb95e4c0f7849c99391a3265366d380}{AVI\_LIST\_ERR}},}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a7f65ba87da71533d3ba92c01e614a68d}{AVI\_HDRL\_ERR}},}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a58c9bc48cd88d65ef12e52999894282a}{AVI\_AVIH\_ERR}},}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7aa32440838bbb44cabe1cb7929465deb9}{AVI\_STRL\_ERR}},}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a9902b5dbcd08b2e5e1d5f2b28e7bcc78}{AVI\_STRH\_ERR}},}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7af3ad92c668bf1f78d6e19c0bc1fc1a41}{AVI\_STRF\_ERR}},}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7ae7361a4b52200de3bc19d0e9a6e7e813}{AVI\_MOVI\_ERR}},}
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7a49344f7be05e2cc0a057dedc973db30e}{AVI\_FORMAT\_ERR}},}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7abd8fea3fd943c00964f90b652d4a5bd8}{AVI\_STREAM\_ERR}},}
+\DoxyCodeLine{00077\ \ \ \}\ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00080\ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___h_e_a_d_e_r_a9257bd8cc4331141e67f41b27bad096b}{RiffID}};}
+\DoxyCodeLine{00082\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___h_e_a_d_e_r_af514103d17a9819995c94afdf3dc1354}{FileSize}};}
+\DoxyCodeLine{00083\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___h_e_a_d_e_r_a8823f3332aef0bc9e965ccfc7c12f91a}{AviID}};}
+\DoxyCodeLine{00084\ \ \ \}\ \mbox{\hyperlink{struct_a_v_i___h_e_a_d_e_r}{AVI\_HEADER}};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00087\ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_f_r_a_m_e___h_e_a_d_e_r_a4be3d7bf1af3a5946234836cc77facc3}{FrameID}};}
+\DoxyCodeLine{00089\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_f_r_a_m_e___h_e_a_d_e_r_a7686da9fc15f5c816e78b91b60b530e9}{FrameSize}};}
+\DoxyCodeLine{00090\ \ \ \}\ \mbox{\hyperlink{struct_f_r_a_m_e___h_e_a_d_e_r}{FRAME\_HEADER}};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00093\ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_l_i_s_t___h_e_a_d_e_r_a12412032a77b1400f5358d192686ceb8}{ListID}};}
+\DoxyCodeLine{00095\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_l_i_s_t___h_e_a_d_e_r_a6d784a45c8b6bb5657248be98c1cd76b}{BlockSize}};}
+\DoxyCodeLine{00096\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_l_i_s_t___h_e_a_d_e_r_a6d7ddba7b9d41881e7b4cbb0b85c9f92}{ListType}};}
+\DoxyCodeLine{00097\ \ \ \}\ \mbox{\hyperlink{struct_l_i_s_t___h_e_a_d_e_r}{LIST\_HEADER}};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00100\ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_a391c80168befbf248b27c8a66b6434c0}{BlockID}};}
+\DoxyCodeLine{00102\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_af7305ca331d1acbe0f9b9966f6046550}{BlockSize}};}
+\DoxyCodeLine{00103\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_a428d15bfe0055e589d8d91d31f0e3f47}{SecPerFrame}};}
+\DoxyCodeLine{00104\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_a94b32383d643c27ddb61704454873d48}{MaxByteSec}};}
+\DoxyCodeLine{00105\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_ad1e16449ea604626356b78db8b9f82c7}{PaddingGranularity}};}
+\DoxyCodeLine{00106\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_acfbb1398524c11b7b01ce8a90a7cc510}{Flags}};}
+\DoxyCodeLine{00107\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_aaa2d7cc6345a28c16bd31569a38994af}{TotalFrame}};}
+\DoxyCodeLine{00108\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_aabd467e1323d8a0b16faf8f9f4dad467}{InitFrames}};}
+\DoxyCodeLine{00109\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_acf6b72f5c3b71f1d9e7e90022082dd42}{Streams}};}
+\DoxyCodeLine{00110\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_ab1cfc577596e5640e90f14ff027582db}{RefBufSize}};}
+\DoxyCodeLine{00111\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_a3cd1ada12495db14638c16b6d5d81339}{Width}};}
+\DoxyCodeLine{00112\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_ad9df6d6ee6019da51ba65ea455520af7}{Height}};}
+\DoxyCodeLine{00113\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r_a8344f72255910892ae5c4bd6b61e991c}{Reserved}}[4];}
+\DoxyCodeLine{00114\ \ \ \}\ \mbox{\hyperlink{struct_a_v_i_h___h_e_a_d_e_r}{AVIH\_HEADER}};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00117\ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_acd70b1b28d58191a198c6181769aa7dd}{BlockID}};}
+\DoxyCodeLine{00119\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a758c8dcbaa8d653e3b953859106e7daf}{BlockSize}};}
+\DoxyCodeLine{00120\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_ab7a765df289c36453b65de511dcc570f}{StreamType}};}
+\DoxyCodeLine{00121\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_aee82a75fedc9e81e7856f1051dc9749f}{Handler}};}
+\DoxyCodeLine{00122\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a6d5ed11170bd489b816e43c21cca43a7}{Flags}};}
+\DoxyCodeLine{00123\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a7b3346d2de587ad95af0d6df503b84ac}{Priority}};}
+\DoxyCodeLine{00124\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a71261e096170992a32fbe3da26858275}{Language}};}
+\DoxyCodeLine{00125\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a6bee2477ab26023687971bfff231fc96}{InitFrames}};}
+\DoxyCodeLine{00126\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a307334afab3dce2f6318683150f6383b}{Scale}};}
+\DoxyCodeLine{00127\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a98063b510f2378cbb43dafe9db43be77}{Rate}};}
+\DoxyCodeLine{00128\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a2ac2eb60a8ace6b5c8e137e4c6691e36}{Start}};}
+\DoxyCodeLine{00129\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_ab71810999cbbfdf819598ade1aa0bb78}{Length}};}
+\DoxyCodeLine{00130\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a4c6a2770a11290894bc1c1e5a63d360b}{RefBufSize}};}
+\DoxyCodeLine{00131\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_ae0b863ccc30bb83011782acb36037277}{Quality}};}
+\DoxyCodeLine{00132\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_ab665f598e29d1c91b03eaea637439d91}{SampleSize}};}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00134\ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a39f1ae7d696c3d499c7b023484cfffc1}{Left}};}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a653fdc4e86ef6e8502a71b574505d6fc}{Top}};}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_aa0c229e552db3d60608d61af57207c97}{Right}};}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r_a09d6e846e777d94770c71a7403efc9d2}{Bottom}};}
+\DoxyCodeLine{00139\ \ \ \ \ \}\ Frame;}
+\DoxyCodeLine{00140\ \ \ \}\ \mbox{\hyperlink{struct_s_t_r_h___h_e_a_d_e_r}{STRH\_HEADER}};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00143\ \ \ \{}
+\DoxyCodeLine{00144\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_a13a02f3c86d6b8fd6bf63274a7706c0d}{BmpSize}};}
+\DoxyCodeLine{00145\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_a760cae048dc5b2f9c38fede50a51cfea}{Width}};}
+\DoxyCodeLine{00146\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_a44e0a9e3159002eb72bfd6d2648a6016}{Height}};}
+\DoxyCodeLine{00147\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_ae7818bbf46d460d1575158bd486a6d59}{Planes}};}
+\DoxyCodeLine{00148\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_afac447ea3e005005e08d591227b0e6ab}{BitCount}};}
+\DoxyCodeLine{00149\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_ad8229c527917f6519a845444e37afddc}{Compression}};}
+\DoxyCodeLine{00150\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_a0daea680e85d8b6b17969ce521cda38a}{SizeImage}};}
+\DoxyCodeLine{00151\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_ab7703a3f7153faf94585f4df9ca05648}{XpixPerMeter}};}
+\DoxyCodeLine{00152\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_ae97e595b08425ce09ab4756519669da4}{YpixPerMeter}};}
+\DoxyCodeLine{00153\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_a0d69c123db93f1133b76a36d76206853}{ClrUsed}};}
+\DoxyCodeLine{00154\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r_abba5e4c1d1f39060998885af5febff0b}{ClrImportant}};}
+\DoxyCodeLine{00155\ \ \ \}\ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r}{BMP\_HEADER}};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00158\ \ \ \{}
+\DoxyCodeLine{00159\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_a_v_i_r_g_b_q_u_a_d_aeca7655a23980105e4d3d014789aac05}{rgbBlue}};}
+\DoxyCodeLine{00160\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_a_v_i_r_g_b_q_u_a_d_a37e27676af7feff85fae2b0a8d2f7a5c}{rgbGreen}};}
+\DoxyCodeLine{00161\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_a_v_i_r_g_b_q_u_a_d_a7f4cd6ec23a95f879b6e0f340c518a2d}{rgbRed}};}
+\DoxyCodeLine{00162\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_a_v_i_r_g_b_q_u_a_d_a6eed39fdb3a8c4e7e5c5c62872fe0b61}{rgbReserved}};}
+\DoxyCodeLine{00163\ \ \ \}\ \mbox{\hyperlink{struct_a_v_i_r_g_b_q_u_a_d}{AVIRGBQUAD}};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00166\ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_f___b_m_p_h_e_a_d_e_r_a649f76c89cf45b34c88fd92a9d17287c}{BlockID}};}
+\DoxyCodeLine{00168\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_f___b_m_p_h_e_a_d_e_r_a7f2bd73897c3dce150173676bff1b065}{BlockSize}};}
+\DoxyCodeLine{00169\ \ \ \ \ \mbox{\hyperlink{struct_b_m_p___h_e_a_d_e_r}{BMP\_HEADER}}\ \mbox{\hyperlink{struct_s_t_r_f___b_m_p_h_e_a_d_e_r_a0f3d464e56554130a6a4d1fe7e780866}{bmiHeader}};}
+\DoxyCodeLine{00170\ \ \ \ \ \mbox{\hyperlink{struct_a_v_i_r_g_b_q_u_a_d}{AVIRGBQUAD}}\ \mbox{\hyperlink{struct_s_t_r_f___b_m_p_h_e_a_d_e_r_a7c130313516e139a3c914657c6e36cad}{bmColors}}[1];}
+\DoxyCodeLine{00171\ \ \ \}\ \mbox{\hyperlink{struct_s_t_r_f___b_m_p_h_e_a_d_e_r}{STRF\_BMPHEADER}};}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00174\ \ \ \{}
+\DoxyCodeLine{00175\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r_a3d800fee21455345fd677286d413d2ab}{BlockID}};}
+\DoxyCodeLine{00176\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r_a583499bd997f68203e4c5b26b6f88da4}{BlockSize}};}
+\DoxyCodeLine{00177\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r_a13b78420c9261fee9f2fba5bf9cf309a}{FormatTag}};}
+\DoxyCodeLine{00178\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r_ad48e7e7e7de435fa060e65664d4da303}{Channels}};}
+\DoxyCodeLine{00179\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r_a33c9d085b050f2a795d7acd556f3bf12}{SampleRate}};}
+\DoxyCodeLine{00180\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r_a1e3faffeebe111aebdec44bf9ee167d4}{BaudRate}};}
+\DoxyCodeLine{00181\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r_abb2b0570968ae1e99388c862f5075d97}{BlockAlign}};}
+\DoxyCodeLine{00182\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r_a11b5cbc68cf51b3049b572dbdf2499b5}{Size}};}
+\DoxyCodeLine{00183\ \ \ \}\ \mbox{\hyperlink{struct_s_t_r_f___w_a_v_h_e_a_d_e_r}{STRF\_WAVHEADER}};}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00186\ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_a3ab754e9efdbb941df82ac50e04beca6}{SecPerFrame}};}
+\DoxyCodeLine{00188\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_a16830d84fcb2e0e2c2de376c2b7de7f9}{TotalFrame}};}
+\DoxyCodeLine{00189\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_a05c70246c80e776937d89972c39322e0}{FrameRate}};}
+\DoxyCodeLine{00190\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_ac185af72fb6b6d9e09838245046ab303}{Width}};}
+\DoxyCodeLine{00191\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_a739ca9278957d998661075d2f516e43d}{Height}};}
+\DoxyCodeLine{00192\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_aaa996dabca3179f6e1017c7546a9c735}{SampleRate}};}
+\DoxyCodeLine{00193\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_a823152f9ca2da7d79a53736610943688}{Channels}};}
+\DoxyCodeLine{00194\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_ad1d4a040c2539e13fa97aa468838b0a0}{AudioBufSize}};}
+\DoxyCodeLine{00195\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_addd19ce5ba65d359bdfa3433a6f91c92}{AudioType}};}
+\DoxyCodeLine{00196\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_a271f51db0bfefea8ddc0dd980f7f6740}{StreamID}};}
+\DoxyCodeLine{00197\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o_adcc54e9a5087119ba95496739c4c5651}{StreamSize}};}
+\DoxyCodeLine{00198\ \ \ \ \ uint8\_t\ *\mbox{\hyperlink{struct_a_v_i___i_n_f_o_a989f8e8755ea531eb016f45659c4a9ed}{VideoFLAG}};}
+\DoxyCodeLine{00199\ \ \ \ \ uint8\_t\ *\mbox{\hyperlink{struct_a_v_i___i_n_f_o_ad4d4f7bf412d873d9d49015e4edfae39}{AudioFLAG}};}
+\DoxyCodeLine{00200\ \ \ \}\ \mbox{\hyperlink{struct_a_v_i___i_n_f_o}{AVI\_INFO}};}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00203\ \ \ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \mbox{\hyperlink{struct_a_v_i___i_n_f_o}{AVI\_INFO}}\ \mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t_a1b2d8c92ca39121b4f862ae1c44a48a9}{aviInfo}};}
+\DoxyCodeLine{00205\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t_a3bdeab29a5f14bda2cb6c096b9fc200e}{CurrentImage}};}
+\DoxyCodeLine{00206\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t_ac94e802029527936f8d74e9433178c57}{FrameSize}};}
+\DoxyCodeLine{00207\ \ \ \ \ uint8\_t\ *\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t_ab268f4040330d432e7bb79735a50c7a4}{pVideoBuffer}};}
+\DoxyCodeLine{00208\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t_a3ba08d3e356874918fd53117a2a5658c}{VideoBufferSize}};}
+\DoxyCodeLine{00209\ \ \ \ \ uint8\_t\ *\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t_ad60aa13fac057170f036dabcef996551}{pAudioBuffer}};}
+\DoxyCodeLine{00210\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t_a7de56259926cd746ea6abb5531dac0c1}{AudioBufferSize}};}
+\DoxyCodeLine{00211\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t_a509fee242b7ac9dd76cb4096b78e10dd}{FileSize}};}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \}\ \mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\_CONTEXT}};}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \textcolor{keyword}{extern}\ uint8\_t\ *\mbox{\hyperlink{_a_v_i__parser_8h_aca42f7778287b9a79affe540ce98d0f5}{frame\_buffer}};}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \textcolor{comment}{/*\ Exported\ functions\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00218\ \ \ uint32\_t\ \mbox{\hyperlink{_a_v_i__parser_8h_abd26a4714ac88bce44d21404922c2ee8}{AVI\_ParserInit}}(\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\_CONTEXT}}\ *pavi,\ FIL\ *file,\ uint8\_t\ *pVideoBuffer,\ uint32\_t\ VideoBufferSize,\ uint8\_t\ *pAudioBuffer,\ uint32\_t\ AudioBufferSize);}
+\DoxyCodeLine{00219\ \ \ uint32\_t\ \mbox{\hyperlink{_a_v_i__parser_8h_a28ff6cd5d018c597613e0d2a61f33ef3}{AVI\_GetFrame}}(\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\_CONTEXT}}\ *pavi,\ FIL\ *file,\ uint8\_t\ skipFlag);}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}}\ \mbox{\hyperlink{_a_v_i__parser_8h_a5bb7651423b20c3f2cca4b917316f0a8}{\_\_AVI\_GetStreamInfo}}(\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\_CONTEXT}}\ *pavi,\ uint8\_t\ *buf);}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00224\ \}}
+\DoxyCodeLine{00225\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

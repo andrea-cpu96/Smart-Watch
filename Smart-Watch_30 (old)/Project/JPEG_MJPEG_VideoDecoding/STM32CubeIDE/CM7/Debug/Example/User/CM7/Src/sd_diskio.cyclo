@@ -1,6 +1,0 @@
-../Example/User/CM7/Src/sd_diskio.c:57:16:SD_CheckStatus	2
-../Example/User/CM7/Src/sd_diskio.c:74:9:SD_initialize	1
-../Example/User/CM7/Src/sd_diskio.c:84:9:SD_status	1
-../Example/User/CM7/Src/sd_diskio.c:97:9:SD_read	3
-../Example/User/CM7/Src/sd_diskio.c:124:9:SD_write	3
-../Example/User/CM7/Src/sd_diskio.c:151:9:SD_ioctl	6

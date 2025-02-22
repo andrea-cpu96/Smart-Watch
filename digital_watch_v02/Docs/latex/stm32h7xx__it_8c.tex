@@ -1,0 +1,241 @@
+\doxysection{Core/\+Src/stm32h7xx\+\_\+it.c File Reference}
+\hypertarget{stm32h7xx__it_8c}{}\label{stm32h7xx__it_8c}\index{Core/Src/stm32h7xx\_it.c@{Core/Src/stm32h7xx\_it.c}}
+
+
+Interrupt Service Routines.  
+
+
+{\ttfamily \#include "{}stm32h7xx\+\_\+it.\+h"{}}\newline
+{\ttfamily \#include "{}main.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a6ad7a5e3ee69cb6db6a6b9111ba898bc}{NMI\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em NMI\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a2bffc10d5bd4106753b7c30e86903bea}{Hard\+Fault\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Hard\+Fault\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a3150f74512510287a942624aa9b44cc5}{Mem\+Manage\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Mem\+Manage\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a850cefb17a977292ae5eb4cafa9976c3}{Bus\+Fault\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Bus\+Fault\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a1d98923de2ed6b7309b66f9ba2971647}{Usage\+Fault\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Usage\+Fault\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a3e5ddb3df0d62f2dc357e64a3f04a6ce}{SVC\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em SVC\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_adbdfb05858cc36fc520974df37ec3cb0}{Debug\+Mon\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Debug\+Mon\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a6303e1f258cbdc1f970ce579cc015623}{Pend\+SV\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Pend\+SV\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_ab5e09814056d617c521549e542639b7e}{Sys\+Tick\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Sys\+Tick\+\_\+\+Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a0aae25932c3afc0f8f7be9c5a569381e}{JPEG\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em JPEG\+\_\+\+IRQHandler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a7506cb08b2e5b7e356f93b5960515bd1}{MDMA\+\_\+\+IRQHandler}} ()
+\begin{DoxyCompactList}\small\item\em MDMA\+\_\+\+IRQHandler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a0a65f11d2684646b3c2ee25f4cdd6017}{DMA1\+\_\+\+Stream0\+\_\+\+IRQHandler}} ()
+\begin{DoxyCompactList}\small\item\em DMA1\+\_\+\+Stream0\+\_\+\+IRQHandler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a9bbd8c17ce4f49adcca47d11f482aab6}{SPI1\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em SPI1\+\_\+\+IRQHandler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a272ffa65eb8ff5c4a065b0d3473611cd}{I2\+C1\+\_\+\+EV\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em I2\+C1\+\_\+\+EV\+\_\+\+IRQHandler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a17e9789a29a87d2df54f12b94dd1a0b6}{EXTI0\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em EXTI0\+\_\+\+IRQHandler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a49cfdd46eb8d0ef3e1987514aa9343dc}{EXTI1\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em EXTI1\+\_\+\+IRQHandler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_ab5a1d9e9c8ef50e0cb9ddb5745a20a14}{EXTI2\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em EXTI2\+\_\+\+IRQHandler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{stm32h7xx__it_8c_a7b2096b8b2643286dc3a7e5110e5ae85}{EXTI9\+\_\+5\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em EXTI9\+\_\+5\+\_\+\+IRQHandler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interrupt Service Routines. 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2024 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{stm32h7xx__it_8c_a850cefb17a977292ae5eb4cafa9976c3}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!BusFault\_Handler@{BusFault\_Handler}}
+\index{BusFault\_Handler@{BusFault\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{BusFault\_Handler()}{BusFault\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a850cefb17a977292ae5eb4cafa9976c3} 
+void Bus\+Fault\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Bus\+Fault\+\_\+\+Handler. 
+
+\Hypertarget{stm32h7xx__it_8c_adbdfb05858cc36fc520974df37ec3cb0}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!DebugMon\_Handler@{DebugMon\_Handler}}
+\index{DebugMon\_Handler@{DebugMon\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{DebugMon\_Handler()}{DebugMon\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_adbdfb05858cc36fc520974df37ec3cb0} 
+void Debug\+Mon\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Debug\+Mon\+\_\+\+Handler. 
+
+\Hypertarget{stm32h7xx__it_8c_a0a65f11d2684646b3c2ee25f4cdd6017}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!DMA1\_Stream0\_IRQHandler@{DMA1\_Stream0\_IRQHandler}}
+\index{DMA1\_Stream0\_IRQHandler@{DMA1\_Stream0\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{DMA1\_Stream0\_IRQHandler()}{DMA1\_Stream0\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a0a65f11d2684646b3c2ee25f4cdd6017} 
+void DMA1\+\_\+\+Stream0\+\_\+\+IRQHandler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+DMA1\+\_\+\+Stream0\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_a17e9789a29a87d2df54f12b94dd1a0b6}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!EXTI0\_IRQHandler@{EXTI0\_IRQHandler}}
+\index{EXTI0\_IRQHandler@{EXTI0\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{EXTI0\_IRQHandler()}{EXTI0\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a17e9789a29a87d2df54f12b94dd1a0b6} 
+void EXTI0\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+EXTI0\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_a49cfdd46eb8d0ef3e1987514aa9343dc}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!EXTI1\_IRQHandler@{EXTI1\_IRQHandler}}
+\index{EXTI1\_IRQHandler@{EXTI1\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{EXTI1\_IRQHandler()}{EXTI1\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a49cfdd46eb8d0ef3e1987514aa9343dc} 
+void EXTI1\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+EXTI1\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_ab5a1d9e9c8ef50e0cb9ddb5745a20a14}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!EXTI2\_IRQHandler@{EXTI2\_IRQHandler}}
+\index{EXTI2\_IRQHandler@{EXTI2\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{EXTI2\_IRQHandler()}{EXTI2\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_ab5a1d9e9c8ef50e0cb9ddb5745a20a14} 
+void EXTI2\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+EXTI2\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_a7b2096b8b2643286dc3a7e5110e5ae85}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!EXTI9\_5\_IRQHandler@{EXTI9\_5\_IRQHandler}}
+\index{EXTI9\_5\_IRQHandler@{EXTI9\_5\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{EXTI9\_5\_IRQHandler()}{EXTI9\_5\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a7b2096b8b2643286dc3a7e5110e5ae85} 
+void EXTI9\+\_\+5\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+EXTI9\+\_\+5\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_a2bffc10d5bd4106753b7c30e86903bea}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!HardFault\_Handler@{HardFault\_Handler}}
+\index{HardFault\_Handler@{HardFault\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{HardFault\_Handler()}{HardFault\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a2bffc10d5bd4106753b7c30e86903bea} 
+void Hard\+Fault\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Hard\+Fault\+\_\+\+Handler. 
+
+\Hypertarget{stm32h7xx__it_8c_a272ffa65eb8ff5c4a065b0d3473611cd}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!I2C1\_EV\_IRQHandler@{I2C1\_EV\_IRQHandler}}
+\index{I2C1\_EV\_IRQHandler@{I2C1\_EV\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{I2C1\_EV\_IRQHandler()}{I2C1\_EV\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a272ffa65eb8ff5c4a065b0d3473611cd} 
+void I2\+C1\+\_\+\+EV\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+I2\+C1\+\_\+\+EV\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_a0aae25932c3afc0f8f7be9c5a569381e}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!JPEG\_IRQHandler@{JPEG\_IRQHandler}}
+\index{JPEG\_IRQHandler@{JPEG\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{JPEG\_IRQHandler()}{JPEG\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a0aae25932c3afc0f8f7be9c5a569381e} 
+void JPEG\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+JPEG\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_a7506cb08b2e5b7e356f93b5960515bd1}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!MDMA\_IRQHandler@{MDMA\_IRQHandler}}
+\index{MDMA\_IRQHandler@{MDMA\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{MDMA\_IRQHandler()}{MDMA\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a7506cb08b2e5b7e356f93b5960515bd1} 
+void MDMA\+\_\+\+IRQHandler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+MDMA\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_a3150f74512510287a942624aa9b44cc5}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!MemManage\_Handler@{MemManage\_Handler}}
+\index{MemManage\_Handler@{MemManage\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{MemManage\_Handler()}{MemManage\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a3150f74512510287a942624aa9b44cc5} 
+void Mem\+Manage\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Mem\+Manage\+\_\+\+Handler. 
+
+\Hypertarget{stm32h7xx__it_8c_a6ad7a5e3ee69cb6db6a6b9111ba898bc}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!NMI\_Handler@{NMI\_Handler}}
+\index{NMI\_Handler@{NMI\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{NMI\_Handler()}{NMI\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a6ad7a5e3ee69cb6db6a6b9111ba898bc} 
+void NMI\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+NMI\+\_\+\+Handler. 
+
+\Hypertarget{stm32h7xx__it_8c_a6303e1f258cbdc1f970ce579cc015623}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!PendSV\_Handler@{PendSV\_Handler}}
+\index{PendSV\_Handler@{PendSV\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{PendSV\_Handler()}{PendSV\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a6303e1f258cbdc1f970ce579cc015623} 
+void Pend\+SV\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Pend\+SV\+\_\+\+Handler. 
+
+\Hypertarget{stm32h7xx__it_8c_a9bbd8c17ce4f49adcca47d11f482aab6}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!SPI1\_IRQHandler@{SPI1\_IRQHandler}}
+\index{SPI1\_IRQHandler@{SPI1\_IRQHandler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{SPI1\_IRQHandler()}{SPI1\_IRQHandler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a9bbd8c17ce4f49adcca47d11f482aab6} 
+void SPI1\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+SPI1\+\_\+\+IRQHandler. 
+
+\Hypertarget{stm32h7xx__it_8c_a3e5ddb3df0d62f2dc357e64a3f04a6ce}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!SVC\_Handler@{SVC\_Handler}}
+\index{SVC\_Handler@{SVC\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{SVC\_Handler()}{SVC\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a3e5ddb3df0d62f2dc357e64a3f04a6ce} 
+void SVC\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+SVC\+\_\+\+Handler. 
+
+\Hypertarget{stm32h7xx__it_8c_ab5e09814056d617c521549e542639b7e}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!SysTick\_Handler@{SysTick\_Handler}}
+\index{SysTick\_Handler@{SysTick\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{SysTick\_Handler()}{SysTick\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_ab5e09814056d617c521549e542639b7e} 
+void Sys\+Tick\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Sys\+Tick\+\_\+\+Handler. 
+
+\Hypertarget{stm32h7xx__it_8c_a1d98923de2ed6b7309b66f9ba2971647}\index{stm32h7xx\_it.c@{stm32h7xx\_it.c}!UsageFault\_Handler@{UsageFault\_Handler}}
+\index{UsageFault\_Handler@{UsageFault\_Handler}!stm32h7xx\_it.c@{stm32h7xx\_it.c}}
+\doxysubsubsection{\texorpdfstring{UsageFault\_Handler()}{UsageFault\_Handler()}}
+{\footnotesize\ttfamily \label{stm32h7xx__it_8c_a1d98923de2ed6b7309b66f9ba2971647} 
+void Usage\+Fault\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Usage\+Fault\+\_\+\+Handler. 
+

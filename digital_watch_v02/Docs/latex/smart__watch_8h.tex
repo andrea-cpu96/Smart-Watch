@@ -1,0 +1,478 @@
+\doxysection{Core/\+Inc/smart\+\_\+watch.h File Reference}
+\hypertarget{smart__watch_8h}{}\label{smart__watch_8h}\index{Core/Inc/smart\_watch.h@{Core/Inc/smart\_watch.h}}
+{\ttfamily \#include "{}GC9\+A01.\+h"{}}\newline
+{\ttfamily \#include "{}FXLS8974\+C.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structvideo__t}{video\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structtime__t}{time\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a27cdcda85544ba9b077d9c152d229ee8}{ENABLE\+\_\+\+BATTERY\+\_\+\+MON}}
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_acd9172fb59056d01079b4f529c4124ba}{MJPEG\+\_\+\+VID\+\_\+\+BUFFER\+\_\+\+SIZE}}~((uint32\+\_\+t)(1024 \texorpdfstring{$\ast$}{*} 50))
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a8014808af86f6e175a77cedae984c4b5}{MJPEG\+\_\+\+AUD\+\_\+\+BUFFER\+\_\+\+SIZE}}~((uint32\+\_\+t)(1024 \texorpdfstring{$\ast$}{*} 0))
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372}{LCD\+\_\+\+SIDE\+\_\+\+SIZE}}~240
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a620beec531df102480f80dd191932703}{DISPLAY\+\_\+\+STANDBY\+\_\+\+TIMER}}~59
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a06257f10c51e668eba3d85a4c45acccd}{LCD\+\_\+\+X\+\_\+\+SIZE}}~\mbox{\hyperlink{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372}{LCD\+\_\+\+SIDE\+\_\+\+SIZE}}
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a71b70747405efd313ee22c4c6325e18b}{LCD\+\_\+\+Y\+\_\+\+SIZE}}~\mbox{\hyperlink{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372}{LCD\+\_\+\+SIDE\+\_\+\+SIZE}}
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a5c71a5e59a53413cd6c270266d63b031}{R}}~((\mbox{\hyperlink{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372}{LCD\+\_\+\+SIDE\+\_\+\+SIZE}} / 2) -\/ 1)
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_aa1cf70a99e21bc2032e8867c6cafbb43}{SQUARE}}(x)
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a6d436a3222bf3b8e0715d1af6182a894}{PIX\+\_\+\+TO\+\_\+\+CIRC\+\_\+\+COORD}}(p)
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_aa6fc0419f1cb795ee1a623eb744de967}{CIRCLE\+\_\+\+MASK}}(px,  py)
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a43a44c8d0935446284a159f24c2d7d3b}{DIFF\+\_\+\+THRESHOLD}}~5
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_ad8554a16a56cb3ee6458f0988a49ed17}{PIXELS\+\_\+\+DIFF}}(pix1,  pix2)
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_ad3c3fa785aa024a24dc8d7add432d1ee}{PIXELS\+\_\+\+COMP}}(pix1,  pix2)
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_adcb062876dabf878c3989ea3ae93852d}{RESET\+\_\+\+ITER\+\_\+\+NUM}}~30
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_a4221ccd2eba33a9ace96b1c571659f33}{HIGH\+\_\+\+SIDE\+\_\+R}}~4300.\+0
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_ad99d15ea42f7d8a37e36a63e9f04eeca}{LOW\+\_\+\+SIDE\+\_\+R}}~8200.\+0
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_ae079872e4baab6a74c0a60bcf06b7ee1}{REVERT\+\_\+\+VOLTAGE\+\_\+\+DIV}}(v\+\_\+read)
+\item 
+\#define \mbox{\hyperlink{smart__watch_8h_aee4a4041802256c27444756275093a33}{BATTERY\+\_\+\+THRESH}}~3.\+5
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167}{mode}} \{ \mbox{\hyperlink{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167aca700b8a8b6aec27bdeac529a3c5307e}{SETTING\+\_\+\+MODE}} = 0
+, \mbox{\hyperlink{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167a83feb61d42f8db9f494019fcea2c0148}{NORMAL\+\_\+\+MODE}}
+ \}
+\item 
+enum \mbox{\hyperlink{smart__watch_8h_ab88132286f81cb754b54e4c7d978579d}{display\+\_\+status}} \{ \mbox{\hyperlink{smart__watch_8h_ab88132286f81cb754b54e4c7d978579dacf49bc1c29a95c65aacddadb4dac7218}{DISPLAY\+\_\+\+OFF}} = 0
+, \mbox{\hyperlink{smart__watch_8h_ab88132286f81cb754b54e4c7d978579da474066ce108b971d3d963cf3ec8b84bd}{DISPLAY\+\_\+\+ON}}
+ \}
+\item 
+enum \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822}{settings}} \{ \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822a5adea44d0223e65f3583b05ec6e4843e}{SET\+\_\+\+IDLE}} = 0
+, \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822ac01edd53052cdd76d84dbccdb18a6e9e}{SET\+\_\+\+HOURS}}
+, \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822a80cd1cf823f465c341650a5c16675b4a}{SET\+\_\+\+MINUTES}}
+, \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822ac06fdffefbd13204265d53725423f371}{SET\+\_\+\+START}}
+ \}
+\item 
+enum \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4a}{button\+\_\+status}} \{ \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa253d1a56d33d9a0f3410be4002f4d2f5}{BTN\+\_\+\+NONE}} = 0
+, \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aabc941d839c0626e89eade979d16c40ac}{BTN\+\_\+\+PLUS}}
+, \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa3e15382c14407efc64d958aff95ea569}{BTN\+\_\+\+SET}}
+, \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa93f057e194d90bec2554f1b49116a3fb}{BTN\+\_\+\+MINUS}}
+ \}
+\item 
+enum \mbox{\hyperlink{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577}{battery\+\_\+status}} \{ \mbox{\hyperlink{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577a0032ea1b7935c71aa1baa3b688e7af85}{BATTERY\+\_\+\+LOW}} = 0
+, \mbox{\hyperlink{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577a372829f876272ab50802b35f98503edc}{BATTERY\+\_\+\+HIGH}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{smart__watch_8h_a4a28906bf60638b08bf8fd43366292b2}{smart\+\_\+watch\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em smart\+\_\+watch\+\_\+init \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{smart__watch_8h_ab3ae4554e081943f1f265297dcd0f5d9}{smart\+\_\+watch\+\_\+process}} (void)
+\begin{DoxyCompactList}\small\item\em smart\+\_\+watch\+\_\+process \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{smart__watch_8h_a9883d2293983bcef88de2ff0d0a2d43c}{lcd\+\_\+draw}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data)
+\begin{DoxyCompactList}\small\item\em lcd\+\_\+draw \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{smart__watch_8h_a546bd89ae5f462af12e14f117ad78f62}{smart\+\_\+watch\+\_\+test\+\_\+sd}} (void)
+\begin{DoxyCompactList}\small\item\em smart\+\_\+watch\+\_\+test\+\_\+sd \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{smart__watch_8h_a904249f9decdbb230964fcca93717fa6}{smart\+\_\+watch\+\_\+test\+\_\+display}} (void)
+\begin{DoxyCompactList}\small\item\em smart\+\_\+watch\+\_\+test\+\_\+display \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{smart__watch_8h_a9cdb2aa9aca618feb3056d6a3b5c9edb}{smart\+\_\+watch\+\_\+test\+\_\+mjpeg}} (void)
+\begin{DoxyCompactList}\small\item\em smart\+\_\+watch\+\_\+test\+\_\+mjpeg \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{smart__watch_8h_a9ebdf6efcd3c0733c0481995de21368f}{smart\+\_\+watch\+\_\+test\+\_\+accelerometer}} (\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sensor\+Handle)
+\begin{DoxyCompactList}\small\item\em smart\+\_\+watch\+\_\+test\+\_\+accelerometer \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{smart__watch_8h_afb42c3476b2df14445f1d3ae382fefc2}{smart\+\_\+watch\+\_\+test\+\_\+adc}} (void)
+\begin{DoxyCompactList}\small\item\em smart\+\_\+watch\+\_\+test\+\_\+adc \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+\+IO uint32\+\_\+t \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga3a6dcae71858a89bf1530a89f1a3cc0a}{Jpeg\+\_\+\+HWDecoding\+End}}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{smart__watch_8h_a6aa18c00e37e3c1fd2066cfc029a5bfc}{output\+Data}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{smart__watch_8h_aee4a4041802256c27444756275093a33}\index{smart\_watch.h@{smart\_watch.h}!BATTERY\_THRESH@{BATTERY\_THRESH}}
+\index{BATTERY\_THRESH@{BATTERY\_THRESH}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{BATTERY\_THRESH}{BATTERY\_THRESH}}
+{\footnotesize\ttfamily \label{smart__watch_8h_aee4a4041802256c27444756275093a33} 
+\#define BATTERY\+\_\+\+THRESH~3.\+5}
+
+\Hypertarget{smart__watch_8h_aa6fc0419f1cb795ee1a623eb744de967}\index{smart\_watch.h@{smart\_watch.h}!CIRCLE\_MASK@{CIRCLE\_MASK}}
+\index{CIRCLE\_MASK@{CIRCLE\_MASK}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{CIRCLE\_MASK}{CIRCLE\_MASK}}
+{\footnotesize\ttfamily \label{smart__watch_8h_aa6fc0419f1cb795ee1a623eb744de967} 
+\#define CIRCLE\+\_\+\+MASK(\begin{DoxyParamCaption}\item[{}]{px}{, }\item[{}]{py}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((\mbox{\hyperlink{smart__watch_8h_aa1cf70a99e21bc2032e8867c6cafbb43}{SQUARE}}(\mbox{\hyperlink{smart__watch_8h_a6d436a3222bf3b8e0715d1af6182a894}{PIX\_TO\_CIRC\_COORD}}(px))\ +\ \mbox{\hyperlink{smart__watch_8h_aa1cf70a99e21bc2032e8867c6cafbb43}{SQUARE}}(\mbox{\hyperlink{smart__watch_8h_a6d436a3222bf3b8e0715d1af6182a894}{PIX\_TO\_CIRC\_COORD}}(py)))\ >=\ \mbox{\hyperlink{smart__watch_8h_aa1cf70a99e21bc2032e8867c6cafbb43}{SQUARE}}(\mbox{\hyperlink{smart__watch_8h_a5c71a5e59a53413cd6c270266d63b031}{R}}))}
+
+\end{DoxyCode}
+\Hypertarget{smart__watch_8h_a43a44c8d0935446284a159f24c2d7d3b}\index{smart\_watch.h@{smart\_watch.h}!DIFF\_THRESHOLD@{DIFF\_THRESHOLD}}
+\index{DIFF\_THRESHOLD@{DIFF\_THRESHOLD}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{DIFF\_THRESHOLD}{DIFF\_THRESHOLD}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a43a44c8d0935446284a159f24c2d7d3b} 
+\#define DIFF\+\_\+\+THRESHOLD~5}
+
+\Hypertarget{smart__watch_8h_a620beec531df102480f80dd191932703}\index{smart\_watch.h@{smart\_watch.h}!DISPLAY\_STANDBY\_TIMER@{DISPLAY\_STANDBY\_TIMER}}
+\index{DISPLAY\_STANDBY\_TIMER@{DISPLAY\_STANDBY\_TIMER}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{DISPLAY\_STANDBY\_TIMER}{DISPLAY\_STANDBY\_TIMER}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a620beec531df102480f80dd191932703} 
+\#define DISPLAY\+\_\+\+STANDBY\+\_\+\+TIMER~59}
+
+\Hypertarget{smart__watch_8h_a27cdcda85544ba9b077d9c152d229ee8}\index{smart\_watch.h@{smart\_watch.h}!ENABLE\_BATTERY\_MON@{ENABLE\_BATTERY\_MON}}
+\index{ENABLE\_BATTERY\_MON@{ENABLE\_BATTERY\_MON}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{ENABLE\_BATTERY\_MON}{ENABLE\_BATTERY\_MON}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a27cdcda85544ba9b077d9c152d229ee8} 
+\#define ENABLE\+\_\+\+BATTERY\+\_\+\+MON}
+
+\Hypertarget{smart__watch_8h_a4221ccd2eba33a9ace96b1c571659f33}\index{smart\_watch.h@{smart\_watch.h}!HIGH\_SIDE\_R@{HIGH\_SIDE\_R}}
+\index{HIGH\_SIDE\_R@{HIGH\_SIDE\_R}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{HIGH\_SIDE\_R}{HIGH\_SIDE\_R}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a4221ccd2eba33a9ace96b1c571659f33} 
+\#define HIGH\+\_\+\+SIDE\+\_\+R~4300.\+0}
+
+\Hypertarget{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372}\index{smart\_watch.h@{smart\_watch.h}!LCD\_SIDE\_SIZE@{LCD\_SIDE\_SIZE}}
+\index{LCD\_SIDE\_SIZE@{LCD\_SIDE\_SIZE}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{LCD\_SIDE\_SIZE}{LCD\_SIDE\_SIZE}}
+{\footnotesize\ttfamily \label{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372} 
+\#define LCD\+\_\+\+SIDE\+\_\+\+SIZE~240}
+
+\Hypertarget{smart__watch_8h_a06257f10c51e668eba3d85a4c45acccd}\index{smart\_watch.h@{smart\_watch.h}!LCD\_X\_SIZE@{LCD\_X\_SIZE}}
+\index{LCD\_X\_SIZE@{LCD\_X\_SIZE}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{LCD\_X\_SIZE}{LCD\_X\_SIZE}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a06257f10c51e668eba3d85a4c45acccd} 
+\#define LCD\+\_\+\+X\+\_\+\+SIZE~\mbox{\hyperlink{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372}{LCD\+\_\+\+SIDE\+\_\+\+SIZE}}}
+
+\Hypertarget{smart__watch_8h_a71b70747405efd313ee22c4c6325e18b}\index{smart\_watch.h@{smart\_watch.h}!LCD\_Y\_SIZE@{LCD\_Y\_SIZE}}
+\index{LCD\_Y\_SIZE@{LCD\_Y\_SIZE}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{LCD\_Y\_SIZE}{LCD\_Y\_SIZE}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a71b70747405efd313ee22c4c6325e18b} 
+\#define LCD\+\_\+\+Y\+\_\+\+SIZE~\mbox{\hyperlink{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372}{LCD\+\_\+\+SIDE\+\_\+\+SIZE}}}
+
+\Hypertarget{smart__watch_8h_ad99d15ea42f7d8a37e36a63e9f04eeca}\index{smart\_watch.h@{smart\_watch.h}!LOW\_SIDE\_R@{LOW\_SIDE\_R}}
+\index{LOW\_SIDE\_R@{LOW\_SIDE\_R}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{LOW\_SIDE\_R}{LOW\_SIDE\_R}}
+{\footnotesize\ttfamily \label{smart__watch_8h_ad99d15ea42f7d8a37e36a63e9f04eeca} 
+\#define LOW\+\_\+\+SIDE\+\_\+R~8200.\+0}
+
+\Hypertarget{smart__watch_8h_a8014808af86f6e175a77cedae984c4b5}\index{smart\_watch.h@{smart\_watch.h}!MJPEG\_AUD\_BUFFER\_SIZE@{MJPEG\_AUD\_BUFFER\_SIZE}}
+\index{MJPEG\_AUD\_BUFFER\_SIZE@{MJPEG\_AUD\_BUFFER\_SIZE}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{MJPEG\_AUD\_BUFFER\_SIZE}{MJPEG\_AUD\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a8014808af86f6e175a77cedae984c4b5} 
+\#define MJPEG\+\_\+\+AUD\+\_\+\+BUFFER\+\_\+\+SIZE~((uint32\+\_\+t)(1024 \texorpdfstring{$\ast$}{*} 0))}
+
+\Hypertarget{smart__watch_8h_acd9172fb59056d01079b4f529c4124ba}\index{smart\_watch.h@{smart\_watch.h}!MJPEG\_VID\_BUFFER\_SIZE@{MJPEG\_VID\_BUFFER\_SIZE}}
+\index{MJPEG\_VID\_BUFFER\_SIZE@{MJPEG\_VID\_BUFFER\_SIZE}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{MJPEG\_VID\_BUFFER\_SIZE}{MJPEG\_VID\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \label{smart__watch_8h_acd9172fb59056d01079b4f529c4124ba} 
+\#define MJPEG\+\_\+\+VID\+\_\+\+BUFFER\+\_\+\+SIZE~((uint32\+\_\+t)(1024 \texorpdfstring{$\ast$}{*} 50))}
+
+\Hypertarget{smart__watch_8h_a6d436a3222bf3b8e0715d1af6182a894}\index{smart\_watch.h@{smart\_watch.h}!PIX\_TO\_CIRC\_COORD@{PIX\_TO\_CIRC\_COORD}}
+\index{PIX\_TO\_CIRC\_COORD@{PIX\_TO\_CIRC\_COORD}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{PIX\_TO\_CIRC\_COORD}{PIX\_TO\_CIRC\_COORD}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a6d436a3222bf3b8e0715d1af6182a894} 
+\#define PIX\+\_\+\+TO\+\_\+\+CIRC\+\_\+\+COORD(\begin{DoxyParamCaption}\item[{}]{p}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((p\ >=\ \mbox{\hyperlink{smart__watch_8h_a5c71a5e59a53413cd6c270266d63b031}{R}})\ ?\ (p\ -\/\ \mbox{\hyperlink{smart__watch_8h_a5c71a5e59a53413cd6c270266d63b031}{R}})\ :\ (\mbox{\hyperlink{smart__watch_8h_a5c71a5e59a53413cd6c270266d63b031}{R}}\ -\/\ p))}
+
+\end{DoxyCode}
+\Hypertarget{smart__watch_8h_ad3c3fa785aa024a24dc8d7add432d1ee}\index{smart\_watch.h@{smart\_watch.h}!PIXELS\_COMP@{PIXELS\_COMP}}
+\index{PIXELS\_COMP@{PIXELS\_COMP}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{PIXELS\_COMP}{PIXELS\_COMP}}
+{\footnotesize\ttfamily \label{smart__watch_8h_ad3c3fa785aa024a24dc8d7add432d1ee} 
+\#define PIXELS\+\_\+\+COMP(\begin{DoxyParamCaption}\item[{}]{pix1}{, }\item[{}]{pix2}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\mbox{\hyperlink{smart__watch_8h_ad8554a16a56cb3ee6458f0988a49ed17}{PIXELS\_DIFF}}(pix1,\ pix2)\ <\ \mbox{\hyperlink{smart__watch_8h_a43a44c8d0935446284a159f24c2d7d3b}{DIFF\_THRESHOLD}})}
+
+\end{DoxyCode}
+\Hypertarget{smart__watch_8h_ad8554a16a56cb3ee6458f0988a49ed17}\index{smart\_watch.h@{smart\_watch.h}!PIXELS\_DIFF@{PIXELS\_DIFF}}
+\index{PIXELS\_DIFF@{PIXELS\_DIFF}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{PIXELS\_DIFF}{PIXELS\_DIFF}}
+{\footnotesize\ttfamily \label{smart__watch_8h_ad8554a16a56cb3ee6458f0988a49ed17} 
+\#define PIXELS\+\_\+\+DIFF(\begin{DoxyParamCaption}\item[{}]{pix1}{, }\item[{}]{pix2}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((pix1\ >\ pix2)\ ?\ (pix1\ -\/\ pix2)\ :\ (pix2\ -\/\ pix1))}
+
+\end{DoxyCode}
+\Hypertarget{smart__watch_8h_a5c71a5e59a53413cd6c270266d63b031}\index{smart\_watch.h@{smart\_watch.h}!R@{R}}
+\index{R@{R}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{R}{R}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a5c71a5e59a53413cd6c270266d63b031} 
+\#define R~((\mbox{\hyperlink{smart__watch_8h_aaf9ef3c313e4bcfb7621548a6c210372}{LCD\+\_\+\+SIDE\+\_\+\+SIZE}} / 2) -\/ 1)}
+
+\Hypertarget{smart__watch_8h_adcb062876dabf878c3989ea3ae93852d}\index{smart\_watch.h@{smart\_watch.h}!RESET\_ITER\_NUM@{RESET\_ITER\_NUM}}
+\index{RESET\_ITER\_NUM@{RESET\_ITER\_NUM}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{RESET\_ITER\_NUM}{RESET\_ITER\_NUM}}
+{\footnotesize\ttfamily \label{smart__watch_8h_adcb062876dabf878c3989ea3ae93852d} 
+\#define RESET\+\_\+\+ITER\+\_\+\+NUM~30}
+
+\Hypertarget{smart__watch_8h_ae079872e4baab6a74c0a60bcf06b7ee1}\index{smart\_watch.h@{smart\_watch.h}!REVERT\_VOLTAGE\_DIV@{REVERT\_VOLTAGE\_DIV}}
+\index{REVERT\_VOLTAGE\_DIV@{REVERT\_VOLTAGE\_DIV}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{REVERT\_VOLTAGE\_DIV}{REVERT\_VOLTAGE\_DIV}}
+{\footnotesize\ttfamily \label{smart__watch_8h_ae079872e4baab6a74c0a60bcf06b7ee1} 
+\#define REVERT\+\_\+\+VOLTAGE\+\_\+\+DIV(\begin{DoxyParamCaption}\item[{}]{v\+\_\+read}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(((\mbox{\hyperlink{smart__watch_8h_ad99d15ea42f7d8a37e36a63e9f04eeca}{LOW\_SIDE\_R}}\ +\ \mbox{\hyperlink{smart__watch_8h_a4221ccd2eba33a9ace96b1c571659f33}{HIGH\_SIDE\_R}})\ /\ \mbox{\hyperlink{smart__watch_8h_ad99d15ea42f7d8a37e36a63e9f04eeca}{LOW\_SIDE\_R}})\ *\ v\_read)}
+
+\end{DoxyCode}
+\Hypertarget{smart__watch_8h_aa1cf70a99e21bc2032e8867c6cafbb43}\index{smart\_watch.h@{smart\_watch.h}!SQUARE@{SQUARE}}
+\index{SQUARE@{SQUARE}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{SQUARE}{SQUARE}}
+{\footnotesize\ttfamily \label{smart__watch_8h_aa1cf70a99e21bc2032e8867c6cafbb43} 
+\#define SQUARE(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((x)\ *\ (x))}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577}\index{smart\_watch.h@{smart\_watch.h}!battery\_status@{battery\_status}}
+\index{battery\_status@{battery\_status}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{battery\_status}{battery\_status}}
+{\footnotesize\ttfamily \label{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577} 
+enum \mbox{\hyperlink{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577}{battery\+\_\+status}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BATTERY\_LOW@{BATTERY\_LOW}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!BATTERY\_LOW@{BATTERY\_LOW}}}\Hypertarget{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577a0032ea1b7935c71aa1baa3b688e7af85}\label{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577a0032ea1b7935c71aa1baa3b688e7af85} 
+BATTERY\+\_\+\+LOW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BATTERY\_HIGH@{BATTERY\_HIGH}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!BATTERY\_HIGH@{BATTERY\_HIGH}}}\Hypertarget{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577a372829f876272ab50802b35f98503edc}\label{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577a372829f876272ab50802b35f98503edc} 
+BATTERY\+\_\+\+HIGH&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4a}\index{smart\_watch.h@{smart\_watch.h}!button\_status@{button\_status}}
+\index{button\_status@{button\_status}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{button\_status}{button\_status}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4a} 
+enum \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4a}{button\+\_\+status}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BTN\_NONE@{BTN\_NONE}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!BTN\_NONE@{BTN\_NONE}}}\Hypertarget{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa253d1a56d33d9a0f3410be4002f4d2f5}\label{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa253d1a56d33d9a0f3410be4002f4d2f5} 
+BTN\+\_\+\+NONE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BTN\_PLUS@{BTN\_PLUS}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!BTN\_PLUS@{BTN\_PLUS}}}\Hypertarget{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aabc941d839c0626e89eade979d16c40ac}\label{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aabc941d839c0626e89eade979d16c40ac} 
+BTN\+\_\+\+PLUS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BTN\_SET@{BTN\_SET}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!BTN\_SET@{BTN\_SET}}}\Hypertarget{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa3e15382c14407efc64d958aff95ea569}\label{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa3e15382c14407efc64d958aff95ea569} 
+BTN\+\_\+\+SET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BTN\_MINUS@{BTN\_MINUS}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!BTN\_MINUS@{BTN\_MINUS}}}\Hypertarget{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa93f057e194d90bec2554f1b49116a3fb}\label{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa93f057e194d90bec2554f1b49116a3fb} 
+BTN\+\_\+\+MINUS&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{smart__watch_8h_ab88132286f81cb754b54e4c7d978579d}\index{smart\_watch.h@{smart\_watch.h}!display\_status@{display\_status}}
+\index{display\_status@{display\_status}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{display\_status}{display\_status}}
+{\footnotesize\ttfamily \label{smart__watch_8h_ab88132286f81cb754b54e4c7d978579d} 
+enum \mbox{\hyperlink{smart__watch_8h_ab88132286f81cb754b54e4c7d978579d}{display\+\_\+status}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_OFF@{DISPLAY\_OFF}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!DISPLAY\_OFF@{DISPLAY\_OFF}}}\Hypertarget{smart__watch_8h_ab88132286f81cb754b54e4c7d978579dacf49bc1c29a95c65aacddadb4dac7218}\label{smart__watch_8h_ab88132286f81cb754b54e4c7d978579dacf49bc1c29a95c65aacddadb4dac7218} 
+DISPLAY\+\_\+\+OFF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_ON@{DISPLAY\_ON}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!DISPLAY\_ON@{DISPLAY\_ON}}}\Hypertarget{smart__watch_8h_ab88132286f81cb754b54e4c7d978579da474066ce108b971d3d963cf3ec8b84bd}\label{smart__watch_8h_ab88132286f81cb754b54e4c7d978579da474066ce108b971d3d963cf3ec8b84bd} 
+DISPLAY\+\_\+\+ON&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167}\index{smart\_watch.h@{smart\_watch.h}!mode@{mode}}
+\index{mode@{mode}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167} 
+enum \mbox{\hyperlink{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167}{mode}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SETTING\_MODE@{SETTING\_MODE}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!SETTING\_MODE@{SETTING\_MODE}}}\Hypertarget{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167aca700b8a8b6aec27bdeac529a3c5307e}\label{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167aca700b8a8b6aec27bdeac529a3c5307e} 
+SETTING\+\_\+\+MODE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NORMAL\_MODE@{NORMAL\_MODE}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!NORMAL\_MODE@{NORMAL\_MODE}}}\Hypertarget{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167a83feb61d42f8db9f494019fcea2c0148}\label{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167a83feb61d42f8db9f494019fcea2c0148} 
+NORMAL\+\_\+\+MODE&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822}\index{smart\_watch.h@{smart\_watch.h}!settings@{settings}}
+\index{settings@{settings}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{settings}{settings}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822} 
+enum \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822}{settings}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SET\_IDLE@{SET\_IDLE}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!SET\_IDLE@{SET\_IDLE}}}\Hypertarget{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822a5adea44d0223e65f3583b05ec6e4843e}\label{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822a5adea44d0223e65f3583b05ec6e4843e} 
+SET\+\_\+\+IDLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SET\_HOURS@{SET\_HOURS}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!SET\_HOURS@{SET\_HOURS}}}\Hypertarget{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822ac01edd53052cdd76d84dbccdb18a6e9e}\label{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822ac01edd53052cdd76d84dbccdb18a6e9e} 
+SET\+\_\+\+HOURS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SET\_MINUTES@{SET\_MINUTES}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!SET\_MINUTES@{SET\_MINUTES}}}\Hypertarget{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822a80cd1cf823f465c341650a5c16675b4a}\label{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822a80cd1cf823f465c341650a5c16675b4a} 
+SET\+\_\+\+MINUTES&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SET\_START@{SET\_START}!smart\_watch.h@{smart\_watch.h}}\index{smart\_watch.h@{smart\_watch.h}!SET\_START@{SET\_START}}}\Hypertarget{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822ac06fdffefbd13204265d53725423f371}\label{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822ac06fdffefbd13204265d53725423f371} 
+SET\+\_\+\+START&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{smart__watch_8h_a9883d2293983bcef88de2ff0d0a2d43c}\index{smart\_watch.h@{smart\_watch.h}!lcd\_draw@{lcd\_draw}}
+\index{lcd\_draw@{lcd\_draw}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{lcd\_draw()}{lcd\_draw()}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a9883d2293983bcef88de2ff0d0a2d43c} 
+int lcd\+\_\+draw (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})}
+
+
+
+lcd\+\_\+draw 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{smart__watch_8h_a4a28906bf60638b08bf8fd43366292b2}\index{smart\_watch.h@{smart\_watch.h}!smart\_watch\_init@{smart\_watch\_init}}
+\index{smart\_watch\_init@{smart\_watch\_init}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{smart\_watch\_init()}{smart\_watch\_init()}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a4a28906bf60638b08bf8fd43366292b2} 
+int smart\+\_\+watch\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+smart\+\_\+watch\+\_\+init 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{smart__watch_8h_ab3ae4554e081943f1f265297dcd0f5d9}\index{smart\_watch.h@{smart\_watch.h}!smart\_watch\_process@{smart\_watch\_process}}
+\index{smart\_watch\_process@{smart\_watch\_process}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{smart\_watch\_process()}{smart\_watch\_process()}}
+{\footnotesize\ttfamily \label{smart__watch_8h_ab3ae4554e081943f1f265297dcd0f5d9} 
+int smart\+\_\+watch\+\_\+process (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+smart\+\_\+watch\+\_\+process 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{smart__watch_8h_a9ebdf6efcd3c0733c0481995de21368f}\index{smart\_watch.h@{smart\_watch.h}!smart\_watch\_test\_accelerometer@{smart\_watch\_test\_accelerometer}}
+\index{smart\_watch\_test\_accelerometer@{smart\_watch\_test\_accelerometer}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{smart\_watch\_test\_accelerometer()}{smart\_watch\_test\_accelerometer()}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a9ebdf6efcd3c0733c0481995de21368f} 
+int smart\+\_\+watch\+\_\+test\+\_\+accelerometer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\+\_\+i2c\+\_\+sensorhandle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sensor\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+smart\+\_\+watch\+\_\+test\+\_\+accelerometer 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sensor\+Handle} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{smart__watch_8h_afb42c3476b2df14445f1d3ae382fefc2}\index{smart\_watch.h@{smart\_watch.h}!smart\_watch\_test\_adc@{smart\_watch\_test\_adc}}
+\index{smart\_watch\_test\_adc@{smart\_watch\_test\_adc}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{smart\_watch\_test\_adc()}{smart\_watch\_test\_adc()}}
+{\footnotesize\ttfamily \label{smart__watch_8h_afb42c3476b2df14445f1d3ae382fefc2} 
+int smart\+\_\+watch\+\_\+test\+\_\+adc (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+smart\+\_\+watch\+\_\+test\+\_\+adc 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{smart__watch_8h_a904249f9decdbb230964fcca93717fa6}\index{smart\_watch.h@{smart\_watch.h}!smart\_watch\_test\_display@{smart\_watch\_test\_display}}
+\index{smart\_watch\_test\_display@{smart\_watch\_test\_display}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{smart\_watch\_test\_display()}{smart\_watch\_test\_display()}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a904249f9decdbb230964fcca93717fa6} 
+int smart\+\_\+watch\+\_\+test\+\_\+display (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+smart\+\_\+watch\+\_\+test\+\_\+display 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{smart__watch_8h_a9cdb2aa9aca618feb3056d6a3b5c9edb}\index{smart\_watch.h@{smart\_watch.h}!smart\_watch\_test\_mjpeg@{smart\_watch\_test\_mjpeg}}
+\index{smart\_watch\_test\_mjpeg@{smart\_watch\_test\_mjpeg}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{smart\_watch\_test\_mjpeg()}{smart\_watch\_test\_mjpeg()}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a9cdb2aa9aca618feb3056d6a3b5c9edb} 
+int smart\+\_\+watch\+\_\+test\+\_\+mjpeg (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+smart\+\_\+watch\+\_\+test\+\_\+mjpeg 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{smart__watch_8h_a546bd89ae5f462af12e14f117ad78f62}\index{smart\_watch.h@{smart\_watch.h}!smart\_watch\_test\_sd@{smart\_watch\_test\_sd}}
+\index{smart\_watch\_test\_sd@{smart\_watch\_test\_sd}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{smart\_watch\_test\_sd()}{smart\_watch\_test\_sd()}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a546bd89ae5f462af12e14f117ad78f62} 
+int smart\+\_\+watch\+\_\+test\+\_\+sd (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+smart\+\_\+watch\+\_\+test\+\_\+sd 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{smart__watch_8h_a6aa18c00e37e3c1fd2066cfc029a5bfc}\index{smart\_watch.h@{smart\_watch.h}!outputData@{outputData}}
+\index{outputData@{outputData}!smart\_watch.h@{smart\_watch.h}}
+\doxysubsubsection{\texorpdfstring{outputData}{outputData}}
+{\footnotesize\ttfamily \label{smart__watch_8h_a6aa18c00e37e3c1fd2066cfc029a5bfc} 
+uint8\+\_\+t\texorpdfstring{$\ast$}{*} output\+Data\hspace{0.3cm}{\ttfamily [extern]}}
+
+Pointer to the output data buffer 

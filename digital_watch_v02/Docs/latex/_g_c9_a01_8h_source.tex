@@ -1,0 +1,67 @@
+\doxysection{GC9\+A01.\+h}
+\hypertarget{_g_c9_a01_8h_source}{}\label{_g_c9_a01_8h_source}\index{Core/Inc/GC9A01.h@{Core/Inc/GC9A01.h}}
+\mbox{\hyperlink{_g_c9_a01_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ GC9A01.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ \ Created\ on:\ Jan\ 11,\ 2025}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ \ \ \ Author:\ Fato}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ \_\_GC9A01\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ \_\_GC9A01\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ DMA\_MODE\ }\textcolor{comment}{//\ When\ defined,\ it\ enables\ the\ DMA\ mode\ for\ the\ SPI\ data\ communication}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ ORIENTATION\ 0\ }\textcolor{comment}{//\ Set\ the\ display\ orientation\ 0,1,2,3}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ Command\ codes\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ COL\_ADDR\_SET\ 0x2A}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ ROW\_ADDR\_SET\ 0x2B}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ MEM\_WR\ 0x2C}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ COLOR\_MODE\ 0x3A}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ COLOR\_MODE\_\_12\_BIT\ 0x03}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ COLOR\_MODE\_\_16\_BIT\ 0x05}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ COLOR\_MODE\_\_18\_BIT\ 0x06}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ MEM\_WR\_CONT\ 0x3C}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ ON\ 1}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ OFF\ 0}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{/*\ Sleep\ modes\ */}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ SLEEP\_MODE\_ON\ 0x10}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ SLEEP\_MODE\_OFF\ 0x11}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{extern}\ uint8\_t\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{_g_c9_a01_8h_a12cf6700e47a2de9cfa6c4e57eef7b9a}{spi\_dma\_not\_ready}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_g_c9_a01__point}{GC9A01\_point}}}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{struct_g_c9_a01__point_a734dd7701f9ecbf0ef257c8f9446d918}{X}},\ \mbox{\hyperlink{struct_g_c9_a01__point_aca010f3daaa5b188f5f4616d39097b3b}{Y}};}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_g_c9_a01__frame}{GC9A01\_frame}}}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_g_c9_a01__point}{GC9A01\_point}}\ start,\ \mbox{\hyperlink{struct_g_c9_a01__frame_a0b4b851678d5c6fd4e203bc999fc06b5}{end}};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c9_a01_8h_a44272fdde5835d9b3c1667e66c057973}{GC9A01\_Init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_c9_a01_8h_a5b0f0de5bfcbfeae589ac05d6ee2cba9}{GC9A01\_set\_frame}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_g_c9_a01__frame}{GC9A01\_frame}}\ frame);}
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_c9_a01_8h_a2f5f0befc860d4f41b42a2b06797ad96}{GC9A01\_write}}(uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_c9_a01_8h_ad60399f6caddef5523e37e94975ff404}{GC9A01\_write\_continue}}(uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_c9_a01_8h_a384fbdc768cee29f71ab5f29aed54840}{GC9A01\_write\_data}}(uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_c9_a01_8h_aebd2cf3878864a59d3ca9a5287b10701}{GC9A01\_write\_command}}(uint8\_t\ cmd);}
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_c9_a01_8h_a3aca2955e3d9ec78902fe116b1b023dc}{GC9A01\_spi\_tx}}(uint8\_t\ *data,\ uint16\_t\ size,\ uint8\_t\ join);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c9_a01_8h_a90506132e89e9e15277b61d5bcb3b8c1}{GC9A01\_set\_reset}}(uint8\_t\ val);}
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c9_a01_8h_a50fdc0f36570dd0d459295cb671680c5}{GC9A01\_set\_data\_command}}(uint8\_t\ val);}
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c9_a01_8h_a079f7980c9cd685bbb9bb318fac91ca6}{GC9A01\_set\_chip\_select}}(uint8\_t\ val);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_c9_a01_8h_a46b748da05000113133e8e76f894dce2}{GC9A01\_sleep\_mode}}(uint8\_t\ command);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

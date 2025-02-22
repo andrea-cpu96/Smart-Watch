@@ -1,0 +1,57 @@
+\doxysection{arm\+\_\+iir\+\_\+lattice\+\_\+instance\+\_\+q15 Struct Reference}
+\hypertarget{structarm__iir__lattice__instance__q15}{}\label{structarm__iir__lattice__instance__q15}\index{arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}}
+
+
+Instance structure for the Q15 IIR lattice filter.  
+
+
+
+
+{\ttfamily \#include $<$arm\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structarm__iir__lattice__instance__q15_a96fbed313bef01070409fa182d26ba3f}{num\+Stages}}
+\item 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__iir__lattice__instance__q15_afd0136ab917b529554d93f41a5e04618}{p\+State}}
+\item 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__iir__lattice__instance__q15_a41c214a1ec38d4a82fae8899d715dd29}{pk\+Coeffs}}
+\item 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__iir__lattice__instance__q15_a4c4f57f45b223abbe2a9fb727bd2cad9}{pv\+Coeffs}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the Q15 IIR lattice filter. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structarm__iir__lattice__instance__q15_a96fbed313bef01070409fa182d26ba3f}\index{arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}!numStages@{numStages}}
+\index{numStages@{numStages}!arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{numStages}{numStages}}
+{\footnotesize\ttfamily \label{structarm__iir__lattice__instance__q15_a96fbed313bef01070409fa182d26ba3f} 
+uint16\+\_\+t arm\+\_\+iir\+\_\+lattice\+\_\+instance\+\_\+q15\+::num\+Stages}
+
+number of stages in the filter. \Hypertarget{structarm__iir__lattice__instance__q15_a41c214a1ec38d4a82fae8899d715dd29}\index{arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}!pkCoeffs@{pkCoeffs}}
+\index{pkCoeffs@{pkCoeffs}!arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pkCoeffs}{pkCoeffs}}
+{\footnotesize\ttfamily \label{structarm__iir__lattice__instance__q15_a41c214a1ec38d4a82fae8899d715dd29} 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+iir\+\_\+lattice\+\_\+instance\+\_\+q15\+::pk\+Coeffs}
+
+points to the reflection coefficient array. The array is of length num\+Stages. \Hypertarget{structarm__iir__lattice__instance__q15_afd0136ab917b529554d93f41a5e04618}\index{arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}!pState@{pState}}
+\index{pState@{pState}!arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pState}{pState}}
+{\footnotesize\ttfamily \label{structarm__iir__lattice__instance__q15_afd0136ab917b529554d93f41a5e04618} 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+iir\+\_\+lattice\+\_\+instance\+\_\+q15\+::p\+State}
+
+points to the state variable array. The array is of length num\+Stages+block\+Size. \Hypertarget{structarm__iir__lattice__instance__q15_a4c4f57f45b223abbe2a9fb727bd2cad9}\index{arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}!pvCoeffs@{pvCoeffs}}
+\index{pvCoeffs@{pvCoeffs}!arm\_iir\_lattice\_instance\_q15@{arm\_iir\_lattice\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pvCoeffs}{pvCoeffs}}
+{\footnotesize\ttfamily \label{structarm__iir__lattice__instance__q15_a4c4f57f45b223abbe2a9fb727bd2cad9} 
+\mbox{\hyperlink{arm__math_8h_ab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+iir\+\_\+lattice\+\_\+instance\+\_\+q15\+::pv\+Coeffs}
+
+points to the ladder coefficient array. The array is of length num\+Stages+1. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{arm__math_8h}{arm\+\_\+math.\+h}}\end{DoxyCompactItemize}

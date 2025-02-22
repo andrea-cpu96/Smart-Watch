@@ -1,0 +1,57 @@
+\doxysection{arm\+\_\+cfft\+\_\+instance\+\_\+f32 Struct Reference}
+\hypertarget{structarm__cfft__instance__f32}{}\label{structarm__cfft__instance__f32}\index{arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}}
+
+
+Instance structure for the floating-\/point CFFT/\+CIFFT function.  
+
+
+
+
+{\ttfamily \#include $<$arm\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structarm__cfft__instance__f32_acd8f9e9540e3dd348212726e5d6aaa95}{fft\+Len}}
+\item 
+const \mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__cfft__instance__f32_a59cc6f753f1498716e1444ac054c06de}{p\+Twiddle}}
+\item 
+const uint16\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__cfft__instance__f32_a21ceaf59a1bb8440af57c28d2dd9bbab}{p\+Bit\+Rev\+Table}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structarm__cfft__instance__f32_a3ba329ed153d182746376208e773d648}{bit\+Rev\+Length}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the floating-\/point CFFT/\+CIFFT function. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structarm__cfft__instance__f32_a3ba329ed153d182746376208e773d648}\index{arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}!bitRevLength@{bitRevLength}}
+\index{bitRevLength@{bitRevLength}!arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{bitRevLength}{bitRevLength}}
+{\footnotesize\ttfamily \label{structarm__cfft__instance__f32_a3ba329ed153d182746376208e773d648} 
+uint16\+\_\+t arm\+\_\+cfft\+\_\+instance\+\_\+f32\+::bit\+Rev\+Length}
+
+bit reversal table length. \Hypertarget{structarm__cfft__instance__f32_acd8f9e9540e3dd348212726e5d6aaa95}\index{arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}!fftLen@{fftLen}}
+\index{fftLen@{fftLen}!arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{fftLen}{fftLen}}
+{\footnotesize\ttfamily \label{structarm__cfft__instance__f32_acd8f9e9540e3dd348212726e5d6aaa95} 
+uint16\+\_\+t arm\+\_\+cfft\+\_\+instance\+\_\+f32\+::fft\+Len}
+
+length of the FFT. \Hypertarget{structarm__cfft__instance__f32_a21ceaf59a1bb8440af57c28d2dd9bbab}\index{arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}!pBitRevTable@{pBitRevTable}}
+\index{pBitRevTable@{pBitRevTable}!arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{pBitRevTable}{pBitRevTable}}
+{\footnotesize\ttfamily \label{structarm__cfft__instance__f32_a21ceaf59a1bb8440af57c28d2dd9bbab} 
+const uint16\+\_\+t\texorpdfstring{$\ast$}{*} arm\+\_\+cfft\+\_\+instance\+\_\+f32\+::p\+Bit\+Rev\+Table}
+
+points to the bit reversal table. \Hypertarget{structarm__cfft__instance__f32_a59cc6f753f1498716e1444ac054c06de}\index{arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}!pTwiddle@{pTwiddle}}
+\index{pTwiddle@{pTwiddle}!arm\_cfft\_instance\_f32@{arm\_cfft\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{pTwiddle}{pTwiddle}}
+{\footnotesize\ttfamily \label{structarm__cfft__instance__f32_a59cc6f753f1498716e1444ac054c06de} 
+const \mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+cfft\+\_\+instance\+\_\+f32\+::p\+Twiddle}
+
+points to the Twiddle factor table. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{arm__math_8h}{arm\+\_\+math.\+h}}\end{DoxyCompactItemize}

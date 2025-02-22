@@ -1,0 +1,49 @@
+\doxysection{arm\+\_\+biquad\+\_\+cascade\+\_\+stereo\+\_\+df2\+T\+\_\+instance\+\_\+f32 Struct Reference}
+\hypertarget{structarm__biquad__cascade__stereo__df2_t__instance__f32}{}\label{structarm__biquad__cascade__stereo__df2_t__instance__f32}\index{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32@{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}}
+
+
+Instance structure for the floating-\/point transposed direct form II Biquad cascade filter.  
+
+
+
+
+{\ttfamily \#include $<$arm\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a5655328252da5c2c2425ceed253bc4f1}{num\+Stages}}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a2cb00048bb1fe957a03c1ff56dfaf8f0}{p\+State}}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a58b15644de62a632c5e9d4a563569dc6}{p\+Coeffs}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the floating-\/point transposed direct form II Biquad cascade filter. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structarm__biquad__cascade__stereo__df2_t__instance__f32_a5655328252da5c2c2425ceed253bc4f1}\index{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32@{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}!numStages@{numStages}}
+\index{numStages@{numStages}!arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32@{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{numStages}{numStages}}
+{\footnotesize\ttfamily \label{structarm__biquad__cascade__stereo__df2_t__instance__f32_a5655328252da5c2c2425ceed253bc4f1} 
+uint8\+\_\+t arm\+\_\+biquad\+\_\+cascade\+\_\+stereo\+\_\+df2\+T\+\_\+instance\+\_\+f32\+::num\+Stages}
+
+number of 2nd order stages in the filter. Overall order is 2\texorpdfstring{$\ast$}{*}num\+Stages. \Hypertarget{structarm__biquad__cascade__stereo__df2_t__instance__f32_a58b15644de62a632c5e9d4a563569dc6}\index{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32@{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}!pCoeffs@{pCoeffs}}
+\index{pCoeffs@{pCoeffs}!arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32@{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{pCoeffs}{pCoeffs}}
+{\footnotesize\ttfamily \label{structarm__biquad__cascade__stereo__df2_t__instance__f32_a58b15644de62a632c5e9d4a563569dc6} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+biquad\+\_\+cascade\+\_\+stereo\+\_\+df2\+T\+\_\+instance\+\_\+f32\+::p\+Coeffs}
+
+points to the array of coefficients. The array is of length 5\texorpdfstring{$\ast$}{*}num\+Stages. \Hypertarget{structarm__biquad__cascade__stereo__df2_t__instance__f32_a2cb00048bb1fe957a03c1ff56dfaf8f0}\index{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32@{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}!pState@{pState}}
+\index{pState@{pState}!arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32@{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{pState}{pState}}
+{\footnotesize\ttfamily \label{structarm__biquad__cascade__stereo__df2_t__instance__f32_a2cb00048bb1fe957a03c1ff56dfaf8f0} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+biquad\+\_\+cascade\+\_\+stereo\+\_\+df2\+T\+\_\+instance\+\_\+f32\+::p\+State}
+
+points to the array of state coefficients. The array is of length 4\texorpdfstring{$\ast$}{*}num\+Stages. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{arm__math_8h}{arm\+\_\+math.\+h}}\end{DoxyCompactItemize}

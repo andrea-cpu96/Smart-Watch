@@ -1,0 +1,163 @@
+\doxysection{Core/\+Src/\+AVI\+\_\+parser.c File Reference}
+\hypertarget{_a_v_i__parser_8c}{}\label{_a_v_i__parser_8c}\index{Core/Src/AVI\_parser.c@{Core/Src/AVI\_parser.c}}
+{\ttfamily \#include "{}AVI\+\_\+parser.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}} \mbox{\hyperlink{_a_v_i__parser_8c_a912ba78be4ff68fed4a7a9ba4c452adf}{\+\_\+\+\_\+\+AVI\+\_\+\+Init}} (\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}pavi, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint32\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Initialize AVI. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{_a_v_i__parser_8c_a3c538394e49fb5c6c067c8573f27b4f6}{\+\_\+\+\_\+\+AVI\+\_\+\+Search\+ID}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint32\+\_\+t size, uint8\+\_\+t \texorpdfstring{$\ast$}{*}id)
+\begin{DoxyCompactList}\small\item\em Search AVI ID. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}} \mbox{\hyperlink{_a_v_i__parser_8c_a5bb7651423b20c3f2cca4b917316f0a8}{\+\_\+\+\_\+\+AVI\+\_\+\+Get\+Stream\+Info}} (\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}pavi, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf)
+\begin{DoxyCompactList}\small\item\em Get AVI file information. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{_a_v_i__parser_8c_abd26a4714ac88bce44d21404922c2ee8}{AVI\+\_\+\+Parser\+Init}} (\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}pavi, FIL \texorpdfstring{$\ast$}{*}file, uint8\+\_\+t \texorpdfstring{$\ast$}{*}p\+Video\+Buffer, uint32\+\_\+t Video\+Buffer\+Size, uint8\+\_\+t \texorpdfstring{$\ast$}{*}p\+Audio\+Buffer, uint32\+\_\+t Audio\+Buffer\+Size)
+\begin{DoxyCompactList}\small\item\em parse AVI file header \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{_a_v_i__parser_8c_a28ff6cd5d018c597613e0d2a61f33ef3}{AVI\+\_\+\+Get\+Frame}} (\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}pavi, FIL \texorpdfstring{$\ast$}{*}file, uint8\+\_\+t skip\+Flag)
+\begin{DoxyCompactList}\small\item\em Get AVI frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*}const \mbox{\hyperlink{_a_v_i__parser_8c_a2a39944ba949a69b91557ca5cb3abdd5}{AVI\+\_\+\+VIDS\+\_\+\+FLAG\+\_\+\+TBL}} \mbox{[}2\mbox{]} = \{(uint8\+\_\+t \texorpdfstring{$\ast$}{*})"{}00dc"{}, (uint8\+\_\+t \texorpdfstring{$\ast$}{*})"{}01dc"{}\}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*}const \mbox{\hyperlink{_a_v_i__parser_8c_ae7143ea7a64719a572dcc50c611725ac}{AVI\+\_\+\+AUDS\+\_\+\+FLAG\+\_\+\+TBL}} \mbox{[}2\mbox{]} = \{(uint8\+\_\+t \texorpdfstring{$\ast$}{*})"{}00wb"{}, (uint8\+\_\+t \texorpdfstring{$\ast$}{*})"{}01wb"{}\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_a_v_i__parser_8c_a5bb7651423b20c3f2cca4b917316f0a8}\index{AVI\_parser.c@{AVI\_parser.c}!\_\_AVI\_GetStreamInfo@{\_\_AVI\_GetStreamInfo}}
+\index{\_\_AVI\_GetStreamInfo@{\_\_AVI\_GetStreamInfo}!AVI\_parser.c@{AVI\_parser.c}}
+\doxysubsubsection{\texorpdfstring{\_\_AVI\_GetStreamInfo()}{\_\_AVI\_GetStreamInfo()}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8c_a5bb7651423b20c3f2cca4b917316f0a8} 
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}} \+\_\+\+\_\+\+AVI\+\_\+\+Get\+Stream\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}}]{pavi}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{}\end{DoxyParamCaption})}
+
+
+
+Get AVI file information. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em havi} & AVI handle \\
+\hline
+{\em buf} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em AVI} & status \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{_a_v_i__parser_8c_a912ba78be4ff68fed4a7a9ba4c452adf}\index{AVI\_parser.c@{AVI\_parser.c}!\_\_AVI\_Init@{\_\_AVI\_Init}}
+\index{\_\_AVI\_Init@{\_\_AVI\_Init}!AVI\_parser.c@{AVI\_parser.c}}
+\doxysubsubsection{\texorpdfstring{\_\_AVI\_Init()}{\_\_AVI\_Init()}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8c_a912ba78be4ff68fed4a7a9ba4c452adf} 
+\mbox{\hyperlink{_a_v_i__parser_8h_a5fb6196ec8881cca7d4205dff28d5bb7}{AVISTATUS}} \+\_\+\+\_\+\+AVI\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}}]{pavi}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint32\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Initialize AVI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em havi} & AVI context \\
+\hline
+{\em buf} & \\
+\hline
+{\em size} & AVI file size \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em AVI} & status \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{_a_v_i__parser_8c_a3c538394e49fb5c6c067c8573f27b4f6}\index{AVI\_parser.c@{AVI\_parser.c}!\_\_AVI\_SearchID@{\_\_AVI\_SearchID}}
+\index{\_\_AVI\_SearchID@{\_\_AVI\_SearchID}!AVI\_parser.c@{AVI\_parser.c}}
+\doxysubsubsection{\texorpdfstring{\_\_AVI\_SearchID()}{\_\_AVI\_SearchID()}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8c_a3c538394e49fb5c6c067c8573f27b4f6} 
+uint32\+\_\+t \+\_\+\+\_\+\+AVI\+\_\+\+Search\+ID (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint32\+\_\+t}]{size}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Search AVI ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & \\
+\hline
+{\em size} & \\
+\hline
+{\em id} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em ID} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{_a_v_i__parser_8c_a28ff6cd5d018c597613e0d2a61f33ef3}\index{AVI\_parser.c@{AVI\_parser.c}!AVI\_GetFrame@{AVI\_GetFrame}}
+\index{AVI\_GetFrame@{AVI\_GetFrame}!AVI\_parser.c@{AVI\_parser.c}}
+\doxysubsubsection{\texorpdfstring{AVI\_GetFrame()}{AVI\_GetFrame()}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8c_a28ff6cd5d018c597613e0d2a61f33ef3} 
+uint32\+\_\+t AVI\+\_\+\+Get\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}}]{pavi}{, }\item[{FIL \texorpdfstring{$\ast$}{*}}]{file}{, }\item[{uint8\+\_\+t}]{skip\+Flag}{}\end{DoxyParamCaption})}
+
+
+
+Get AVI frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pavi} & AVI context \\
+\hline
+{\em file} & AVI file \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em type} & of frame (audio frame or video frame ) \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{_a_v_i__parser_8c_abd26a4714ac88bce44d21404922c2ee8}\index{AVI\_parser.c@{AVI\_parser.c}!AVI\_ParserInit@{AVI\_ParserInit}}
+\index{AVI\_ParserInit@{AVI\_ParserInit}!AVI\_parser.c@{AVI\_parser.c}}
+\doxysubsubsection{\texorpdfstring{AVI\_ParserInit()}{AVI\_ParserInit()}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8c_abd26a4714ac88bce44d21404922c2ee8} 
+uint32\+\_\+t AVI\+\_\+\+Parser\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_v_i___c_o_n_t_e_x_t}{AVI\+\_\+\+CONTEXT}} \texorpdfstring{$\ast$}{*}}]{pavi}{, }\item[{FIL \texorpdfstring{$\ast$}{*}}]{file}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+Video\+Buffer}{, }\item[{uint32\+\_\+t}]{Video\+Buffer\+Size}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+Audio\+Buffer}{, }\item[{uint32\+\_\+t}]{Audio\+Buffer\+Size}{}\end{DoxyParamCaption})}
+
+
+
+parse AVI file header 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pavi} & AVI context \\
+\hline
+{\em file} & AVI file \\
+\hline
+{\em p\+Video\+Buffer} & \+: video buffer \\
+\hline
+{\em Video\+Buffer\+Size} & video buffer size \\
+\hline
+{\em p\+Audio\+Buffer} & \+: audio buffer \\
+\hline
+{\em Audio\+Buffer\+Size} & audio buffer size \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em AVI} & status (0 \+: no Error, 1\+: Error occurred) \\
+\hline
+\end{DoxyRetVals}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_a_v_i__parser_8c_ae7143ea7a64719a572dcc50c611725ac}\index{AVI\_parser.c@{AVI\_parser.c}!AVI\_AUDS\_FLAG\_TBL@{AVI\_AUDS\_FLAG\_TBL}}
+\index{AVI\_AUDS\_FLAG\_TBL@{AVI\_AUDS\_FLAG\_TBL}!AVI\_parser.c@{AVI\_parser.c}}
+\doxysubsubsection{\texorpdfstring{AVI\_AUDS\_FLAG\_TBL}{AVI\_AUDS\_FLAG\_TBL}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8c_ae7143ea7a64719a572dcc50c611725ac} 
+uint8\+\_\+t\texorpdfstring{$\ast$}{*} const AVI\+\_\+\+AUDS\+\_\+\+FLAG\+\_\+\+TBL\mbox{[}2\mbox{]} = \{(uint8\+\_\+t \texorpdfstring{$\ast$}{*})"{}00wb"{}, (uint8\+\_\+t \texorpdfstring{$\ast$}{*})"{}01wb"{}\}}
+
+\Hypertarget{_a_v_i__parser_8c_a2a39944ba949a69b91557ca5cb3abdd5}\index{AVI\_parser.c@{AVI\_parser.c}!AVI\_VIDS\_FLAG\_TBL@{AVI\_VIDS\_FLAG\_TBL}}
+\index{AVI\_VIDS\_FLAG\_TBL@{AVI\_VIDS\_FLAG\_TBL}!AVI\_parser.c@{AVI\_parser.c}}
+\doxysubsubsection{\texorpdfstring{AVI\_VIDS\_FLAG\_TBL}{AVI\_VIDS\_FLAG\_TBL}}
+{\footnotesize\ttfamily \label{_a_v_i__parser_8c_a2a39944ba949a69b91557ca5cb3abdd5} 
+uint8\+\_\+t\texorpdfstring{$\ast$}{*} const AVI\+\_\+\+VIDS\+\_\+\+FLAG\+\_\+\+TBL\mbox{[}2\mbox{]} = \{(uint8\+\_\+t \texorpdfstring{$\ast$}{*})"{}00dc"{}, (uint8\+\_\+t \texorpdfstring{$\ast$}{*})"{}01dc"{}\}}
+

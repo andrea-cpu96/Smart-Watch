@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['r_0',['R',['../smart__watch_8h.html#a5c71a5e59a53413cd6c270266d63b031',1,'smart_watch.h']]],
+  ['rate_1',['Rate',['../struct_s_t_r_h___h_e_a_d_e_r.html#a98063b510f2378cbb43dafe9db43be77',1,'STRH_HEADER']]],
+  ['reciptable_2',['recipTable',['../structarm__lms__norm__instance__q31.html#a85836d0907077b9ac660f7bbbaa9d694',1,'arm_lms_norm_instance_q31::recipTable'],['../structarm__lms__norm__instance__q15.html#a9aabb0e4c79f3db807e7a441fa36f5f8',1,'arm_lms_norm_instance_q15::recipTable']]],
+  ['ref_5fupd_3',['ref_upd',['../union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t.html#aa8d29cf71dedc72ecb9fe79d25047527',1,'FXLS8974_SDCD_CONFIG2_t']]],
+  ['ref_5fupdm_4',['ref_updm',['../union_f_x_l_s8974___s_d_c_d___c_o_n_f_i_g2__t.html#a6429f9f258a36c2d8af9959e732c105b',1,'FXLS8974_SDCD_CONFIG2_t']]],
+  ['refbufsize_5',['RefBufSize',['../struct_a_v_i_h___h_e_a_d_e_r.html#ab1cfc577596e5640e90f14ff027582db',1,'AVIH_HEADER::RefBufSize'],['../struct_s_t_r_h___h_e_a_d_e_r.html#a4c6a2770a11290894bc1c1e5a63d360b',1,'STRH_HEADER::RefBufSize']]],
+  ['reg_5fset_6',['REG_SET',['../_f_x_l_s8974_c_8c.html#a8989b0a82b3a1da6c0fac6b18c2af94a',1,'FXLS8974C.c']]],
+  ['res_7',['res',['../main_8h.html#ab0bd7560790c13b656fd58e17e35143e',1,'main.h']]],
+  ['reserved_8',['Reserved',['../struct_a_v_i_h___h_e_a_d_e_r.html#a8344f72255910892ae5c4bd6b61e991c',1,'AVIH_HEADER']]],
+  ['reserved_9',['reserved',['../unionaxis__u.html#a8a2c582b68df827b23d6de52524f8f74',1,'axis_u']]],
+  ['reset_5fiter_5fnum_10',['RESET_ITER_NUM',['../smart__watch_8h.html#adcb062876dabf878c3989ea3ae93852d',1,'smart_watch.h']]],
+  ['resume_5ftime_11',['resume_time',['../smart__watch_8c.html#a6b139a5673cbd8d89f9702385882a4db',1,'smart_watch.c']]],
+  ['revert_5fvoltage_5fdiv_12',['REVERT_VOLTAGE_DIV',['../smart__watch_8h.html#ae079872e4baab6a74c0a60bcf06b7ee1',1,'smart_watch.h']]],
+  ['revision_20history_20of_20cmsis_20dsp_13',['Revision History of CMSIS-DSP',['../index.html#autotoc_md7',1,'']]],
+  ['rgbblue_14',['rgbBlue',['../struct_a_v_i_r_g_b_q_u_a_d.html#aeca7655a23980105e4d3d014789aac05',1,'AVIRGBQUAD']]],
+  ['rgbgreen_15',['rgbGreen',['../struct_a_v_i_r_g_b_q_u_a_d.html#a37e27676af7feff85fae2b0a8d2f7a5c',1,'AVIRGBQUAD']]],
+  ['rgbred_16',['rgbRed',['../struct_a_v_i_r_g_b_q_u_a_d.html#a7f4cd6ec23a95f879b6e0f340c518a2d',1,'AVIRGBQUAD']]],
+  ['rgbreserved_17',['rgbReserved',['../struct_a_v_i_r_g_b_q_u_a_d.html#a6eed39fdb3a8c4e7e5c5c62872fe0b61',1,'AVIRGBQUAD']]],
+  ['riffid_18',['RiffID',['../struct_a_v_i___h_e_a_d_e_r.html#a9257bd8cc4331141e67f41b27bad096b',1,'AVI_HEADER']]],
+  ['right_19',['Right',['../struct_s_t_r_h___h_e_a_d_e_r.html#aa0c229e552db3d60608d61af57207c97',1,'STRH_HEADER']]],
+  ['root_20',['Square Root',['../group___s_q_r_t.html',1,'']]],
+  ['row_5faddr_5fset_21',['ROW_ADDR_SET',['../_g_c9_a01_8h.html#a16a7382d93022d37990b1a4e855a2474',1,'GC9A01.h']]],
+  ['rst_22',['rst',['../union_f_x_l_s8974___s_e_n_s___c_o_n_f_i_g1__t.html#a50ec1b8be2f1b7c5e0bc25c04e5f6253',1,'FXLS8974_SENS_CONFIG1_t']]]
+];

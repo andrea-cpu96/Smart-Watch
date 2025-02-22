@@ -1,0 +1,49 @@
+\doxysection{arm\+\_\+fir\+\_\+instance\+\_\+q31 Struct Reference}
+\hypertarget{structarm__fir__instance__q31}{}\label{structarm__fir__instance__q31}\index{arm\_fir\_instance\_q31@{arm\_fir\_instance\_q31}}
+
+
+Instance structure for the Q31 FIR filter.  
+
+
+
+
+{\ttfamily \#include $<$arm\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structarm__fir__instance__q31_a918fadd775b7a0482b21bf34dae2f094}{num\+Taps}}
+\item 
+\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__fir__instance__q31_a409f39c93b744784648bdc365541444d}{p\+State}}
+\item 
+\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__fir__instance__q31_afaae4c884bdf11a4ec2f3b9bb2bb51d0}{p\+Coeffs}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the Q31 FIR filter. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structarm__fir__instance__q31_a918fadd775b7a0482b21bf34dae2f094}\index{arm\_fir\_instance\_q31@{arm\_fir\_instance\_q31}!numTaps@{numTaps}}
+\index{numTaps@{numTaps}!arm\_fir\_instance\_q31@{arm\_fir\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{numTaps}{numTaps}}
+{\footnotesize\ttfamily \label{structarm__fir__instance__q31_a918fadd775b7a0482b21bf34dae2f094} 
+uint16\+\_\+t arm\+\_\+fir\+\_\+instance\+\_\+q31\+::num\+Taps}
+
+number of filter coefficients in the filter. \Hypertarget{structarm__fir__instance__q31_afaae4c884bdf11a4ec2f3b9bb2bb51d0}\index{arm\_fir\_instance\_q31@{arm\_fir\_instance\_q31}!pCoeffs@{pCoeffs}}
+\index{pCoeffs@{pCoeffs}!arm\_fir\_instance\_q31@{arm\_fir\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{pCoeffs}{pCoeffs}}
+{\footnotesize\ttfamily \label{structarm__fir__instance__q31_afaae4c884bdf11a4ec2f3b9bb2bb51d0} 
+\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+fir\+\_\+instance\+\_\+q31\+::p\+Coeffs}
+
+points to the coefficient array. The array is of length num\+Taps. \Hypertarget{structarm__fir__instance__q31_a409f39c93b744784648bdc365541444d}\index{arm\_fir\_instance\_q31@{arm\_fir\_instance\_q31}!pState@{pState}}
+\index{pState@{pState}!arm\_fir\_instance\_q31@{arm\_fir\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{pState}{pState}}
+{\footnotesize\ttfamily \label{structarm__fir__instance__q31_a409f39c93b744784648bdc365541444d} 
+\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+fir\+\_\+instance\+\_\+q31\+::p\+State}
+
+points to the state variable array. The array is of length num\+Taps+block\+Size-\/1. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{arm__math_8h}{arm\+\_\+math.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,223 @@
+\doxysubsection{JPEG\+\_\+\+MJPEG\+\_\+\+Video\+Decoding}
+\hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding}{}\label{group___j_p_e_g___m_j_p_e_g___video_decoding}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_gadadd887f8cb522edf47d8ca564829b47}{CHUNK\+\_\+\+SIZE\+\_\+\+IN}}~((uint32\+\_\+t)(64 \texorpdfstring{$\ast$}{*} 1024))
+\item 
+\#define \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga72616520854b883a9b942d9592c5db8e}{CHUNK\+\_\+\+SIZE\+\_\+\+OUT}}~((uint32\+\_\+t)(64 \texorpdfstring{$\ast$}{*} 1024))
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_gab345f01054ea48ca1c202dc99f3dd2a8}{JPEG\+\_\+\+Decode\+\_\+\+DMA}} (JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hjpeg, uint32\+\_\+t Frame\+Source\+Address, uint32\+\_\+t Frame\+Size, uint32\+\_\+t Dest\+Address)
+\begin{DoxyCompactList}\small\item\em Decode\+\_\+\+DMA. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga0135dc454fced489aa00ee94e0b7acb4}{HAL\+\_\+\+JPEG\+\_\+\+Info\+Ready\+Callback}} (JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hjpeg, JPEG\+\_\+\+Conf\+Type\+Def \texorpdfstring{$\ast$}{*}p\+Info)
+\begin{DoxyCompactList}\small\item\em JPEG Info ready callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga92a5841006626e82410f583ac3fad7d3}{HAL\+\_\+\+JPEG\+\_\+\+Get\+Data\+Callback}} (JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hjpeg, uint32\+\_\+t Nb\+Decoded\+Data)
+\begin{DoxyCompactList}\small\item\em JPEG Get Data callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga92e4ec891bcda307484f5ea6bb1f61e8}{HAL\+\_\+\+JPEG\+\_\+\+Data\+Ready\+Callback}} (JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hjpeg, uint8\+\_\+t \texorpdfstring{$\ast$}{*}p\+Data\+Out, uint32\+\_\+t Out\+Data\+Length)
+\begin{DoxyCompactList}\small\item\em JPEG Data Ready callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga81728acc33eb8194d3b96ef4e9c19ce2}{HAL\+\_\+\+JPEG\+\_\+\+Error\+Callback}} (JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hjpeg)
+\begin{DoxyCompactList}\small\item\em JPEG Error callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga110ce46551890ef0a0117f5cec9ca39b}{HAL\+\_\+\+JPEG\+\_\+\+Decode\+Cplt\+Callback}} (JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hjpeg)
+\begin{DoxyCompactList}\small\item\em JPEG Decode complete callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+\+IO uint32\+\_\+t \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga3a6dcae71858a89bf1530a89f1a3cc0a}{Jpeg\+\_\+\+HWDecoding\+End}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_gad02921b240b0740b1e3c389bb9048012}{Frame\+Buffer\+Address}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga0f317aff97f0a1a86aba251fc5ca3fb0}{JPEGSource\+Address}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_gaf06690aaa37ba203d1f45e593b62b4b3}{Input\+\_\+frame\+Size}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_gad582d0f679503f1c6228ca49ccd72426}{Input\+\_\+frame\+Index}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_gadadd887f8cb522edf47d8ca564829b47}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!CHUNK\_SIZE\_IN@{CHUNK\_SIZE\_IN}}
+\index{CHUNK\_SIZE\_IN@{CHUNK\_SIZE\_IN}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{CHUNK\_SIZE\_IN}{CHUNK\_SIZE\_IN}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_gadadd887f8cb522edf47d8ca564829b47} 
+\#define CHUNK\+\_\+\+SIZE\+\_\+\+IN~((uint32\+\_\+t)(64 \texorpdfstring{$\ast$}{*} 1024))}
+
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_ga72616520854b883a9b942d9592c5db8e}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!CHUNK\_SIZE\_OUT@{CHUNK\_SIZE\_OUT}}
+\index{CHUNK\_SIZE\_OUT@{CHUNK\_SIZE\_OUT}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{CHUNK\_SIZE\_OUT}{CHUNK\_SIZE\_OUT}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_ga72616520854b883a9b942d9592c5db8e} 
+\#define CHUNK\+\_\+\+SIZE\+\_\+\+OUT~((uint32\+\_\+t)(64 \texorpdfstring{$\ast$}{*} 1024))}
+
+
+
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_ga92e4ec891bcda307484f5ea6bb1f61e8}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!HAL\_JPEG\_DataReadyCallback@{HAL\_JPEG\_DataReadyCallback}}
+\index{HAL\_JPEG\_DataReadyCallback@{HAL\_JPEG\_DataReadyCallback}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{HAL\_JPEG\_DataReadyCallback()}{HAL\_JPEG\_DataReadyCallback()}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_ga92e4ec891bcda307484f5ea6bb1f61e8} 
+void HAL\+\_\+\+JPEG\+\_\+\+Data\+Ready\+Callback (\begin{DoxyParamCaption}\item[{JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hjpeg}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+Data\+Out}{, }\item[{uint32\+\_\+t}]{Out\+Data\+Length}{}\end{DoxyParamCaption})}
+
+
+
+JPEG Data Ready callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hjpeg} & JPEG handle pointer \\
+\hline
+{\em p\+Data\+Out} & pointer to the output data buffer \\
+\hline
+{\em Out\+Data\+Length} & length of output buffer in bytes \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_ga110ce46551890ef0a0117f5cec9ca39b}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!HAL\_JPEG\_DecodeCpltCallback@{HAL\_JPEG\_DecodeCpltCallback}}
+\index{HAL\_JPEG\_DecodeCpltCallback@{HAL\_JPEG\_DecodeCpltCallback}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{HAL\_JPEG\_DecodeCpltCallback()}{HAL\_JPEG\_DecodeCpltCallback()}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_ga110ce46551890ef0a0117f5cec9ca39b} 
+void HAL\+\_\+\+JPEG\+\_\+\+Decode\+Cplt\+Callback (\begin{DoxyParamCaption}\item[{JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hjpeg}{}\end{DoxyParamCaption})}
+
+
+
+JPEG Decode complete callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hjpeg} & JPEG handle pointer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_ga81728acc33eb8194d3b96ef4e9c19ce2}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!HAL\_JPEG\_ErrorCallback@{HAL\_JPEG\_ErrorCallback}}
+\index{HAL\_JPEG\_ErrorCallback@{HAL\_JPEG\_ErrorCallback}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{HAL\_JPEG\_ErrorCallback()}{HAL\_JPEG\_ErrorCallback()}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_ga81728acc33eb8194d3b96ef4e9c19ce2} 
+void HAL\+\_\+\+JPEG\+\_\+\+Error\+Callback (\begin{DoxyParamCaption}\item[{JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hjpeg}{}\end{DoxyParamCaption})}
+
+
+
+JPEG Error callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hjpeg} & JPEG handle pointer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_ga92a5841006626e82410f583ac3fad7d3}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!HAL\_JPEG\_GetDataCallback@{HAL\_JPEG\_GetDataCallback}}
+\index{HAL\_JPEG\_GetDataCallback@{HAL\_JPEG\_GetDataCallback}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{HAL\_JPEG\_GetDataCallback()}{HAL\_JPEG\_GetDataCallback()}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_ga92a5841006626e82410f583ac3fad7d3} 
+void HAL\+\_\+\+JPEG\+\_\+\+Get\+Data\+Callback (\begin{DoxyParamCaption}\item[{JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hjpeg}{, }\item[{uint32\+\_\+t}]{Nb\+Decoded\+Data}{}\end{DoxyParamCaption})}
+
+
+
+JPEG Get Data callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hjpeg} & JPEG handle pointer \\
+\hline
+{\em Nb\+Decoded\+Data} & Number of decoded (consumed) bytes from input buffer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_ga0135dc454fced489aa00ee94e0b7acb4}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!HAL\_JPEG\_InfoReadyCallback@{HAL\_JPEG\_InfoReadyCallback}}
+\index{HAL\_JPEG\_InfoReadyCallback@{HAL\_JPEG\_InfoReadyCallback}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{HAL\_JPEG\_InfoReadyCallback()}{HAL\_JPEG\_InfoReadyCallback()}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_ga0135dc454fced489aa00ee94e0b7acb4} 
+void HAL\+\_\+\+JPEG\+\_\+\+Info\+Ready\+Callback (\begin{DoxyParamCaption}\item[{JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hjpeg}{, }\item[{JPEG\+\_\+\+Conf\+Type\+Def \texorpdfstring{$\ast$}{*}}]{p\+Info}{}\end{DoxyParamCaption})}
+
+
+
+JPEG Info ready callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hjpeg} & JPEG handle pointer \\
+\hline
+{\em p\+Info} & JPEG Info Struct pointer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_gab345f01054ea48ca1c202dc99f3dd2a8}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!JPEG\_Decode\_DMA@{JPEG\_Decode\_DMA}}
+\index{JPEG\_Decode\_DMA@{JPEG\_Decode\_DMA}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{JPEG\_Decode\_DMA()}{JPEG\_Decode\_DMA()}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_gab345f01054ea48ca1c202dc99f3dd2a8} 
+int JPEG\+\_\+\+Decode\+\_\+\+DMA (\begin{DoxyParamCaption}\item[{JPEG\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hjpeg}{, }\item[{uint32\+\_\+t}]{Frame\+Source\+Address}{, }\item[{uint32\+\_\+t}]{Frame\+Size}{, }\item[{uint32\+\_\+t}]{Dest\+Address}{}\end{DoxyParamCaption})}
+
+
+
+Decode\+\_\+\+DMA. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hjpeg} & JPEG handle pointer \\
+\hline
+{\em Frame\+Source\+Address} & \+: video buffer address. \\
+\hline
+{\em Dest\+Address} & \+: YCb\+Cr destination Frame Buffer Address. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+
+
+\doxysubsubsection{Variable Documentation}
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_gad02921b240b0740b1e3c389bb9048012}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!FrameBufferAddress@{FrameBufferAddress}}
+\index{FrameBufferAddress@{FrameBufferAddress}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{FrameBufferAddress}{FrameBufferAddress}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_gad02921b240b0740b1e3c389bb9048012} 
+uint32\+\_\+t Frame\+Buffer\+Address}
+
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_gad582d0f679503f1c6228ca49ccd72426}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!Input\_frameIndex@{Input\_frameIndex}}
+\index{Input\_frameIndex@{Input\_frameIndex}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{Input\_frameIndex}{Input\_frameIndex}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_gad582d0f679503f1c6228ca49ccd72426} 
+uint32\+\_\+t Input\+\_\+frame\+Index}
+
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_gaf06690aaa37ba203d1f45e593b62b4b3}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!Input\_frameSize@{Input\_frameSize}}
+\index{Input\_frameSize@{Input\_frameSize}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{Input\_frameSize}{Input\_frameSize}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_gaf06690aaa37ba203d1f45e593b62b4b3} 
+uint32\+\_\+t Input\+\_\+frame\+Size}
+
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_ga3a6dcae71858a89bf1530a89f1a3cc0a}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!Jpeg\_HWDecodingEnd@{Jpeg\_HWDecodingEnd}}
+\index{Jpeg\_HWDecodingEnd@{Jpeg\_HWDecodingEnd}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{Jpeg\_HWDecodingEnd}{Jpeg\_HWDecodingEnd}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_ga3a6dcae71858a89bf1530a89f1a3cc0a} 
+\+\_\+\+\_\+\+IO uint32\+\_\+t Jpeg\+\_\+\+HWDecoding\+End = 0}
+
+\Hypertarget{group___j_p_e_g___m_j_p_e_g___video_decoding_ga0f317aff97f0a1a86aba251fc5ca3fb0}\index{JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}!JPEGSourceAddress@{JPEGSourceAddress}}
+\index{JPEGSourceAddress@{JPEGSourceAddress}!JPEG\_MJPEG\_VideoDecoding@{JPEG\_MJPEG\_VideoDecoding}}
+\doxysubsubsubsection{\texorpdfstring{JPEGSourceAddress}{JPEGSourceAddress}}
+{\footnotesize\ttfamily \label{group___j_p_e_g___m_j_p_e_g___video_decoding_ga0f317aff97f0a1a86aba251fc5ca3fb0} 
+uint32\+\_\+t JPEGSource\+Address}
+

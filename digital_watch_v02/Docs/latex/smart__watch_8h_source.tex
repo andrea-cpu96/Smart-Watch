@@ -1,0 +1,193 @@
+\doxysection{smart\+\_\+watch.\+h}
+\hypertarget{smart__watch_8h_source}{}\label{smart__watch_8h_source}\index{Core/Inc/smart\_watch.h@{Core/Inc/smart\_watch.h}}
+\mbox{\hyperlink{smart__watch_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ smart\_watch.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ \ Created\ on:\ Jul\ 22,\ 2024}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ \ \ \ Author:\ Fato}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ EXAMPLE\_USER\_CM7\_SMART\_WATCH\_H\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ EXAMPLE\_USER\_CM7\_SMART\_WATCH\_H\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_g_c9_a01_8h}{GC9A01.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_f_x_l_s8974_c_8h}{FXLS8974C.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ DEBUG\ SETTINGS\ */}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \#define\ DEBUG\_TIME}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ OPTIMIZZATION\ SETTINGS\ */}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ \#define\ OPT}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ \#define\ OPT2}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ \#define\ OPT3}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{/*\ POWER\ MANAGEMENT\ SETTINGS\ */}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ ENABLE\_BATTERY\_MON}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{/*\ MJPEG\ SETTINGS\ */}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ MJPEG\_VID\_BUFFER\_SIZE\ ((uint32\_t)(1024\ *\ 50))}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ MJPEG\_AUD\_BUFFER\_SIZE\ ((uint32\_t)(1024\ *\ 0))}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{/*\ DISPLAY\ SETTINGS\ */}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ LCD\_SIDE\_SIZE\ 240}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ DISPLAY\_STANDBY\_TIMER\ 59}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ LCD\_X\_SIZE\ LCD\_SIDE\_SIZE}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ LCD\_Y\_SIZE\ LCD\_SIDE\_SIZE}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{/*\ BLOCKS\ SETTINGS\ */}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#ifdef\ OPT3}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ BLOCK\_SIDE\_SIZE\ 12}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ BLOCKS\_PER\_RAW\ (LCD\_SIDE\_SIZE\ /\ BLOCK\_SIDE\_SIZE)}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ BLOCK\_TOT\_PIXELS\ (BLOCK\_SIDE\_SIZE\ *\ BLOCK\_SIDE\_SIZE)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ BLOCK\_NUM\ ((LCD\_SIDE\_SIZE\ *\ LCD\_SIDE\_SIZE)\ /\ BLOCK\_TOT\_PIXELS)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{comment}{/*\ CIRCULAR\ MASK\ */}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ R\ ((LCD\_SIDE\_SIZE\ /\ 2)\ -\/\ 1)\ }\textcolor{comment}{//\ Ray\ of\ the\ round\ display}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ SQUARE(x)\ ((x)\ *\ (x))}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ PIX\_TO\_CIRC\_COORD(p)\ ((p\ >=\ R)\ ?\ (p\ -\/\ R)\ :\ (R\ -\/\ p))\ }\textcolor{comment}{//\ Put\ the\ pixel\ position\ in\ a\ circle\ reference\ (where\ the\ center\ is\ the\ 0\ position)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ CIRCLE\_MASK(px,\ py)\ ((SQUARE(PIX\_TO\_CIRC\_COORD(px))\ +\ SQUARE(PIX\_TO\_CIRC\_COORD(py)))\ >=\ SQUARE(R))}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{/*\ OTHERS\ DEFINITIONS\ */}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ DIFF\_THRESHOLD\ 5}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ PIXELS\_DIFF(pix1,\ pix2)\ ((pix1\ >\ pix2)\ ?\ (pix1\ -\/\ pix2)\ :\ (pix2\ -\/\ pix1))}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ PIXELS\_COMP(pix1,\ pix2)\ (PIXELS\_DIFF(pix1,\ pix2)\ <\ DIFF\_THRESHOLD)}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ RESET\_ITER\_NUM\ 30}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ HIGH\_SIDE\_R\ 4300.0}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ LOW\_SIDE\_R\ 8200.0}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ REVERT\_VOLTAGE\_DIV(v\_read)\ (((LOW\_SIDE\_R\ +\ HIGH\_SIDE\_R)\ /\ LOW\_SIDE\_R)\ *\ v\_read)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ BATTERY\_THRESH\ 3.5}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167}{mode}}}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167aca700b8a8b6aec27bdeac529a3c5307e}{SETTING\_MODE}}\ =\ 0,}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167a83feb61d42f8db9f494019fcea2c0148}{NORMAL\_MODE}}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{smart__watch_8h_ab88132286f81cb754b54e4c7d978579d}{display\_status}}}
+\DoxyCodeLine{00078\ \{}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_ab88132286f81cb754b54e4c7d978579dacf49bc1c29a95c65aacddadb4dac7218}{DISPLAY\_OFF}}\ =\ 0,}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_ab88132286f81cb754b54e4c7d978579da474066ce108b971d3d963cf3ec8b84bd}{DISPLAY\_ON}}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822}{settings}}}
+\DoxyCodeLine{00086\ \{}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822a5adea44d0223e65f3583b05ec6e4843e}{SET\_IDLE}}\ =\ 0,}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822ac01edd53052cdd76d84dbccdb18a6e9e}{SET\_HOURS}},}
+\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822a80cd1cf823f465c341650a5c16675b4a}{SET\_MINUTES}},}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822ac06fdffefbd13204265d53725423f371}{SET\_START}}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4a}{button\_status}}}
+\DoxyCodeLine{00096\ \{}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa253d1a56d33d9a0f3410be4002f4d2f5}{BTN\_NONE}}\ =\ 0,}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aabc941d839c0626e89eade979d16c40ac}{BTN\_PLUS}},}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa3e15382c14407efc64d958aff95ea569}{BTN\_SET}},}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_a3ba15f6896e40b9ba6c5bf1d398dab4aa93f057e194d90bec2554f1b49116a3fb}{BTN\_MINUS}}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577}{battery\_status}}}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577a0032ea1b7935c71aa1baa3b688e7af85}{BATTERY\_LOW}}\ =\ 0,}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{smart__watch_8h_af13fd4f5eac53be5d4c16f437e6c2577a372829f876272ab50802b35f98503edc}{BATTERY\_HIGH}}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00114\ \{}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ RTC\_TimeTypeDef\ \mbox{\hyperlink{structvideo__t_ab1b6585fa9b6900b6bd12502688c95e6}{time}};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structvideo__t_a5493aa4a9462e073dcf2a999ed0ced5b}{file\_idx}};}
+\DoxyCodeLine{00119\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structvideo__t_ab9b3714273cf713ff582386ec3405789}{isfirstFrame}};}
+\DoxyCodeLine{00120\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structvideo__t_a68575f97c1eb5e8069835fcdc8c62a2f}{FrameType}};}
+\DoxyCodeLine{00121\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structvideo__t_a90f3cd309e7417d94db77963087446b7}{width}};}
+\DoxyCodeLine{00122\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structvideo__t_ac8277c8081adb42da924fff6c09a27d0}{height}};}
+\DoxyCodeLine{00123\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structvideo__t_a7e0a2c167897d236e03c0595ef871810}{frameCount}};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structvideo__t_a5da05237b1fcb97a6ac9eb9d8ea5ef14}{frameToSkip}};\ \ \ \textcolor{comment}{//\ Defines\ for\ each\ cycle\ how\ many\ frames\ time\ skip}}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structvideo__t_a7daae7000110708ac6255d35dfb9ad29}{frame\_time}};\ \ \ \textcolor{comment}{//\ Holds\ the\ time\ duration\ of\ the\ single\ frame}}
+\DoxyCodeLine{00127\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structvideo__t_a5922548c0165418a3dd552b44a63893c}{actual\_time}};\ \textcolor{comment}{//\ Takes\ trace\ of\ the\ actual\ time}}
+\DoxyCodeLine{00128\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structvideo__t_af863815b7f90b93547347cf1f0af8ae8}{tick\_offset}};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structvideo__t_a9dd2339df76a474f8759c7f0c8e3c0d1}{jpegOutDataAdreess}};\ \textcolor{comment}{//\ Buffer\ for\ the\ decoded\ data}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{smart__watch_8h_a1a6b6fb557d8d37d59700faf4e4c9167}{mode}}\ \mbox{\hyperlink{structvideo__t_aa3fc47b38aaf319226348c3fec85af3b}{video\_mode}};}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{smart__watch_8h_a6cddb5e40c21eadd2ded85bc51f79822}{settings}}\ \mbox{\hyperlink{structvideo__t_a83a4acc9f64d8f35df35fdb070c4cbe6}{set}};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structvideo__t_a690a2a98fa843b8078bdedb87062be12}{display\_ts}};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structvideo__t_a2d573b6084df6c692f4c4ecb0aea096b}{display\_status}};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \}\ \mbox{\hyperlink{structvideo__t}{video\_t}};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00142\ \{}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structtime__t_a2031d6e7688370b25a9d056e8d4f3eb7}{first\_day}};}
+\DoxyCodeLine{00145\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structtime__t_a0696371fb83ef1cb77f8b98581472490}{first\_month}};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structtime__t_a017da6b2d77e7ee28e89c04f436c37ad}{current\_day}};}
+\DoxyCodeLine{00148\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structtime__t_a8d53d4017565f4866a96b49da20b887b}{current\_month}};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structtime__t_abd6397b6a4235e29b7abfac61dc24c41}{minutes\_offs}};}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \}\ \mbox{\hyperlink{structtime__t}{time\_t}};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#ifdef\ OPT3}}
+\DoxyCodeLine{00155\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00156\ \{}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_g_c9_a01__frame}{GC9A01\_frame}}\ display\_frame;}
+\DoxyCodeLine{00159\ \ \ \ \ uint8\_t\ *buffer\_frame1[BLOCK\_SIDE\_SIZE];}
+\DoxyCodeLine{00160\ \ \ \ \ uint8\_t\ *buffer\_frame2[BLOCK\_SIDE\_SIZE];}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \}\ block\_t;}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{keyword}{extern}\ \_\_IO\ uint32\_t\ \mbox{\hyperlink{group___j_p_e_g___m_j_p_e_g___video_decoding_ga3a6dcae71858a89bf1530a89f1a3cc0a}{Jpeg\_HWDecodingEnd}};}
+\DoxyCodeLine{00166\ \textcolor{keyword}{extern}\ uint8\_t\ *\mbox{\hyperlink{smart__watch_8h_a6aa18c00e37e3c1fd2066cfc029a5bfc}{outputData}};}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{smart__watch_8h_a4a28906bf60638b08bf8fd43366292b2}{smart\_watch\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00169\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{smart__watch_8h_ab3ae4554e081943f1f265297dcd0f5d9}{smart\_watch\_process}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00170\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{smart__watch_8h_a9883d2293983bcef88de2ff0d0a2d43c}{lcd\_draw}}(uint8\_t\ *data);}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#ifdef\ OPT}}
+\DoxyCodeLine{00172\ \textcolor{keywordtype}{int}\ lcd\_draw\_opt(uint8\_t\ *data);}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#ifdef\ OPT2}}
+\DoxyCodeLine{00175\ \textcolor{keywordtype}{void}\ lcd\_draw\_opt2(\mbox{\hyperlink{uniondouble_format}{doubleFormat}}\ *data);}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#ifdef\ OPT3}}
+\DoxyCodeLine{00178\ \textcolor{keywordtype}{void}\ lcd\_draw\_opt3(\mbox{\hyperlink{uniondouble_format}{doubleFormat}}\ *data);}
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{smart__watch_8h_a546bd89ae5f462af12e14f117ad78f62}{smart\_watch\_test\_sd}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00182\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{smart__watch_8h_a904249f9decdbb230964fcca93717fa6}{smart\_watch\_test\_display}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00183\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{smart__watch_8h_a9cdb2aa9aca618feb3056d6a3b5c9edb}{smart\_watch\_test\_mjpeg}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00184\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{smart__watch_8h_a9ebdf6efcd3c0733c0481995de21368f}{smart\_watch\_test\_accelerometer}}(\mbox{\hyperlink{structfxls8974__i2c__sensorhandle__t}{fxls8974\_i2c\_sensorhandle\_t}}\ *pSensorHandle);}
+\DoxyCodeLine{00185\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{smart__watch_8h_afb42c3476b2df14445f1d3ae382fefc2}{smart\_watch\_test\_adc}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ EXAMPLE\_USER\_CM7\_SMART\_WATCH\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

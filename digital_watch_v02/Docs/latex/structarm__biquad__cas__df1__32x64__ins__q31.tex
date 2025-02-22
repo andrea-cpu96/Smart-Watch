@@ -1,0 +1,57 @@
+\doxysection{arm\+\_\+biquad\+\_\+cas\+\_\+df1\+\_\+32x64\+\_\+ins\+\_\+q31 Struct Reference}
+\hypertarget{structarm__biquad__cas__df1__32x64__ins__q31}{}\label{structarm__biquad__cas__df1__32x64__ins__q31}\index{arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}}
+
+
+Instance structure for the high precision Q31 Biquad cascade filter.  
+
+
+
+
+{\ttfamily \#include $<$arm\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structarm__biquad__cas__df1__32x64__ins__q31_ad7cb9a9f5df8f4fcfc7a0b633672e574}{num\+Stages}}
+\item 
+\mbox{\hyperlink{arm__math_8h_a5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__biquad__cas__df1__32x64__ins__q31_a4c899cdfaf2bb955323e93637bd662e0}{p\+State}}
+\item 
+\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structarm__biquad__cas__df1__32x64__ins__q31_a490462d6ebe0fecfb6acbf51bed22ecf}{p\+Coeffs}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structarm__biquad__cas__df1__32x64__ins__q31_a8e9d58e8dba5aa3b2fc4f36d2ed07996}{post\+Shift}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the high precision Q31 Biquad cascade filter. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structarm__biquad__cas__df1__32x64__ins__q31_ad7cb9a9f5df8f4fcfc7a0b633672e574}\index{arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}!numStages@{numStages}}
+\index{numStages@{numStages}!arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}}
+\doxysubsubsection{\texorpdfstring{numStages}{numStages}}
+{\footnotesize\ttfamily \label{structarm__biquad__cas__df1__32x64__ins__q31_ad7cb9a9f5df8f4fcfc7a0b633672e574} 
+uint8\+\_\+t arm\+\_\+biquad\+\_\+cas\+\_\+df1\+\_\+32x64\+\_\+ins\+\_\+q31\+::num\+Stages}
+
+number of 2nd order stages in the filter. Overall order is 2\texorpdfstring{$\ast$}{*}num\+Stages. \Hypertarget{structarm__biquad__cas__df1__32x64__ins__q31_a490462d6ebe0fecfb6acbf51bed22ecf}\index{arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}!pCoeffs@{pCoeffs}}
+\index{pCoeffs@{pCoeffs}!arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}}
+\doxysubsubsection{\texorpdfstring{pCoeffs}{pCoeffs}}
+{\footnotesize\ttfamily \label{structarm__biquad__cas__df1__32x64__ins__q31_a490462d6ebe0fecfb6acbf51bed22ecf} 
+\mbox{\hyperlink{arm__math_8h_adc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+biquad\+\_\+cas\+\_\+df1\+\_\+32x64\+\_\+ins\+\_\+q31\+::p\+Coeffs}
+
+points to the array of coefficients. The array is of length 5\texorpdfstring{$\ast$}{*}num\+Stages. \Hypertarget{structarm__biquad__cas__df1__32x64__ins__q31_a8e9d58e8dba5aa3b2fc4f36d2ed07996}\index{arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}!postShift@{postShift}}
+\index{postShift@{postShift}!arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}}
+\doxysubsubsection{\texorpdfstring{postShift}{postShift}}
+{\footnotesize\ttfamily \label{structarm__biquad__cas__df1__32x64__ins__q31_a8e9d58e8dba5aa3b2fc4f36d2ed07996} 
+uint8\+\_\+t arm\+\_\+biquad\+\_\+cas\+\_\+df1\+\_\+32x64\+\_\+ins\+\_\+q31\+::post\+Shift}
+
+additional shift, in bits, applied to each output sample. \Hypertarget{structarm__biquad__cas__df1__32x64__ins__q31_a4c899cdfaf2bb955323e93637bd662e0}\index{arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}!pState@{pState}}
+\index{pState@{pState}!arm\_biquad\_cas\_df1\_32x64\_ins\_q31@{arm\_biquad\_cas\_df1\_32x64\_ins\_q31}}
+\doxysubsubsection{\texorpdfstring{pState}{pState}}
+{\footnotesize\ttfamily \label{structarm__biquad__cas__df1__32x64__ins__q31_a4c899cdfaf2bb955323e93637bd662e0} 
+\mbox{\hyperlink{arm__math_8h_a5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}}\texorpdfstring{$\ast$}{*} arm\+\_\+biquad\+\_\+cas\+\_\+df1\+\_\+32x64\+\_\+ins\+\_\+q31\+::p\+State}
+
+points to the array of state coefficients. The array is of length 4\texorpdfstring{$\ast$}{*}num\+Stages. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{arm__math_8h}{arm\+\_\+math.\+h}}\end{DoxyCompactItemize}

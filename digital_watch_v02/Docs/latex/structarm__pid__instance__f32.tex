@@ -1,0 +1,81 @@
+\doxysection{arm\+\_\+pid\+\_\+instance\+\_\+f32 Struct Reference}
+\hypertarget{structarm__pid__instance__f32}{}\label{structarm__pid__instance__f32}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+
+
+Instance structure for the floating-\/point PID Control.  
+
+
+
+
+{\ttfamily \#include $<$arm\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \mbox{\hyperlink{structarm__pid__instance__f32_ad7b0bed64915d0a25a3409fa2dc45556}{A0}}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \mbox{\hyperlink{structarm__pid__instance__f32_a7def89571c50f7137a213326a396e560}{A1}}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \mbox{\hyperlink{structarm__pid__instance__f32_a155acf642ba2f521869f19d694cd7fa0}{A2}}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \mbox{\hyperlink{structarm__pid__instance__f32_afd394e1e52fb1d526aa472c83b8f2464}{state}} \mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \mbox{\hyperlink{structarm__pid__instance__f32_aa9b9aa9e413c6cec376a9dddc9f01ebe}{Kp}}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \mbox{\hyperlink{structarm__pid__instance__f32_ac0feffde05fe391eeab3bf78e953830a}{Ki}}
+\item 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \mbox{\hyperlink{structarm__pid__instance__f32_ad5b68fbf84d16188ae4747ff91f6f088}{Kd}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the floating-\/point PID Control. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structarm__pid__instance__f32_ad7b0bed64915d0a25a3409fa2dc45556}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!A0@{A0}}
+\index{A0@{A0}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{A0}{A0}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_ad7b0bed64915d0a25a3409fa2dc45556} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+pid\+\_\+instance\+\_\+f32\+::\+A0}
+
+The derived gain, A0 = Kp + Ki + Kd . \Hypertarget{structarm__pid__instance__f32_a7def89571c50f7137a213326a396e560}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!A1@{A1}}
+\index{A1@{A1}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{A1}{A1}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_a7def89571c50f7137a213326a396e560} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+pid\+\_\+instance\+\_\+f32\+::\+A1}
+
+The derived gain, A1 = -\/Kp -\/ 2Kd. \Hypertarget{structarm__pid__instance__f32_a155acf642ba2f521869f19d694cd7fa0}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!A2@{A2}}
+\index{A2@{A2}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{A2}{A2}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_a155acf642ba2f521869f19d694cd7fa0} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+pid\+\_\+instance\+\_\+f32\+::\+A2}
+
+The derived gain, A2 = Kd . \Hypertarget{structarm__pid__instance__f32_ad5b68fbf84d16188ae4747ff91f6f088}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!Kd@{Kd}}
+\index{Kd@{Kd}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{Kd}{Kd}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_ad5b68fbf84d16188ae4747ff91f6f088} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+pid\+\_\+instance\+\_\+f32\+::\+Kd}
+
+The derivative gain. \Hypertarget{structarm__pid__instance__f32_ac0feffde05fe391eeab3bf78e953830a}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!Ki@{Ki}}
+\index{Ki@{Ki}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{Ki}{Ki}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_ac0feffde05fe391eeab3bf78e953830a} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+pid\+\_\+instance\+\_\+f32\+::\+Ki}
+
+The integral gain. \Hypertarget{structarm__pid__instance__f32_aa9b9aa9e413c6cec376a9dddc9f01ebe}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!Kp@{Kp}}
+\index{Kp@{Kp}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{Kp}{Kp}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_aa9b9aa9e413c6cec376a9dddc9f01ebe} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+pid\+\_\+instance\+\_\+f32\+::\+Kp}
+
+The proportional gain. \Hypertarget{structarm__pid__instance__f32_afd394e1e52fb1d526aa472c83b8f2464}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!state@{state}}
+\index{state@{state}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_afd394e1e52fb1d526aa472c83b8f2464} 
+\mbox{\hyperlink{arm__math_8h_a4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+pid\+\_\+instance\+\_\+f32\+::state\mbox{[}3\mbox{]}}
+
+The state array of length 3. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Inc/\mbox{\hyperlink{arm__math_8h}{arm\+\_\+math.\+h}}\end{DoxyCompactItemize}

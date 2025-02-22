@@ -1,0 +1,271 @@
+\doxysection{Core/\+Src/\+GC9\+A01.c File Reference}
+\hypertarget{_g_c9_a01_8c}{}\label{_g_c9_a01_8c}\index{Core/Src/GC9A01.c@{Core/Src/GC9A01.c}}
+{\ttfamily \#include "{}GC9\+A01.\+h"{}}\newline
+{\ttfamily \#include "{}main.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c9_a01_8c_adeeffd0faed93b1b5f62b4ca50668948}{MAX\+\_\+\+ITERATIONS\+\_\+\+NUM}}~1000000
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{_g_c9_a01_8c_a43b4598e57923d02b5526f172b7fb09c}{GC9\+A01\+\_\+write\+\_\+byte}} (uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+write\+\_\+byte. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c9_a01_8c_a90506132e89e9e15277b61d5bcb3b8c1}{GC9\+A01\+\_\+set\+\_\+reset}} (uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+set\+\_\+reset. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c9_a01_8c_a50fdc0f36570dd0d459295cb671680c5}{GC9\+A01\+\_\+set\+\_\+data\+\_\+command}} (uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+set\+\_\+data\+\_\+command. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c9_a01_8c_a079f7980c9cd685bbb9bb318fac91ca6}{GC9\+A01\+\_\+set\+\_\+chip\+\_\+select}} (uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+set\+\_\+chip\+\_\+select. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_c9_a01_8c_aebd2cf3878864a59d3ca9a5287b10701}{GC9\+A01\+\_\+write\+\_\+command}} (uint8\+\_\+t cmd)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+write\+\_\+command. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_c9_a01_8c_a384fbdc768cee29f71ab5f29aed54840}{GC9\+A01\+\_\+write\+\_\+data}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+write\+\_\+data. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_c9_a01_8c_a2f5f0befc860d4f41b42a2b06797ad96}{GC9\+A01\+\_\+write}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+write. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_c9_a01_8c_ad60399f6caddef5523e37e94975ff404}{GC9\+A01\+\_\+write\+\_\+continue}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+write\+\_\+continue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c9_a01_8c_a44272fdde5835d9b3c1667e66c057973}{GC9\+A01\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+\+Init. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_c9_a01_8c_a5b0f0de5bfcbfeae589ac05d6ee2cba9}{GC9\+A01\+\_\+set\+\_\+frame}} (struct \mbox{\hyperlink{struct_g_c9_a01__frame}{GC9\+A01\+\_\+frame}} frame)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+set\+\_\+frame. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_c9_a01_8c_a46b748da05000113133e8e76f894dce2}{GC9\+A01\+\_\+sleep\+\_\+mode}} (uint8\+\_\+t command)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+sleep\+\_\+mode. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_c9_a01_8c_a3aca2955e3d9ec78902fe116b1b023dc}{GC9\+A01\+\_\+spi\+\_\+tx}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint16\+\_\+t size, uint8\+\_\+t join)
+\begin{DoxyCompactList}\small\item\em GC9\+A01\+\_\+spi\+\_\+tx. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t volatile \mbox{\hyperlink{_g_c9_a01_8c_a12cf6700e47a2de9cfa6c4e57eef7b9a}{spi\+\_\+dma\+\_\+not\+\_\+ready}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c9_a01_8c_adeeffd0faed93b1b5f62b4ca50668948}\index{GC9A01.c@{GC9A01.c}!MAX\_ITERATIONS\_NUM@{MAX\_ITERATIONS\_NUM}}
+\index{MAX\_ITERATIONS\_NUM@{MAX\_ITERATIONS\_NUM}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_ITERATIONS\_NUM}{MAX\_ITERATIONS\_NUM}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_adeeffd0faed93b1b5f62b4ca50668948} 
+\#define MAX\+\_\+\+ITERATIONS\+\_\+\+NUM~1000000}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c9_a01_8c_a44272fdde5835d9b3c1667e66c057973}\index{GC9A01.c@{GC9A01.c}!GC9A01\_Init@{GC9A01\_Init}}
+\index{GC9A01\_Init@{GC9A01\_Init}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_Init()}{GC9A01\_Init()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a44272fdde5835d9b3c1667e66c057973} 
+void GC9\+A01\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+\+Init. 
+
+\Hypertarget{_g_c9_a01_8c_a079f7980c9cd685bbb9bb318fac91ca6}\index{GC9A01.c@{GC9A01.c}!GC9A01\_set\_chip\_select@{GC9A01\_set\_chip\_select}}
+\index{GC9A01\_set\_chip\_select@{GC9A01\_set\_chip\_select}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_set\_chip\_select()}{GC9A01\_set\_chip\_select()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a079f7980c9cd685bbb9bb318fac91ca6} 
+void GC9\+A01\+\_\+set\+\_\+chip\+\_\+select (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+set\+\_\+chip\+\_\+select. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_g_c9_a01_8c_a50fdc0f36570dd0d459295cb671680c5}\index{GC9A01.c@{GC9A01.c}!GC9A01\_set\_data\_command@{GC9A01\_set\_data\_command}}
+\index{GC9A01\_set\_data\_command@{GC9A01\_set\_data\_command}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_set\_data\_command()}{GC9A01\_set\_data\_command()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a50fdc0f36570dd0d459295cb671680c5} 
+void GC9\+A01\+\_\+set\+\_\+data\+\_\+command (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+set\+\_\+data\+\_\+command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_g_c9_a01_8c_a5b0f0de5bfcbfeae589ac05d6ee2cba9}\index{GC9A01.c@{GC9A01.c}!GC9A01\_set\_frame@{GC9A01\_set\_frame}}
+\index{GC9A01\_set\_frame@{GC9A01\_set\_frame}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_set\_frame()}{GC9A01\_set\_frame()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a5b0f0de5bfcbfeae589ac05d6ee2cba9} 
+int GC9\+A01\+\_\+set\+\_\+frame (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_g_c9_a01__frame}{GC9\+A01\+\_\+frame}}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+set\+\_\+frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_g_c9_a01_8c_a90506132e89e9e15277b61d5bcb3b8c1}\index{GC9A01.c@{GC9A01.c}!GC9A01\_set\_reset@{GC9A01\_set\_reset}}
+\index{GC9A01\_set\_reset@{GC9A01\_set\_reset}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_set\_reset()}{GC9A01\_set\_reset()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a90506132e89e9e15277b61d5bcb3b8c1} 
+void GC9\+A01\+\_\+set\+\_\+reset (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+set\+\_\+reset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_g_c9_a01_8c_a46b748da05000113133e8e76f894dce2}\index{GC9A01.c@{GC9A01.c}!GC9A01\_sleep\_mode@{GC9A01\_sleep\_mode}}
+\index{GC9A01\_sleep\_mode@{GC9A01\_sleep\_mode}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_sleep\_mode()}{GC9A01\_sleep\_mode()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a46b748da05000113133e8e76f894dce2} 
+int GC9\+A01\+\_\+sleep\+\_\+mode (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{command}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+sleep\+\_\+mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_g_c9_a01_8c_a3aca2955e3d9ec78902fe116b1b023dc}\index{GC9A01.c@{GC9A01.c}!GC9A01\_spi\_tx@{GC9A01\_spi\_tx}}
+\index{GC9A01\_spi\_tx@{GC9A01\_spi\_tx}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_spi\_tx()}{GC9A01\_spi\_tx()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a3aca2955e3d9ec78902fe116b1b023dc} 
+int GC9\+A01\+\_\+spi\+\_\+tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint16\+\_\+t}]{size}{, }\item[{uint8\+\_\+t}]{join}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+spi\+\_\+tx. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+{\em size} & \\
+\hline
+{\em join} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_g_c9_a01_8c_a2f5f0befc860d4f41b42a2b06797ad96}\index{GC9A01.c@{GC9A01.c}!GC9A01\_write@{GC9A01\_write}}
+\index{GC9A01\_write@{GC9A01\_write}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_write()}{GC9A01\_write()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a2f5f0befc860d4f41b42a2b06797ad96} 
+int GC9\+A01\+\_\+write (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+write. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+{\em len} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_g_c9_a01_8c_a43b4598e57923d02b5526f172b7fb09c}\index{GC9A01.c@{GC9A01.c}!GC9A01\_write\_byte@{GC9A01\_write\_byte}}
+\index{GC9A01\_write\_byte@{GC9A01\_write\_byte}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_write\_byte()}{GC9A01\_write\_byte()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a43b4598e57923d02b5526f172b7fb09c} 
+static int GC9\+A01\+\_\+write\+\_\+byte (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+GC9\+A01\+\_\+write\+\_\+byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_g_c9_a01_8c_aebd2cf3878864a59d3ca9a5287b10701}\index{GC9A01.c@{GC9A01.c}!GC9A01\_write\_command@{GC9A01\_write\_command}}
+\index{GC9A01\_write\_command@{GC9A01\_write\_command}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_write\_command()}{GC9A01\_write\_command()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_aebd2cf3878864a59d3ca9a5287b10701} 
+int GC9\+A01\+\_\+write\+\_\+command (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+write\+\_\+command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_g_c9_a01_8c_ad60399f6caddef5523e37e94975ff404}\index{GC9A01.c@{GC9A01.c}!GC9A01\_write\_continue@{GC9A01\_write\_continue}}
+\index{GC9A01\_write\_continue@{GC9A01\_write\_continue}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_write\_continue()}{GC9A01\_write\_continue()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_ad60399f6caddef5523e37e94975ff404} 
+int GC9\+A01\+\_\+write\+\_\+continue (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+write\+\_\+continue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+{\em len} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_g_c9_a01_8c_a384fbdc768cee29f71ab5f29aed54840}\index{GC9A01.c@{GC9A01.c}!GC9A01\_write\_data@{GC9A01\_write\_data}}
+\index{GC9A01\_write\_data@{GC9A01\_write\_data}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{GC9A01\_write\_data()}{GC9A01\_write\_data()}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a384fbdc768cee29f71ab5f29aed54840} 
+int GC9\+A01\+\_\+write\+\_\+data (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+GC9\+A01\+\_\+write\+\_\+data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+{\em len} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_g_c9_a01_8c_a12cf6700e47a2de9cfa6c4e57eef7b9a}\index{GC9A01.c@{GC9A01.c}!spi\_dma\_not\_ready@{spi\_dma\_not\_ready}}
+\index{spi\_dma\_not\_ready@{spi\_dma\_not\_ready}!GC9A01.c@{GC9A01.c}}
+\doxysubsubsection{\texorpdfstring{spi\_dma\_not\_ready}{spi\_dma\_not\_ready}}
+{\footnotesize\ttfamily \label{_g_c9_a01_8c_a12cf6700e47a2de9cfa6c4e57eef7b9a} 
+uint8\+\_\+t volatile spi\+\_\+dma\+\_\+not\+\_\+ready = 0}
+
